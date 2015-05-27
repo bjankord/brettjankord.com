@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Brett Jankord</title>
+    <description>Front-End Software Engineer</description>
+    <link>http://www.brettjankord.com</link>
+    <atom:link href="http://www.brettjankord.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Modular CSS: Thoughts on SMACSS modules</title>
+        <description>&lt;p&gt;My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I’ve learned about modules.&lt;/p&gt;
+
+&lt;div class=&quot;align-center&quot;&gt;
+  &lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/File:Lego_Color_Bricks.jpg&quot;&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/03/Lego_Color_Bricks.jpg&quot; alt=&quot;Lego Bricks&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;http://en.wikipedia.org/wiki/File:Lego_Color_Bricks.jpg&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-are-modules&quot;&gt;What are modules?&lt;/h2&gt;
+
+&lt;p&gt;If you’ve read through SMACSS, the concept of modules is already familiar. They are one of the main categories of styles in SMACSS. Below is a snippet on modules pulled from the SMACSS book:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Modules sit inside Layout components. Modules can sometimes sit within other Modules, too. Each Module should be designed to exist as a standalone component. In doing so, the page will be more flexible. If done right, Modules can easily be moved to different parts of the layout without breaking.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Modules make up the majority of a website’s styles. They help us create code that we can extend and scale.&lt;/p&gt;
+
+&lt;p&gt;Another interesting point Snook talks about is how “Modules generally don’t have a width specified. They’re designed to contain content and sit within a layout, which provides constraints to the modules.”&lt;/p&gt;
+
+&lt;h2 id=&quot;modules-oocss-and-structure-vs-skin&quot;&gt;Modules, OOCSS and Structure vs. Skin&lt;/h2&gt;
+
+&lt;p&gt;One of the main principles of Object Oriented CSS is the separation of structure and skin.&lt;/p&gt;
+
+&lt;p&gt;From Nicole Sullivan’s OOCSS Wiki:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Separate structure and skin&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This means to define repeating visual features (like background and border styles) as separate “skins” that you can mix-and-match with your various objects to achieve a large amount of visual variety without much code&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We can apply this concept of separate styles for structure and skin to modules.&lt;/p&gt;
+
+&lt;p&gt;Harry Roberts explains way better than I could about how you can combine the concept from OOCSS with modules.&lt;/p&gt;
+
+&lt;p&gt;The following is from Harry’s &lt;a href=&quot;https://github.com/csswizardry/CSS-Guidelines#oocss&quot;&gt;CSS Guidelines:&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;As an analogy (note, not example) take the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.room&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.room--kitchen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.room--bedroom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.room--bathroom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We have several types of room in a house, but they all share similar traits; they all have floors, ceilings, walls and doors. We can share this information in an abstracted .room{} class. However we have specific types of room that are different from the others; a kitchen might have a tiled floor and a bedroom might have carpets, a bathroom might not have a window but a bedroom most likely will, each room likely has different coloured walls. OOCSS teaches us to abstract the shared styles out into a base object and then extend this information with more specific classes to add the unique treatment(s).&lt;/p&gt;
+
+&lt;p&gt;So, instead of building dozens of unique components, try and spot repeated design patterns across them all and abstract them out into reusable classes; build these skeletons as base ‘objects’ and then peg classes onto these to extend their styling for more unique circumstances.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In the example above, the &lt;code&gt;.room&lt;/code&gt; class Harry talks about would be a module in regards to SMACSS. It contains all of the common styles for all instances of the &lt;code&gt;.room&lt;/code&gt; module. We extend the use of the &lt;code&gt;.room&lt;/code&gt; module by adding a modifier to it, .room–kitchen, .room–bedroom, .room–bathroom.&lt;/p&gt;
+
+&lt;p&gt;Module modifiers contain the specific styles for each instance of the &lt;code&gt;.room&lt;/code&gt; module. These are usually “skin” based styles.&lt;/p&gt;
+
+&lt;h2 id=&quot;module-modifiers&quot;&gt;Module Modifiers&lt;/h2&gt;
+
+&lt;p&gt;As I talked about earlier, module modifiers extend the use of modules. There are a few ways that come to mind on how one could use module modifiers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/02/reviews.jpg&quot; alt=&quot;&quot; title=&quot;reviews&quot; style=&quot;width:282px !important;&quot; class=&quot;aligncenter size-full wp-image-588&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, with the above comp, we could create a reviews module that had all the styles for the movie review block in it, and create module modifiers for albums and books.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews--albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews--books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Module styles, plus specific styles for .reviews--movie */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Overrides for the albums block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Overrides for the albums block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Another option is to create a module just for reviews which contains all the shared styles and no specific styles, then create a modifier for movies, albums, and books.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews--movies&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews--albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews--books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Common module styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for movie reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for album reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for books reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I’m not particularly sure which method I prefer the most. With the first method, I see having to always overwrite the unique styles in each instance from the core module.&lt;/p&gt;
+
+&lt;p&gt;With the second method, each time you use a module, you would need to include a module modifier with it as the module only contains the shared styles, and no unique styles for individual instances.&lt;/p&gt;
+
+&lt;p&gt;If you have any thoughts on which method you prefer or think would be better, let me know in the comments below.&lt;/p&gt;
+
+&lt;p&gt;In both examples, &lt;code&gt;.reviews&lt;/code&gt; is our module. In a previous post I talked about how we can use class attribute selectors to reduce the number of classes in our HTML. Below is an approach I’ve been using which uses class attribute selectors. In the example, we no longer need the &lt;code&gt;.reviews&lt;/code&gt; class in our HTML, we can use [class*=’reviews–’] instead for the same purpose.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews--movies&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews--albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews--books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;reviews--&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Common module styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for movie reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for album reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews--books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Specific styles for books reviews block */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I like to keep the &lt;code&gt;.reviews&lt;/code&gt; in my styles if, for whatever reason, I decide to use it in my HTML. Whether you use multiple classes or class attribute selectors, the choice is up to you. What is important is understanding the concept of a module and a modifier.&lt;/p&gt;
+
+&lt;p&gt;In an earlier post, a commenter posted about selector performance of class attribute selectors. It is true that class attribute selectors are slower than class selectors but I would not worry about CSS selector performance. Ben Frain has a great write up on &lt;a href=&quot;http://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/&quot;&gt;CSS selector performance&lt;/a&gt; that explains why you shouldn’t worry about selector performance in CSS better than I could. After reading it, especially the comment from Webkit Engineer, Benjamin Poulain, I no longer concern myself with selector performance.&lt;/p&gt;
+
+&lt;p&gt;Nathan Ford also has some insightful comments on selector performance of class attribute selectors in his &lt;a href=&quot;http://24ways.org/2012/a-harder-working-class/&quot;&gt;A Harder Working Class&lt;/a&gt; post on 24Ways.&lt;/p&gt;
+
+&lt;h2 id=&quot;naming-conventions-of-modifiers&quot;&gt;Naming Conventions of Modifiers&lt;/h2&gt;
+
+&lt;p&gt;What I call module modifiers, Johnathan refers to as submodles. I use the term modifier based on my understanding of the BEM methodology. I think as long as you understand the concept of modules(blocks), submodules(modifiers), and subcomponents(elements), what your call them is up to you. Find a naming convention you and your team agree on and stick to it. As long as it is easy for you to understand when you come back to your code or for other developers to understand if they work on it, that is what is important. In the &lt;a href=&quot;http://us2.campaign-archive1.com/?u=2de298319eb1c284bd66e8b42&amp;amp;id=966ba5b4d3&quot;&gt;recent SMACSS newsletter&lt;/a&gt;, Johnathan listed some other naming conventions people are using.&lt;/p&gt;
+
+&lt;p&gt;In a &lt;a href=&quot;http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/&quot;&gt;recent post&lt;/a&gt;, I jotted down some common naming conventions I’ve seen other developers using.&lt;/p&gt;
+
+&lt;h2 id=&quot;modules-and-presentational-class-names&quot;&gt;Modules and Presentational Class Names&lt;/h2&gt;
+
+&lt;p&gt;Another concept in OOCSS is the use of visual class names, or presentational class names. Ask anyone about semantic class names and they will tell you presentational class names are a bad practice, and I agree, to an extent. While I think presentational classes should be avoided in the HTML markup, I think they play a big role in aiding in developer understanding of the styles. They add meaning (semantics) for developers on how certain elements will look. People generally don’t like presentational classes because they can muddy up our HTML. If we ever decide to change the look of something, we need to modify the HTML and this isn’t always possible/ideal. So where do presentational classes fit in?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;%placehoders&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;With the rise of CSS preprocessors, specifically Sass, the ability to craft intelligent CSS has grown immensely. I especially like the %placeholder feature of Sass. Using placeholders, we can keep our presentational class names, though extend them inside our “semantic” role based class names.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/&quot;&gt;Ian Taylor&lt;/a&gt; has a great article on how we can use presentational classes inside of role based class names. I see it as a way to include presentational class names inside of module classes.&lt;/p&gt;
+
+&lt;p&gt;I know &lt;a href=&quot;http://semantic.gs/&quot;&gt;Semantic.gs&lt;/a&gt; uses the same approach of loading presentational classes inside role based class names with preprocessors and Jeff Escalante &lt;a href=&quot;http://carrotblog.com/css-patterns-evolved/&quot;&gt;wrote&lt;/a&gt; about this concept about a year ago as well.&lt;/p&gt;
+
+&lt;p&gt;It is definitely something I’d like to explore some more.&lt;/p&gt;
+
+&lt;h2 id=&quot;modules-within-modules-vs-subcomponents&quot;&gt;Modules within Modules vs. Subcomponents&lt;/h2&gt;
+
+&lt;p&gt;Another important markup feature Snook talks about are subcomponents. These are the inside parts of the modules, the pieces that make up the module. Also of note is that modules can be used inside of other modules as well. I need some more experience using modules and subcompents to form my thoughts on best practices for when to use subcomponents and when to use a module inside a module.&lt;/p&gt;
+
+&lt;p&gt;Going back to the reviews example, each review is a module and in each of the .review modules there is a button. Depending on how you look at it, the button could be its own module used within the .review module, or it could be a subcomponent of the .review module.&lt;/p&gt;
+
+&lt;p&gt;In another post I’ll come back to looking at modules within modules vs. subcomponents.&lt;/p&gt;
+
+&lt;p&gt;This is really just a brain dump on my understanding of modular CSS. I find, writing this all done helps me better understand the concepts. As always, I’d love to hear your thoughts and ideas on this topic.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 09 Mar 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/03/09/modular-css-thoughts-on-smacss-modules/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/03/09/modular-css-thoughts-on-smacss-modules/</guid>
+      </item>
+    
+      <item>
+        <title>Style Guide Boilerplate</title>
+        <description>&lt;p&gt;Recently I’ve had a renewed interest in web style guides. As I’ve been building responsive websites, I’ve found style guides to be a crucial part of the build process. Style guides help promote consistency and modular thinking when building websites and also help add a greater clarity to the parts and pieces that make up your website.&lt;/p&gt;
+
+&lt;p&gt;I’ve always been interested in standardizing the front-end code that I work on. Having a set reference any developer can look to adds efficiency to your team when editing a site.&lt;/p&gt;
+
+&lt;p&gt;I decided I would standardize the style guide I had been using into a boilerplate of sorts for me and others to use. I started looking around to see what other developers were including in there style guides. One that really stood out to me was &lt;a href=&quot;http://www.99lime.com/elements/&quot;&gt;HTML KickStart&lt;/a&gt;. It probably falls more in line with a pattern library. I really liked how &lt;a href=&quot;https://twitter.com/htmlkickstart&quot;&gt;Joshua Gatcke&lt;/a&gt; had markup examples in tabs right next to the live code.&lt;/p&gt;
+
+&lt;p&gt;I started working on a style guide that used tabs that had markup next to the live code examples for myself. One thing that was always a pain when I had written style guides/standards before was that you have to duplicate your markup from your live code to the example code box. If you ever update your live code, you also have to update your code example. This isn’t very DRY. I decided I’d write some JavaScript that would pull the markup from the live example and populate the tabs with the sample code.&lt;/p&gt;
+
+&lt;p&gt;This is similar to what Mat Marquis does with &lt;a href=&quot;https://github.com/filamentgroup/X-rayHTML&quot;&gt;X-RayHTML&lt;/a&gt; and how code examples work on the &lt;a href=&quot;http://view.jquerymobile.com/master/demos/&quot;&gt;jQuery mobile docs site&lt;/a&gt; currently. One thing I didn’t like about this was how I had to format the live markup to get it look formatted correctly in the example code. Any code I wanted to populate in a code example, I had to remove all of the spaces to the left of the open and closing tags of my code sample. Looking at the markup it looked odd. It wasn’t a big issue, though I could see people not wanting to format their markup so particularly to get the sample code to look right in &lt;code&gt;pre&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I kept looking around and came to Jeremy Keith’s &lt;a href=&quot;https://github.com/adactio/Pattern-Primer&quot;&gt;Pattern Primer&lt;/a&gt;. I liked how code snippets were all html pages that were pulled in with PHP. It meant I didn’t have to worry about odd formatting to get my live code formatting to look correct in the code examples.&lt;/p&gt;
+
+&lt;p&gt;I spoke with Jeremy to see if I could use Pattern Primer for the core of my style guide boilerplate and build on top of it and he gave me the green light.&lt;/p&gt;
+
+&lt;h2 id=&quot;of-styles-and-patterns&quot;&gt;Of Styles and Patterns&lt;/h2&gt;
+
+&lt;p&gt;To me, what I typically think of when I hear the word style guide in relation to websites, is a document will all elements and styling applied to the base elements. A style guide shows how H1-H6s are styled, how blockquotes, tables, forms, etc. are styled.&lt;/p&gt;
+
+&lt;p&gt;Then there are patterns. To me, patterns are modular like pieces of markup. These are things like pagination, breadcrumbs, buttons. They can also be unique styles on top of the base styles for things like blockquotes, tables, forms.&lt;/p&gt;
+
+&lt;p&gt;I wanted to combine the two into one document and so this was a driving factor behind the boilerplate. Bringing the two types of styles into one style guide.&lt;/p&gt;
+
+&lt;h2 id=&quot;goals-for-style-guide-boilerplate&quot;&gt;Goals for Style Guide Boilerplate&lt;/h2&gt;
+
+&lt;p&gt;As mentioned earlier, I think there are a lot of benefits to having your own style guide for your websites.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Style guides:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Promote consistency&lt;/li&gt;
+  &lt;li&gt;Promote modular thinking&lt;/li&gt;
+  &lt;li&gt;Add a greater clarity to the parts and pieces that make up your website&lt;/li&gt;
+  &lt;li&gt;Increase efficiency when editing a website.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I hope people find this boilerplate useful and add it to their own projects.&lt;/p&gt;
+
+&lt;p&gt;I’d love to be able to go to www.anysite.com/styleguide/ and view that site’s style guide.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloaddemo&quot;&gt;Download/Demo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/bjankord/Style-Guide-Boilerplate&quot;&gt;Download/Fork&lt;/a&gt; the Style Guide Boilerplate from github.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://brettjankord.com/projects/style-guide-boilerplate/&quot;&gt;View the demo&lt;/a&gt; for Style Guide Boilerplate.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 07 Mar 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/03/07/style-guide-boilerplate/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/03/07/style-guide-boilerplate/</guid>
+      </item>
+    
+      <item>
+        <title>More thoughts on HTML class naming conventions.</title>
+        <description>&lt;p&gt;I recently came across a &lt;a href=&quot;https://gist.github.com/necolas/1309546&quot;&gt;gist&lt;/a&gt; Nicolas Gallagher had posted on HTML class naming conventions. I had seen how he named classes before in from his post, &lt;a href=&quot;http://nicolasgallagher.com/about-html-semantics-front-end-architecture/&quot;&gt;About HTML semantics and front end architecture&lt;/a&gt;, though I wanted to jot down some more thoughts on this topic.&lt;/p&gt;
+
+&lt;h2 id=&quot;common-naming-conventions&quot;&gt;Common naming conventions&lt;/h2&gt;
+
+&lt;p&gt;Below are a few common naming conventions I’ve seen other developers using.&lt;/p&gt;
+
+&lt;p&gt;Harry Roberts (&lt;a href=&quot;https://twitter.com/csswizardry&quot;&gt;@csswizardy&lt;/a&gt;) uses a &lt;a href=&quot;http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/&quot;&gt;BEM like syntax which was honed by Gallagher&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.module&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module--modifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module__subcomponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module__subcomponent--modifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I’ve seen Jonathan Snook (&lt;a href=&quot;https://twitter.com/snookca&quot;&gt;@snookca&lt;/a&gt;) &lt;a href=&quot;http://us2.campaign-archive1.com/?u=2de298319eb1c284bd66e8b42&amp;amp;id=966ba5b4d3&quot;&gt;write&lt;/a&gt; about using a syntax like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.module&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module-submodule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Module Modifier uses single dash */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module--subcomponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Subcomponent uses double dash */&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Another naming convention I’ve thought about similar to the one above looks like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.module&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module--modifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Double dash for modifier */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module-subcomponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Single dash for subcomponent */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.module-subcomponent--modifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The issue I see with the last two naming conventions is that it can be hard see spot the difference where a module ends and a modifier or subcomponent starts when module names are made up of multiple words like product rating.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.product-rating&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating--featured&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Modifer (Submodule) with double dashes is easy to spot and understand */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating__label&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Subcomponent with double underscore is easy to spot and understand */&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.product-rating&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating-featured&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Modifier (Submodule) with single dash may be harder to understand that feature is a modifier of product-rating and not necessarily its own module */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating--label&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.product-rating&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Module */&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating--featured&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.product-rating-label&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Subcomponent with single dash. Harder to understand label is component of product rating. */&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;One way to get around this would be to use camelCase for module names and only use dashes to separate modules from modifiers and subcomponents.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.productRating&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.productRating-featured&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.productRating--label&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All of the naming conventions look a little odd at first glance. I think it is important to remind others the overall goal of a HTML class naming convention would be to add clarity for developers, though it can take a while for other developers to understand the thinking behind it and grow accustom to it.&lt;/p&gt;
+
+&lt;p&gt;I’ve created a &lt;a href=&quot;https://github.com/bjankord/CSS-Modules-Subcomponents-And-Modifiers-Collection&quot;&gt;Github repo&lt;/a&gt; to help document modular class naming patterns I’ve come across.&lt;/p&gt;
+
+&lt;p&gt;Do you have a naming convention you use when you’re writing modular CSS? Let me know in the comments below.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 06 Mar 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/</guid>
+      </item>
+    
+      <item>
+        <title>Thoughts on semantic HTML class names and maintainability</title>
+        <description>&lt;p&gt;The discussion of semantic HTML class names is one that goes back quite a while. While many great front-end developers have discussed back and forth on the topic, I wanted to document my own thoughts on the topic. To me, semantic HTML class names is somewhat of a misnomer. Aside from microformats, HTML classes add no semantic meaning to machines such as search engines or assistive technology like screen readers. Yet semantic class names is one of the main tenants of CSS best practices. I believe choosing class names is one of the most difficult part of CSS, largely do to our understanding of semantics. I’ve recently read and re-read a lot of articles/books on semantic HTML, specifically concerning document outlines, as well as techniques for writing maintainable and scalable CSS.&lt;/p&gt;
+
+&lt;p&gt;I want to reiterate this one point, HTML class names offer no semantic value to search engines or screen readers, aside from microformats. If you are concerned with semantic value, understanding HTML document outlines is very important. It’s also important to understand that class names have no effect on the document outline. So the way we view semantic value of HTML class names must be different than the way we view semantic value of our HTML markup.&lt;/p&gt;
+
+&lt;p&gt;Rather than concerning ourselves with creating semantic class names, I think we should be thinking about creating &lt;em&gt;sensible&lt;/em&gt; class names. I believe sensible class names offer semantics, but they also offer flexibility and reusability. Sensible class names gives meaning to an element to make it easier to understand and maintain &lt;em&gt;for developers&lt;/em&gt;. In my mind, there are two ways I see naming classes, based on their function(role) or based on their form(visual).&lt;/p&gt;
+
+&lt;h2 id=&quot;w3c-recommendation-of-naming-classes&quot;&gt;W3C recommendation of naming classes&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Often people use class names like bluetext, or redborder. A much better way to name your classes is with the role a certain HTML element of that class has.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From &lt;a href=&quot;http://www.w3.org/QA/Tips/goodclassnames&quot;&gt;W3C’s Tips for Webmasters&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The reasoning behind W3C’s recommendation is clear, using a class like bluetext is not future friendly. If down the road, you change that color, &lt;code&gt;.bluetext&lt;/code&gt; has lost its meaning.&lt;/p&gt;
+
+&lt;p&gt;On the flip side, frameworks like Twitter Bootstrap which use visual(presentational) class names are widely popular. Back-end developers that I’ve talked to that have used Twitter Bootstrap seem to really like it. They love the plugin-in-play ability with adding visual class names to elements. They don’t have to get in and mess around with the CSS, they can just add and remove classes as needed.&lt;/p&gt;
+
+&lt;p&gt;With individual role based classes, this flexibility is tricky. If we class the sections of the page individually, based on their role, with little thought to reusability, the CSS and the corresponding HTML classes offer little ease of maintenance and extensibility. If new sections are added, we need to add new role based classes along with additional CSS that corresponds to these new classes.&lt;/p&gt;
+
+&lt;p&gt;There are ways to reduce this concern when using role based classes, and take steps towards flexibility and modularity we see used with presentational classes.&lt;/p&gt;
+
+&lt;h2 id=&quot;flexible-and-reusable-css&quot;&gt;Flexible and Reusable CSS&lt;/h2&gt;
+
+&lt;p&gt;Coming up with HTML class names, I think, is one of the hardest parts of CSS. We want our styles to flexible and reusable, it keeps our file-sizes small and makes maintenance easier. While presentational classes like .left, .right, .hide, .show, invisible do help with flexibility and are highly reusable, I believe tend to muddy up our HTML. I believe &lt;a href=&quot;http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/&quot;&gt;presentational classes have a place&lt;/a&gt;, but it is not in our HTML. This a topic I’d like to write more about as well.&lt;/p&gt;
+
+&lt;p&gt;I want to share some ideas on approaches I think help reduce the amount of classes we have in our HTML, while still giving us the flexibility and reusability we want. I’ve recently reread &lt;a href=&quot;http://smacss.com/&quot;&gt;SMACSS&lt;/a&gt; by Johnathon Snook and enjoyed it so much I decided to finally buy it so I could read the last few chapters. So a lot of my thinking is formed around the SMACSS concept. If you havn’t read &lt;a href=&quot;http://smacss.com/&quot;&gt;SMACSS&lt;/a&gt; yet, I highly suggest you check it out.&lt;/p&gt;
+
+&lt;h2 id=&quot;keeping-it-simple&quot;&gt;Keeping it simple&lt;/h2&gt;
+
+&lt;p&gt;With role based class naming, its easy to get specific, in some cases, too specific. Specific class names can make it difficult to make CSS reusable, if we aren’t smart about it.&lt;/p&gt;
+
+&lt;p&gt;I prefer role based classes names but I think it is very important to keep them as general as possible at first. We should be looking for patterns in the layouts and create modules from those patterns. I tend to try and base my patterns on structural elements.&lt;/p&gt;
+
+&lt;p&gt;I’ve put together a screenshot of sidebar to help go over some of these concepts.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/02/reviews.jpg&quot; style=&quot;width:282px !important;&quot; alt=&quot;Three review sections. One for movies, one for albums, and one for books&quot; class=&quot;aligncenter size-full wp-image-588&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;EDIT: I should have changed the titles of the items in each review section in this graphic above, but they aren’t really the focus of this post, so yeah…&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Upon getting this sidebar to code out, I would go about classing each review section as &lt;code&gt;.reviews&lt;/code&gt; and not worry about getting too specific for now with the class names.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;.reviews&lt;/code&gt; class will act as our main module for all reviews we have here.&lt;/p&gt;
+
+&lt;h2 id=&quot;sub-classing&quot;&gt;Sub-Classing&lt;/h2&gt;
+
+&lt;p&gt;Snook talks a lot about sub-classing in SMACSS and it’s key to making our modules flexible. Sub-classing is the process of creating sub-modules based off of our main module.&lt;/p&gt;
+
+&lt;p&gt;For instance, a sub-class, or sub-module of &lt;code&gt;.reviews&lt;/code&gt; would be &lt;code&gt;.reviews-movies&lt;/code&gt;. There are a few tricks to naming sub-modules which I’ll touch on later, but the main thing I want to share is that by keeping our class names simple at first and creating basic modules, it makes them more reusable and allows use to use sub-modules to create flexibility.&lt;/p&gt;
+
+&lt;p&gt;So now we have our updated HTML and CSS with our module class, and sub-module classes.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews-movies&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews-albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews reviews-books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.reviews-movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;drying-up-modules-and-sub-modules&quot;&gt;DRYing up modules and sub-modules&lt;/h2&gt;
+
+&lt;p&gt;These are a few tricks I’ve found that try and help make sure you Don’t Repeat Yourself. They help clean up our HTML classes as well as our CSS for modules and sub-modules.&lt;/p&gt;
+
+&lt;h3 id=&quot;extending-selectors&quot;&gt;Extending selectors&lt;/h3&gt;
+
+&lt;p&gt;One approach is based on the @extend concept in Sass. You don’t need Sass to do this, though it does help. The idea is simple enough, instead of keeping our module styles in a separate class of &lt;code&gt;.reviews&lt;/code&gt;, we chain all our sub-modules together and are styles for the module are then stored here.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;p&gt;Instead of writing our CSS like below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.reviews-movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can write it as:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.movie-reviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.album-reviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.book-reviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.magazine-reviews&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.reviews-movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This approach is similar in thinking to talks Jeremy Clarke has been giving on &lt;a href=&quot;http://www.slideshare.net/jeremyclarke/dry-css-a-dontrepeatyourself-methodology-for-creating-efficient-unified-and-scalable-stylesheets&quot;&gt;DRY CSS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;One of the benefits of this approach is that we can remove the &lt;code&gt;.reviews&lt;/code&gt; class from out HTML.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-movies&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The main drawback I see with this approach though is that if we decide to add a new review section, we have to update our styles. This is a small issue admittedly, though I think we can alleviate it with intelligently thinking about how we go about naming our classes and writing our CSS. Nicolas Gallagher touches on some of the other issues associated with a single class approach in the component modifiers section of his post, &lt;a href=&quot;http://nicolasgallagher.com/about-html-semantics-front-end-architecture/&quot;&gt;About HTML semantics and front-end architecture&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;class-attribute-selectors&quot;&gt;Class-Attribute Selectors&lt;/h3&gt;
+
+&lt;p&gt;The method I prefer the most when writing modules and sub-modules is to use class-attribute selectors. I’ve found that they reduce the amount of classes in my HTML as well as reduce the amount of CSS I have to write.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://24ways.org/2012/a-harder-working-class/&quot;&gt;Nathan Ford wrote&lt;/a&gt; recently about using class-attribute selectors and how they can be used to help make our CSS more object-oriented, more scalable and modular. It really opened my eyes to the power of this technique. It’s actually used in Twitter Bootstrap as well and is one of the techniques that allows it to be so flexible.&lt;/p&gt;
+
+&lt;p&gt;Below is an example of the HTML we would write with this approach. You’ll notice we don’t need the additional .reviews class we once had as well with this technique. The class-attribute selector takes the role of the .reviews class we once had.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-movies&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Movie Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-albums&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Album Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reviews-books&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Book Reviews&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;reviews-&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.reviews-movies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-albums&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.reviews-books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;/* Sub-Module Styles */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this technique it’s important to be consistent with naming schemes so they match our class-attribute selector.&lt;/p&gt;
+
+&lt;p&gt;Of note, class-attribute selector are not supported in IE6. If you need to support IE6, I recommend using additional classes instead.&lt;/p&gt;
+
+&lt;h2 id=&quot;with-great-power&quot;&gt;With great power&lt;/h2&gt;
+
+&lt;p&gt;The class-attribute selector offers a lot of power to how we can write our CSS and HTML classes, though this power does not come without responsibility. There are certain things to be aware of when using class-attribute selectors.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wellfireinteractive.com/&quot;&gt;Cobey Potter&lt;/a&gt; brought up a good concept to be aware of when using class-attribute selectors in Nathan’s, &lt;a href=&quot;http://24ways.org/2012/a-harder-working-class/&quot;&gt;A Harder-Working Class article&lt;/a&gt; that I thought was worth sharing. It highlights one reason why we must be smarter in how we name our classes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;One thing people should be aware of is when you write:&lt;/p&gt;
+
+  &lt;p&gt;[class&lt;em&gt;=“pod”] it will choose both .pod-heading as well as .podium. Basically, you need to be pretty sharp on your naming conventions. To combat this, I’ve started namespacing using something like: [class&lt;/em&gt;=“pod—”] (two dashes) to ensure it only picks up the right namespace.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is the reasoning behind why I used &lt;code&gt;[class*=&quot;reviews-&quot;]&lt;/code&gt; in the example above instead of just &lt;code&gt;[class*=&quot;reviews&quot;]&lt;/code&gt;. There may not be any conflicts with using &lt;code&gt;[class*=&quot;reviews&quot;]&lt;/code&gt; but adding the extra dash helps, usually.&lt;/p&gt;
+
+&lt;p&gt;In the comments section of Nicolas Gallagher’s About HTML semantics and front-end architecture post, Gallagher talks about a concern he has with the “moduleName-” pattern.&lt;/p&gt;
+
+&lt;p&gt;Below are Gallagher’s concerns on using &lt;code&gt;[class*=&quot;btn-&quot;]&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;My concern with it is that you have to make sure that the substring you choose to match will never unintentionally appear in another class, e.g., btn-group.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I’ve put together an example below to demonstrate the issue:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-group&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;order.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-order&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Order&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;shopping-cart.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-shopping-cart&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Cart&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Gallagher has a valid point. In the example above, if we use the following CSS, our &lt;code&gt;.btn&lt;/code&gt; module will be used on &lt;code&gt;.btn-group&lt;/code&gt; as well.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;btn-&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#CCC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;text-decoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A few ways come to mind to avoid this concern.&lt;/p&gt;
+
+&lt;p&gt;I’ve started to use a BEM like syntax, the same that &lt;a href=&quot;http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/&quot;&gt;Harry Roberts&lt;/a&gt; uses, for my modules, sub-modules, and sub-components&lt;/p&gt;
+
+&lt;p&gt;With this approach the code looks like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-group&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;order.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn--order&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Order&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;shopping-cart.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn--shopping-cart&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Cart&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;btn--&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#CCC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;text-decoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I prefer this approach when using class-attribute selectors, I haven’t run into naming conflicts with this approach yet, that’s not to say there aren’t any. It seems easier for me to glance at it and know immediately what its for. A minor detail, but just something I prefer.&lt;/p&gt;
+
+&lt;p&gt;Another solution would be to simply change the name of &lt;code&gt;.btn-group&lt;/code&gt; so it doesn’t conflict with our module class-attribute selector.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;button-group&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;order.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-order&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Order&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;shopping-cart.php&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-shopping-cart-&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Cart&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;btn-&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#CCC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;text-decoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All in all, using class-attribute selectors does require an involved and thoughtful effort to make sure the strings for modules match up correctly and do not conflict with other class names. Though I find the benefit class-attributes bring, from ease of authorship to ease of flexiblity and maintainability are worth the thought involvement needed in using them.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I feel the discussion of how we name our classes and make sure our styles are flexible and resuable could go on and on. These are some techniques that I’ve found useful and am planning on sharing some more ideas on structuring and naming CSS and decoupling CSS from HTML. While I don’t think there is &lt;strong&gt;one true way&lt;/strong&gt; to craft CSS, I really wanted to document the techniques I use today to see if/how they change over time. So far these techniques have been very useful for me.&lt;/p&gt;
+
+&lt;p&gt;Kinda off-topic from semantic HTML class names and maintainability, I often think back to my days working for my Dad when I think of the ways I work today. He runs a construction company and I would say most of what I learned while working for him easily translates to web design. For instance, thinking of painters that come paint your house. Every painter paints differently. Some use a paint sprayer and some use rollers and brushes. Both are effective. There times when I think of sharing techniques and think what I’m sharing may be as interesting as a painter sharing how they use a paint sprayer. At the end of the day who cares right? As long as the job gets done. But I think there is a level of passion for the craft I work in that my Dad instilled in me that pushes me to share, analyze, critique and process the techniques I use and continue to strive to improve.&lt;/p&gt;
+
+&lt;p&gt;I believe sharing our ideas and approaches can help us better understand our craft and how we approach it. I look forward to feedback, critique, and general comments on this topic.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 09 Feb 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/</guid>
+      </item>
+    
+      <item>
+        <title>You Keep Using That Word, I Do Not Think It Means What You Think It Means</title>
+        <description>&lt;p&gt;I like to stay on top of cutting edge web design and development practices. I have a few keyword searches on Twitter I like to check daily for new articles on this and that, though one trend that really has caught my attention recently is seeing more and more authors writing about techniques like mobile first, adaptive web design, and RESS and many others terms with what seems to be a misconception of these terms. From &lt;a href=&quot;http://www.businessinsider.com/survey-mobile-first-bad-strategy-2012-12&quot;&gt;articles talking about mobile first&lt;/a&gt; with no mention of Luke Wroblewski to &lt;a href=&quot;http://uxmag.com/articles/combining-responsive-and-adaptive-strategies-to-solve-mobile-design-challenges&quot;&gt;articles explaining adaptive web design as RESS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/youkeepusingthatword.jpg&quot; alt=&quot;Scene from The Princess Bride&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By no means I am all knowing of this terminology either, though I thought I could help clear some confusion by sharing insight to the origins of where some of these new terms came from. My hope in this, is that it will result in more accurate articles which, would ideally, result in a better understanding of these techniques for a wider range of readers. With this, maybe we can reduce discussions where we are talking past each other instead of with each other because of a simple misunderstanding of terminology. The words we use to describe what we do have a way of evolving and gaining additional meaning over time, so I don’t mean to cement these definitions. This is happening with responsive web design and is happening with &lt;a href=&quot;http://bradfrostweb.com/blog/mobile/the-many-faces-of-mobile-first/&quot;&gt;mobile-first&lt;/a&gt; as Brad Frost documented. As I talk about these terms, these are the meanings I’ve come to know and wanted to share in hopes of clearing up some confusion.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/progressive-enhancement.jpg&quot; alt=&quot;Escalators&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;progressive-enhancement&quot;&gt;Progressive Enhancement&lt;/h2&gt;
+
+&lt;p&gt;Progressive enhancement is a strategy for &lt;a href=&quot;http://en.wikipedia.org/wiki/Web_design&quot;&gt;web design&lt;/a&gt; that emphasizes accessibility, &lt;a href=&quot;http://en.wikipedia.org/wiki/Semantic_HTML&quot;&gt;semantic HTML markup&lt;/a&gt;, and external stylesheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or Internet connection, while also providing an enhanced version of the page to those with more advanced browser software or greater bandwidth.&lt;/p&gt;
+
+&lt;p&gt;(Source: &lt;a href=&quot;http://en.wikipedia.org/wiki/Progressive_enhancement&quot;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Progressive enhancement was coined by &lt;a href=&quot;http://www.hesketh.com/thought-leadership/our-publications/progressive-enhancement-and-future-web-design&quot;&gt;Steven Champeon&lt;/a&gt; back in 2003. It allows us to start with a core experience and layer on enhancements as the browser is found more capable. A lot of today’s best practices fall under progressive enhancement, see: mobile first responsive web design, feature detection, conditional loading.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.hesketh.com/thought-leadership/our-publications/progressive-enhancement-and-future-web-design&quot;&gt;Progressive Enhancement and the Future of Web Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hesketh.com/thought-leadership/our-publications/inclusive-web-design-future&quot;&gt;Inclusive Web Design Future&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Progressive_enhancement&quot;&gt;Progressive Enhancement&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://alistapart.com/article/testdriven&quot;&gt;Test-Driven Progressive Enhancement&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://alistapart.com/article/understandingprogressiveenhancement&quot;&gt;Understanding Progressive Enhancement&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://alistapart.com/article/behavioralseparation&quot;&gt;Behavioral Separation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;graceful-degradation&quot;&gt;Graceful Degradation&lt;/h2&gt;
+
+&lt;p&gt;Graceful degradation comes from the concept in software development of &lt;a href=&quot;http://en.wikipedia.org/wiki/Graceful_degradation&quot;&gt;fault tolerance&lt;/a&gt;. With graceful degradation, designers would create Web pages for the latest browsers that would also work well in older versions of browser software. Graceful degradation was supposed to allow the page to “degrade”, or remain presentable even if certain technologies assumed by the design were not present, without being jarring to the user of such older software.&lt;/p&gt;
+
+&lt;p&gt;(Source: &lt;a href=&quot;http://en.wikipedia.org/wiki/Progressive_enhancement&quot;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sitepoint.com/progressive-enhancement-graceful-degradation-basics/&quot;&gt;Progressive Enhancement and Graceful Degradation: an Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3.org/wiki/Graceful_degredation_versus_progressive_enhancement&quot;&gt;Graceful Degredation versus Progressive Enhancement&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/technique-chare.jpg&quot; alt=&quot;Chart of responsive web design, progressive enhancement, and graceful degradation&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;responsive-web-design&quot;&gt;Responsive Web Design&lt;/h2&gt;
+
+&lt;p&gt;Coined by &lt;a href=&quot;http://alistapart.com/article/responsive-web-design&quot;&gt;Ethan Marcotte&lt;/a&gt; in May 2010, is a technique for adapting a website’s layout across multiple devices. The technique is composed of 3 elements.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Media Queries&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Media_queries&quot;&gt;Media queries&lt;/a&gt; allow the page to use different CSS style rules based on characteristics of the device the site is being displayed on, most commonly the width of the &lt;a href=&quot;http://en.wikipedia.org/wiki/Web_browser&quot;&gt;browser&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fluid Grids&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The fluid &lt;a href=&quot;http://en.wikipedia.org/wiki/Grid_%28page_layout%29#Grid_use_in_web_design&quot;&gt;grid&lt;/a&gt; concept calls for page element sizing to be in relative units like percentages or &lt;a href=&quot;http://en.wikipedia.org/wiki/Em_%28typography%29&quot;&gt;EMs&lt;/a&gt;, rather than absolute units like &lt;a href=&quot;http://en.wikipedia.org/wiki/Pixel&quot;&gt;pixels&lt;/a&gt; or &lt;a href=&quot;http://en.wikipedia.org/wiki/Point_%28typography%29&quot;&gt;points&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Flexible Images&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Flexible images are also sized in relative units (up to 100%), so as to prevent them from displaying outside their containing &lt;a href=&quot;http://en.wikipedia.org/wiki/HTML_element&quot;&gt;element&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(Source: &lt;a href=&quot;http://en.wikipedia.org/wiki/Responsive_web_design&quot;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Marcotte published a book entitled &lt;a href=&quot;http://www.abookapart.com/products/responsive-web-design&quot;&gt;Responsive Web Design&lt;/a&gt;. Responsive Web Design is sometimes referred to as &lt;a href=&quot;http://www.google.com/trends/explore#q=responsive%20design,%20responsive%20web%20design&amp;amp;cmpt=q&quot;&gt;Responsive Design&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://alistapart.com/article/responsive-web-design&quot;&gt;Responsive Web Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.abookapart.com/products/responsive-web-design&quot;&gt;Responsive Web Design Book&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mediaqueri.es/&quot;&gt;Mediaqueri.es&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://johnpolacek.github.com/scrolldeck.js/decks/responsive/&quot;&gt;What the heck is Responsive Web Design?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;mobile-first&quot;&gt;Mobile-First&lt;/h2&gt;
+
+&lt;p&gt;Coined by &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?933&quot;&gt;Luke Wroblewski&lt;/a&gt; back in November 2009, is a mindset that allows new opportunities in web design and development by switching our focus from desktop-first. Wroblewski published a book entitled Mobile First which covers different concepts of a mobile-first mindset.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Mobile is exploding&lt;/li&gt;
+  &lt;li&gt;Mobile forces us to focus&lt;/li&gt;
+  &lt;li&gt;Mobile extends your capabilities&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.abookapart.com/products/mobile-first&quot;&gt;Mobile First Book&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.uxmatters.com/mt/archives/2012/03/mobile-first-what-does-it-mean.php&quot;&gt;Mobile First: What Does It Mean?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vincentjordan.com/2012/02/rethinking-your-mobile-first-strategy/&quot;&gt;Rethinking Your Mobile First Strategy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/mobile-first.jpg&quot; alt=&quot;Mobile first&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mobile-first-responsive-web-design&quot;&gt;Mobile-First Responsive Web Design&lt;/h2&gt;
+
+&lt;p&gt;This term combines the mobile-first mindset from Wroblewski with Marcotte’s Responsive Web Design technique. It involves starting with a baseline experience and using min-width media queries along with other elements of responsive web design to enhance the experience as the layout becomes wider. This approach falls in line with principles of progressive enhancement. While the technique of responsive web design can be implemented with a desktop-first or mobile-first approach, the mobile first is considered best practice amongst developers as it allows for more optimization for performance. Other terms you’ll often see when reading about mobile first responsive web design:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Responsible Responsive Web Design&lt;/li&gt;
+  &lt;li&gt;Responsive Enhancement&lt;/li&gt;
+  &lt;li&gt;Feature Detection&lt;/li&gt;
+  &lt;li&gt;Conditional Loading&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bradfrostweb.com/blog/web/mobile-first-responsive-web-design/&quot;&gt;Mobile First Responsive Web Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.html5rocks.com/en/mobile/responsivedesign/&quot;&gt;Creating A Mobile-First Responsive Web Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/grigs/fitc-mobile-first-responsive-design&quot;&gt;FITC Mobile First Responsive Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.uie.com/brainsparks/2012/10/12/jason-grigsby-mobile-first-responsive-design/&quot;&gt;Jason Grigsby – Mobile-First Responsive Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://435digital.com/blog/2012/10/16/mobile-first-responsive-design-websites/&quot;&gt;Mobile-First, Responsive Design Websites: Does This Really Matter?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/desktop-first.jpg&quot; alt=&quot;Dekstop first&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;desktop-first&quot;&gt;Desktop-First&lt;/h2&gt;
+
+&lt;p&gt;Desktop-first is the flip side to mobile-first. It has been the mindset of web designers and developers for the last 15+ years.&lt;/p&gt;
+
+&lt;p&gt;Desktop-First Responsive Web Design This approach to responsive web design lines up with principles of graceful degradation. You start with your desktop website and add max-width media queries along with other elements of responsive web design to your website. Another term I’ve seen associated with this approach is &lt;a href=&quot;https://github.com/sparkbox/Responsive-Retrofitting&quot;&gt;Responsive Retrofitting&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://responsivedesignweekly.com/rwd-summit/retrofitting-sites-with-responsive-design-with-ben-callahan/&quot;&gt;Retrofitting sites with responsive design with Ben Callahan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.webmonkey.com/2012/09/give-the-web-a-responsive-design-facelift-with-responsive-retrofitting/&quot;&gt;Give the Web a Responsive-Design Facelift With ‘Responsive Retrofitting’&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://speakerdeck.com/bencallahan/responsive-retrofitting-from-css-dev-conf-2012-in-honolulu-hi&quot;&gt;Responsive Retrofitting from CSS Dev Conf 2012 in Honolulu, HI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/adaptive.jpg&quot; alt=&quot;Adaptive&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;adaptive-web-design&quot;&gt;Adaptive Web Design&lt;/h2&gt;
+
+&lt;p&gt;This is the term I see the most confusion with. The concept of adaptive web design has been around for sometime, though
+&lt;a href=&quot;http://easy-readers.net/books/adaptive-web-design/&quot;&gt;Aaron Gustafson&lt;/a&gt; really popularized the term with his book, &lt;a href=&quot;http://easy-readers.net/books/adaptive-web-design/&quot;&gt;Adaptive Web Design Crafting Rich Experiences with Progressive Enhancement&lt;/a&gt;. I could try to explain what adaptive web design means, though I’d rather just pull a quote from Gustafson himself from a recent &lt;a href=&quot;https://bdconf.com/podcasts/adaptive-web-design-with-aaron-gustafson/&quot;&gt;Breaking Development&lt;/a&gt; interview.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;…adaptive web design, the term that I, you know, decided to use for the title of the book, was mainly trying to come up with a phrase that kind of encapsulated what progressive enhancement was all about. Progressive enhancement as a term, you know, it’s been with us since about 2003, but it also feels very clinical and sounds kind of boring. And from a marketing perspective with the book we wanted to make sure that we weren’t, you know, creating confusion with the Filament Group’s book, “Designing with Progressive Enhancement,” which is a fantastic book and I certainly recommend people purchase that as well. But we wanted to kind of disambiguate my book from that book. So, we were trying to think of, you know, what exactly does all of this stuff really mean, and it was about creating rich, adaptable experiences that tailor themselves to the particular device that you were working with. So, the way that I view progressive enhancement is very much analogous to adaptive web &amp;gt;design. It’s essentially the same concept.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From this, I get the idea that adaptive web design and progressive enhancement are interchangeable, where adaptive web design may just be a more modern take on progressive enhancement, used for what it sounds like marketing reasons. This is a term that I believe will continue to be ambiguous and have it’s meaning morphed as needed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Additional Resources&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.easy-designs.net/archives/2011/11/16/on-adaptive-vs-responsive-web-design/&quot;&gt;On Adaptive vs. Responsive Web Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ampagency.com/what-is-responsive-and-adaptive-web-design/&quot;&gt;What is Responsive and Adaptive Web Design?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://viljamis.com/blog/2012/adaptive-vs-responsive-whats-the-difference.php&quot;&gt;Adaptive vs. Responsive, What’s the Difference?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;adaptive-layouts&quot;&gt;Adaptive Layouts&lt;/h2&gt;
+
+&lt;p&gt;The concept of &lt;a href=&quot;https://twitter.com/stephanierieger/status/237936382595723264&quot;&gt;adaptive layouts&lt;/a&gt; is often confused with term adaptive web design. Where responsive web design implements fluid states between breakpoints, adaptive layouts implements fixed states between breakpoints. This is usually achieved by setting either a set width, or max-width in certain breakpoints. I think the best way to understand this technique is to see it in action.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Examples of Adaptive Layouts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sony.com/index.php&quot;&gt;Sony.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://foodsense.is/&quot;&gt;FoodSense.is&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.londonandpartners.com/&quot;&gt;LondonandPartners.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sasquatchfestival.com/&quot;&gt;SasquatchFestival.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://informationarchitects.net/&quot;&gt;InformationArchitects.net&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Examples of Responsive Web Design&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bostonglobe.com/&quot;&gt;BostonGlobe.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.microsoft.com/en-us/default.aspx&quot;&gt;Microsoft.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thegreatdiscontent.com/&quot;&gt;TheGreatDiscontent.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stephencaver.com/&quot;&gt;StephenCaver.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.starbucks.com/&quot;&gt;Starbucks.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ress&quot;&gt;RESS&lt;/h2&gt;
+
+&lt;p&gt;RESS is another term I often see confused with adaptive web design. Original coined by &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1392&quot;&gt;Luke Wroblewski&lt;/a&gt; in September 2011, it stands for Responsive Design + Server Side Components. “In a nutshell, RESS combines adaptive layouts with server side component (not full page) optimization. So a single set of page templates define an entire Web site for all devices but key components within that site have device-class specific implementations that are rendered server side.”&lt;/p&gt;
+
+&lt;p&gt;(Source: &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1392&quot;&gt;Luke Wroblewski&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;For some time, the server side component in RESS was assumed to be a device detection solution like WURFL, Categorizr, Device Atlas. Recently though, I had an insightful conversation with Tim Murtaugh. Tim helped develop the redesign for &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;. In an &lt;a href=&quot;http://aneventapart.com/news/post/aea-2012-relaunch&quot;&gt;article about the redesign&lt;/a&gt;, it was mentioned that RESS was used in the redesign. I was curious about which server side component they were using as part of their RESS implementation, however when talking to Tim, he mentioned they were conditionally loading resources based on feature detection. Which is perfectly reasonable and the approach I prefer when I’m build responsive websites. Though the use of the term RESS did not seem to line up with my understanding of it. An &lt;a href=&quot;https://twitter.com/bjankord/status/275672328153755649&quot;&gt;interesting discussion&lt;/a&gt; ensued on Twitter between, Tim Murtaugh, Luke Wroblewski, Ethan Marcotte, Scott Jehl and myself about what RESS actually is. After the discussion I don’t think I understand what RESS full encapsulates. Depending on &lt;a href=&quot;https://twitter.com/lukew/status/275678033661272064&quot;&gt;who you ask&lt;/a&gt;, conditionally loading resources/markup via AJAX based on feature detection could be defined as RESS, where the server side component is the part the returns the data for the AJAX call, though I believe most people still associate RESS with responsive design + a server side device detection component. I think this is a perfect example of where terms we use everyday have a way of evolving as we adapt with change over time.&lt;/p&gt;
+
+&lt;h2 id=&quot;in-conclusion&quot;&gt;In Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Hopefully this can serve as a reference for those who want to catch up on these new terms. It’s always good when you’re planning out your next website project to make sure all of those involved are on the same page. By defining these terms for those who may not be familiar with them helps ensure better understanding for everyone throughout the project.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 30 Jan 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/</guid>
+      </item>
+    
+      <item>
+        <title>Beyond Device Detection</title>
+        <description>&lt;p&gt;The landscape of web enabled devices is drastically changing at a &lt;a href=&quot;http://newsroom.cisco.com/press-release-content?articleId=888280&quot;&gt;rapid pace&lt;/a&gt;. Device detection is no longer a reliable solution to adapt with the changes we are seeing in the technological world. The amount of new web enabled devices being released is just too high.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/toohigh.jpg&quot; alt=&quot;The amount of new web enabled devices is too damn high&quot; class=&quot;aligncenter size-full&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-question-of-reliability&quot;&gt;A question of reliability&lt;/h2&gt;
+
+&lt;p&gt;Device detection cannot reliably report the features of every device users are using to access the web. The main reason is that to know what features a device supports, you must check for them, after the code has been executed on server. Feature detection, currently, can only be done client-side. There are &lt;a href=&quot;https://docs.google.com/presentation/d/1y_A6VOZy9bD2i0VLHv9ZWr0W3hZJvlTNCDA0itjI0yM/edit#slide=id.p19&quot;&gt;ideas to offer feature detection on the server&lt;/a&gt;, yet this option is not available today.&lt;/p&gt;
+
+&lt;p&gt;One possible workaround for this lack of knowledge of supported features of the device accessing the website before sending the website over the wire is to use a &lt;a href=&quot;http://wurfl.sourceforge.net/&quot;&gt;service&lt;/a&gt; that provides a list of supported features related to the user agent. While this can work for some devices, it’s not without it’s own drawbacks.&lt;/p&gt;
+
+&lt;p&gt;The difficulty of keeping up with every new web enabled device and testing it and making sure it’s features are added to a database is no small task. It’s a maintenance nightmare as well as a costly endeavor. If &lt;a href=&quot;http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/&quot;&gt;one major company decides to break away from standards you rely on&lt;/a&gt; for device detection and feature pairing based on the user agent, the whole technique becomes less reliable.&lt;/p&gt;
+
+&lt;p&gt;For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg&quot; alt=&quot;Pile of web enabled devices with text overlaid on top that reads, Gotta catch &#39;em all&quot; class=&quot;aligncenter size-full&quot; /&gt;&lt;br /&gt;
+(Credit: &lt;a href=&quot;http://commons.wikimedia.org/wiki/File:Device_pile.jpg&quot;&gt;Jeremy Keith&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.&lt;/p&gt;
+
+&lt;h2 id=&quot;device-detection--feature-detection&quot;&gt;Device Detection != Feature Detection&lt;/h2&gt;
+
+&lt;p&gt;One common pattern I saw with device detection when I was working on &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr&lt;/a&gt; and looking at other projects, new and old, was too assume features based on the type of device. For instance, it was, and unfortunately &lt;a href=&quot;http://tympanus.net/codrops/2013/01/21/ui-design-guidelines-for-responsive-design/&quot;&gt;still is&lt;/a&gt;, &lt;a href=&quot;http://www.html5rocks.com/en/mobile/cross-device/&quot;&gt;common&lt;/a&gt; for people to &lt;a href=&quot;http://blog.grayghostvisuals.com/modernizr/conditionally-loading-resources/&quot;&gt;talk about&lt;/a&gt; how mobiles and tablets support touch and desktops do not. This is simply not true anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://windows.microsoft.com/en-US/windows-8/meet&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/touch-desktop.jpg&quot; alt=&quot;&quot; title=&quot;touch-desktop&quot; class=&quot;aligncenter size-full wp-image-547&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(Credit: CNET)&lt;/p&gt;
+
+&lt;h2 id=&quot;feature-detection--device-detection&quot;&gt;Feature Detection != Device Detection&lt;/h2&gt;
+
+&lt;p&gt;I will admit, it’s difficult to move beyond device detection. We want our websites to be suitable for and to work on as many devices as possible. Yet relying on user agents to determine features is not reliable, though we continue with this same set logic. We just reverse it. I’m sure you’ve all seen &lt;a href=&quot;http://css-tricks.com/snippets/css/media-queries-for-standard-devices/&quot;&gt;a list&lt;/a&gt; of media queries designed &lt;a href=&quot;http://perishablepress.com/target-iphone-and-ipad-with-css3-media-queries/&quot;&gt;specifically for the iPhone or the iPad&lt;/a&gt;. Or maybe the misconception I brought up previously, that we can rely on detecting touch support to determine what type of device a user is on. These are not only silly, but have become tiring to see &lt;a href=&quot;http://stackoverflow.com/questions/6191590/css-media-query-on-iphone&quot;&gt;over&lt;/a&gt; and &lt;a href=&quot;http://web-design-weekly.com/snippets/iphone-5-media-query/&quot;&gt;over&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you believe device detection != feature detection, you must accept that, feature detection != device detection.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Move beyond device detection through feature detection. Let feature detection be just that, feature detection. The lines we’ve drawn in the sand to differentiate devices are fading away. We are seeing this with Windows 8 tablets and laptops/desktops. But we are also seeing the &lt;a href=&quot;http://www.theverge.com/2013/1/21/3902234/lg-joins-the-5-inch-1080p-party-with-optimus-g-pro&quot;&gt;lines&lt;/a&gt; &lt;a href=&quot;http://www.engadget.com/2013/01/07/huawei-launches-6-1-inch-ascend-mate/&quot;&gt;between&lt;/a&gt; &lt;a href=&quot;http://www.androidcentral.com/production-line-leak-claims-show-644-inch-screen-sony-device&quot;&gt;mobile&lt;/a&gt; and &lt;a href=&quot;http://reviews.cnet.com/2733-3126_7-936-3.html&quot;&gt;tablet&lt;/a&gt; blur.&lt;/p&gt;
+
+&lt;p&gt;Once you move beyond device detection, you will be better prepared to adapt to the constantly changing landscape of web enabled devices. The Web is changing and if we wish to keep up with it, we too, must change the ways to adapt to it.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 22 Jan 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/01/22/beyond-device-detection/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/01/22/beyond-device-detection/</guid>
+      </item>
+    
+      <item>
+        <title>Active development on Categorizr has come to an end</title>
+        <description>&lt;p&gt;It’s time to officially bring active development of Categorizr to a close. It’s always difficult to bring a personal project to a close. This was my first big personal project, so it is bittersweet to see this go.&lt;/p&gt;
+
+&lt;p&gt;It was fun to see the project take off, I remember getting a tweet from Paul Irish asking me to add a link to Categorizr in the Modernizr Wiki. It was fun to see Categorizr make it in to a list of 50 fantastic responsive web design tools on &lt;a href=&quot;http://www.netmagazine.com/features/50-fantastic-tools-responsive-web-design&quot;&gt;.net Magazine&lt;/a&gt;, and see &lt;a href=&quot;http://www.netmagazine.com/interviews/ethan-marcotte-answers-your-responsive-web-design-questions&quot;&gt;Ethan Marcotte&lt;/a&gt; mention my project as well other people I look up to like &lt;a href=&quot;https://twitter.com/zeldman/status/166660028055556096&quot;&gt;Jeffery Zeldman&lt;/a&gt;, &lt;a href=&quot;http://adactio.com/journal/5194/&quot;&gt;Jeremy Keith&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/brad_frost/status/192289889939767296&quot;&gt;Brad Frost&lt;/a&gt;. Jason Grigsby introduced me to Crystal Beasley and Lawrence Mandel to offer my thoughts on the user agent for Firefox’s new OS to make sure it would be easily detectable. It was a great experience.&lt;/p&gt;
+
+&lt;p&gt;I learned a lot while working on the project. To name just a few of the things, I learned a better understanding of PHP, a better understanding of how CDNs work, how to license code and what licensing options there are. Nearly a year ago, I took the plunge and learned how to use github and set up a project specifically so I could put &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr&lt;/a&gt; on it.&lt;/p&gt;
+
+&lt;p&gt;I worked with a great developer and friend on this project, &lt;a href=&quot;https://twitter.com/jaeisma&quot;&gt;Josh Eisma&lt;/a&gt;. He helped a lot with code review and we had even built out an API to launch a month after Categorizr was released on github, though there was something that held me back from ever pushing that update live. My view of the web.&lt;/p&gt;
+
+&lt;h2 id=&quot;reasoning-behind-it-all&quot;&gt;Reasoning behind it all&lt;/h2&gt;
+
+&lt;p&gt;As I was collecting user agents and testing data I came across the some &lt;a href=&quot;http://social.msdn.microsoft.com/Forums/en-US/6be392da-4d2f-41b4-8354-8dcee20c85cd/internet-explorer-10-user-agent-strings-on-windows-8-64bit?forum=windowsdeveloperpreviewgeneral&quot;&gt;user agents from a Windows 8 dev device running Metro&lt;/a&gt;. One interesting thing with Windows 8 is that Microsoft decided to base the OS off of its &lt;a href=&quot;http://arstechnica.com/information-technology/2012/02/leaked-windows-phone-8-vid-windows-8-kernel-and-integration-multiple-cores/&quot;&gt;desktop kernel&lt;/a&gt;. What this meant was that the user agent for Windows 8 tablets, desktops, and possible phones would all show that they are based on the desktop kernel.&lt;/p&gt;
+
+&lt;p&gt;Red lights went off immediately in my mind, because detecting desktop operating systems was one of the methods I used in Categorizr. I assumed there wouldn’t be any new desktop operating system that would go against the standards we had seen for the last ten years and that the &lt;code&gt;Windows NT&lt;/code&gt; string would only show up in actual “desktop” user agents.&lt;/p&gt;
+
+&lt;p&gt;Before Windows 8, you could &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/windows/desktop/ms700675%28v=vs.85%29.aspx&quot;&gt;determine the difference&lt;/a&gt; between a Windows PC and and Windows tablet by looking for &lt;code&gt;Tablet PC&lt;/code&gt; in the user agent string.&lt;/p&gt;
+
+&lt;p&gt;Though when I looked at they user agents Paulo Morgado collected from IE10, running on Windows 8 on his dev device, I noticed their was no &lt;strong&gt;reliable&lt;/strong&gt; way to differentiate the user agent between Metro and Classic Desktop mode.&lt;/p&gt;
+
+&lt;p&gt;User agent from Internet Explorer 10, running in the Metro UI:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mozilla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MSIE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Windows&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Win64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;User agent from Internet Explorer 10, running in the Classic Desktop UI:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mozilla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MSIE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Windows&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WOW64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This was the first instance I started to see the lines between tablet and desktop blur, then I started seeing screen shots of the tablet paired with a keyboard and it really opened my eyes. I &lt;a href=&quot;http://www.brettjankord.com/2012/02/22/thoughts-on-windows-8-device-detection/&quot;&gt;blogged&lt;/a&gt; about it back in February last year.&lt;/p&gt;
+
+&lt;p&gt;So I decided to hold off on promoting Categorizr any more as I wanted to see if Microsoft would change the UAs, possibly adding Tablet PC to their Windows 8 tablets when they actually released their device.&lt;/p&gt;
+
+&lt;p&gt;Here are the user agents from the new Microsoft Surface.&lt;/p&gt;
+
+&lt;p&gt;User agent from Internet Explorer 10, running in the Metro UI on Microsoft Surface:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mozilla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MSIE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Windows&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ARM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Touch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;User agent from Internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mozilla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MSIE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Windows&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ARM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Touch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Microsoft actually uses the same user agent when for the Surface when it is in Metro UI mode as when it is in Desktop UI mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;They want the device to be recognized as a “desktop”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I don’t think this is necessarily bad either. This matches up with &lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2012/11/giving-tablet-users-full-sized-web.html&quot;&gt;Google’s tips for optimizing websites for tablets&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;other-concerns&quot;&gt;Other concerns&lt;/h2&gt;
+
+&lt;p&gt;As I mentioned, Categorizr/device detection in general no longer lines up with my view of the web.&lt;/p&gt;
+
+&lt;p&gt;What I mean by this is that I longer see using user agent sniffing to group devices into set categories as a viable solution for creating web experiences across the wide array of web capable devices. There is a consensual hallucination in the market, that we can silo devices into set categories like mobile, tablet, and desktop, yet the reality is drawing these lines in the sand is not an easy task.&lt;/p&gt;
+
+&lt;p&gt;Sure, I can pick up a phone and tell the difference from a tablet. Likewise, I know the difference between my desktop computer at work and a tablet, though those lines we use to differentiate device groups are quickly fading away. Luke Wroblewski has an excellent graphic that shows how capabilities we saw associate with certain sets of devices is crossing over into all devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://static.lukew.com/unified_device_design.png&quot; alt=&quot;Unified device design&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thinking back to what originally motivated me to develop Categorizr, I wanted a &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1392&quot;&gt;RESS solution&lt;/a&gt; to help conditionally load resources/assets/content. A nice side effect of Categorizr was that it also worked great as redirect solution.&lt;/p&gt;
+
+&lt;p&gt;Yet as more time went on, I begin to realize that user agents offer very little of the actual information we would want to know to conditionally load resources. There are device databases that collect this data, though being reliant on services like WURFL or DeviceAtlas is blessing and a curse. It takes the onus off of you to test devices and make sure the device detection is accurate, though at the same time, you are at the mercy of those who own the database/service. You have to hope they &lt;strong&gt;have&lt;/strong&gt; tested the new devices and have the features of those new devices in the database when they are released.&lt;/p&gt;
+
+&lt;p&gt;I would much rather rely on client-side feature detection. I feel it is more accurate and easier to correct false positives, and works better with new devices with easier testing. The standards for browser features are stronger than the standards for user agents. We know that all future versions of browsers &lt;strong&gt;should&lt;/strong&gt; support the same features the previous version supported. This is not always the case with user agents. User agent strings that had set strings in them that we could rely on to detect the device are not always in future versions, a la Windows 8.&lt;/p&gt;
+
+&lt;h2 id=&quot;moving-on&quot;&gt;Moving on&lt;/h2&gt;
+
+&lt;p&gt;While I see little reason to use device detection in my workflow, I know there are intances where a separate mobile site is preferred. I’ve decided to take the knowledge I’ve learned from working on Categorizr and create a simpler, smaller device detection script called &lt;a href=&quot;https://github.com/bjankord/isMobile&quot;&gt;isMobile&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It will come in two flavors: a mobile first detection of mobile devices, and a desktop first detection of mobile devices.&lt;/p&gt;
+
+&lt;p&gt;And so, its sad, for me, to see the project go, but I’m also glad to move on from this, into a more &lt;a href=&quot;http://futurefriend.ly/&quot;&gt;future friendly&lt;/a&gt; workflow and mindset. About a year ago I had this crazy idea to apply mobile first thinking to device detection. Yet I’ve awakened from the consensual hallucination that the web can be divided and grouped into simple categories like mobile, tablet, and desktop since then. Thanks to everyone that supported this project, it was truly a great learning experience for me.&lt;/p&gt;
+
+&lt;p&gt;In my next post I plan to talk more about this consensual hallucination and my new workflow.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 10 Jan 2013 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/</guid>
+      </item>
+    
+      <item>
+        <title>Cross Browser Retina/High Resolution Media Queries</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://www.w3.org/blog/CSS/2012/06/14/unprefix-webkit-device-pixel-ratio/&quot;&gt;fantasai&lt;/a&gt;, &lt;a href=&quot;http://benfrain.com/a-full-vendor-stack-for-targeting-high-resolution-retina-devices/&quot;&gt;Ben Frain&lt;/a&gt;, and &lt;a href=&quot;http://www.broken-links.com/2012/07/13/using-media-queries-to-test-device-resolution/&quot;&gt;Peter Gasston&lt;/a&gt; have all written about this topic before, though I still see a lot developers using verbose media queries for retina/high resolution displays so I figured I would write up my own post.&lt;/p&gt;
+
+&lt;p&gt;Most developers are currently writing retina/high resolution media queries similar to the examples below:&lt;/p&gt;
+
+&lt;p&gt;This media query example is from &lt;a href=&quot;http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss&quot;&gt;37signals article on retina images and scss&lt;/a&gt;. It is based on the one in Thomas Fuchs’ Retinafy book but, it has been modified to define the Google Nexus 7 with it’s 1.3 pixel ratio as a retina-capable device.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min--moz-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-o-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.3dppx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Chris Coyier has a &lt;a href=&quot;http://css-tricks.com/snippets/css/retina-display-media-query/&quot;&gt;retina display media query example&lt;/a&gt; that looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min--moz-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2dppx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;what8217s-wrong-with-the-above-solutions&quot;&gt;What’s wrong with the above solutions&lt;/h2&gt;
+
+&lt;p&gt;Nothing really, though they could be a lot cleaner. A friend asked me about retina media queries and how to get them to work on his new Windows 8 Phone.&lt;/p&gt;
+
+&lt;p&gt;It got me thinking about the standard retina/high resolution media query I typically use. Usually I just copy and paste from other sites and had never put much thought into it.&lt;/p&gt;
+
+&lt;p&gt;When I tested the query I usually use on his phone, I learned that IE does not have a device-pixel-ratio media query. There is no -ms-device-pixel-ratio. You can’t detect the device-pixel-ration with Javascript using window.devicePixelRatio in IE either. Also of note, window.devicePixelRatio does not currently work in Firefox, though it does work in Opera and Chrome.&lt;/p&gt;
+
+&lt;h2 id=&quot;ie-is-using-standards-this-is-new&quot;&gt;IE is using standards, this is new&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;The device-pixel-ratio is not a standard media query.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;-webkit-min-device-pixel-ratio: is not a standard&lt;/p&gt;
+
+&lt;p&gt;min–moz-device-pixel-ratio: is not a standard&lt;/p&gt;
+
+&lt;p&gt;-o-min-device-pixel-ratio: is not a standard&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;min-device-pixel-ratio: I don’t think the un-prefixed version works an any browsers, because it’s not a standard.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok, so we got that cleared up. Good news is the resolution media query is &lt;strong&gt;a standard media query&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;I started looking to see which browsers supported the resolution media query. I forked &lt;a href=&quot;http://www.jordanm.co.uk/palmreader/&quot;&gt;Jordan Moore’s Palm Reader&lt;/a&gt; to do some &lt;a href=&quot;http://brettjankord.com/projects/palmreader/&quot;&gt;testing&lt;/a&gt; specifically related to device-pixel-ratio and resolution media queries. I also looked at &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/resolution&quot;&gt;MDN’s documentation on resolution media queries&lt;/a&gt; and found that it actually has great support.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Resolution media queries&lt;/strong&gt; are currently supported in &lt;strong&gt;IE9+, FF3.5+, Opera9.5+&lt;/strong&gt;. However, support for resolution media queries is lacking in webkit browsers. Support for resolution media queries was recently added to webkit on Oct. 23rd, 2012.&lt;/p&gt;
+
+&lt;p&gt;This means you can replace, the min–moz-device-pixel-ratio, the -o-min-device-pixel-ratio with a resolution media query. You can also just remove the unprefixed min-device-pixel-ratio.&lt;/p&gt;
+
+&lt;p&gt;This cleans up Coyier’s retina/high resolution media query.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2dppx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can clean this up even more though. The dppx unit is a new unit that is equal to the device-pixel-ratio value webkit uses.&lt;/p&gt;
+
+&lt;p&gt;However, the dppx unit is not as widely supported as the dpi unit. The dppx unit is supported in FF 16.0+ and Opera 12.10+.&lt;/p&gt;
+
+&lt;p&gt;IE does not currently support dppx units.&lt;/p&gt;
+
+&lt;p&gt;If you want to support retina/high resolution devices that are running IE, you need to use the resolution media query and use dpi units. If you’re going to use the dpi unit, I don’t see much need to include the dppx unit as well. Everywhere the dppx unit is supported, the dpi unit is also supported. Using both units would be like writing a media query that uses pixels and ems for the same size.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;320px&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;20em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Two units that equal the same value don&amp;#39;t make sense in this media query*/&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Why use two units which equal the same value with resolution media queries? */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;final-retinahigh-resolution-media-query&quot;&gt;Final retina/high resolution media query&lt;/h2&gt;
+
+&lt;p&gt;This works in all the browsers that Coyier’s original example does and is just a future friendly.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Like I said, others have written about this before, though I still see a lot of people using verbose retina/high resolution media queries. As more Windows 8 devices come out, I can see a need for retina/high resolution media queries that work in IE.&lt;/p&gt;
+
+&lt;p&gt;I’ve done some testing across different desktop browsers and this looks to work cross-browser. I need to do some testing on mobile devices to see if the slimmed down media query works as well as it does on desktops. Hopefully this helps other developers see they can slim down retina/high resolution media queries while still having them work on a wider range of devices.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;c&quot;&gt;/* Clean version examples */&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/* 1.25 dpr */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;120dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/* 1.3 dpr */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;124&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.8dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/* 1.5 dpr */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;144dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/*2.0 dpr */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;update&quot;&gt;Update&lt;/h2&gt;
+
+&lt;p&gt;I’ve finished my testing on the mobile devices I have access to and the results are interesting to say the least.&lt;/p&gt;
+
+&lt;p&gt;I tested on an Android 2.3 device, an Android 4.1, and an iPad 3. I also got my hands on two of the new Windows 8 phones for testing.&lt;/p&gt;
+
+&lt;p&gt;The simplified retina/high resolution media query works great across the stock browsers on iOS and Android. -webkit-device-pixel-ratio and window.DevicePixelRatio work great as well as expected. The stock browser on iOS and Android is webkit based browsers so there really is no surprise there.&lt;/p&gt;
+
+&lt;p&gt;Things get interesting when looking at how Opera Mini, Firefox for Mobile (Fennec), and IE on Windows Phone 8 handle retina/high resolution media queries.&lt;/p&gt;
+
+&lt;h2 id=&quot;opera-mini&quot;&gt;Opera Mini&lt;/h2&gt;
+
+&lt;p&gt;On iOS and Android, Opera Mini reported odd values across the board for high resolution media queries and window.devicePixelRatio. I’m guessing this has to do with it being a proxy browser.&lt;/p&gt;
+
+&lt;p&gt;On my iPad 3 and my Android 4.1 device, both devices have a device-pixel-ratio of 2. However, when using window.devicePixelRatio, Opera Mini reports the value of 1 on these devices.&lt;/p&gt;
+
+&lt;p&gt;In regards to media queries, using Opera prefixed min-device-pixel-ratio media query, only the -o-min-device-pixel-ratio:1 reported true on the iPad 3 and Android 4.1 device. However, the min-resolution:192dpi media query reported true.&lt;/p&gt;
+
+&lt;p&gt;The resolution media query is reporting the right value in Opera Mini, but the prefixed -o-min-device-pixel-ratio is not.&lt;/p&gt;
+
+&lt;p&gt;Also of interest, only dpi units work in Opera Mini currently.&lt;/p&gt;
+
+&lt;p&gt;On my Android 2.3 device, the device-pixel-ratio is 1.5. Again, -o-min-device-pixel-ratio:1 was the only Opera prefixed media query to report true. However, the only min-resolution media query to report true was the one set to 96dpi.&lt;/p&gt;
+
+&lt;p&gt;I’m guessing these issues are all caused from Opera Mini being a proxy browser.&lt;/p&gt;
+
+&lt;p&gt;Of note, -o-device-pixel-ratio media queries and resolution media queries work create in &lt;strong&gt;Opera Mobile&lt;/strong&gt; on Android. Opera Mobile also supports dpi, dpcm, and dppx units in resolution media queries.&lt;/p&gt;
+
+&lt;h2 id=&quot;firefox-for-mobile-fennec&quot;&gt;Firefox for Mobile (Fennec)&lt;/h2&gt;
+
+&lt;p&gt;I tested Firefox for Mobile on my Android devices and saw some of the most bizarre results from testing. On both my Android 2.3 and Android 4.1 devices, the min–moz-device-pixel-ratio: 1 media query was the only moz prefixed media query to report true.&lt;/p&gt;
+
+&lt;p&gt;On the Android 4.1 device, which has a dpr of 2, the min-resolution:192dpi and min-resolution:2ddpx reported true. Interestingly, these same two media queries reported true on the Android 2.3 device which has a dpr of 1.5.&lt;/p&gt;
+
+&lt;p&gt;It seems like resolution media queries work a bit better than min–moz-device-pixel-ratio media queries in Firefox for Mobile on Android, but both a buggy.&lt;/p&gt;
+
+&lt;h2 id=&quot;interenet-explorer-on-windows-phone-8&quot;&gt;Interenet Explorer on Windows Phone 8&lt;/h2&gt;
+
+&lt;p&gt;I tested on two of the new Windows 8 phones, the Nokia 920, and the HTC 8x. Both phones do not support any of the device-pixel-ratio media queries. The devices do support the resolution media query, dpi and dpcm units, but not dppx units.&lt;/p&gt;
+
+&lt;p&gt;However, both devices reported a resolution of 96dpi. I am not sure if this is correct or not. I’ve seen people say the phone has a high resolution screen, so it seems odd that it only reports 96dpi. If anyone has more info on this, let me know in the comments below.&lt;/p&gt;
+
+&lt;p&gt;Retina/high resolution media queries work great across a wide range of different devices and different browsers, though if you really wanted to make your site look great on the widest range of retina/high resolution displays and browsers, I’d look at using &lt;a href=&quot;http://css-tricks.com/using-fonts-for-icons/&quot;&gt;icon fonts&lt;/a&gt;, &lt;a href=&quot;http://www.broken-links.com/2010/06/14/using-svg-in-backgrounds-with-png-fallback/&quot;&gt;SVG images&lt;/a&gt; and &lt;a href=&quot;http://filamentgroup.com/lab/rwd_img_compression/&quot;&gt;compressive images&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 28 Nov 2012 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2012/11/28/cross-browser-retinahigh-resolution-media-queries/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2012/11/28/cross-browser-retinahigh-resolution-media-queries/</guid>
+      </item>
+    
+      <item>
+        <title>Syncing JavaScript with your active media query</title>
+        <description>&lt;p&gt;I’m starting to move more and more towards the idea of using client-side conditional loading as opposed to server-side conditional loading. I’ve seen a couple of solutions for handling conditional loading on the client side, from using modernizr and AJAXing content in to toggleing HTML comments around conditional content. One of the best solutions I’ve seen is &lt;a title=&quot;Conditional loading for responsive design&quot; href=&quot;http://24ways.org/2011/conditional-loading-for-responsive-designs&quot; target=&quot;_blank&quot;&gt;Jeremy Keith’s conditional loading for responsive designs concept&lt;/a&gt;. Not only can it be used to load in additional content, but it’s a great way to sync Javascript functions with your CSS media queries. As I’ve worked on responsive websites, I noticed a need to be able to sync my JavaScript functionality with my CSS media queries and at times, have only certain JavaScript functionality work within a certain range of breakpoints.&lt;/p&gt;
+
+&lt;h2 id=&quot;iterating-on-a-concept&quot;&gt;Iterating on a concept&lt;/h2&gt;
+
+&lt;p&gt;It seems like the most recent iteration of Jeremy’s concept is is &lt;a href=&quot;https://github.com/emilbjorklund&quot; target=&quot;_blank&quot;&gt;Emil Björklund&lt;/a&gt;‘s version. He came up with &lt;a href=&quot;https://gist.github.com/2481019&quot; target=&quot;_blank&quot;&gt;the idea of using a pseudo element&lt;/a&gt; to store a value to associate with the active media query. This works great because then you only have to manage your breakpoints in your CSS file. You can check for the pseudo content value with JavaScript and make sure your JS functionality is in sync with you CSS media queries and you don’t have to worry about &lt;a href=&quot;http://tripleodeon.com/2011/12/first-understand-your-screen/&quot;&gt;checking screensize/viewport widths and all the cross-browser issues&lt;/a&gt; that go along with that.&lt;/p&gt;
+
+&lt;p&gt;Chris Coyier has put together a &lt;a href=&quot;http://css-tricks.com/examples/ConditionalCSS/&quot; target=&quot;_blank&quot;&gt;nice demo&lt;/a&gt; as well to show how the concept could work with jQuery. I like how Chris named his breakpoints Baby Bear, Mama Bear, and Papa Bear. I think it’s important to move away from the idea that screensize/viewport size equals device type.&lt;/p&gt;
+
+&lt;p&gt;This concept works great in modern browsers, though I wanted to expand on it and fix some issues I noticed when testing it. I decided to use Coyier’s demo as a starting point for my iteration.&lt;/p&gt;
+
+&lt;h2 id=&quot;squashing-bugs&quot;&gt;Squashing bugs&lt;/h2&gt;
+
+&lt;p&gt;When I tested Emil’s demo on my phone, a Galaxy S with Android 2.3, I came across an odd bug in my stock browser and some of the other 3rd party browser you can download on Android  The stock browser on my phone supports both pseudo elements and .getComputedStyle, though it wouldn’t alert the value for the active media query.&lt;/p&gt;
+
+&lt;p&gt;I tested on another Android phone running Android 2.2 and noticed the same error that I saw on my phone as well. I haven’t tested on any other versions of Android, though I’m curious if this bug happens on versions. I also tested on a friend’s Galaxy S3 with Android 4.0.4 and the demo worked fine.&lt;/p&gt;
+
+&lt;p&gt;With my interest peak about this issue, I got a hold of a Blackberry Curve running OS6. I noticed the same issue with Emil’s demo as I did on the Android phones running 2.X.&lt;/p&gt;
+
+&lt;p&gt;I decided to switch storing the breakpoint value inside of a font-family property. This fixed the bug in Android 2.X and on the Blackberry running OS6, though it introduced another issue.&lt;/p&gt;
+
+&lt;p&gt;As &lt;a href=&quot;http://adactio.com/journal/5429/&quot; target=&quot;_blank&quot;&gt;Jeremy noted&lt;/a&gt;: &lt;em&gt;“It works! …except in Opera. Where every other browser returns whatever string has been provided in the font-family declaration, Opera returns the font that ends up actually getting used (Times New Roman by default).”&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I was able to get around this by using pseudo elements for Opera, and font-family for all other modern browsers.&lt;/p&gt;
+
+&lt;h2 id=&quot;old-ie&quot;&gt;Old IE&lt;/h2&gt;
+
+&lt;p&gt;Another issue I had was getting this to work in IE 8 and lower. In a perfect world, we could just develop for the latest version of each browser and call it a day. However, most of the sites I work on still see a fair amount of usage from people using IE 8 and lower. Because of this &lt;a href=&quot;https://twitter.com/bjankord/status/197126937926311936&quot; target=&quot;_blank&quot;&gt;I wanted to&lt;/a&gt; find a way to get this working in IE 8 and IE 7. This was somewhat of an issue because IE 8 and below don’t natively support .getComputedStyle. I added a polyfill for .getComputedStyle and was able to get this technique working in IE 8 and IE 7. This comes in handy occasions when I use &lt;a href=&quot;https://github.com/scottjehl/Respond&quot; target=&quot;_blank&quot;&gt;Scott Jehl’s respond.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-wider-cross-browser-solution&quot;&gt;A wider cross-browser solution&lt;/h2&gt;
+
+&lt;p&gt;Emil’s versions works great in modern browsers, though I really wanted to get this working on wider range of mobile devices as well as IE 8 and IE 7. By making a few changes on to what was already done, I was able get this technique working on a wider range of devices/browsers.&lt;/p&gt;
+
+&lt;p&gt;I set up a &lt;a href=&quot;http://brettjankord.com/projects/media-query-sync/&quot; target=&quot;_blank&quot;&gt;demo&lt;/a&gt; for people to see how it works when you use respond.js and a &lt;a href=&quot;http://brettjankord.com/projects/media-query-sync/index-without-respondjs.html&quot; target=&quot;_blank&quot;&gt;demo without respond.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can &lt;a title=&quot;Active Media Query on github&quot; href=&quot;https://github.com/bjankord/Media-Query-Sync&quot; target=&quot;_blank&quot;&gt;view the code for it on github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I wanted to keep the code for this small and avoid using jQuery. I’ve tested in Chrome, Firefox, Opera, Safari, and IE7+ and it seems to work great. I’ve also tested on some Android 2.2, 2.3, and 4.0 devices, an iPod, iPhone 4S and iPad 3, and a Blackberry Curve and everything worked as expected. There are so many devices out there, it’s hard to test on all of them, though I’m pretty happy with the results I’ve seen so far. If you come across an issue with this, let me know on &lt;a href=&quot;https://github.com/bjankord/Media-Query-Sync&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 15 Nov 2012 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2012/11/15/syncing-javascript-with-your-active-media-query/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2012/11/15/syncing-javascript-with-your-active-media-query/</guid>
+      </item>
+    
+      <item>
+        <title>HRWD &amp;#8211; Hybrid Responsive Web Design</title>
+        <description>&lt;p&gt;As the &lt;a href=&quot;http://androidandme.com/2012/02/news/android-posts-250-year-over-year-growth-with-850k-daily-activations/?utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed%3A+androidandme+%28Android+and+Me%29&amp;amp;utm_content=Google+Reader&quot; target=&quot;_blank&quot;&gt;amount of web capable devices grows&lt;/a&gt;, a one size fits all website will no longer suffice. Responsive web design seems to be the most popular solution to achieving device agnostic web design, but there are issues we still need to resolve when creating a responsive website.&lt;/p&gt;
+
+&lt;p&gt;Many great minds have dissected and critiqued responsive web design, and it’s merits as a solution to creating sites for the mobile web. I’ve tried to compile a general list of issues/concerns people have had about responsive web design. As we continue to experiment and find ways to adapt to the growing landscape of the web, it’s important to communicate with one another and review our processes and techniques. What is true today, may change tomorrow.&lt;/p&gt;
+
+&lt;h2 id=&quot;issue-with-responsive-web-design&quot;&gt;Issue with Responsive Web Design&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/fools-gold.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-422&quot; title=&quot;fools-gold&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/fools-gold.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Back in in August 2010, Jason Grigsby published an article, &lt;a href=&quot;http://www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/&quot; target=&quot;_blank&quot;&gt;CSS Media Query for Mobile is Fool’s Gold&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some of the main points from the article are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Media queries add more code to create the “mobile” version of the site&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;**Media queries i&lt;/strong&gt;gnore the mobile context**&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;**Media queries d&lt;/strong&gt;o not optimize HTML or JavaScript**&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div&gt;
+  Jason also brought up many good points about images:
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;How letting the browser scale images is a bad idea&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Full size images = unnecessarily large files to download&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Using media queries to deliver different images doesn&amp;#8217;t work&lt;/strong&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Jason concludes that he believes responsive design still rocks, though it’s important to understand that media queries are not a silver bullet when creating a mobile site.&lt;/p&gt;
+
+&lt;p&gt;James Pearce, another expert in the realm of mobile replied to this article,&lt;/p&gt;
+
+&lt;p&gt;“&lt;em&gt;+1 for context… the most important point. If there’s a media query that will turn an airline’s desktop site (flight booking, credit card promotions, photos of reclining seats, chairman’s statements etc) into its corresponding mobile site (flight time checker, on-line check-in, QR-code boarding pass etc), then I would love to see it.&lt;/em&gt;”&lt;/p&gt;
+
+&lt;p&gt;James later wrote another article about issues related to responsive web design titled, &lt;a title=&quot;Permanent Link to Not a mobile web, merely a 320px-wide one&quot; href=&quot;http://tripleodeon.com/2010/10/not-a-mobile-web-merely-a-320px-wide-one/&quot; rel=&quot;bookmark&quot;&gt;Not a mobile web, merely a 320px-wide one&lt;/a&gt; in which he discusses issues with responsive web design.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/merely-320.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-423&quot; title=&quot;merely-320&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/merely-320.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Media queries only affect the styling once the markup and other resources have reached the browser&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Media queries are not supported by most of the world’s web browsers.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The main issue James gets into is how responsive web design, as it’s currently being done, is &lt;strong&gt;not suitable to handle context&lt;/strong&gt;. It also does little to handle &lt;strong&gt;performance optimization&lt;/strong&gt;. James goes on to say that “&lt;em&gt;…it’s quite likely that they [the mobile user] really deserve different content and services altogether – or, at least, a differently prioritized version of the default desktop experience.&lt;/em&gt;”&lt;/p&gt;
+
+&lt;p&gt;While it’s true, mobile users &lt;em&gt;may&lt;/em&gt; want different content or services altogether. &lt;a href=&quot;http://blog.comscore.com/2011/11/the_rise_of_digital_omnivores.html&quot; target=&quot;_blank&quot;&gt;Studies&lt;/a&gt; have also shown that users love content, no matter what device they are on. To help determine if a separate mobile site is necessary, one should &lt;a href=&quot;http://globalmoxie.com/blog/mobile-context-stats.shtml&quot; target=&quot;_blank&quot;&gt;research&lt;/a&gt; their user base. Look at your site statistics and analytics. This will give you the information you need to decided if you can offer a differently prioritized version of your desktop site, or if you need to create a custom experience tailored specially for individual user groups, be it a native app or web app. Though if you do decide to go with separate mobile site, I believe the concepts from responsive web design; fluid grids, fluid images, and media queries will still be beneficial to your separate mobile site/web app.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-word-on-context&quot;&gt;A word on context&lt;/h3&gt;
+
+&lt;p&gt;Context is a funny thing, and everyone has their opinion on what the mobile web is, and thus, what &lt;a href=&quot;http://adactio.com/journal/4443/&quot; target=&quot;_blank&quot;&gt;mobile context&lt;/a&gt; is. One of this best articles I’ve come across on this topic is by Jason Rhodes entitled, &lt;a href=&quot;http://jasonthings.com/2011/03/626/&quot; target=&quot;_blank&quot;&gt;More Responsive Design, Please&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Stephanie Rieger also has some great thoughts on mobile context. &lt;a href=&quot;http://www.slideshare.net/yiibu/the-trouble-with-context&quot; target=&quot;_blank&quot;&gt;The Trouble With Context&lt;/a&gt; and &lt;a href=&quot;http://stephanierieger.com/mobile-users-dont-do-that/&quot; target=&quot;_blank&quot;&gt;Mobile User Don’t Do That&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Almost a year later after Grigsby published his article regarding concerns with media queries, there was another article published on Web Design Shock about issues with responsive web design titled, &lt;a href=&quot;http://www.webdesignshock.com/responsive-design-problems/&quot;&gt;11 Reasons Why Responsive Design Isn’t That Cool!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Form these three articles we can see there are some common issues people have with how responsive web design has been done so far.&lt;/p&gt;
+
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Media queries ignore the mobile context&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Media queries add more code to create the &amp;#8220;mobile&amp;#8221; version of the site&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;CSS media query is a bad choice for multiple devices&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Media queries do not optimize HTML or JavaScript or remove unnecessary code&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Mobile needs are different from desktop needs&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Issues with handling images on varying devices&lt;/strong&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;it8217s-time-we-to-try-and-solve-these-issues&quot;&gt;It’s time we to try and solve these issues&lt;/h2&gt;
+
+&lt;p&gt;I agree with points raised. I believe each new technique that comes out needs to be reviewed and critiqued. This is how we move the web forward. Along with offering critique and reviewing our processes, we need to seek solutions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle2.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-427&quot; title=&quot;puzzle2&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-first-part-of-the-puzzle-is-solved-by-thinking-mobile-first&quot;&gt;The first part of the puzzle is solved by thinking Mobile First&lt;/h3&gt;
+
+&lt;div&gt;
+  If you have not picked up Luke Wroblewski&amp;#8217;s book, &lt;a href=&quot;http://www.lukew.com/resources/mobile_first.asp&quot; target=&quot;_blank&quot;&gt;Mobile First&lt;/a&gt;, I highly recommend it. Going &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?933&quot; target=&quot;_blank&quot;&gt;mobile first&lt;/a&gt; with our responsive websites allows us to solve some of the issues people have raised about responsive web design.
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Media queries ignore the mobile context&lt;br /&gt; &lt;/strong&gt;By starting a project with a mobile first mindset, we are now focusing on mobile from the beginning, thus acknowledging mobile context and the needs of mobile users. This also allows us new potential for interactions between us and our users, based on new capabilities. It also helps us prepare for the growing market of varying mobile devices.
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Media queries add more code to create the &amp;#8220;mobile&amp;#8221; version of the site&lt;br /&gt; &lt;/strong&gt;By building our site for mobile devices first, we can progressively enhance our base version of the site by conditionally loading in assets/resources for other more capable devices as opposed to trying to scale down our desktop sites to be more suitable for mobiles. This type of thinking is tricky though, and requires us to really re-examine a lot of our common practices that we have become accustom to. I believe the many benefits of going mobile first out weigh the trouble involved in &lt;a href=&quot;http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu&quot; target=&quot;_blank&quot;&gt;rethinking the mobile web&lt;/a&gt;.
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;CSS media queries are a bad choice for multiple devices&lt;br /&gt; &lt;/strong&gt;This issue stems from the idea of starting with a desktop site and using media queries to scale down to a mobile layout. This results in mobile devices that &lt;a href=&quot;http://www.quirksmode.org/m/css.html#t021&quot; target=&quot;_blank&quot;&gt;don&amp;#8217;t support&lt;/a&gt; &lt;a href=&quot;http://caniuse.com/#search=media queries&quot; target=&quot;_blank&quot;&gt;media queries&lt;/a&gt; getting the desktop styles. Though by going mobile first with our media queries, we can easily create styles for devices that don&amp;#8217;t understand media queries, and then use media queries to progressively enhance our layout.
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  Bryan Rieger, puts this nicely,&lt;br /&gt; &amp;#8220;&lt;em&gt;The absence of a media query is in fact, the ﬁrst media query&lt;/em&gt;&amp;#8220;.&lt;br /&gt; -Rethinking the Mobile Web
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;the-second-part-of-the-puzzle-is-adaptation&quot;&gt;The second part of the puzzle is Adaptation&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/be-like-water.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-428&quot; title=&quot;be-like-water&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/be-like-water.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div&gt;
+  When it comes to adaptation, Bryan and Stephanie Rieger are leading the charge on what works and what doesn&amp;#8217;t. I would highly reccomend looking through Stephanie&amp;#8217;s slides on &lt;a href=&quot;http://www.slideshare.net/yiibu/pragmatic-responsive-design&quot; target=&quot;_blank&quot;&gt;Pragmatic Responsive Design&lt;/a&gt; and Bryan&amp;#8217;s slides on &lt;a href=&quot;http://www.slideshare.net/yiibu/adaptation-why-responsive-design-actually-begins-on-the-server&quot;&gt;Adaptation: Why Responsive Design Actually Begins On The Server&lt;br /&gt; &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;strong&gt;Server side adaptation allows us:&lt;/strong&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Optimize the pay-load from the server to the user, for example, add or remove markup / scripts / styles for different device groups&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The ability to alternate content appropriate for context&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div&gt;
+  &lt;strong&gt;Client side adaptation allows us:&lt;/strong&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Ability to test for capabilities &amp;#8211; Feature Detection &amp;#8211; Modernizr&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;strong&gt;Ability to modify the layout as screen real estate increases - Media Queries &amp;#8211; Responsive Web Design &amp;#8211; JavaScript solutions&lt;/strong&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2&gt;
+    What tool do we use for server side adaptation?
+  &lt;/h2&gt;
+
+  &lt;div&gt;
+    In Riegers&amp;#8217; slides, they suggest using a device database to handle the server side logic for websites adaptation. &lt;a href=&quot;http://deviceatlas.com/&quot; target=&quot;_blank&quot;&gt;Device Atlas&lt;/a&gt;, and &lt;a href=&quot;http://wurfl.sourceforge.net/&quot; target=&quot;_blank&quot;&gt;WURFL&lt;/a&gt; are great resources as well as &lt;a href=&quot;http://www.handsetdetection.com/&quot; target=&quot;_blank&quot;&gt;Handset Detection&lt;/a&gt;. However, each of these options come with a price, literally. If you go with the cloud version of Device Atlas, it&amp;#8217;s &lt;a href=&quot;http://deviceatlas.com/cart/add/2483428&quot; target=&quot;_blank&quot;&gt;$399/year&lt;/a&gt; per website or &lt;a href=&quot;http://deviceatlas.com/cart/add/2483430&quot; target=&quot;_blank&quot;&gt;$3,990/year&lt;/a&gt; for 50 websites. Their enterprise prices are not listed, I don&amp;#8217;t even want to know what those cost. WURFL has recently updated their licensing terms. If you plan to use WURFL on a commercial project, you need to buy a license. Handset Detection seems to be the most reasonably &lt;a style=&quot;color: #000000;&quot; href=&quot;https://www.handsetdetection.com/pricing&quot; target=&quot;_blank&quot;&gt;priced solution&lt;/a&gt; at $13/month for 100,000 detections. They also have a free option with 10,000 detections per month.
+  &lt;/div&gt;
+
+  &lt;div&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+  &lt;/div&gt;
+
+  &lt;h3&gt;
+    What other options do we have?
+  &lt;/h3&gt;
+
+  &lt;p&gt;
+    &lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2012/01/categorizr.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-110&quot; title=&quot;categorizr&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2012/01/categorizr.jpg&quot; alt=&quot;Categorizr - A modern device detection script&quot; /&gt;&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Categorizr&lt;/strong&gt; is modern device detection script I wrote to help handle simple device profiling. You can read more about &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr here&lt;/a&gt;. The concept is that by basing device detection on the idea of mobile first, detection not only becomes easier, it’s also more accurate. If your curious how &lt;strong&gt;Categorizr&lt;/strong&gt; handles user agents, you can &lt;a href=&quot;http://brettjankord.com/categorizr/categorizr-results.php&quot; target=&quot;_blank&quot;&gt;view test results here&lt;/a&gt; from over 11,000 user agents, most of them are from the WURFL database or &lt;a href=&quot;http://brettjankord.com/categorizr/ua-check.php&quot; target=&quot;_blank&quot;&gt;check your own device&lt;/a&gt; and see what category it falls into.&lt;/p&gt;
+
+&lt;h2 id=&quot;so-now-we-have-all-the-tools-what-is-hybrid-responsive-web-design&quot;&gt;So now we have all the tools, what is hybrid responsive web design?&lt;/h2&gt;
+
+&lt;p&gt;Hybrid responsive web design is not a &lt;a href=&quot;http://blog.mozilla.com/webdev/2011/06/27/approaches-to-mobile-web-development-part-4-%E2%80%93-a-hybrid-approach/&quot; target=&quot;_blank&quot;&gt;new concept&lt;/a&gt;, and there is more than one way someone could create a hybrid responsive website. Though the general idea behind HRWD is that it pairs the concepts of responsive web design with the concepts of server side device detection. It builds on top of the concepts we know are true for responsive web design, and adds concepts from traditional mobile device detection.&lt;/p&gt;
+
+&lt;p&gt;After looking through Riegers’ slides from last year’s Breaking Development conference and reading Luke Wroblewski’s post, &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1392&quot; target=&quot;_blank&quot;&gt;RESS: Responsive Design + Server Side Components&lt;/a&gt;, I really started to get interested in experimenting with this concept. &lt;a href=&quot;http://yiibu.com/&quot; target=&quot;_blank&quot;&gt;Yiibu.com&lt;/a&gt; and &lt;a href=&quot;http://filamentgroup.com/&quot; target=&quot;_blank&quot;&gt;The Filament Group’s&lt;/a&gt; website are two sites that also really got me thinking in this direction. The first step required an accurate way to handle device detection. The way device detection has traditionally been done was flawed in my mind, as it was not very future friendly, though this is the nature of the beast when you get into user agent sniffing. I wanted to find a solution that would be free for anyone who wanted to use it, and would provide accurate results and this is what led me to develop &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr&lt;/a&gt;. With** Categorizr**, you can group devices into specific categories and handle various adaptations from one device group to another on the server. I’ve found though, that mobile devices are where most of the server-side adaptation is needed. Adaptation for tablets and smartTVs can mainly be based on the desktop version and handled client side.&lt;/p&gt;
+
+&lt;h2 id=&quot;issues-hrwd-solves&quot;&gt;Issues HRWD solves&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**Media queries d&lt;/strong&gt;&lt;strong&gt;o not optimize HTML or JavaScript or &lt;/strong&gt;remove unnecessary code&lt;br /&gt;
+&lt;strong&gt;**This is a problem many people have had with responsive web design. Media queries are a client side technology based for styling, thus they cannot remove unnecessary code, optimize HTML or JavaScript. To do this, we need to do it on the server side. With **Categorizr&lt;/strong&gt;, you can detect what type of device the user is on, and give them only the markup / scripts / styles they need.&lt;em&gt;**&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**Mobile needs are different from desktop needs&lt;br /&gt;
+**&lt;/strong&gt;&lt;strong&gt;To quote **James Pearce&lt;/strong&gt; again, “*…it’s quite likely that they [the mobile user] really deserve … a differently prioritized version of the default desktop experience.&lt;strong&gt;” &lt;em&gt;We can use **Categorizr **to dectect the type of device the user is on, be it mobile, tablet, desktop, or smartTV. From there we can handle priority changes on the server, whether that means shifting around markup, or loading different content/resources altogher, before sending it down to the user.&lt;/em&gt;&lt;/strong&gt;*&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Issues with handling images on varying devices&lt;br /&gt;
+**This is something I would not recommend using &lt;/strong&gt;Categorizr** for. While it does a great job of figuring out what type of device your on, it won’t get you specifics. Since there is a lot of variety in mobile screen sizes, I would recommend looking at &lt;a href=&quot;http://www.sencha.com/learn/how-to-use-src-sencha-io/&quot; target=&quot;_blank&quot;&gt;Sencha.io Src&lt;/a&gt; or &lt;a href=&quot;http://adaptive-images.com/&quot; target=&quot;_blank&quot;&gt;Adaptive Images&lt;/a&gt;. Currently there is &lt;a href=&quot;http://www.w3.org/community/respimg/&quot; target=&quot;_blank&quot;&gt;discussion going on&lt;/a&gt; about creating a new HTML element to handle images for varying devices based on media query logic.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;More code, more to update&lt;br /&gt;
+**I honestly don’t understand the reasoning behind this issue. To me, you either don’t do anything and stick with your desktop websites, blissfully ignorant to the changing market, or you adapt. Hybrid responsive web design with **Categorizr&lt;/strong&gt; is actually fairly simple. If you want to support multiple devices, there is going to be more code. Though I’ll explain how we can support a wide array of devices, while still maintaining a code-base that is easy to manage and update.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div&gt;
+  &lt;h2&gt;
+    Issues that still need to be solved.
+  &lt;/h2&gt;
+
+  &lt;p&gt;
+    &lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle3.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-429&quot; title=&quot;puzzle3&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle3.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Hybrid Responsive Web Design does not solve all the issues. There are still many issues we will need to tackle as the web evolves on to more devices. We are all in this together, and for us to move forward, we need to review our processes, offer critique, and help push each other to find solutions. I&amp;#8217;m hope you&amp;#8217;ll offer your feedback and critique on this approach so we can continue to move the web forward.
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    One of the biggest issues that still remains relates to content management systems. Our craft is evolving, we need the tools we use to evolve also. Though, this a topic I&amp;#8217;ll save to tackle another day.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;mobile-first-hrwd-development&quot;&gt;Mobile First HRWD Development&lt;/h2&gt;
+
+&lt;p&gt;So, you’ve read this far. Take a break, relax, I know that was a lot to digest. I’m planning on writing up a more detailed walkthrough of mobile first HRWD development and was considering leaving this concept for another post, though while I have your attention, I figured I’d breifly cover some concepts of a mobile first hybrid responsive web design development. Try saying that ten times fast.&lt;/p&gt;
+
+&lt;p&gt;First, we’ll be starting our project with a mobile first mindset. As I’ve mentioned, this helps solve a lot of issues when creating a responsive site. There are 4 areas I want to quickly go over; the Sever-Side Component, how to handle HTML, how to handle  CSS, how to handle JavaSript, and how to handle images.&lt;/p&gt;
+
+&lt;h3 id=&quot;server-side-component&quot;&gt;Server-Side Component&lt;/h3&gt;
+
+&lt;p&gt;In this example I’ll be explaining how to use &lt;strong&gt;Categorizr&lt;/strong&gt; to handle our server side adaptation. &lt;strong&gt;Catgorizr&lt;/strong&gt; is PHP based and fairly easy to use, even if you have no programming knowledge. To alter various parts of your site, be it your CSS, JavaScript, page components, or other markup, all you need is a simple PHP &lt;strong&gt;if statement&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mobile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is categorized as mobile device&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;desktop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is not categorized as desktop device&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this, we can keep all of our markup for each device category together in one file. This makes maintenance of a hybrid responsive website rather easy. This works great if your mobile site will be similar to your desktop site and you just want to re-prioritize your mobile site. However, if your mobile site is going to be quite a bit different than your desktop site, I would suggest using **Categorizr Redirect **and creating a separate mobile site.&lt;/p&gt;
+
+&lt;h3 id=&quot;html&quot;&gt;HTML&lt;/h3&gt;
+
+&lt;p&gt;The HTML you craft will vary from project to project. Sketching and prototyping will be your best friends as you move back and forth between design and development. For tablets and smartTVs, I would suggest using the same HTML markup as your desktop site and letting media queries handle layout changes. If you need to add specific CSS, JavaScript, or other elements solely to your tablet or smartTV version of your page, you can simply write an if statement.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tablet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is categorized as tablet device&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Be sure to be considerate of users who want to change what there device is categorized as. Add a link to your page so if users are on your mobile site, and want to view the desktop version, they can. To do this with &lt;strong&gt;Categorizr&lt;/strong&gt;, all you need to do is create an anchor link and set the href value to a PHP GET variable with &lt;strong&gt;view&lt;/strong&gt; set to what you want it to be. Below is an example of a link you would add to your mobile site to switch users to being categorized as a desktop.&lt;/p&gt;
+
+&lt;pre class=&quot;brush: html; gutter: true; first-line: 1&quot;&gt;&lt;a href=&quot;?view=desktop&quot;&gt;View Desktop Site&lt;/a&gt;&lt;/pre&gt;
+
+&lt;p&gt;When a user clicks on this link, it will reload the page, then &lt;strong&gt;Categorizr&lt;/strong&gt; will pick up that the user now wants to be categorized as a desktop device. &lt;strong&gt;Categorizr&lt;/strong&gt; stores this in a session so the user can move from page to page and still be recognized as a desktop device.&lt;/p&gt;
+
+&lt;h3 id=&quot;css&quot;&gt;CSS&lt;/h3&gt;
+
+&lt;p&gt;With CSS, we’ll first create styles for basic devices such as feature phones, legacy phones, and other devices that do not understand media queries. In this file I usually add my HTML reset, basic formatting for typography, link styles, and any other basic styles needed for these devices. I’ll usually name this stylesheet &lt;strong&gt;base.css&lt;/strong&gt; though you can name it however you please.&lt;/p&gt;
+
+&lt;p&gt;Next, we’ll create a stylesheet for mobile devices. I name this file &lt;strong&gt;mobile-styles.css&lt;/strong&gt;. In this file, we’ll set up our media queries for mobile devices. These will cascade off of the styles set in the &lt;strong&gt;base.css&lt;/strong&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Lastly, we’ll create another stylesheet that will handle our layouts for tablets, desktops, and smartTVs. I typically name this file &lt;strong&gt;main-styles.css&lt;/strong&gt;. Again, this stylesheet will cascade off &lt;strong&gt;base.css&lt;/strong&gt;, as well as &lt;strong&gt;mobile-styles.css&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In development, I like to keep the files separate, though on your production site, I would concatenate them into one file. Then conditionally load them based on what device category comes to your site.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If mobile, load mobile.css.&lt;br /&gt;
+&lt;em&gt;mobile.css = base.css + mobile-styles.css &lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+Use this for feature phones / smartphones / and other mobile devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If not mobile, load main.css&lt;br /&gt;
+&lt;em&gt;main.css = base.css + mobile-styles.css + main-styles.css&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+Use this for tablets / desktops / smartTVs&lt;/p&gt;
+
+&lt;p&gt;By concatenating the stylesheets, you’ll only serve 1 CSS file which will help keep your website fast.&lt;/p&gt;
+
+&lt;h3 id=&quot;javascript&quot;&gt;JavaScript&lt;/h3&gt;
+
+&lt;p&gt;The JavaScript you use on your site will vary from site to site, however one file I would encourage you to include on your sites is &lt;a href=&quot;http://www.modernizr.com/&quot; target=&quot;_blank&quot;&gt;Modernizr&lt;/a&gt;. Categorizr is great at what it does, though it only gets us some of the information we typically want to know. By pairing Categorizr with Modernizr, you can accurately detect device types, and their capabilities.&lt;/p&gt;
+
+&lt;p&gt;Just as we did with the stylesheets, I would recommend concatenating your JavaScript where applicapable. The &lt;a href=&quot;http://html5boilerplate.com/&quot; target=&quot;_blank&quot;&gt;HTML5 Boiler Plate&lt;/a&gt; has a good example of file strutures for JS.&lt;/p&gt;
+
+&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
+
+&lt;p&gt;As I mentioned earlier, I would recommend using &lt;a href=&quot;http://www.sencha.com/learn/how-to-use-src-sencha-io/&quot; target=&quot;_blank&quot;&gt;Sencha.io Src&lt;/a&gt; or &lt;a href=&quot;http://adaptive-images.com/&quot; target=&quot;_blank&quot;&gt;Adaptive Images&lt;/a&gt; as a solution to providing images for varying devices.These are the best solutions I’ve seen so far for creating responsive images. Matt Wilcox, the developer behind Adaptive Images and Jason Grigsby are both members of the W3C Responsive Images Community Group. I’m excited to see what solution this community group comes up with as a native way to handle responsive images.&lt;/p&gt;
+
+&lt;h3 id=&quot;other-components&quot;&gt;Other Components&lt;/h3&gt;
+
+&lt;p&gt;There are many other components one could add to a HRWD development, such as appropriately caching files, gzipping files, using HTML5 AppCache, minifying files along with many other techniques. This is a topic I’ll go into more detail another day.&lt;/p&gt;
+
+&lt;h2 id=&quot;is-this-the-silver-bullet-we8217ve-been-waiting-for&quot;&gt;Is this the silver bullet we’ve been waiting for?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/silver-bullet.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-430&quot; title=&quot;silver-bullet&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/silver-bullet.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nope. It’s &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1509&quot; target=&quot;_blank&quot;&gt;one possible technique&lt;/a&gt; you can add to your toolbox. Hybrid responsive web design does not aim to create solutions for the mobile web, the desktop web, the tablet web, the smartTV web. It aims to create solutions for the responsive web. Each project should be evaluated to see which techniques will be the most benefical, not only to your clients, but also to their users.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 29 Feb 2012 00:00:00 -0600</pubDate>
+        <link>http://www.brettjankord.com/2012/02/29/hrwd-hybrid-responsive-web-design/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2012/02/29/hrwd-hybrid-responsive-web-design/</guid>
+      </item>
+    
+  </channel>
+</rss>

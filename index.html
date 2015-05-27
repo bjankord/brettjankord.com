@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<div class="posts">
+  <!-- This loops through the paginated posts -->
+{% for post in paginator.posts %}
+  <article class="post">
+
+    <h2 class="h1"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+
+    <div class="entry">
+      {{ post.content | truncatewords:40}}
+    </div>
+
+    <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+  </article>
+{% endfor %}
+
+<!-- Pagination links -->
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&#12296; Newer articles</a>
+  {% else %}
+
+  {% endif %}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older articles &#12297;</a>
+  {% else %}
+
+  {% endif %}
+</div>
+{% endif %}
+
+
+  {% for post in site.posts %}
+
+  {% endfor %}
+</div>
