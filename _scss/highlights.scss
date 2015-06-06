@@ -1,14 +1,12 @@
-@import "_scss/_variables";
+// SYNTAX HIGHLIGHTING STYLES
+// --------------------------------------------------
+@import "_scss/base/_variables";
 
-
-// SYNTAX HIGHLIGHTING
-/***********************/
- 
 .highlight {
-  background-color: $darkerGray;
+  background-color: #333;
   border-radius: 5px;
-  padding: 10px 20px 15px 20px;
-  margin: 20px 0;
+  padding: $half-spacing-unit;
+  margin-bottom: $base-spacing-unit;
 }
 
 .highlight pre {

@@ -2,6 +2,7 @@
 title: 'HRWD &#8211; Hybrid Responsive Web Design'
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2012/02/29/hrwd-hybrid-responsive-web-design/
 dsq_thread_id:
@@ -214,16 +215,16 @@ After looking through Riegers&#8217; slides from last year&#8217;s Breaking Deve
 
 ## Issues HRWD solves
 
-*   **********Media queries d****o not optimize HTML or JavaScript or **remove unnecessary code  
+*   **********Media queries d****o not optimize HTML or JavaScript or **remove unnecessary code
     ****This is a problem many people have had with responsive web design. Media queries are a client side technology based for styling, thus they cannot remove unnecessary code, optimize HTML or JavaScript. To do this, we need to do it on the server side. With **Categorizr**, you can detect what type of device the user is on, and give them only the markup / scripts / styles they need.****
 
-*   **********Mobile needs are different from desktop needs  
+*   **********Mobile needs are different from desktop needs
     ******To quote **James Pearce** again, &#8220;*&#8230;it’s quite likely that they [the mobile user] really deserve &#8230; a differently prioritized version of the default desktop experience.**&#8221; *We can use **Categorizr **to dectect the type of device the user is on, be it mobile, tablet, desktop, or smartTV. From there we can handle priority changes on the server, whether that means shifting around markup, or loading different content/resources altogher, before sending it down to the user.****
 
-*   **Issues with handling images on varying devices  
+*   **Issues with handling images on varying devices
     **This is something I would not recommend using **Categorizr** for. While it does a great job of figuring out what type of device your on, it won&#8217;t get you specifics. Since there is a lot of variety in mobile screen sizes, I would recommend looking at <a href="http://www.sencha.com/learn/how-to-use-src-sencha-io/" target="_blank">Sencha.io Src</a> or <a href="http://adaptive-images.com/" target="_blank">Adaptive Images</a>. Currently there is <a href="http://www.w3.org/community/respimg/" target="_blank">discussion going on</a> about creating a new HTML element to handle images for varying devices based on media query logic.
 
-*   **More code, more to update  
+*   **More code, more to update
     **I honestly don&#8217;t understand the reasoning behind this issue. To me, you either don&#8217;t do anything and stick with your desktop websites, blissfully ignorant to the changing market, or you adapt. Hybrid responsive web design with **Categorizr** is actually fairly simple. If you want to support multiple devices, there is going to be more code. Though I&#8217;ll explain how we can support a wide array of devices, while still maintaining a code-base that is easy to manage and update.
 
 <div>
@@ -291,12 +292,12 @@ Lastly, we&#8217;ll create another stylesheet that will handle our layouts for 
 
 In development, I like to keep the files separate, though on your production site, I would concatenate them into one file. Then conditionally load them based on what device category comes to your site.
 
-**If mobile, load mobile.css.  
-*mobile.css = base.css + mobile-styles.css ***  
+**If mobile, load mobile.css.
+*mobile.css = base.css + mobile-styles.css ***
 Use this for feature phones / smartphones / and other mobile devices.
 
-**If not mobile, load main.css  
-*main.css = base.css + mobile-styles.css + main-styles.css***  
+**If not mobile, load main.css
+*main.css = base.css + mobile-styles.css + main-styles.css***
 Use this for tablets / desktops / smartTVs
 
 By concatenating the stylesheets, you&#8217;ll only serve 1 CSS file which will help keep your website fast.

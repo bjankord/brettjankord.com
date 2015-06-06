@@ -2,6 +2,7 @@
 title: Active development on Categorizr has come to an end
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2013/01/10/active-development-on-categorizr-has-come-to-an-end/
 dsq_thread_id:

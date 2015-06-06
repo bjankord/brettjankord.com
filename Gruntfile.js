@@ -106,7 +106,7 @@ module.exports = function(grunt) {
         livereload: LIVERELOAD_PORT
       },
       assets: {
-        files: ['<%= globalConfig.scssdir %>**/*'],
+        files: ['<%= globalConfig.scssdir %>**/*.scss'],
         tasks: ['assets', 'content']
       },
       content: {

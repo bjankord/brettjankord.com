@@ -1,0 +1,222 @@
+// TYPOGRAPHY
+// ----------------------------------------
+
+// Respects user defined font-size
+html {
+  font-size: 100%;
+  font-size: $base-font-size;
+}
+
+body {
+  background: $bg;
+  color: $fg;
+  font-family: $base-type-font;
+  line-height: $line-height-ratio;
+}
+
+// Headings
+// ----------------------------------------
+ h1, h2, h3, h4, h5, h6 {
+  @include rem(margin-bottom, $base-spacing-unit);
+  font-family: $base-heading-font;
+  font-weight: 700;
+  color: $slate-gray;
+
+  a {
+    color: inherit;
+  }
+}
+
+h1, .h1 {
+  @include rem(font-size, $h2-size);
+  @include rem(line-height, ($base-spacing-unit * 2));
+
+  @include bp-m {
+    @include rem(font-size, $h1-size);
+    @include rem(line-height, ($base-spacing-unit * 2));
+  }
+}
+
+h2, .h2 {
+  @include rem(font-size, $h3-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h2-size);
+    @include rem(line-height, ($base-spacing-unit * 2));
+  }
+}
+
+h3, .h3 {
+  @include rem(font-size, $h4-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h3-size);
+    @include rem(line-height, $base-spacing-unit);
+  }
+}
+
+h4, .h4 {
+  @include rem(font-size, $h5-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h4-size);
+    @include rem(line-height, $base-spacing-unit);
+  }
+}
+
+h5, .h5 {
+  @include rem(font-size, $h6-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h5-size);
+    @include rem(line-height, $base-spacing-unit);
+  }
+}
+
+h6, .h6 {
+  @include rem(font-size, $h6-size);
+  @include rem(line-height, $base-spacing-unit);
+}
+
+
+// Links
+// ----------------------------------------
+
+// Remove the gray background color from active links in IE 10.
+a {
+  background-color: transparent;
+  color: $link-color;
+  cursor: pointer;
+  text-decoration: none;
+
+  // Improve readability when focused and also mouse hovered in all browsers.
+  &:active,
+  &:hover {
+    color: $link-color;
+    outline: 0;
+  }
+}
+
+// Lists
+// ----------------------------------------
+ul, ol {
+  padding-left: 30px;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ul,
+ul ol,
+ul ul,
+ol ol {
+  margin: 0;
+}
+
+ul ul,
+ol ul {
+  list-style-type: circle;
+}
+
+// Text Elements
+// --------------------------------------------------
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+blockquote {
+  border-left: 3px solid $gray;
+  color: $gray;
+  font-style: italic;
+  margin-left: .8em;
+  margin-right: .8em;
+  padding: 0 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+//Address odd `em`-unit font size rendering in all browsers.
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+code {
+  background-color: rgb(235, 246, 253);
+  color: $slate-gray;
+  border-radius: 4px;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 85%;
+  padding: 0.2em 0.4em 0.2em 0.3em;
+}
+
+pre {
+  overflow: auto;
+
+  code {
+    @include rem(font-size, 16px);
+    display: block;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: $line-height-ratio;
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+    padding: 0;
+  }
+}
+
+hr {
+  @include rem(margin-top, $base-spacing-unit);
+  @include rem(margin-bottom, $base-spacing-unit);
+  border-top: 1px solid #ccc;
+  border: 0;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+// Specify the color of the selection
+::-moz-selection {
+  background: $gray-light;
+  color: $slate-gray;
+}
+::selection {
+  background: $gray-light;
+  color: $slate-gray;
+}
+
+// Global margin spacing
+address,
+blockquote,
+dl,
+fieldset,
+figure
+dl,
+ol,
+ul,
+p,
+table {
+  @include rem(margin-bottom, $base-spacing-unit);
+}

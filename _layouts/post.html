@@ -3,15 +3,16 @@ layout: default
 ---
 
 <article class="post">
-  <h1>{{ page.title }}</h1>
-
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
+  <header class="post-header">
+    <div class="container">
+      <h1 class="post-title">{{ page.title }}</h1>
+      <p class="post-date">{{ page.date | date: "%B %e, %Y" }}</p>
+    </div>
+  </header>
+  <div class="container">
+    <div class="post-entry">
+      {{ content }}
+    </div>
+    {% include disqus.html disqus_identifier=page.disqus_identifier %}
   </div>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-
-  {% include disqus.html disqus_identifier=page.disqus_identifier %}
 </article>

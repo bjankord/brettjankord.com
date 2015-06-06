@@ -1,113 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  
+  <url>
+    <loc>http://www.brettjankord.com/2015/06/05/the-not-css-pseudo-class-and-specificity/</loc>
+    <lastmod>2015-06-05T00:00:00-05:00</lastmod>
+  </url>
   <url>
     <loc>http://www.brettjankord.com/2013/03/09/modular-css-thoughts-on-smacss-modules/</loc>
     <lastmod>2013-03-09T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/03/07/style-guide-boilerplate/</loc>
     <lastmod>2013-03-07T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/</loc>
     <lastmod>2013-03-06T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/</loc>
     <lastmod>2013-02-09T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/</loc>
     <lastmod>2013-01-30T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/01/22/beyond-device-detection/</loc>
     <lastmod>2013-01-22T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/</loc>
     <lastmod>2013-01-10T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2012/11/28/cross-browser-retinahigh-resolution-media-queries/</loc>
     <lastmod>2012-11-28T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2012/11/15/syncing-javascript-with-your-active-media-query/</loc>
     <lastmod>2012-11-15T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2012/02/29/hrwd-hybrid-responsive-web-design/</loc>
     <lastmod>2012-02-29T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2012/02/22/thoughts-on-windows-8-device-detection/</loc>
     <lastmod>2012-02-22T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2012/01/18/rwd-toolset/</loc>
     <lastmod>2012-01-18T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/2011/12/11/device-capability-testing/</loc>
     <lastmod>2011-12-11T00:00:00-06:00</lastmod>
-    <priority>0.8</priority>
   </url>
-  
-  
   <url>
     <loc>http://www.brettjankord.com/404.html</loc>
-    <lastmod>2014-09-11T11:30:58-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/about/</loc>
-    <lastmod>2014-09-11T11:30:58-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/</loc>
-    <lastmod>2014-09-11T11:30:58-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>http://www.brettjankord.com/contact/</loc>
-    <lastmod>2014-09-11T11:30:58-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
-  
-  
 </urlset>

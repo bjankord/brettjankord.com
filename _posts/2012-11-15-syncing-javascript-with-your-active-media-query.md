@@ -2,6 +2,7 @@
 title: Syncing JavaScript with your active media query
 author: Brett
 layout: post
+comments : true
 permalink: /2012/11/15/syncing-javascript-with-your-active-media-query/
 dsq_thread_id:
   - 936310339

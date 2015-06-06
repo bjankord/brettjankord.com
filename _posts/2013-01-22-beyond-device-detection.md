@@ -2,6 +2,7 @@
 title: Beyond Device Detection
 author: Brett
 layout: post
+comments : true
 permalink: /2013/01/22/beyond-device-detection/
 dsq_thread_id:
   - 1040810148
@@ -22,7 +23,7 @@ The difficulty of keeping up with every new web enabled device and testing it an
 
 For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.
 
-<img src="http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg" alt="Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all" class="aligncenter size-full" />  
+<img src="http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg" alt="Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all" class="aligncenter size-full" />
 (Credit: [Jeremy Keith][5])
 
 A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.

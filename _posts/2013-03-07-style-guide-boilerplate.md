@@ -2,6 +2,7 @@
 title: Style Guide Boilerplate
 author: Brett
 layout: post
+comments : true
 permalink: /2013/03/07/style-guide-boilerplate/
 dsq_thread_id:
   - 1123210769

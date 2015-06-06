@@ -1,0 +1,58 @@
+// RESET
+// --------------------------------------------------
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+html {
+  box-sizing: border-box;
+  min-height:100%;
+  overflow-y:scroll;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+// Allows easy override of default box-sizing: border-box
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// HTML5 display-role reset for older browsers
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// Removes extra whitespace below image
+img {
+	max-width: 100%;
+	vertical-align: center;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}

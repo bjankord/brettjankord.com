@@ -2,6 +2,7 @@
 title: 'Modular CSS: Thoughts on SMACSS modules'
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2013/03/09/modular-css-thoughts-on-smacss-modules/
 dsq_thread_id:

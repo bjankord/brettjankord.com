@@ -5,52 +5,45 @@
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
-
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
-
     <meta name="author" content="{{ site.name }}" />
     <meta name="description" content="{{ site.description }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     <style>
       {% include style.css %}
     </style>
-
     {% if page.code_demo %}<link rel="stylesheet" type="text/css" href="/css/highlights.css" />{% endif %}
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about/">About</a>
-            <a href="{{ site.baseurl }}/contact/">Contact</a>
-          </nav>
-        </header>
-      </div>
+    <div class="container">
+      <header class="site-masthead">
+        <h1 class="site-name">
+          <a href="{{ site.baseurl }}/">{{ site.name }}</a>
+          <small class="site-description">{{ site.description }}</small>
+        </h1>
+        <nav class="site-nav">
+          <a href="{{ site.baseurl }}/">Blog</a>
+          <a href="{{ site.baseurl }}/about/">About</a>
+          <a href="{{ site.baseurl }}/contact/">Contact</a>
+        </nav>
+      </header>
     </div>
 
-    <div id="main" role="main" class="container">
+    <main id="main">
       {{ content }}
-    </div>
+    </main>
 
-    <div class="wrapper-footer">
+    <div class="site-footer-wrapper">
       <div class="container">
-        <footer class="footer">
+        <footer class="site-footer">
           {% include svg-icons.html %}
         </footer>
       </div>

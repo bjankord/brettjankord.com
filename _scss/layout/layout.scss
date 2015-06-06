@@ -1,0 +1,105 @@
+// LAYOUTS
+// --------------------------------------------------
+
+// Container
+// ----------------------------------------
+.container {
+  @include rem(max-width, $container-max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+}
+
+// Site Masthead
+// ----------------------------------------
+.site-masthead {
+  @include rem(margin-bottom, 50px);
+  @include rem(padding, $base-spacing-unit 0);
+  border-bottom: 1px solid $gray-light;
+  display: table;
+  width: 100%;
+  text-align: center;
+
+  @include bp-m {
+    text-align: left;
+  }
+}
+
+// Site Name
+// ----------------------------------------
+.site-name {
+  @include rem(font-size, 28px);
+  color: $slate-gray;
+  cursor: pointer;
+  font-family: $base-heading-font;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 0;
+
+  @include bp-m {
+    display: table-cell;
+    text-align: left;
+    vertical-align: bottom;
+    width: 50%;
+  }
+}
+
+// Site Description
+// ----------------------------------------
+.site-description {
+  @include rem(font-size, 16px);
+  @include rem(margin-top, $half-spacing-unit);
+  color: $gray;
+  display: block;
+
+  @include bp-m {
+    @include rem(margin-top, 1px);
+  }
+}
+
+// Site Nav
+// ----------------------------------------
+.site-nav {
+  @include rem(font-size, 16px);
+  @include rem(margin-top, $half-spacing-unit);
+  font-family: $base-heading-font;
+
+  @include bp-m {
+    @include rem(font-size, 18px);
+    display: table-cell;
+    margin-top: 0;
+    text-align: right;
+    vertical-align: bottom;
+    width: 50%;
+  }
+
+  a {
+    color: $link-color;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0 10px;
+
+    @include bp-m {
+      color: $slate-gray;
+      font-weight: 300;
+      margin-left: 20px;
+      margin-right: 0;
+      text-align: right;
+    }
+  }
+}
+
+// Site Footer Wrapper
+// ----------------------------------------
+.site-footer-wrapper {
+  @include rem(font-size, 50px);
+  background-color: $gray-darker;
+}
+
+// Site Footer
+// ----------------------------------------
+.site-footer {
+  padding: 20px 0;
+  text-align: center;
+}

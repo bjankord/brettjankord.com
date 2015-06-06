@@ -2,6 +2,7 @@
 title: Device Capability Testing
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2011/12/11/device-capability-testing/
 dsq_thread_id:

@@ -2,6 +2,7 @@
 title: More thoughts on HTML class naming conventions.
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2013/03/06/more-thoughts-on-html-class-naming-conventions/
 dsq_thread_id:

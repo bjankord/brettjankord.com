@@ -2,6 +2,7 @@
 title: Cross Browser Retina/High Resolution Media Queries
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2012/11/28/cross-browser-retinahigh-resolution-media-queries/
 dsq_thread_id:
@@ -24,20 +25,20 @@ This media query example is from [37signals article on retina images and scss][4
 (min-resolution: 1.3dppx) {
    /* Retina-specific stuff here */
 }
-{% endhighlight %}  
+{% endhighlight %}
 
 Chris Coyier has a [retina display media query example][5] that looks like this:
 
 {% highlight css %}
-@media  
-only screen and (-webkit-min-device-pixel-ratio: 2),  
-only screen and ( min--moz-device-pixel-ratio: 2),  
-only screen and ( -o-min-device-pixel-ratio: 2/1),  
-only screen and ( min-device-pixel-ratio: 2),  
-only screen and ( min-resolution: 192dpi),  
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and ( min--moz-device-pixel-ratio: 2),
+only screen and ( -o-min-device-pixel-ratio: 2/1),
+only screen and ( min-device-pixel-ratio: 2),
+only screen and ( min-resolution: 192dpi),
 only screen and ( min-resolution: 2dppx) {
     /* Retina-specific stuff here */
-}  
+}
 {% endhighlight %}
 
 ## What&#8217;s wrong with the above solutions
@@ -145,7 +146,7 @@ I&#8217;ve done some testing across different desktop browsers and this looks to
 (min-resolution: 192dpi){
     /* Retina-specific stuff here */
 }
-{% endhighlight %}  
+{% endhighlight %}
 
 ## Update
 

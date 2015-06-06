@@ -2,6 +2,7 @@
 title: RWD Toolset
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2012/01/18/rwd-toolset/
 dsq_thread_id:
@@ -27,8 +28,8 @@ Using this method when developing a responsive design, it frees the design from 
 
 I&#8217;ve combined these two scripts together into what I&#8217;m calling the **RWD Toolset**. Since I&#8217;ve just thrown these two script together for development purposes, I&#8217;m sure there are ways to improve the code, though it accomplishes what I need it to do. If you have improvements, feel free to let me know in the comments below.
 
-**How to use RWD Toolset:**  
-Simply download the JavaScript file and the CSS file and add them to your site.  
+**How to use RWD Toolset:**
+Simply download the JavaScript file and the CSS file and add them to your site.
 **RWD Toolset** requires jQuery so make sure you have that included on your site too.
 
 {% highlight html %}
@@ -41,5 +42,5 @@ Once the files are in place you, should now have the **RWD Toolset** toolbar on 
 
 I do most of my development in either Firefox or Chrome. My idea in building **RWD Toolset **was to use it as a tool to help me in the development stage when working a responsive websites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. I assume this is where most developers are working intially, so this is the environment **RWD Toolset **is best suited for. Hopefully this will help speed up your development time when working on your own responsive websites.
 
-**<a title="RWD Toolset" href="http://brettjankord.com/projects/rwd-toolset/" target="_blank">Preview RWD Toolset</a>**  
+**<a title="RWD Toolset" href="http://brettjankord.com/projects/rwd-toolset/" target="_blank">Preview RWD Toolset</a>**
 **<a title="Download RWD Toolset" href="http://brettjankord.com/projects/rwd-toolset/rwd-toolset.zip" target="_blank">Download RWD Toolset</a> **

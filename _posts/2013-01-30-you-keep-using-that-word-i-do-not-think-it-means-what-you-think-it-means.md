@@ -2,6 +2,7 @@
 title: You Keep Using That Word, I Do Not Think It Means What You Think It Means
 author: Brett
 layout: post
+comments : true
 permalink: /2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/
 dsq_thread_id:
   - 1055861421

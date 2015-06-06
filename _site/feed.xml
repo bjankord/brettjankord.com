@@ -7,6 +7,128 @@
     <atom:link href="http://www.brettjankord.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>The :not() css-pseudo-class and specificity</title>
+        <description>&lt;p&gt;The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument passed to it. For example, &lt;code&gt;li:not(.different)&lt;/code&gt; would match all list items that don’t have the HTML class: &lt;code&gt;.different&lt;/code&gt;. There are &lt;a href=&quot;https://twitter.com/wesbos/status/606144483562913792&quot;&gt;cases&lt;/a&gt; where using the :not pseudo-class makes a lot of sense. There are also cases where the specificity :not() applies can work against you.&lt;/p&gt;
+
+&lt;p&gt;Recently I was working on a project where various form text inputs were styled with the following code.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Some default form field styles */&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;focus&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Focus state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Disabled state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Readonly state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;By looking at the output CSS this generates, you’ll see the amount of selectors for these styles is rather large.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Some default form field styles */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Focus state styles */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Disabled state styles */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tel&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Readonly state styles */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;chaining-not&quot;&gt;Chaining :not()&lt;/h2&gt;
+&lt;p&gt;By chaining up :not pseudo-classes to select input types we do not want to match, we can select the same elements as our previous input selectors. This reduces the amount of selectors as this long chain counts as only one selector.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;hidden&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;checkbox&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;radio&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;file&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;range&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;reset&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:not&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;image&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Using a selector like this &lt;em&gt;may&lt;/em&gt; seem like a good idea, &lt;strong&gt;with this selector, we cut our output css selector count for these styles from 40 to 5&lt;/strong&gt;. Though, this introduces a side effect. When you chain the :not pseudo-classes, it increases specificity with each :not. While we cut the selector count down, we now have a selector with a &lt;strong&gt;specificity score of 0.0.8.1&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you need to override styles applied by this selector, you’ll need some way to trump their current styling specificity.&lt;/p&gt;
+
+&lt;h2 id=&quot;an-alternate-approach&quot;&gt;An alternate approach&lt;/h2&gt;
+&lt;p&gt;If you have control over the markup, you can apply the styles with a single class. This solves the problem of keeping selector count low while also keeping specificity low.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.text-input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;/* Some default form field styles */&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;focus&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Focus state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;disabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Disabled state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;amp;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:focus&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;/* Readonly state styles */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this &lt;code&gt;.text-input&lt;/code&gt; class, we can apply form field styles only to the specific inputs we want. It also keeps things simple. The &lt;strong&gt;specificity score of this &lt;code&gt;.text-input&lt;/code&gt; selector is 0.0.1.0&lt;/strong&gt;, which is easy to override if the need arises. The total selector count for applying these styles with a class is 5, the same as the chained :not selector.&lt;/p&gt;
+
+&lt;p&gt;When using the :not pseudo-class, be careful of chaining them together. You may end up creating a specificity side effect that will cause issues down the road.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 05 Jun 2015 00:00:00 -0500</pubDate>
+        <link>http://www.brettjankord.com/2015/06/05/the-not-css-pseudo-class-and-specificity/</link>
+        <guid isPermaLink="true">http://www.brettjankord.com/2015/06/05/the-not-css-pseudo-class-and-specificity/</guid>
+      </item>
+    
+      <item>
         <title>Modular CSS: Thoughts on SMACSS modules</title>
         <description>&lt;p&gt;My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I’ve learned about modules.&lt;/p&gt;
 
@@ -765,7 +887,7 @@
 
 &lt;p&gt;For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg&quot; alt=&quot;Pile of web enabled devices with text overlaid on top that reads, Gotta catch &#39;em all&quot; class=&quot;aligncenter size-full&quot; /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg&quot; alt=&quot;Pile of web enabled devices with text overlaid on top that reads, Gotta catch &#39;em all&quot; class=&quot;aligncenter size-full&quot; /&gt;
 (Credit: &lt;a href=&quot;http://commons.wikimedia.org/wiki/File:Device_pile.jpg&quot;&gt;Jeremy Keith&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.&lt;/p&gt;
@@ -893,12 +1015,12 @@
 
 &lt;p&gt;Chris Coyier has a &lt;a href=&quot;http://css-tricks.com/snippets/css/retina-display-media-query/&quot;&gt;retina display media query example&lt;/a&gt; that looks like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min--moz-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;  
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-webkit-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min--moz-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o-min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-device-pixel-ratio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;192dpi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;min-resolution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;2dppx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;c&quot;&gt;/* Retina-specific stuff here */&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1093,333 +1215,6 @@
         <pubDate>Thu, 15 Nov 2012 00:00:00 -0600</pubDate>
         <link>http://www.brettjankord.com/2012/11/15/syncing-javascript-with-your-active-media-query/</link>
         <guid isPermaLink="true">http://www.brettjankord.com/2012/11/15/syncing-javascript-with-your-active-media-query/</guid>
-      </item>
-    
-      <item>
-        <title>HRWD &amp;#8211; Hybrid Responsive Web Design</title>
-        <description>&lt;p&gt;As the &lt;a href=&quot;http://androidandme.com/2012/02/news/android-posts-250-year-over-year-growth-with-850k-daily-activations/?utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed%3A+androidandme+%28Android+and+Me%29&amp;amp;utm_content=Google+Reader&quot; target=&quot;_blank&quot;&gt;amount of web capable devices grows&lt;/a&gt;, a one size fits all website will no longer suffice. Responsive web design seems to be the most popular solution to achieving device agnostic web design, but there are issues we still need to resolve when creating a responsive website.&lt;/p&gt;
-
-&lt;p&gt;Many great minds have dissected and critiqued responsive web design, and it’s merits as a solution to creating sites for the mobile web. I’ve tried to compile a general list of issues/concerns people have had about responsive web design. As we continue to experiment and find ways to adapt to the growing landscape of the web, it’s important to communicate with one another and review our processes and techniques. What is true today, may change tomorrow.&lt;/p&gt;
-
-&lt;h2 id=&quot;issue-with-responsive-web-design&quot;&gt;Issue with Responsive Web Design&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/fools-gold.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-422&quot; title=&quot;fools-gold&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/fools-gold.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Back in in August 2010, Jason Grigsby published an article, &lt;a href=&quot;http://www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/&quot; target=&quot;_blank&quot;&gt;CSS Media Query for Mobile is Fool’s Gold&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Some of the main points from the article are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Media queries add more code to create the “mobile” version of the site&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;**Media queries i&lt;/strong&gt;gnore the mobile context**&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;**Media queries d&lt;/strong&gt;o not optimize HTML or JavaScript**&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div&gt;
-  Jason also brought up many good points about images:
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;How letting the browser scale images is a bad idea&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Full size images = unnecessarily large files to download&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Using media queries to deliver different images doesn&amp;#8217;t work&lt;/strong&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Jason concludes that he believes responsive design still rocks, though it’s important to understand that media queries are not a silver bullet when creating a mobile site.&lt;/p&gt;
-
-&lt;p&gt;James Pearce, another expert in the realm of mobile replied to this article,&lt;/p&gt;
-
-&lt;p&gt;“&lt;em&gt;+1 for context… the most important point. If there’s a media query that will turn an airline’s desktop site (flight booking, credit card promotions, photos of reclining seats, chairman’s statements etc) into its corresponding mobile site (flight time checker, on-line check-in, QR-code boarding pass etc), then I would love to see it.&lt;/em&gt;”&lt;/p&gt;
-
-&lt;p&gt;James later wrote another article about issues related to responsive web design titled, &lt;a title=&quot;Permanent Link to Not a mobile web, merely a 320px-wide one&quot; href=&quot;http://tripleodeon.com/2010/10/not-a-mobile-web-merely-a-320px-wide-one/&quot; rel=&quot;bookmark&quot;&gt;Not a mobile web, merely a 320px-wide one&lt;/a&gt; in which he discusses issues with responsive web design.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/merely-320.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-423&quot; title=&quot;merely-320&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/merely-320.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Media queries only affect the styling once the markup and other resources have reached the browser&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Media queries are not supported by most of the world’s web browsers.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The main issue James gets into is how responsive web design, as it’s currently being done, is &lt;strong&gt;not suitable to handle context&lt;/strong&gt;. It also does little to handle &lt;strong&gt;performance optimization&lt;/strong&gt;. James goes on to say that “&lt;em&gt;…it’s quite likely that they [the mobile user] really deserve different content and services altogether – or, at least, a differently prioritized version of the default desktop experience.&lt;/em&gt;”&lt;/p&gt;
-
-&lt;p&gt;While it’s true, mobile users &lt;em&gt;may&lt;/em&gt; want different content or services altogether. &lt;a href=&quot;http://blog.comscore.com/2011/11/the_rise_of_digital_omnivores.html&quot; target=&quot;_blank&quot;&gt;Studies&lt;/a&gt; have also shown that users love content, no matter what device they are on. To help determine if a separate mobile site is necessary, one should &lt;a href=&quot;http://globalmoxie.com/blog/mobile-context-stats.shtml&quot; target=&quot;_blank&quot;&gt;research&lt;/a&gt; their user base. Look at your site statistics and analytics. This will give you the information you need to decided if you can offer a differently prioritized version of your desktop site, or if you need to create a custom experience tailored specially for individual user groups, be it a native app or web app. Though if you do decide to go with separate mobile site, I believe the concepts from responsive web design; fluid grids, fluid images, and media queries will still be beneficial to your separate mobile site/web app.&lt;/p&gt;
-
-&lt;h3 id=&quot;a-word-on-context&quot;&gt;A word on context&lt;/h3&gt;
-
-&lt;p&gt;Context is a funny thing, and everyone has their opinion on what the mobile web is, and thus, what &lt;a href=&quot;http://adactio.com/journal/4443/&quot; target=&quot;_blank&quot;&gt;mobile context&lt;/a&gt; is. One of this best articles I’ve come across on this topic is by Jason Rhodes entitled, &lt;a href=&quot;http://jasonthings.com/2011/03/626/&quot; target=&quot;_blank&quot;&gt;More Responsive Design, Please&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Stephanie Rieger also has some great thoughts on mobile context. &lt;a href=&quot;http://www.slideshare.net/yiibu/the-trouble-with-context&quot; target=&quot;_blank&quot;&gt;The Trouble With Context&lt;/a&gt; and &lt;a href=&quot;http://stephanierieger.com/mobile-users-dont-do-that/&quot; target=&quot;_blank&quot;&gt;Mobile User Don’t Do That&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Almost a year later after Grigsby published his article regarding concerns with media queries, there was another article published on Web Design Shock about issues with responsive web design titled, &lt;a href=&quot;http://www.webdesignshock.com/responsive-design-problems/&quot;&gt;11 Reasons Why Responsive Design Isn’t That Cool!&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Form these three articles we can see there are some common issues people have with how responsive web design has been done so far.&lt;/p&gt;
-
-&lt;div&gt;
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Media queries ignore the mobile context&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Media queries add more code to create the &amp;#8220;mobile&amp;#8221; version of the site&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;CSS media query is a bad choice for multiple devices&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Media queries do not optimize HTML or JavaScript or remove unnecessary code&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Mobile needs are different from desktop needs&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Issues with handling images on varying devices&lt;/strong&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;it8217s-time-we-to-try-and-solve-these-issues&quot;&gt;It’s time we to try and solve these issues&lt;/h2&gt;
-
-&lt;p&gt;I agree with points raised. I believe each new technique that comes out needs to be reviewed and critiqued. This is how we move the web forward. Along with offering critique and reviewing our processes, we need to seek solutions.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle2.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-427&quot; title=&quot;puzzle2&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;the-first-part-of-the-puzzle-is-solved-by-thinking-mobile-first&quot;&gt;The first part of the puzzle is solved by thinking Mobile First&lt;/h3&gt;
-
-&lt;div&gt;
-  If you have not picked up Luke Wroblewski&amp;#8217;s book, &lt;a href=&quot;http://www.lukew.com/resources/mobile_first.asp&quot; target=&quot;_blank&quot;&gt;Mobile First&lt;/a&gt;, I highly recommend it. Going &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?933&quot; target=&quot;_blank&quot;&gt;mobile first&lt;/a&gt; with our responsive websites allows us to solve some of the issues people have raised about responsive web design.
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Media queries ignore the mobile context&lt;br /&gt; &lt;/strong&gt;By starting a project with a mobile first mindset, we are now focusing on mobile from the beginning, thus acknowledging mobile context and the needs of mobile users. This also allows us new potential for interactions between us and our users, based on new capabilities. It also helps us prepare for the growing market of varying mobile devices.
-    &lt;/li&gt;
-  &lt;/ul&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Media queries add more code to create the &amp;#8220;mobile&amp;#8221; version of the site&lt;br /&gt; &lt;/strong&gt;By building our site for mobile devices first, we can progressively enhance our base version of the site by conditionally loading in assets/resources for other more capable devices as opposed to trying to scale down our desktop sites to be more suitable for mobiles. This type of thinking is tricky though, and requires us to really re-examine a lot of our common practices that we have become accustom to. I believe the many benefits of going mobile first out weigh the trouble involved in &lt;a href=&quot;http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu&quot; target=&quot;_blank&quot;&gt;rethinking the mobile web&lt;/a&gt;.
-    &lt;/li&gt;
-  &lt;/ul&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;CSS media queries are a bad choice for multiple devices&lt;br /&gt; &lt;/strong&gt;This issue stems from the idea of starting with a desktop site and using media queries to scale down to a mobile layout. This results in mobile devices that &lt;a href=&quot;http://www.quirksmode.org/m/css.html#t021&quot; target=&quot;_blank&quot;&gt;don&amp;#8217;t support&lt;/a&gt; &lt;a href=&quot;http://caniuse.com/#search=media queries&quot; target=&quot;_blank&quot;&gt;media queries&lt;/a&gt; getting the desktop styles. Though by going mobile first with our media queries, we can easily create styles for devices that don&amp;#8217;t understand media queries, and then use media queries to progressively enhance our layout.
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-  Bryan Rieger, puts this nicely,&lt;br /&gt; &amp;#8220;&lt;em&gt;The absence of a media query is in fact, the ﬁrst media query&lt;/em&gt;&amp;#8220;.&lt;br /&gt; -Rethinking the Mobile Web
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;the-second-part-of-the-puzzle-is-adaptation&quot;&gt;The second part of the puzzle is Adaptation&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/be-like-water.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-428&quot; title=&quot;be-like-water&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/be-like-water.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;div&gt;
-  When it comes to adaptation, Bryan and Stephanie Rieger are leading the charge on what works and what doesn&amp;#8217;t. I would highly reccomend looking through Stephanie&amp;#8217;s slides on &lt;a href=&quot;http://www.slideshare.net/yiibu/pragmatic-responsive-design&quot; target=&quot;_blank&quot;&gt;Pragmatic Responsive Design&lt;/a&gt; and Bryan&amp;#8217;s slides on &lt;a href=&quot;http://www.slideshare.net/yiibu/adaptation-why-responsive-design-actually-begins-on-the-server&quot;&gt;Adaptation: Why Responsive Design Actually Begins On The Server&lt;br /&gt; &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-  &lt;strong&gt;Server side adaptation allows us:&lt;/strong&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Optimize the pay-load from the server to the user, for example, add or remove markup / scripts / styles for different device groups&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;The ability to alternate content appropriate for context&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div&gt;
-  &lt;strong&gt;Client side adaptation allows us:&lt;/strong&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Ability to test for capabilities &amp;#8211; Feature Detection &amp;#8211; Modernizr&lt;/strong&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;strong&gt;Ability to modify the layout as screen real estate increases - Media Queries &amp;#8211; Responsive Web Design &amp;#8211; JavaScript solutions&lt;/strong&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-
-  &lt;h2&gt;
-    What tool do we use for server side adaptation?
-  &lt;/h2&gt;
-
-  &lt;div&gt;
-    In Riegers&amp;#8217; slides, they suggest using a device database to handle the server side logic for websites adaptation. &lt;a href=&quot;http://deviceatlas.com/&quot; target=&quot;_blank&quot;&gt;Device Atlas&lt;/a&gt;, and &lt;a href=&quot;http://wurfl.sourceforge.net/&quot; target=&quot;_blank&quot;&gt;WURFL&lt;/a&gt; are great resources as well as &lt;a href=&quot;http://www.handsetdetection.com/&quot; target=&quot;_blank&quot;&gt;Handset Detection&lt;/a&gt;. However, each of these options come with a price, literally. If you go with the cloud version of Device Atlas, it&amp;#8217;s &lt;a href=&quot;http://deviceatlas.com/cart/add/2483428&quot; target=&quot;_blank&quot;&gt;$399/year&lt;/a&gt; per website or &lt;a href=&quot;http://deviceatlas.com/cart/add/2483430&quot; target=&quot;_blank&quot;&gt;$3,990/year&lt;/a&gt; for 50 websites. Their enterprise prices are not listed, I don&amp;#8217;t even want to know what those cost. WURFL has recently updated their licensing terms. If you plan to use WURFL on a commercial project, you need to buy a license. Handset Detection seems to be the most reasonably &lt;a style=&quot;color: #000000;&quot; href=&quot;https://www.handsetdetection.com/pricing&quot; target=&quot;_blank&quot;&gt;priced solution&lt;/a&gt; at $13/month for 100,000 detections. They also have a free option with 10,000 detections per month.
-  &lt;/div&gt;
-
-  &lt;div&gt;
-  &lt;/div&gt;
-
-  &lt;div&gt;
-  &lt;/div&gt;
-
-  &lt;h3&gt;
-    What other options do we have?
-  &lt;/h3&gt;
-
-  &lt;p&gt;
-    &lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2012/01/categorizr.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-110&quot; title=&quot;categorizr&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2012/01/categorizr.jpg&quot; alt=&quot;Categorizr - A modern device detection script&quot; /&gt;&lt;/a&gt;
-  &lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Categorizr&lt;/strong&gt; is modern device detection script I wrote to help handle simple device profiling. You can read more about &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr here&lt;/a&gt;. The concept is that by basing device detection on the idea of mobile first, detection not only becomes easier, it’s also more accurate. If your curious how &lt;strong&gt;Categorizr&lt;/strong&gt; handles user agents, you can &lt;a href=&quot;http://brettjankord.com/categorizr/categorizr-results.php&quot; target=&quot;_blank&quot;&gt;view test results here&lt;/a&gt; from over 11,000 user agents, most of them are from the WURFL database or &lt;a href=&quot;http://brettjankord.com/categorizr/ua-check.php&quot; target=&quot;_blank&quot;&gt;check your own device&lt;/a&gt; and see what category it falls into.&lt;/p&gt;
-
-&lt;h2 id=&quot;so-now-we-have-all-the-tools-what-is-hybrid-responsive-web-design&quot;&gt;So now we have all the tools, what is hybrid responsive web design?&lt;/h2&gt;
-
-&lt;p&gt;Hybrid responsive web design is not a &lt;a href=&quot;http://blog.mozilla.com/webdev/2011/06/27/approaches-to-mobile-web-development-part-4-%E2%80%93-a-hybrid-approach/&quot; target=&quot;_blank&quot;&gt;new concept&lt;/a&gt;, and there is more than one way someone could create a hybrid responsive website. Though the general idea behind HRWD is that it pairs the concepts of responsive web design with the concepts of server side device detection. It builds on top of the concepts we know are true for responsive web design, and adds concepts from traditional mobile device detection.&lt;/p&gt;
-
-&lt;p&gt;After looking through Riegers’ slides from last year’s Breaking Development conference and reading Luke Wroblewski’s post, &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1392&quot; target=&quot;_blank&quot;&gt;RESS: Responsive Design + Server Side Components&lt;/a&gt;, I really started to get interested in experimenting with this concept. &lt;a href=&quot;http://yiibu.com/&quot; target=&quot;_blank&quot;&gt;Yiibu.com&lt;/a&gt; and &lt;a href=&quot;http://filamentgroup.com/&quot; target=&quot;_blank&quot;&gt;The Filament Group’s&lt;/a&gt; website are two sites that also really got me thinking in this direction. The first step required an accurate way to handle device detection. The way device detection has traditionally been done was flawed in my mind, as it was not very future friendly, though this is the nature of the beast when you get into user agent sniffing. I wanted to find a solution that would be free for anyone who wanted to use it, and would provide accurate results and this is what led me to develop &lt;a href=&quot;https://github.com/bjankord/Categorizr&quot;&gt;Categorizr&lt;/a&gt;. With** Categorizr**, you can group devices into specific categories and handle various adaptations from one device group to another on the server. I’ve found though, that mobile devices are where most of the server-side adaptation is needed. Adaptation for tablets and smartTVs can mainly be based on the desktop version and handled client side.&lt;/p&gt;
-
-&lt;h2 id=&quot;issues-hrwd-solves&quot;&gt;Issues HRWD solves&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**Media queries d&lt;/strong&gt;&lt;strong&gt;o not optimize HTML or JavaScript or &lt;/strong&gt;remove unnecessary code&lt;br /&gt;
-&lt;strong&gt;**This is a problem many people have had with responsive web design. Media queries are a client side technology based for styling, thus they cannot remove unnecessary code, optimize HTML or JavaScript. To do this, we need to do it on the server side. With **Categorizr&lt;/strong&gt;, you can detect what type of device the user is on, and give them only the markup / scripts / styles they need.&lt;em&gt;**&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;**&lt;/strong&gt;&lt;strong&gt;**Mobile needs are different from desktop needs&lt;br /&gt;
-**&lt;/strong&gt;&lt;strong&gt;To quote **James Pearce&lt;/strong&gt; again, “*…it’s quite likely that they [the mobile user] really deserve … a differently prioritized version of the default desktop experience.&lt;strong&gt;” &lt;em&gt;We can use **Categorizr **to dectect the type of device the user is on, be it mobile, tablet, desktop, or smartTV. From there we can handle priority changes on the server, whether that means shifting around markup, or loading different content/resources altogher, before sending it down to the user.&lt;/em&gt;&lt;/strong&gt;*&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Issues with handling images on varying devices&lt;br /&gt;
-**This is something I would not recommend using &lt;/strong&gt;Categorizr** for. While it does a great job of figuring out what type of device your on, it won’t get you specifics. Since there is a lot of variety in mobile screen sizes, I would recommend looking at &lt;a href=&quot;http://www.sencha.com/learn/how-to-use-src-sencha-io/&quot; target=&quot;_blank&quot;&gt;Sencha.io Src&lt;/a&gt; or &lt;a href=&quot;http://adaptive-images.com/&quot; target=&quot;_blank&quot;&gt;Adaptive Images&lt;/a&gt;. Currently there is &lt;a href=&quot;http://www.w3.org/community/respimg/&quot; target=&quot;_blank&quot;&gt;discussion going on&lt;/a&gt; about creating a new HTML element to handle images for varying devices based on media query logic.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;More code, more to update&lt;br /&gt;
-**I honestly don’t understand the reasoning behind this issue. To me, you either don’t do anything and stick with your desktop websites, blissfully ignorant to the changing market, or you adapt. Hybrid responsive web design with **Categorizr&lt;/strong&gt; is actually fairly simple. If you want to support multiple devices, there is going to be more code. Though I’ll explain how we can support a wide array of devices, while still maintaining a code-base that is easy to manage and update.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div&gt;
-  &lt;h2&gt;
-    Issues that still need to be solved.
-  &lt;/h2&gt;
-
-  &lt;p&gt;
-    &lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle3.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-429&quot; title=&quot;puzzle3&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/puzzle3.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
-  &lt;/p&gt;
-
-  &lt;p&gt;
-    Hybrid Responsive Web Design does not solve all the issues. There are still many issues we will need to tackle as the web evolves on to more devices. We are all in this together, and for us to move forward, we need to review our processes, offer critique, and help push each other to find solutions. I&amp;#8217;m hope you&amp;#8217;ll offer your feedback and critique on this approach so we can continue to move the web forward.
-  &lt;/p&gt;
-
-  &lt;p&gt;
-    One of the biggest issues that still remains relates to content management systems. Our craft is evolving, we need the tools we use to evolve also. Though, this a topic I&amp;#8217;ll save to tackle another day.
-  &lt;/p&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;mobile-first-hrwd-development&quot;&gt;Mobile First HRWD Development&lt;/h2&gt;
-
-&lt;p&gt;So, you’ve read this far. Take a break, relax, I know that was a lot to digest. I’m planning on writing up a more detailed walkthrough of mobile first HRWD development and was considering leaving this concept for another post, though while I have your attention, I figured I’d breifly cover some concepts of a mobile first hybrid responsive web design development. Try saying that ten times fast.&lt;/p&gt;
-
-&lt;p&gt;First, we’ll be starting our project with a mobile first mindset. As I’ve mentioned, this helps solve a lot of issues when creating a responsive site. There are 4 areas I want to quickly go over; the Sever-Side Component, how to handle HTML, how to handle  CSS, how to handle JavaSript, and how to handle images.&lt;/p&gt;
-
-&lt;h3 id=&quot;server-side-component&quot;&gt;Server-Side Component&lt;/h3&gt;
-
-&lt;p&gt;In this example I’ll be explaining how to use &lt;strong&gt;Categorizr&lt;/strong&gt; to handle our server side adaptation. &lt;strong&gt;Catgorizr&lt;/strong&gt; is PHP based and fairly easy to use, even if you have no programming knowledge. To alter various parts of your site, be it your CSS, JavaScript, page components, or other markup, all you need is a simple PHP &lt;strong&gt;if statement&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mobile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is categorized as mobile device&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;desktop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is not categorized as desktop device&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;With this, we can keep all of our markup for each device category together in one file. This makes maintenance of a hybrid responsive website rather easy. This works great if your mobile site will be similar to your desktop site and you just want to re-prioritize your mobile site. However, if your mobile site is going to be quite a bit different than your desktop site, I would suggest using **Categorizr Redirect **and creating a separate mobile site.&lt;/p&gt;
-
-&lt;h3 id=&quot;html&quot;&gt;HTML&lt;/h3&gt;
-
-&lt;p&gt;The HTML you craft will vary from project to project. Sketching and prototyping will be your best friends as you move back and forth between design and development. For tablets and smartTVs, I would suggest using the same HTML markup as your desktop site and letting media queries handle layout changes. If you need to add specific CSS, JavaScript, or other elements solely to your tablet or smartTV version of your page, you can simply write an if statement.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tablet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;&amp;lt;h1&amp;gt;This heading will only show up if the device is categorized as tablet device&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Be sure to be considerate of users who want to change what there device is categorized as. Add a link to your page so if users are on your mobile site, and want to view the desktop version, they can. To do this with &lt;strong&gt;Categorizr&lt;/strong&gt;, all you need to do is create an anchor link and set the href value to a PHP GET variable with &lt;strong&gt;view&lt;/strong&gt; set to what you want it to be. Below is an example of a link you would add to your mobile site to switch users to being categorized as a desktop.&lt;/p&gt;
-
-&lt;pre class=&quot;brush: html; gutter: true; first-line: 1&quot;&gt;&lt;a href=&quot;?view=desktop&quot;&gt;View Desktop Site&lt;/a&gt;&lt;/pre&gt;
-
-&lt;p&gt;When a user clicks on this link, it will reload the page, then &lt;strong&gt;Categorizr&lt;/strong&gt; will pick up that the user now wants to be categorized as a desktop device. &lt;strong&gt;Categorizr&lt;/strong&gt; stores this in a session so the user can move from page to page and still be recognized as a desktop device.&lt;/p&gt;
-
-&lt;h3 id=&quot;css&quot;&gt;CSS&lt;/h3&gt;
-
-&lt;p&gt;With CSS, we’ll first create styles for basic devices such as feature phones, legacy phones, and other devices that do not understand media queries. In this file I usually add my HTML reset, basic formatting for typography, link styles, and any other basic styles needed for these devices. I’ll usually name this stylesheet &lt;strong&gt;base.css&lt;/strong&gt; though you can name it however you please.&lt;/p&gt;
-
-&lt;p&gt;Next, we’ll create a stylesheet for mobile devices. I name this file &lt;strong&gt;mobile-styles.css&lt;/strong&gt;. In this file, we’ll set up our media queries for mobile devices. These will cascade off of the styles set in the &lt;strong&gt;base.css&lt;/strong&gt; file.&lt;/p&gt;
-
-&lt;p&gt;Lastly, we’ll create another stylesheet that will handle our layouts for tablets, desktops, and smartTVs. I typically name this file &lt;strong&gt;main-styles.css&lt;/strong&gt;. Again, this stylesheet will cascade off &lt;strong&gt;base.css&lt;/strong&gt;, as well as &lt;strong&gt;mobile-styles.css&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;In development, I like to keep the files separate, though on your production site, I would concatenate them into one file. Then conditionally load them based on what device category comes to your site.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;If mobile, load mobile.css.&lt;br /&gt;
-&lt;em&gt;mobile.css = base.css + mobile-styles.css &lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
-Use this for feature phones / smartphones / and other mobile devices.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;If not mobile, load main.css&lt;br /&gt;
-&lt;em&gt;main.css = base.css + mobile-styles.css + main-styles.css&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
-Use this for tablets / desktops / smartTVs&lt;/p&gt;
-
-&lt;p&gt;By concatenating the stylesheets, you’ll only serve 1 CSS file which will help keep your website fast.&lt;/p&gt;
-
-&lt;h3 id=&quot;javascript&quot;&gt;JavaScript&lt;/h3&gt;
-
-&lt;p&gt;The JavaScript you use on your site will vary from site to site, however one file I would encourage you to include on your sites is &lt;a href=&quot;http://www.modernizr.com/&quot; target=&quot;_blank&quot;&gt;Modernizr&lt;/a&gt;. Categorizr is great at what it does, though it only gets us some of the information we typically want to know. By pairing Categorizr with Modernizr, you can accurately detect device types, and their capabilities.&lt;/p&gt;
-
-&lt;p&gt;Just as we did with the stylesheets, I would recommend concatenating your JavaScript where applicapable. The &lt;a href=&quot;http://html5boilerplate.com/&quot; target=&quot;_blank&quot;&gt;HTML5 Boiler Plate&lt;/a&gt; has a good example of file strutures for JS.&lt;/p&gt;
-
-&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
-
-&lt;p&gt;As I mentioned earlier, I would recommend using &lt;a href=&quot;http://www.sencha.com/learn/how-to-use-src-sencha-io/&quot; target=&quot;_blank&quot;&gt;Sencha.io Src&lt;/a&gt; or &lt;a href=&quot;http://adaptive-images.com/&quot; target=&quot;_blank&quot;&gt;Adaptive Images&lt;/a&gt; as a solution to providing images for varying devices.These are the best solutions I’ve seen so far for creating responsive images. Matt Wilcox, the developer behind Adaptive Images and Jason Grigsby are both members of the W3C Responsive Images Community Group. I’m excited to see what solution this community group comes up with as a native way to handle responsive images.&lt;/p&gt;
-
-&lt;h3 id=&quot;other-components&quot;&gt;Other Components&lt;/h3&gt;
-
-&lt;p&gt;There are many other components one could add to a HRWD development, such as appropriately caching files, gzipping files, using HTML5 AppCache, minifying files along with many other techniques. This is a topic I’ll go into more detail another day.&lt;/p&gt;
-
-&lt;h2 id=&quot;is-this-the-silver-bullet-we8217ve-been-waiting-for&quot;&gt;Is this the silver bullet we’ve been waiting for?&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/silver-bullet.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-430&quot; title=&quot;silver-bullet&quot; src=&quot;http://www.brettjankord.com/wp-content/uploads/2011/12/silver-bullet.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Nope. It’s &lt;a href=&quot;http://www.lukew.com/ff/entry.asp?1509&quot; target=&quot;_blank&quot;&gt;one possible technique&lt;/a&gt; you can add to your toolbox. Hybrid responsive web design does not aim to create solutions for the mobile web, the desktop web, the tablet web, the smartTV web. It aims to create solutions for the responsive web. Each project should be evaluated to see which techniques will be the most benefical, not only to your clients, but also to their users.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 29 Feb 2012 00:00:00 -0600</pubDate>
-        <link>http://www.brettjankord.com/2012/02/29/hrwd-hybrid-responsive-web-design/</link>
-        <guid isPermaLink="true">http://www.brettjankord.com/2012/02/29/hrwd-hybrid-responsive-web-design/</guid>
       </item>
     
   </channel>

@@ -2,6 +2,7 @@
 title: Thoughts on Windows 8 device detection
 author: Brett
 layout: post
+comments : true
 permalink: /2012/02/22/thoughts-on-windows-8-device-detection/
 dsq_thread_id:
   - 936332847
@@ -19,13 +20,13 @@ Back at the start of February, [news came][2] [out][3] that Windows Phone 8 will
 
 Since Windows Phone 6.5, Microsoft has included “**Windows Phone**” in the user agent.
 
-User agent from HTC Radar 4G:  
+User agent from HTC Radar 4G:
 **Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; Radar 4G)**
 
-User agent from Samsung Omnia 7  
+User agent from Samsung Omnia 7
 **Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; GT-i8700)**
 
-User agent from HTC HD2  
+User agent from HTC HD2
 **Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; HTC\_HD2\_T8585; Windows Phone 6.5)**
 
 Based on this information, I’m going to guess that even if Microsoft includes a variation of Windows NT in the user agent on their new Windows 8 Phones, as long as they continue with the pattern of including “Windows Phone” in the string too, it should be possible to differentiate between Windows 8 mobile phones, and Windows 8 desktops. Differentiating between Windows 8 tablets and Windows 8 desktops get a bit more interesting.
@@ -56,8 +57,8 @@ As you can see, the line between desktops and tablets is growing smaller, just a
 
 Microsoft is no stranger to this concept and is aware that developers like to differentiate between the tablets and desktops. Here’s a small quote from an article on Microsoft&#8217;s Dev Center website regarding how to [Determing Wheter a PC is a Tablet PC.][4]
 
-> In Windows Vista, the user-agent string reported by Internet Explorer includes &#8220;Tablet PC 2.0&#8243; if, according to GetSystemMetrics(SM_TABLETPC), the device is a Tablet PC.  
-> In Windows XP Tablet PC Edition 2005, the user-agent string includes Tablet PC 1.7. The user-agent string looks something like the following:  
+> In Windows Vista, the user-agent string reported by Internet Explorer includes &#8220;Tablet PC 2.0&#8243; if, according to GetSystemMetrics(SM_TABLETPC), the device is a Tablet PC.
+> In Windows XP Tablet PC Edition 2005, the user-agent string includes Tablet PC 1.7. The user-agent string looks something like the following:
 > **Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705; Tablet PC 2.0)**
 
 <h2 dir="ltr">
@@ -66,10 +67,10 @@ Microsoft is no stranger to this concept and is aware that developers like to di
 
 I’ve come across some [user agents Paulo Morgado collected][5] from IE10, which runs on Windows 8.
 
-User agent from Internet Explorer 10, running in the Metro UI:  
+User agent from Internet Explorer 10, running in the Metro UI:
 **Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)**
 
-User agent from Internet Explorer 10, running in the Classic Desktop UI:  
+User agent from Internet Explorer 10, running in the Classic Desktop UI:
 **Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)**
 
 I’m not sure if Paulo was on a desktop, or tablet when he got these, though one thing Paulo notes is that Metro Internet Explorer is always a 64bit application on 64bit Windows 8 based on the user agents he’s found so far. I’d much rather check for the words Tablet PC or even Metro in the user agent string when Windows 8 is in Metro mode than Win64 and x64.

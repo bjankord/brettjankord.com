@@ -2,6 +2,7 @@
 title: Thoughts on semantic HTML class names and maintainability
 author: Brett
 layout: post
+comments : true
 code_demo: true
 permalink: /2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/
 dsq_thread_id:
@@ -124,7 +125,7 @@ Instead of writing our CSS like below:
 .reviews-movies {/* Sub-Module Styles */}
 .reviews-albums {/* Sub-Module Styles */}
 .reviews-books {/* Sub-Module Styles */}
-{% endhighlight %}  
+{% endhighlight %}
 
 We can write it as:
 
