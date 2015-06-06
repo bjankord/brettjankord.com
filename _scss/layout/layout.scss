@@ -5,9 +5,8 @@
 // ----------------------------------------
 .container {
   @include rem(max-width, $container-max-width);
+  @include rem(padding, 0 30px);
   margin: 0 auto;
-  padding: 0 30px;
-  width: 100%;
 }
 
 // Site Masthead
@@ -17,8 +16,8 @@
   @include rem(padding, $base-spacing-unit 0);
   border-bottom: 1px solid $gray-light;
   display: table;
-  width: 100%;
   text-align: center;
+  width: 100%;
 
   @include bp-m {
     text-align: left;
@@ -29,9 +28,9 @@
 // ----------------------------------------
 .site-name {
   @include rem(font-size, 28px);
-  color: $slate-gray;
+  color: $slate;
   cursor: pointer;
-  font-family: $base-heading-font;
+  font-family: $font-stack-1;
   font-weight: 300;
   letter-spacing: 1px;
   line-height: 1;
@@ -63,7 +62,7 @@
 .site-nav {
   @include rem(font-size, 16px);
   @include rem(margin-top, $half-spacing-unit);
-  font-family: $base-heading-font;
+  font-family: $font-stack-1;
 
   @include bp-m {
     @include rem(font-size, 18px);
@@ -75,16 +74,17 @@
   }
 
   a {
+    @include rem(margin-left, 10px);
+    @include rem(margin-right, 10px);
     color: $link-color;
     font-weight: 500;
     letter-spacing: 1px;
-    margin: 0 10px;
 
     @include bp-m {
-      color: $slate-gray;
+      @include rem(margin-left, 20px);
+      @include rem(margin-right, 0);
+      color: $slate;
       font-weight: 300;
-      margin-left: 20px;
-      margin-right: 0;
       text-align: right;
     }
   }
@@ -93,13 +93,13 @@
 // Site Footer Wrapper
 // ----------------------------------------
 .site-footer-wrapper {
-  @include rem(font-size, 50px);
-  background-color: $gray-darker;
+  @include rem(margin-top, $base-spacing-unit);
+  background-color: $gray-dark;
 }
 
 // Site Footer
 // ----------------------------------------
 .site-footer {
-  padding: 20px 0;
+  @include rem(padding, 20px 0);
   text-align: center;
 }

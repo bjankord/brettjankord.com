@@ -1,7 +1,7 @@
 // MIXINS
 // --------------------------------------------------
 
-// Clearfix mixin
+// Clearfix
 // http://nicolasgallagher.com/micro-clearfix-hack/
 // ----------------------------------------
 @mixin clearfix() {
@@ -25,7 +25,7 @@
     clear: both;
 }
 
-// Breakpoint mixin
+// Breakpoints
 // ----------------------------------------
 @mixin bp-m {
   @media screen and (min-width: 740px) {
@@ -33,8 +33,14 @@
   }
 }
 
+// ::selection styles
+// ----------------------------------------
+@mixin selection() {
+  background: $gray-light;
+  color: $slate;
+}
 
-// Rem mixin
+// Rem units
 // Source: https://github.com/pierreburel/sass-rem
 // ----------------------------------------
 

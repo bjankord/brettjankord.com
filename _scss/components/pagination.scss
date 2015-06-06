@@ -2,8 +2,8 @@
 // --------------------------------------------------
 
 .pagination {
-  @include rem(padding-top, 20px);
-  font-family: $base-heading-font;
+  @include rem(padding-top, $base-spacing-unit);
+  font-family: $font-stack-1;
   text-align: center;
 }
 

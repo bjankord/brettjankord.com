@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en-US">
   <head>
     <meta charset="utf-8" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
@@ -16,12 +16,8 @@
       {% include style.css %}
     </style>
     {% if page.code_demo %}<link rel="stylesheet" type="text/css" href="/css/highlights.css" />{% endif %}
-    <link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   </head>
-
   <body>
     <div class="container">
       <header class="site-masthead">
@@ -35,12 +31,10 @@
           <a href="{{ site.baseurl }}/contact/">Contact</a>
         </nav>
       </header>
+      <main id="main">
+        {{ content }}
+      </main>
     </div>
-
-    <main id="main">
-      {{ content }}
-    </main>
-
     <div class="site-footer-wrapper">
       <div class="container">
         <footer class="site-footer">
@@ -48,7 +42,6 @@
         </footer>
       </div>
     </div>
-
     {% include analytics.html %}
   </body>
 </html>

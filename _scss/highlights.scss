@@ -1,12 +1,12 @@
-// SYNTAX HIGHLIGHTING STYLES
+// SYNTAX HIGHLIGHTING
 // --------------------------------------------------
 @import "_scss/base/_variables";
 
 .highlight {
-  background-color: #333;
+  background-color: $gray-dark;
   border-radius: 5px;
-  padding: $half-spacing-unit;
   margin-bottom: $base-spacing-unit;
+  padding: $half-spacing-unit;
 }
 
 .highlight pre {
@@ -16,7 +16,12 @@
 }
 
 // Monokai Pygments
-.highlight code { color: #ffffff; background: none; padding: 0; }
+.highlight code {
+  color: #ffffff;
+  background: none;
+  padding: 0;
+}
+
 .highlight .hll { background-color: #49483e }
 .highlight .c { color: #75715e } /* Comment */
 .highlight .err { color: #960050; background-color: #1e0010 } /* Error */

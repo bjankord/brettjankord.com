@@ -1,39 +1,37 @@
 ---
 layout: default
 ---
-<div class="container">
 
-  {% for post in paginator.posts %}
-    <article class="post post-preview">
-      <header class="post-header">
-        <h2 class="post-preview-title">
-          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        </h2>
-        <p class="post-date">
-          <time datetime="{{post.date | date: "%Y-%m-%d"}}">{{ post.date | date: "%B %e, %Y" }}</time>
-        </p>
-      </header>
-      <div class="post-excerpt">
-      {{ post.content | truncatewords:37}}
-      </div>
-      <p class="post-more"><a href="{{ site.baseurl }}{{ post.url }}">Read More</a></p>
-    </article>
-  {% endfor %}
+{% for post in paginator.posts %}
+  <article class="post post-preview">
+    <header class="post-header">
+      <h2 class="post-preview-title">
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h2>
+      <p class="post-date">
+        <time datetime="{{post.date | date: "%Y-%m-%d"}}">{{ post.date | date: "%B %e, %Y" }}</time>
+      </p>
+    </header>
+    <div class="post-excerpt">
+    {{ post.content | truncatewords:37}}
+    </div>
+    <p class="post-more"><a href="{{ site.baseurl }}{{ post.url }}">Read More</a></p>
+  </article>
+{% endfor %}
 
-  <!-- Pagination links -->
-  {% if paginator.total_pages > 1 %}
-  <!--<div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&#12296; Newer articles</a>
-    {% else %}
+<!-- Pagination links -->
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&#12296; Newer articles</a>
+  {% else %}
 
-    {% endif %}
+  {% endif %}
 
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older articles &#12297;</a>
-    {% else %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older articles &#12297;</a>
+  {% else %}
 
-    {% endif %}
-  </div>-->
   {% endif %}
 </div>
+{% endif %}

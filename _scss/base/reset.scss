@@ -2,11 +2,11 @@
 // --------------------------------------------------
 
 * {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 
 html {
@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 
-// Removes extra whitespace below image
+// Vertical align set to remove extra whitespace below image
 img {
 	max-width: 100%;
 	vertical-align: center;

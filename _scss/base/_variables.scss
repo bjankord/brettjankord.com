@@ -1,10 +1,6 @@
 // VARIABLES
 // ----------------------------------------
 
-// Layout
-// ----------------------------------------
-$container-max-width: 800px;
-
 // Font Sizes
 // ----------------------------------------
 $base-font-size:    16px;
@@ -17,7 +13,6 @@ $h4-size: 20px;
 $h5-size: 18px;
 $h6-size: 16px;
 
-
 // Spacing Units
 // ----------------------------------------
 $base-spacing-unit: $base-line-height;
@@ -26,12 +21,11 @@ $line-height-ratio: $base-line-height / $base-font-size;
 
 // Font stacks
 // ----------------------------------------
+$font-stack-1: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-stack-2: 'Droid Serif', Georgia, Cambria, "Times New Roman", Times, serif;
 
-$fs-1: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$fs-2: 'Droid Serif', Georgia, Cambria, "Times New Roman", Times, serif;
-
-$base-heading-font: $fs-1;
-$base-type-font:  $fs-2;
+$base-heading-font: $font-stack-1;
+$base-type-font:  $font-stack-2;
 
 // Rem Units
 // ----------------------------------------
@@ -42,22 +36,21 @@ $rem-px-only: false;
 // Colors
 // ----------------------------------------
 $black: #000;
-$white: #fff;
-$slate-gray: #3B4247;
-// Grays
-$gray-darker: #333;
-$gray-dark: #3B4247;
+$gray-dark: #333;
 $gray: #737373;
 $gray-light: #eee;
+$white: #fff;
 
 $blue: #3c7ab7;
-
+$slate: #3B4247;
 
 // Color mapping
 // ----------------------------------------
 $bg: $white;
-$fg: $gray-darker;
-
+$fg: $gray-dark;
 $link-color: $blue;
 
+// Layout
+// ----------------------------------------
+$container-max-width: 800px;
 

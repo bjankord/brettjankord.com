@@ -1,12 +1,7 @@
 // POSTS
 // ------------------------
 
-.post {
-  .comments {
-    margin-top: 10px;
-  }
-}
-
+// index.html
 .post-preview {
   @include rem(padding-bottom,  ($base-spacing-unit - 1));
   @include rem(margin-bottom,  $base-spacing-unit);
@@ -18,6 +13,7 @@
   }
 }
 
+// index.html
 .post-preview-title {
   @include rem(font-size, $h3-size);
   @include rem(line-height, $base-spacing-unit);
@@ -28,39 +24,29 @@
     @include rem(line-height, ($base-spacing-unit * 2));
     margin-bottom: 0;
   }
-
-
-
-  // @include rem(font-size,  $h3-size);
-  // @include rem(margin-bottom,  $half-spacing-unit);
-  // margin-bottom: 0;
-  // @include rem(line-height,  ($base-spacing-unit));
-
-  // @include bp-m {
-  //   @include rem(font-size,  $h2-size);
-  //   @include rem(line-height,  ($base-spacing-unit * 1.5));
-  // }
 }
 
+// post.html
 .post-title {
-  // fs: 40px;
-  // line-height: 56px;
-  // @include rem(margin-bottom,  $half-spacing-unit);
-  // @include rem(line-height,  $base-spacing-unit);
   @include rem(font-size,  $h1-size);
   @include rem(line-height,  ($base-spacing-unit * 2));
   @include rem(margin-bottom,  $half-spacing-unit);
   margin-bottom: 0;
 }
 
+// both
 .post-header {
   @include rem(margin-bottom,  $half-spacing-unit);
 
+  // post.html
   .post-title {
     @include rem(margin-bottom,  $half-spacing-unit);
   }
 }
 
+// posibily set in typography.less on time element
+// would need to test setting display: inline-block or block to align with baseline grid
+// both
 .post-date {
   color: $gray;
   font-style: italic;
@@ -68,6 +54,10 @@
   font-family: $base-heading-font;
 }
 
+
+
+
+// index.html
 .post-more {
   margin-bottom: 0;
 
@@ -75,24 +65,10 @@
     @include rem(font-size, 15px);
     font-family: $base-heading-font;
     text-transform: uppercase;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
   }
 }
 
-.posts > .post {
-  //@include rem(padding-bottom, ($base-spacing-unit - 1));
-  @include rem(margin-bottom, ($base-spacing-unit - 1));
-  border-bottom: 1px solid $gray-light;
-}
-
-.posts > .post:last-child {
-  border-bottom: none;
-}
-
+// index.html
 .post-excerpt {
   margin-bottom: 0.75rem;
 
@@ -101,12 +77,4 @@
       margin-bottom: 0;
     }
   }
-}
-
-.archive {
-
-}
-
-.archive-title {
-  margin-bottom: 0;
 }

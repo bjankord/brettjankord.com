@@ -1,10 +1,8 @@
 // TYPOGRAPHY
 // ----------------------------------------
 
-// Respects user defined font-size
 html {
   font-size: 100%;
-  font-size: $base-font-size;
 }
 
 body {
@@ -14,26 +12,50 @@ body {
   line-height: $line-height-ratio;
 }
 
+// Links
+// ----------------------------------------
+
+// Background-color set to remove the gray background color from active links in IE 10.
+a {
+  background-color: transparent;
+  color: $link-color;
+  cursor: pointer;
+  text-decoration: none;
+
+  // Improve readability when focused / mouse hovered in all browsers.
+  &:active,
+  &:hover {
+    color: $link-color;
+    outline: 0;
+    text-decoration: underline;
+  }
+}
+
 // Headings
 // ----------------------------------------
  h1, h2, h3, h4, h5, h6 {
   @include rem(margin-bottom, $base-spacing-unit);
+  color: $slate;
   font-family: $base-heading-font;
   font-weight: 700;
-  color: $slate-gray;
 
   a {
     color: inherit;
+
+    &:active,
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
+// Headings increase font size above medium breakpoint
 h1, .h1 {
   @include rem(font-size, $h2-size);
   @include rem(line-height, ($base-spacing-unit * 2));
 
   @include bp-m {
     @include rem(font-size, $h1-size);
-    @include rem(line-height, ($base-spacing-unit * 2));
   }
 }
 
@@ -53,7 +75,6 @@ h3, .h3 {
 
   @include bp-m {
     @include rem(font-size, $h3-size);
-    @include rem(line-height, $base-spacing-unit);
   }
 }
 
@@ -63,7 +84,6 @@ h4, .h4 {
 
   @include bp-m {
     @include rem(font-size, $h4-size);
-    @include rem(line-height, $base-spacing-unit);
   }
 }
 
@@ -73,7 +93,6 @@ h5, .h5 {
 
   @include bp-m {
     @include rem(font-size, $h5-size);
-    @include rem(line-height, $base-spacing-unit);
   }
 }
 
@@ -82,29 +101,10 @@ h6, .h6 {
   @include rem(line-height, $base-spacing-unit);
 }
 
-
-// Links
-// ----------------------------------------
-
-// Remove the gray background color from active links in IE 10.
-a {
-  background-color: transparent;
-  color: $link-color;
-  cursor: pointer;
-  text-decoration: none;
-
-  // Improve readability when focused and also mouse hovered in all browsers.
-  &:active,
-  &:hover {
-    color: $link-color;
-    outline: 0;
-  }
-}
-
 // Lists
 // ----------------------------------------
 ul, ol {
-  padding-left: 30px;
+ @include rem(padding-left, 30px);
 }
 
 ul {
@@ -149,7 +149,7 @@ blockquote {
 }
 
 small {
-  font-size: 80%;
+  font-size: 85%;
 }
 
 //Address odd `em`-unit font size rendering in all browsers.
@@ -157,15 +157,14 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 1em;
 }
 
 code {
   background-color: rgb(235, 246, 253);
-  color: $slate-gray;
   border-radius: 4px;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  color: $slate;
   font-size: 85%;
   padding: 0.2em 0.4em 0.2em 0.3em;
 }
@@ -174,16 +173,13 @@ pre {
   overflow: auto;
 
   code {
-    @include rem(font-size, 16px);
+    @include rem(font-size, $base-font-size);
     display: block;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
     line-height: $line-height-ratio;
-    -moz-tab-size: 2;
-    -o-tab-size: 2;
-    tab-size: 2;
     padding: 0;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
   }
 }
 
@@ -199,18 +195,17 @@ hr {
 
 // Specify the color of the selection
 ::-moz-selection {
-  background: $gray-light;
-  color: $slate-gray;
-}
-::selection {
-  background: $gray-light;
-  color: $slate-gray;
+  @include selection();
 }
 
-// Global margin spacing
+::selection {
+  @include selection();
+}
+
+// Global spacing
+// --------------------------------------------------
 address,
 blockquote,
-dl,
 fieldset,
 figure
 dl,
