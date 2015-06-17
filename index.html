@@ -3,19 +3,17 @@ layout: default
 ---
 
 {% for post in paginator.posts %}
-  <article class="post post-preview">
-    <header class="post-header">
-      <h2 class="post-preview-title">
+  <article class="archive">
+    <header class="archive-header">
+      <h2 class="archive-title">
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h2>
-      <p class="post-date">
-        <time datetime="{{post.date | date: "%Y-%m-%d"}}">{{ post.date | date: "%B %e, %Y" }}</time>
-      </p>
+      <time datetime="{{post.date | date: "%Y-%m-%d"}}">{{ post.date | date: "%B %e, %Y" }}</time>
     </header>
-    <div class="post-excerpt">
+    <div class="archive-excerpt">
     {{ post.content | truncatewords:37}}
     </div>
-    <p class="post-more"><a href="{{ site.baseurl }}{{ post.url }}">Read More</a></p>
+    <p class="archive-more"><a href="{{ site.baseurl }}{{ post.url }}">Read More</a></p>
   </article>
 {% endfor %}
 
