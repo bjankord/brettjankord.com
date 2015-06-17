@@ -14,10 +14,10 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <style>
-      {% include style.css %}
+      {% include critical.css %}
+      {% if page.code_demo %}{% include highlight.css %}{% endif %}
     </style>
-    {% if page.code_demo %}<link rel="stylesheet" type="text/css" href="/css/highlights.css" />{% endif %}
-    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
   </head>
   <body>
     <div class="container">

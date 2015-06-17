@@ -1,0 +1,21 @@
+// CRITICAL STYLES
+// --------------------------------------------------
+
+// Config
+// ----------------------------------------
+@import "_scss/config/_variables";
+@import "_scss/config/_mixins";
+
+// Base styles
+// ----------------------------------------
+@import "_scss/base/reset";
+@import "_scss/base/typography";
+
+// Layout styles
+// ----------------------------------------
+@import "_scss/layout/layout";
+
+// Module Styles
+// ----------------------------------------
+@import "_scss/modules/archives";
+@import "_scss/modules/posts";

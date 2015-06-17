@@ -19,10 +19,11 @@ $base-spacing-unit: $base-line-height;
 $half-spacing-unit: $base-spacing-unit / 2;
 $line-height-ratio: $base-line-height / $base-font-size;
 
-// Font stacks
+// Font Stacks
 // ----------------------------------------
-$font-stack-1: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-stack-2: 'Droid Serif', Georgia, Cambria, "Times New Roman", Times, serif;
+$font-stack-1: Georgia, serif;
+$font-stack-2: Helvetica, Arial, sans-serif;
+$font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $base-heading-font: $font-stack-1;
 $base-type-font:  $font-stack-2;
@@ -42,9 +43,10 @@ $gray-light: #eee;
 $white: #fff;
 
 $blue: #3c7ab7;
+$blug-light: #EBF6FD;
 $slate: #3B4247;
 
-// Color mapping
+// Color Mapping
 // ----------------------------------------
 $bg: $white;
 $fg: $gray-dark;
@@ -53,4 +55,3 @@ $link-color: $blue;
 // Layout
 // ----------------------------------------
 $container-max-width: 800px;
-

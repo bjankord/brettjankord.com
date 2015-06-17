@@ -1,6 +1,10 @@
+// Config
+// ----------------------------------------
+@import "_scss/config/_variables";
+@import "_scss/config/_mixins";
+
 // SYNTAX HIGHLIGHTING
 // --------------------------------------------------
-@import "_scss/base/_variables";
 
 .highlight {
   background-color: $gray-dark;

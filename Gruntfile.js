@@ -52,8 +52,9 @@ module.exports = function(grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'_includes/style.css': '<%= globalConfig.scssdir %>style.scss',
-          'css/highlights.css': '<%= globalConfig.scssdir %>highlights.scss',
+					'_includes/critical.css': '<%= globalConfig.scssdir %>critical.scss',
+          '_includes/highlight.css': '<%= globalConfig.scssdir %>syntax-highlighting.scss',
+          'css/styles.css': '<%= globalConfig.scssdir %>styles.scss'
 				}
 			}
 		},
