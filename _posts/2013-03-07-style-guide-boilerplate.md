@@ -1,5 +1,5 @@
 ---
-title: Style Guide Boilerplate
+title: Style guide boilerplate
 author: Brett
 layout: post
 comments : true

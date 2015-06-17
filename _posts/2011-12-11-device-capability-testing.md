@@ -1,5 +1,5 @@
 ---
-title: Device Capability Testing
+title: Device capability testing
 author: Brett
 layout: post
 comments : true

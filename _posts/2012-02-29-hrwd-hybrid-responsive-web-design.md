@@ -1,5 +1,5 @@
 ---
-title: 'HRWD &#8211; Hybrid Responsive Web Design'
+title: 'HRWD &#8211; Hybrid responsive web design'
 author: Brett
 layout: post
 comments : true

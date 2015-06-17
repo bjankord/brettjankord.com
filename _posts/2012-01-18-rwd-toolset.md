@@ -1,5 +1,5 @@
 ---
-title: RWD Toolset
+title: RWD toolset
 author: Brett
 layout: post
 comments : true

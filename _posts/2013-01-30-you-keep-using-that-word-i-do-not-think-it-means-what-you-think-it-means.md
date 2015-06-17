@@ -1,5 +1,5 @@
 ---
-title: You Keep Using That Word, I Do Not Think It Means What You Think It Means
+title: You keep using that word, I do not think it means what you think it means
 author: Brett
 layout: post
 comments : true

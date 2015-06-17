@@ -1,5 +1,5 @@
 ---
-title: More thoughts on HTML class naming conventions.
+title: More thoughts on HTML class naming conventions
 author: Brett
 layout: post
 comments : true

@@ -1,5 +1,5 @@
 ---
-title: Beyond Device Detection
+title: Beyond device detection
 author: Brett
 layout: post
 comments : true

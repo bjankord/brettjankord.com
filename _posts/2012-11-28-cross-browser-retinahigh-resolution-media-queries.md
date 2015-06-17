@@ -1,5 +1,5 @@
 ---
-title: Cross Browser Retina/High Resolution Media Queries
+title: Cross browser retina/high resolution media queries
 author: Brett
 layout: post
 comments : true
