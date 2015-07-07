@@ -115,19 +115,6 @@ module.exports = function(grunt) {
         tasks: ['content']
       }
     }
-
-
-      /*livereload: {
-        options: {
-          open: true,
-          base: [
-            '.tmp',
-            '.jekyll',
-            '<%%= yeoman.app %>'
-          ]
-        }
-      }*/
-
   });
 
 
