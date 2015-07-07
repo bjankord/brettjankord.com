@@ -47,48 +47,46 @@ module.exports = function(grunt) {
     // This allows us to include the .css file inline when jekyll builds out
     // ------------------------------------------------
     sass: {
-			dist: {
-				options: {
-					style: 'compressed'
-				},
-				files: {
-					'_includes/critical.css': '<%= globalConfig.scssdir %>critical.scss',
+      dist: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          '_includes/critical.css': '<%= globalConfig.scssdir %>critical.scss',
           '_includes/highlight.css': '<%= globalConfig.scssdir %>syntax-highlighting.scss',
           'css/styles.css': '<%= globalConfig.scssdir %>styles.scss'
-				}
-			}
-		},
+        }
+      }
+    },
 
     shell: {
-			jekyll: {
-				command: 'jekyll build',
-				options: {
-					stdout: true,
-					execOptions: {
-					//	cwd: '<%= config.root %>'
-					}
-				}
-			}
-		},
+      jekyll: {
+        command: 'jekyll build',
+        options: {
+          stdout: true,
+          execOptions: {
+            //	cwd: '<%= config.root %>'
+          }
+        }
+      }
+    },
 
     // HTML Minification
     // ------------------------------------------------
     htmlmin: {
-			main: {
-				options: {
-					removeComments: true,
-					collapseWhitespace: true
-				},
-				files: [
-					{
-						expand: true,
-						cwd: '<%= globalConfig.site %>',
-						src: '**/*.html',
-						dest: '<%= globalConfig.site %>'
-					}
-				]
-			}
-		},
+      main: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= globalConfig.site %>',
+          src: '**/*.html',
+          dest: '<%= globalConfig.site %>'
+        }]
+      }
+    },
 
     connect: {
       server: {
@@ -100,7 +98,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
 
     watch: {
       options: {
@@ -125,6 +122,4 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['assets', 'content', 'notify']);
   grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('default', ['build']);
-
-
 };
