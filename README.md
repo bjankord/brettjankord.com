@@ -1,3 +1,9 @@
-# BrettJankord.com
+# Blog
 
-Personal site. A work in progress.
+## Deploy
+
+```bash
+gatsby build
+cd public
+netlify deploy
+```

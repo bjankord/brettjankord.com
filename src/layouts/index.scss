@@ -1,0 +1,782 @@
+// VARIABLES
+// ----------------------------------------
+
+// Font Sizes
+// ----------------------------------------
+$base-font-size:    16px;
+$base-line-height:  24px;
+
+$h1-size: 40px;
+$h2-size: 30px;
+$h3-size: 24px;
+$h4-size: 20px;
+$h5-size: 18px;
+$h6-size: 16px;
+
+// Spacing Units
+// ----------------------------------------
+$base-spacing-unit: $base-line-height;
+$half-spacing-unit: $base-spacing-unit / 2;
+$line-height-ratio: $base-line-height / $base-font-size;
+
+// Font Stacks
+// ----------------------------------------
+$font-stack-1: Georgia, serif;
+$font-stack-2: Helvetica, Arial, sans-serif;
+$font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$base-heading-font: $font-stack-1;
+$base-type-font:  $font-stack-2;
+
+// Rem Units
+// ----------------------------------------
+$rem-baseline: $base-font-size;
+$rem-fallback: false;
+$rem-px-only: false;
+
+// Colors
+// ----------------------------------------
+$black: #000;
+$gray-dark: #333;
+$gray: #737373;
+$gray-light: #eee;
+$white: #fff;
+
+$blue: #3c7ab7;
+$blug-light: #EBF6FD;
+$slate: #3B4247;
+
+// Color Mapping
+// ----------------------------------------
+$bg: $white;
+$fg: $gray-dark;
+$link-color: $blue;
+
+// Layout
+// ----------------------------------------
+$container-max-width: 800px;
+
+
+// MIXINS
+// --------------------------------------------------
+
+// Clearfix
+// http://nicolasgallagher.com/micro-clearfix-hack/
+// ----------------------------------------
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// Breakpoints
+// ----------------------------------------
+@mixin bp-m {
+  @media screen and (min-width: 740px) {
+    @content;
+  }
+}
+
+// ::selection styles
+// ----------------------------------------
+@mixin selection() {
+  background: $gray-light;
+  color: $slate;
+}
+
+// Rem units
+// Source: https://github.com/pierreburel/sass-rem
+// ----------------------------------------
+
+// list-separator polyfill by Hugo Giraudel (https://sass-compatibility.github.io/#list_separator_function)
+@function rem-separator($list) {
+  @if function-exists("list-separator") == true {
+    @return list-separator($list);
+  }
+
+  $test-list: ();
+  @each $item in $list {
+    $test-list: append($test-list, $item, space);
+  }
+
+  @return if($test-list == $list, space, comma);
+}
+
+@mixin rem-baseline($zoom: 100%) {
+  font-size: $zoom / 16px * $rem-baseline;
+}
+
+@function rem-convert($to, $values...) {
+  $result: ();
+  $separator: rem-separator($values);
+
+  @each $value in $values {
+    @if type-of($value) == "number" and unit($value) == "rem" and $to == "px" {
+      $result: append($result, $value / 1rem * $rem-baseline, $separator);
+    } @else if type-of($value) == "number" and unit($value) == "px" and $to == "rem" {
+      $result: append($result, $value / ($rem-baseline / 1rem), $separator);
+    } @else if type-of($value) == "list" {
+      $result: append($result, rem-convert($to, $value...), $separator);
+    } @else {
+      $result: append($result, $value, $separator);
+    }
+  }
+
+  @return $result;
+}
+
+@function rem($values...) {
+  @if $rem-px-only {
+    @return rem-convert(px, $values...);
+  } @else {
+    @return rem-convert(rem, $values...);
+  }
+}
+
+@mixin rem($properties, $values...) {
+  @if type-of($properties) == "map" {
+    @each $property in map-keys($properties) {
+      @include rem($property, map-get($properties, $property));
+    }
+  } @else {
+    @each $property in $properties {
+      @if $rem-fallback or $rem-px-only {
+        #{$property}: rem-convert(px, $values...);
+      }
+      @if not $rem-px-only {
+        #{$property}: rem-convert(rem, $values...);
+      }
+    }
+  }
+}
+
+
+// RESET
+// --------------------------------------------------
+
+* {
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+html {
+  box-sizing: border-box;
+  min-height:100%;
+  overflow-y:scroll;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+// Allows easy override of default box-sizing: border-box
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// HTML5 display-role reset for older browsers
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Vertical align set to remove extra whitespace below image */
+img {
+	max-width: 100%;
+	vertical-align: center;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+// TYPOGRAPHY
+// ----------------------------------------
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background: $bg;
+  color: $fg;
+  font-family: $base-type-font;
+  line-height: $line-height-ratio;
+}
+
+// Links
+// ----------------------------------------
+
+// Background-color set to remove the gray background color from active links in IE 10.
+a {
+  background-color: transparent;
+  color: $link-color;
+  cursor: pointer;
+  text-decoration: none;
+
+  // Improve readability when focused / mouse hovered in all browsers.
+  &:active,
+  &:hover {
+    color: $link-color;
+    outline: 0;
+    text-decoration: underline;
+  }
+}
+
+// Headings
+// ----------------------------------------
+ h1, h2, h3, h4, h5, h6 {
+  @include rem(margin-bottom, $base-spacing-unit);
+  color: $slate;
+  font-family: $base-heading-font;
+  font-weight: 700;
+
+  a {
+    color: inherit;
+
+    &:active,
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+// Headings increase font size above medium breakpoint
+h1, .h1 {
+  @include rem(font-size, $h2-size);
+  @include rem(line-height, ($base-spacing-unit * 2));
+
+  @include bp-m {
+    @include rem(font-size, $h1-size);
+  }
+}
+
+h2, .h2 {
+  @include rem(font-size, $h3-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h2-size);
+    @include rem(line-height, ($base-spacing-unit * 2));
+  }
+}
+
+h3, .h3 {
+  @include rem(font-size, $h4-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h3-size);
+  }
+}
+
+h4, .h4 {
+  @include rem(font-size, $h5-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h4-size);
+  }
+}
+
+h5, .h5 {
+  @include rem(font-size, $h6-size);
+  @include rem(line-height, $base-spacing-unit);
+
+  @include bp-m {
+    @include rem(font-size, $h5-size);
+  }
+}
+
+h6, .h6 {
+  @include rem(font-size, $h6-size);
+  @include rem(line-height, $base-spacing-unit);
+}
+
+// Lists
+// ----------------------------------------
+ul, ol {
+ @include rem(padding-left, 30px);
+}
+
+// Text Elements
+// --------------------------------------------------
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+blockquote {
+  border-left: 3px solid $gray;
+  color: $gray;
+  font-family: $font-stack-1;
+  margin-left: .8em;
+  margin-right: .8em;
+  padding: 0 1em;
+}
+
+small {
+  font-size: 85%;
+}
+
+time {
+  color: $gray;
+  display: inline-block;
+  font-family: $font-stack-3;
+  font-style: italic;
+  vertical-align: bottom; // Helps align with baslien grid
+}
+
+//Address odd `em`-unit font size rendering in all browsers.
+code,
+kbd,
+pre,
+samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 1em;
+}
+
+code {
+  background-color: $blug-light;
+  border-radius: 5px;
+  font-size: 85%;
+  padding: 0.2em 0.4em 0.2em 0.3em;
+}
+
+pre {
+  overflow: auto;
+
+  code {
+    @include rem(font-size, $base-font-size);
+    background-color: inherit;
+    display: block;
+    line-height: $line-height-ratio;
+    padding: 0;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
+  }
+}
+
+hr {
+  @include rem(margin-top, ($base-spacing-unit -1));
+  @include rem(margin-bottom, $base-spacing-unit);
+  border-top: 1px solid $gray-light;
+  box-sizing: content-box;
+  height: 0;
+}
+
+// Specify the color of the selection
+::-moz-selection {
+  @include selection();
+}
+
+::selection {
+  @include selection();
+}
+
+// Global spacing
+// --------------------------------------------------
+address,
+blockquote,
+fieldset,
+figure
+dl,
+ol,
+ul,
+p,
+table {
+  @include rem(margin-bottom, $base-spacing-unit);
+}
+
+
+// LAYOUTS
+// --------------------------------------------------
+
+// Container
+// ----------------------------------------
+.container {
+  @include rem(max-width, $container-max-width);
+  @include rem(padding, 0 30px);
+  margin: 0 auto;
+}
+
+// Site Masthead
+// ----------------------------------------
+.site-masthead {
+  @include rem(margin-bottom, 50px);
+  @include rem(padding-top, $base-spacing-unit);
+  @include rem(padding-bottom,  $base-spacing-unit);
+  border-bottom: 1px solid $gray-light;
+  display: table;
+  text-align: center;
+  width: 100%;
+
+  @include bp-m {
+    text-align: left;
+    @include rem(padding-bottom,  ($base-spacing-unit - 1));
+  }
+}
+
+// Site Name
+// ----------------------------------------
+.site-name {
+  @include rem(font-size, 28px);
+  color: $slate;
+  cursor: pointer;
+  font-family: $font-stack-3;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 0;
+
+  @include bp-m {
+    display: table-cell;
+    text-align: left;
+    vertical-align: bottom;
+    width: 50%;
+  }
+}
+
+// Site Description
+// ----------------------------------------
+.site-description {
+  @include rem(font-size, $base-font-size);
+  @include rem(margin-top, $half-spacing-unit);
+  color: $gray;
+  display: block;
+
+  @include bp-m {
+    @include rem(margin-top, 1px);
+  }
+}
+
+// Site Nav
+// ----------------------------------------
+.site-nav {
+  @include rem(font-size, $base-font-size);
+  @include rem(margin-top, $half-spacing-unit);
+  font-family: $font-stack-3;
+
+  @include bp-m {
+    @include rem(font-size, 18px);
+    display: table-cell;
+    margin-top: 0;
+    text-align: right;
+    vertical-align: bottom;
+    width: 50%;
+  }
+
+  a {
+    @include rem(margin-left, 10px);
+    @include rem(margin-right, 10px);
+    color: $link-color;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    @include bp-m {
+      @include rem(margin-left, 20px);
+      @include rem(margin-right, 0);
+      color: $slate;
+      font-weight: 300;
+      text-align: right;
+    }
+  }
+}
+
+// Site Footer Wrapper
+// ----------------------------------------
+.site-footer-wrapper {
+  @include rem(margin-top, ($base-spacing-unit * 2));
+  background-color: $gray-dark;
+}
+
+// Site Footer
+// ----------------------------------------
+.site-footer {
+  @include rem(padding, 20px 0);
+  text-align: center;
+}
+
+
+// ARCHIVCES
+// ------------------------
+
+.archive {
+  @include rem(padding-bottom,  ($base-spacing-unit - 1));
+  @include rem(margin-bottom,  $base-spacing-unit);
+  border-bottom: 1px solid $gray-light;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  // Archive header
+  &-header {
+    @include rem(margin-bottom,  $half-spacing-unit);
+  }
+
+  // Archive title
+  // Displays post title
+  &-title {
+    @include rem(font-size, $h3-size);
+    @include rem(line-height, $base-spacing-unit);
+    @include rem(margin-bottom, $half-spacing-unit);
+
+    @include bp-m {
+      @include rem(font-size, $h2-size);
+      @include rem(line-height, ($base-spacing-unit * 2));
+      margin-bottom: 0;
+    }
+  }
+
+  // Archive excerpt
+  // Displays post excerpt
+  &-excerpt {
+    @include rem(margin-bottom, $half-spacing-unit);
+
+    @include bp-m {
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Archive read more link
+  &-more {
+    margin-bottom: 0;
+
+    a {
+      @include rem(font-size, 15px);
+      font-family: $font-stack-3;
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+// POSTS
+// ------------------------
+
+.post {
+  // Post header
+  &-header {
+    @include rem(margin-bottom,  $half-spacing-unit);
+  }
+
+  // Post title
+  &-title {
+    @include rem(font-size, $h3-size);
+    @include rem(line-height, $base-spacing-unit);
+    @include rem(margin-bottom, $half-spacing-unit);
+
+    @include bp-m {
+      @include rem(font-size,  $h1-size);
+      @include rem(line-height,  ($base-spacing-unit * 2));
+      @include rem(margin-bottom,  $half-spacing-unit);
+    }
+  }
+}
+
+
+// PAGINATION
+// --------------------------------------------------
+
+.pagination {
+  @include rem(padding-top, $base-spacing-unit);
+  font-family: $font-stack-3;
+  text-align: center;
+}
+
+
+// SYNTAX HIGHLIGHTING
+// --------------------------------------------------
+/**
+ * a11y-dark theme for JavaScript, CSS, and HTML
+ * Based on the okaidia theme: https://github.com/PrismJS/prism/blob/gh-pages/themes/prism-okaidia.css
+ * @author ericwbailey
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: 0.5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #2b2b2b;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: 0.1em;
+	border-radius: 0.3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #d4d0ab;
+}
+
+.token.punctuation {
+	color: #fefefe;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #ffa07a;
+}
+
+.token.boolean,
+.token.number {
+	color: #00e0e0;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #abe338;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #00e0e0;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+	color: #ffd700;
+}
+
+.token.keyword {
+	color: #00e0e0;
+}
+
+.token.regex,
+.token.important {
+	color: #ffd700;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+@media screen and (-ms-high-contrast: active) {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		color: windowText;
+		background: window;
+	}
+
+	:not(pre) > code[class*="language-"],
+	pre[class*="language-"] {
+		background: window;
+	}
+
+	.token.important {
+		background: highlight;
+		color: window;
+		font-weight: normal;
+	}
+
+	.token.atrule,
+	.token.attr-value,
+	.token.function,
+	.token.keyword,
+	.token.operator,
+	.token.selector {
+		font-weight: bold;
+	}
+
+	.token.attr-value,
+	.token.comment,
+	.token.doctype,
+	.token.function,
+	.token.keyword,
+	.token.operator,
+	.token.property,
+	.token.string {
+		color: highlight;
+	}
+
+	.token.attr-value,
+	.token.url {
+		font-weight: normal;
+	}
+}

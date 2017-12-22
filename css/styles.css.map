@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGA,WAAY,CC0FJ,WAAY,CA9BL,MAA4D,CD1DzE,WAAW,CEoBE,2CAAgB,CFnB7B,UAAU,CAAE,MAAM,CGNpB,wEAEyB,CACvB,OAAO,CAAE,YAAY,CACrB,OAAO,CAAE,cAAc,CACvB,MAAM,CAAE,cAAc,CACtB,aAAa,CAAE,GAAG,CAClB,UAAU,CAAE,2wDAA2wD,CACvxD,UAAU,CAAE,0yDAAmwD,CAE/wD,UAAU,CAAE,kyDAAmwD,CAE/wD,eAAe,CAAE,oBAAoB,CAGnC,IAAI,CAAE,2CAA2C,CACnD,eAAe,CAAE,IAAI,CACrB,KAAK,CAAE,IAAI,CACX,WAAW,CAAE,6BAA+B,CAC5C,WAAW,CAAE,MAAM,CACnB,WAAW,CAAE,IAAI,CAInB,0FAE+B,CAC7B,OAAO,CAAE,IAAI,CACb,YAAY,CAAE,OAAO,CCzBvB,aAAc,CACZ,UAAU,CAAE,MAAM",
-"sources": ["../_scss/modules/pagination.scss","../_scss/config/_mixins.scss","../_scss/config/_variables.scss","../_scss/modules/twitter-widgets.scss","../_scss/utilities/utilities.scss"],
-"names": [],
-"file": "styles.css"
-}
