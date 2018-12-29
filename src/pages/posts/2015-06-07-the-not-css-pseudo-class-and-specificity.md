@@ -1,13 +1,8 @@
 ---
-title: 'The :not() css-pseudo-class and specificity'
-author: Brett
-layout: post
-comments : false
-code_demo: true
+title: "The :not() css-pseudo-class and specificity"
+date: "2015-06-07"
+tags: ["CSS"]
 permalink: /2015/06/07/the-not-css-pseudo-class-and-specificity/
-categories:
-  - CSS
-  - Front-End-Development
 ---
 
 The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument passed to it. For example, `li:not(.different)` would match all list items that don’t have the HTML class: `.different`. There are [cases](https://twitter.com/wesbos/status/606144483562913792) where using the :not pseudo-class makes a lot of sense. There are also cases where the specificity :not() applies can work against you.
@@ -97,6 +92,7 @@ input[type="url"][readonly]:focus {
 ```
 
 ## Chaining :not()
+
 By chaining up :not pseudo-classes to select input types we do not want to match, we can select the same elements as our previous input selectors. This reduces the amount of selectors as this long chain counts as only one selector.
 
 ```css
@@ -108,6 +104,7 @@ Using a selector like this *may* seem like a good idea, **with this selector, we
 If you need to override styles applied by this selector, you'll need some way to trump their current styling specificity.
 
 ## An alternate approach
+
 If you have control over the markup, you can apply the styles with a single class. This solves the problem of keeping selector count low while also keeping specificity low.
 
 ```css

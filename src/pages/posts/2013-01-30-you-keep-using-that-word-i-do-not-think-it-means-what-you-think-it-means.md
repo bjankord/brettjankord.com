@@ -1,22 +1,17 @@
 ---
-title: You keep using that word, I do not think it means what you think it means
-author: Brett
-layout: post
-comments : true
+title: "You keep using that word, I do not think it means what you think it means"
+date: "2013-01-30"
+tags: ["Web Development"]
 permalink: /2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/
-dsq_thread_id:
-  - 1055861421
-categories:
-  - General
 ---
+
 I like to stay on top of cutting edge web design and development practices. I have a few keyword searches on Twitter I like to check daily for new articles on this and that, though one trend that really has caught my attention recently is seeing more and more authors writing about techniques like mobile first, adaptive web design, and RESS and many others terms with what seems to be a misconception of these terms. From [articles talking about mobile first][1] with no mention of Luke Wroblewski to [articles explaining adaptive web design as RESS][2].
 
-![Scene from The Princess Bride]({{ site.url }}/wp-content/uploads/2013/01/youkeepusingthatword.jpg)
+<!-- ![Scene from The Princess Bride]({{ site.url }}/wp-content/uploads/2013/01/youkeepusingthatword.jpg) -->
 
-By no means I am all knowing of this terminology either, though I thought I could help clear some confusion by sharing insight to the origins of where some of these new terms came from. My hope in this, is that it will result in more accurate articles which, would ideally, result in a better understanding of these techniques for a wider range of readers. With this, maybe we can reduce discussions where we are talking past each other instead of with each other because of a simple misunderstanding of terminology. The words we use to describe what we do have a way of evolving and gaining additional meaning over time, so I don’t mean to cement these definitions. This is happening with responsive web design and is happening with [mobile-first][3] as Brad Frost documented. As I talk about these terms, these are the meanings I&#8217;ve come to know and wanted to share in hopes of clearing up some confusion.
+By no means I am all knowing of this terminology either, though I thought I could help clear some confusion by sharing insight to the origins of where some of these new terms came from. My hope in this, is that it will result in more accurate articles which, would ideally, result in a better understanding of these techniques for a wider range of readers. With this, maybe we can reduce discussions where we are talking past each other instead of with each other because of a simple misunderstanding of terminology. The words we use to describe what we do have a way of evolving and gaining additional meaning over time, so I don’t mean to cement these definitions. This is happening with responsive web design and is happening with [mobile-first][3] as Brad Frost documented. As I talk about these terms, these are the meanings I've come to know and wanted to share in hopes of clearing up some confusion.
 
-![Escalators]({{ site.url }}/wp-content/uploads/2013/01/progressive-enhancement.jpg)
-
+<!-- ![Escalators]({{ site.url }}/wp-content/uploads/2013/01/progressive-enhancement.jpg) -->
 
 ## Progressive Enhancement
 
@@ -46,12 +41,12 @@ Graceful degradation comes from the concept in software development of [fault to
 * [Progressive Enhancement and Graceful Degradation: an Overview][14]
 * [Graceful Degredation versus Progressive Enhancement][15]
 
-![Chart of responsive web design, progressive enhancement, and graceful degradation]({{ site.url }}/wp-content/uploads/2013/01/technique-chare.jpg)
+<!-- ![Chart of responsive web design, progressive enhancement, and graceful degradation]({{ site.url }}/wp-content/uploads/2013/01/technique-chare.jpg) -->
 
 
 ## Responsive Web Design
 
-Coined by [Ethan Marcotte][16] in May 2010, is a technique for adapting a website&#8217;s layout across multiple devices. The technique is composed of 3 elements.
+Coined by [Ethan Marcotte][16] in May 2010, is a technique for adapting a website's layout across multiple devices. The technique is composed of 3 elements.
 
 **Media Queries**
 
@@ -90,7 +85,7 @@ Coined by [Luke Wroblewski][29] back in November 2009, is a mindset that allows 
 * [Mobile First: What Does It Mean?][31]
 * [Rethinking Your Mobile First Strategy][32]
 
-![Mobile first]({{ site.url }}/wp-content/uploads/2013/01/mobile-first.jpg)
+<!-- ![Mobile first]({{ site.url }}/wp-content/uploads/2013/01/mobile-first.jpg) -->
 
 ## Mobile-First Responsive Web Design
 
@@ -109,13 +104,13 @@ This term combines the mobile-first mindset from Wroblewski with Marcotte’s Re
 * [Jason Grigsby – Mobile-First Responsive Design][36]
 * [Mobile-First, Responsive Design Websites: Does This Really Matter?][37]
 
-![Dekstop first]({{ site.url }}/wp-content/uploads/2013/01/desktop-first.jpg)
+<!-- ![Dekstop first]({{ site.url }}/wp-content/uploads/2013/01/desktop-first.jpg) -->
 
 ## Desktop-First
 
 Desktop-first is the flip side to mobile-first. It has been the mindset of web designers and developers for the last 15+ years.
 
-Desktop-First Responsive Web Design This approach to responsive web design lines up with principles of graceful degradation. You start with your desktop website and add max-width media queries along with other elements of responsive web design to your website. Another term I&#8217;ve seen associated with this approach is [Responsive Retrofitting][38]
+Desktop-First Responsive Web Design This approach to responsive web design lines up with principles of graceful degradation. You start with your desktop website and add max-width media queries along with other elements of responsive web design to your website. Another term I've seen associated with this approach is [Responsive Retrofitting][38]
 
 **Additional Resources:**
 
@@ -123,7 +118,7 @@ Desktop-First Responsive Web Design This approach to responsive web design lines
 * [Give the Web a Responsive-Design Facelift With ‘Responsive Retrofitting’][40]
 * [Responsive Retrofitting from CSS Dev Conf 2012 in Honolulu, HI][41]
 
-![Adaptive]({{ site.url }}/wp-content/uploads/2013/01/adaptive.jpg)
+<!-- ![Adaptive]({{ site.url }}/wp-content/uploads/2013/01/adaptive.jpg) -->
 
 
 ## Adaptive Web Design
@@ -131,7 +126,7 @@ Desktop-First Responsive Web Design This approach to responsive web design lines
 This is the term I see the most confusion with. The concept of adaptive web design has been around for sometime, though
 [Aaron Gustafson][42] really popularized the term with his book, [Adaptive Web Design Crafting Rich Experiences with Progressive Enhancement][42]. I could try to explain what adaptive web design means, though I’d rather just pull a quote from Gustafson himself from a recent [Breaking Development][43] interview.
 
-> &#8230;adaptive web design, the term that I, you know, decided to use for the title of the book, was mainly trying to come up with a phrase that kind of encapsulated what progressive enhancement was all about. Progressive enhancement as a term, you know, it’s been with us since about 2003, but it also feels very clinical and sounds kind of boring. And from a marketing perspective with the book we wanted to make sure that we weren&#8217;t, you know, creating confusion with the Filament Group’s book, “Designing with Progressive Enhancement,” which is a fantastic book and I certainly recommend people purchase that as well. But we wanted to kind of disambiguate my book from that book. So, we were trying to think of, you know, what exactly does all of this stuff really mean, and it was about creating rich, adaptable experiences that tailor themselves to the particular device that you were working with. So, the way that I view progressive enhancement is very much analogous to adaptive web >design. It’s essentially the same concept.
+> &#8230;adaptive web design, the term that I, you know, decided to use for the title of the book, was mainly trying to come up with a phrase that kind of encapsulated what progressive enhancement was all about. Progressive enhancement as a term, you know, it’s been with us since about 2003, but it also feels very clinical and sounds kind of boring. And from a marketing perspective with the book we wanted to make sure that we weren't, you know, creating confusion with the Filament Group’s book, “Designing with Progressive Enhancement,” which is a fantastic book and I certainly recommend people purchase that as well. But we wanted to kind of disambiguate my book from that book. So, we were trying to think of, you know, what exactly does all of this stuff really mean, and it was about creating rich, adaptable experiences that tailor themselves to the particular device that you were working with. So, the way that I view progressive enhancement is very much analogous to adaptive web >design. It’s essentially the same concept.
 
 From this, I get the idea that adaptive web design and progressive enhancement are interchangeable, where adaptive web design may just be a more modern take on progressive enhancement, used for what it sounds like marketing reasons. This is a term that I believe will continue to be ambiguous and have it’s meaning morphed as needed.
 

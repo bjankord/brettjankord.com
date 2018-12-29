@@ -1,52 +1,69 @@
-const fs = require('fs-extra')
+const _ = require('lodash')
+const Promise = require('bluebird')
 const path = require('path')
-const slugify = require('slug')
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require('gatsby-source-filesystem')
 
-exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators
-  if (node.internal.type === `MarkdownRemark`) {
-    const { categories } = node.frontmatter
-    const slug = createFilePath({ node, getNode, basePath: `pages` })
-    const [, date, title] = slug.match(/^\/([\d]{4}-[\d]{2}-[\d]{2})-{1}(.+)\/$/)
-    const value = `/${date.split("-").join("/")}/${title}/`
-    createNodeField({ node, name: `slug`, value })
-    createNodeField({ node, name: `date`, value: date })
-  }
-}
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
   return new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug,
-                date
-              },
-              frontmatter {
-                categories
+    const blogPost = path.resolve('./src/templates/blog-post.js')
+    resolve(
+      graphql(
+        `
+          {
+            allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+              edges {
+                node {
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title
+                    permalink
+                  }
+                }
               }
             }
           }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
         }
-      }
-    `).then(result => {
-      result.data.allMarkdownRemark.edges.map(({ node }) => {
-        createPage({
-          path: node.fields.slug,
-          component: path.resolve(`./src/templates/blog-post.js`),
-          context: {
-            // Data passed to context is available in page queries as GraphQL variables.
-            slug: node.fields.slug,
-            date: node.fields.date
-          },
+
+        // Create blog posts pages.
+        const posts = result.data.allMarkdownRemark.edges;
+
+        _.each(posts, (post, index) => {
+          const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+          const next = index === 0 ? null : posts[index - 1].node;
+
+          createPage({
+            path: post.node.frontmatter.permalink,
+            component: blogPost,
+            context: {
+              slug: post.node.fields.slug,
+              previous,
+              next,
+            },
+          })
         })
       })
-      resolve()
-    })
+    )
   })
+}
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({ node, getNode })
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
+    })
+  }
 }

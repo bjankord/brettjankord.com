@@ -1,13 +1,11 @@
 ---
-title: 'Inline SCSS with Jekyll and Grunt'
-author: Brett
-layout: post
-comments : true
-code_demo: true
-permalink: /2015/07/07/Inline SCSS with Jekyll and Grunt/
+title: "Inline SCSS with Jekyll and Grunt"
+date: "2015-07-07"
+tags: ["CSS"]
+permalink: /2015/07/07/inline-scss-with-jekyll-and-grunt/
 ---
 
-Inlining critical CSS as great way to improve the performance of your site, it reduces blocking CSS requests needed for the initial render. I recently added this functionality to [my site](https://github.com/bjankord/brettjankord.com/blob/master/Gruntfile.js) and with the help of grunt, inlining CSS in Jeykll is fairly straight forward.
+Inlining critical CSS as great way to improve the performance of your site, it reduces blocking CSS requests needed for the initial render. I recently added this functionality to my site and with the help of grunt, inlining CSS in Jeykll is fairly straight forward.
 
 ## Grunt setup
 
@@ -19,7 +17,7 @@ To get set up with grunt, check out their [Getting Started guide](http://gruntjs
 
 Below is a sample grunt file you can use to compile you SCSS into CSS.
 
-```javascript
+```js
 module.exports = function(grunt) {
 
   // Project configuration
@@ -49,21 +47,17 @@ module.exports = function(grunt) {
 };
 ```
 
-
 ## Jekyll Setup
-
 Now that we are compiling a CSS file into Jekyll's `include` directory, we can call that include in our templates.
 In the head of you document, add the following code to include you critical CSS inline.
 
-```javascript
+```html
 <!-- Inline critical css -->
 <style type="text/css">{% raw %}{% include critical.css %}{% endraw %}</style>
 ```
 
 ## Taking it a step further
-
 One could take this a step further by using [Filament Group's loadCSS utility](https://github.com/filamentgroup/loadCSS) to asynchronously load the remaining CSS for your site. By inlining critical CSS and asynchronously loading the rest of your CSS, you'll see a nice performance boost in the overall loading time of your site.
-
 
 ## Additional resources
 * [Inline SCSS with Jekyll and GitHub Pages](http://www.kevinsweet.com/inline-scss-jekyll-github-pages/)

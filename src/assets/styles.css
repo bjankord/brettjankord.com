@@ -1,0 +1,404 @@
+:root {
+  /* Colors */
+  --bg: #fff;
+  --fg: #333;
+  --slate: #3B4247;
+  --link-color: #3c7ab7;
+  --gray: #737373;
+  --gray-light: #eee;
+
+  /* Typography */
+  --font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --base-spacing-unit: 24px;
+  --h1-size: 4rem;
+  --h2-size: 3rem;
+  --h3-size: 2.4rem;
+  --h4-size: 2rem;
+  --h5-size: 1.8rem;
+  --h6-size: 1.6rem;
+}
+
+/* Base
+---------------------------------------- */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%; /* Assumes default font-size is unchanged, making 1rem = 10px. */
+  min-height: 100%;
+  overflow-y: scroll;
+}
+
+/* Allows easy override of default box-sizing: border-box */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--base-font-family, Georgia, Cambria, "Times New Roman", Times,serif);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.003em;
+  line-height: 1.75;
+  padding: 0;
+  margin: 0;
+}
+
+/* Links
+---------------------------------------- */
+a {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:active,
+a:hover {
+  color: var(--link-color);
+  outline: 0;
+  text-decoration: underline;
+}
+
+/* Images
+---------------------------------------- */
+/* Vertical align set to remove extra whitespace below image */
+img {
+	max-width: 100%;
+	vertical-align: center;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Headings
+---------------------------------------- */
+ h1, h2, h3, h4, h5, h6 {
+  color: var(--slate);
+  font-family: var(--base-heading-font-family, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif);
+}
+
+/* Text Elements
+-------------------------------------------------- */
+blockquote {
+  border-left: 3px solid;
+  font-style: italic;
+  margin-left: -1.2em;
+  margin-right: -1.2em;
+  padding: 0 0.6em;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+time {
+  color: var(--gray);
+  display: inline-block;
+  font-style: italic;
+  vertical-align: bottom;
+}
+
+hr {
+  margin-top: var(--base-spacing-unit -1);
+  margin-bottom: var(--base-spacing-unit);
+  border-top: 1px solid var(--gray-light);
+  box-sizing: content-box;
+  height: 0;
+}
+
+/* Specify the color of the selection */
+::-moz-selection {
+  background: var(--gray-light);
+  color: var(--slate);
+}
+
+::selection {
+  background: var(--gray-light);
+  color: var(--slate);
+}
+
+/* Animations
+---------------------------------------- */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes wave {
+  0% {transform:rotate(3deg);}
+  96.6% {transform:rotate(3deg);}
+  96.9% {transform:rotate(0deg);}
+  97.3% {transform:rotate(-3deg);}
+  97.6% {transform:rotate(0deg);}
+  97.9% {transform:rotate(3deg);}
+  98.3% {transform:rotate(0deg);}
+  98.6% {transform:rotate(-3deg);}
+  98.9% {transform:rotate(0deg);}
+  99.3% {transform:rotate(3deg);}
+}
+
+.fade-in-down-slow {
+  animation-duration: .9s;
+  animation-fill-mode: both;
+  animation-name: fadeInDown;
+}
+
+.fade-in-down {
+  animation-duration: .6s;
+  animation-fill-mode: both;
+  animation-name: fadeInDown;
+}
+
+/* Site Container
+---------------------------------------- */
+.site-container {
+  max-width: 76rem;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+/* Site Hero
+---------------------------------------- */
+.site-hero {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5rem;
+}
+
+.site-hero-bg {
+  background-size: cover;
+  background-position: center;
+  background-image: url(hero.jpg);
+  filter: blur(3px) brightness(30%);
+  top: -2rem;
+  bottom: -2rem;
+  left: -2rem;
+  right: -2rem;
+  position: absolute;
+}
+
+.site-hero-bg-overlay {
+  background-image: linear-gradient(270deg, #38b0e8, #964f93);
+  background-size: 100% 600%;
+  height: 100%;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+}
+
+.site-hero-content {
+  animation-duration: .9s;
+  animation-fill-mode: both;
+  animation-name: fadeInDown;
+
+  position: relative;
+  align-items: center;
+  display: flex;
+  padding: 7rem 0 10rem 0;
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.site-hero-heading {
+  color: #fff;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif;
+  position: relative; /* Needed for emoji wave */
+}
+
+.site-hero-wave {
+  position: absolute;
+  top: 0;
+  left: 3em;
+  animation: wave 10s alternate infinite;
+  transform-origin: 50% 60%;
+  transform: rotate(3deg);
+  animation-timing-function: ease;
+}
+
+.site-hero-intro {
+  display: block;
+  font-family: Georgia, sans-serif;
+  font-size: 3rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.site-hero-intro a {
+  color: #fff;
+}
+
+.site-hero-intro a:hover {
+  color: #ffd21f;
+}
+
+.site-hero-social {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-hero-social a {
+  display: inline-block;
+  color: #ffd21f;
+}
+
+.site-hero-social a:first-child {
+  margin-right: 1.5rem;
+}
+
+/* Site Header
+---------------------------------------- */
+.site-header {
+  margin-bottom: 2rem;
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--base-spacing-unit);
+  padding-bottom: var(--base-spacing-unit);
+  border-bottom: 1px solid var(--gray-light);
+  display: table;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 740px) {
+  .site-header {
+    text-align: left;
+    padding-bottom:  calc(var(--base-spacing-unit) - 1px);
+  }
+}
+
+/* Site Name
+---------------------------------------- */
+.site-name {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: var(--slate);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 0;
+}
+
+.site-name a {
+  color: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 740px) {
+  .site-name {
+    display: table-cell;
+    text-align: left;
+    vertical-align: bottom;
+    width: 50%;
+  }
+}
+
+/* Site Description
+---------------------------------------- */
+.site-description {
+  font-size: 1.5rem;
+  color: var(--gray);
+}
+
+/* Post Listing
+---------------------------------------- */
+.post-listing {
+  margin-bottom: 6rem;
+}
+
+.post-listing-title {
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.post-listing-title a {
+  color: inherit;
+}
+
+/* Post
+---------------------------------------- */
+.post-title {
+  margin-bottom: 0;
+  line-height: 4.5rem;
+}
+
+/* Bio
+---------------------------------------- */
+.bio {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.bio-img {
+  border-radius: 100%;
+  margin-right: 0.875rem;
+  margin-bottom: 0;
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+.bio-content {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.bio-social-link {
+  display: inline-block;
+}
+
+.bio-social-link-twitter {
+  margin-right: 5px;
+}
+
+
+/* Pagination
+---------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 5rem;
+}
+
+.pagination-previous,
+.pagination-next {
+  flex-basis: 50%;
+  line-height: 1.2;
+}
+
+.pagination-previous small,
+.pagination-next small {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.pagination-previous {
+  margin-right: 2rem;
+}
+
+.pagination-next {
+  margin-left: 2rem;
+}
