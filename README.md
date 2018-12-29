@@ -1,4 +1,4 @@
-# Blog
+# BrettJankord.com
 
 ## Deploy
 
