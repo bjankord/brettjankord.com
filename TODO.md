@@ -1,9 +1,5 @@
 # TO DO
 
-## Must haves
-* Set up RSS Feed
-
-
 ## Nice to haves
 * Add ability to add inline header to posts
 * Add read time to posts

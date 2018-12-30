@@ -7,16 +7,6 @@ class Layout extends React.Component {
     const rootPath = `${__PATH_PREFIX__}/`
     let header
 
-    const headerStyles = {
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: 'rgb(255, 255, 255)',
-      backgroundImage: `linear-gradient(to bottom, rgb(247, 247, 247) 0%, rgb(243, 243, 243) 100%)`,
-      color: 'rgb(56, 56, 56)',
-      paddingTop: '13rem',
-      paddingBottom: '13rem'
-    };
-
     if (location.pathname === rootPath) {
       header = (
         <header className="site-hero">
@@ -34,6 +24,9 @@ class Layout extends React.Component {
                 </li>
                 <li>
                   <a href="https://github.com/bjankord">GitHub</a>
+                </li>
+                <li>
+                  <a href="https://www.brettjankord.com/rss.xml">RSS</a>
                 </li>
               </ul>
             </div>
@@ -58,6 +51,9 @@ class Layout extends React.Component {
         <div className="site-container">
           {children}
         </div>
+        <footer style={{textAlign: 'center', marginBottom: '4rem'}}>
+          Brett Jankord Copyright © 2011 - Present. <a href="https://www.brettjankord.com/rss.xml">RSS Feed</a>
+        </footer>
       </React.Fragment>
     )
   }
