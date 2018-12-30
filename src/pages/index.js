@@ -4,7 +4,6 @@ import get from 'lodash/get'
 import Helmet from 'react-helmet'
 
 import Layout from '../components/Layout'
-import '../assets/styles.css';
 
 class BlogIndex extends React.Component {
   render() {
