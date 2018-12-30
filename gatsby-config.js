@@ -3,7 +3,7 @@ module.exports = {
     title: 'Brett Jankord',
     author: 'Brett Jankord',
     description: 'Brett Jankord - Front-End Developer',
-    siteUrl: 'http://brettjankord.com',
+    siteUrl: 'https://brettjankord.com',
   },
   pathPrefix: '/gatsby-starter-blog',
   plugins: [
