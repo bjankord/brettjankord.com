@@ -1,7 +1,7 @@
 ---
-title: "Beyond device detection"
-date: "2013-01-22"
-tags: ["Device Detection"]
+title: 'Beyond device detection'
+date: '2013-01-22'
+tags: ['Device Detection']
 permalink: /2013/01/22/beyond-device-detection/
 ---
 
@@ -13,7 +13,7 @@ The landscape of web enabled devices is drastically changing at a [rapid pace][1
 
 ## A question of reliability
 
-Device detection *cannot* reliably report the features of every device people are using to access the web. The main reason is for this is that reliable feature detection can only be done client-side via JavaScript. There are [ideas to offer feature detection on the server][2], yet these options are not available today.
+Device detection _cannot_ reliably report the features of every device people are using to access the web. The main reason is for this is that reliable feature detection can only be done client-side via JavaScript. There are [ideas to offer feature detection on the server][2], yet these options are not available today.
 
 There are [serives][3] which aim to provide a list of known features on a device based on it's user agent, however, they are not without drawbacks.
 
@@ -46,20 +46,20 @@ Move beyond device detection through feature detection. Let feature detection be
 
 Once you move beyond device detection, you will be better prepared to adapt to the constantly changing landscape of web enabled devices. The Web is changing and if we wish to keep up with it, we too, must change the ways to adapt to it.
 
- [1]: http://newsroom.cisco.com/press-release-content?articleId=888280
- [2]: https://docs.google.com/presentation/d/1y_A6VOZy9bD2i0VLHv9ZWr0W3hZJvlTNCDA0itjI0yM/edit#slide=id.p19
- [3]: http://wurfl.sourceforge.net/
- [4]: http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/
- [5]: http://commons.wikimedia.org/wiki/File:Device_pile.jpg
- [6]: https://github.com/bjankord/Categorizr
- [7]: http://tympanus.net/codrops/2013/01/21/ui-design-guidelines-for-responsive-design/
- [8]: http://www.html5rocks.com/en/mobile/cross-device/
- [9]: http://blog.grayghostvisuals.com/modernizr/conditionally-loading-resources/
- [10]: http://css-tricks.com/snippets/css/media-queries-for-standard-devices/
- [11]: http://perishablepress.com/target-iphone-and-ipad-with-css3-media-queries/
- [12]: http://stackoverflow.com/questions/6191590/css-media-query-on-iphone
- [13]: http://web-design-weekly.com/snippets/iphone-5-media-query/
- [14]: http://www.theverge.com/2013/1/21/3902234/lg-joins-the-5-inch-1080p-party-with-optimus-g-pro
- [15]: http://www.engadget.com/2013/01/07/huawei-launches-6-1-inch-ascend-mate/
- [16]: http://www.androidcentral.com/production-line-leak-claims-show-644-inch-screen-sony-device
- [17]: http://reviews.cnet.com/2733-3126_7-936-3.html
+[1]: http://newsroom.cisco.com/press-release-content?articleId=888280
+[2]: https://docs.google.com/presentation/d/1y_A6VOZy9bD2i0VLHv9ZWr0W3hZJvlTNCDA0itjI0yM/edit#slide=id.p19
+[3]: http://wurfl.sourceforge.net/
+[4]: http://www.brettjankord.com/2013/01/10/active-development-on-categorizr-has-come-to-an-end/
+[5]: http://commons.wikimedia.org/wiki/File:Device_pile.jpg
+[6]: https://github.com/bjankord/Categorizr
+[7]: http://tympanus.net/codrops/2013/01/21/ui-design-guidelines-for-responsive-design/
+[8]: http://www.html5rocks.com/en/mobile/cross-device/
+[9]: http://blog.grayghostvisuals.com/modernizr/conditionally-loading-resources/
+[10]: http://css-tricks.com/snippets/css/media-queries-for-standard-devices/
+[11]: http://perishablepress.com/target-iphone-and-ipad-with-css3-media-queries/
+[12]: http://stackoverflow.com/questions/6191590/css-media-query-on-iphone
+[13]: http://web-design-weekly.com/snippets/iphone-5-media-query/
+[14]: http://www.theverge.com/2013/1/21/3902234/lg-joins-the-5-inch-1080p-party-with-optimus-g-pro
+[15]: http://www.engadget.com/2013/01/07/huawei-launches-6-1-inch-ascend-mate/
+[16]: http://www.androidcentral.com/production-line-leak-claims-show-644-inch-screen-sony-device
+[17]: http://reviews.cnet.com/2733-3126_7-936-3.html

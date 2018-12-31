@@ -29,8 +29,6 @@
   },
   "devDependencies": {
     "eslint": "^5.11.1",
-    "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^2.0.1",
     "prettier": "^1.14.2"
   },
   "homepage": "https://brettjankord.com",
@@ -41,7 +39,7 @@
     "serve": "gatsby serve",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }

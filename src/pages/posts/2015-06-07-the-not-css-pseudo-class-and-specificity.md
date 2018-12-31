@@ -1,7 +1,7 @@
 ---
-title: "The :not() css-pseudo-class and specificity"
-date: "2015-06-07"
-tags: ["CSS"]
+title: 'The :not() css-pseudo-class and specificity'
+date: '2015-06-07'
+tags: ['CSS']
 permalink: /2015/06/07/the-not-css-pseudo-class-and-specificity/
 ---
 
@@ -10,14 +10,14 @@ The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It mat
 Recently I was working on a project where various form text inputs were styled with the following code.
 
 ```css
-input[type="date"],
-input[type="email"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="url"] {
+input[type='date'],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'] {
   /* Some default form field styles */
 
   &:focus {
@@ -38,55 +38,55 @@ input[type="url"] {
 It is a good idea to check the output of your preprocessed CSS to make sure the generated code is as you would intend it to be. In this case, the amount of selectors this code generates for these styles is rather large.
 
 ```css
-input[type="date"],
-input[type="email"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="url"] {
+input[type='date'],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'] {
   /* Some default form field styles */
 }
 
-input[type="date"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-input[type="password"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="text"]:focus,
-input[type="url"]:focus {
+input[type='date']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='text']:focus,
+input[type='url']:focus {
   /* Focus state styles */
 }
 
-input[type="date"][disabled],
-input[type="email"][disabled],
-input[type="number"][disabled],
-input[type="password"][disabled],
-input[type="search"][disabled],
-input[type="tel"][disabled],
-input[type="text"][disabled],
-input[type="url"][disabled] {
+input[type='date'][disabled],
+input[type='email'][disabled],
+input[type='number'][disabled],
+input[type='password'][disabled],
+input[type='search'][disabled],
+input[type='tel'][disabled],
+input[type='text'][disabled],
+input[type='url'][disabled] {
   /* Disabled state styles */
 }
 
-input[type="date"][readonly],
-input[type="email"][readonly],
-input[type="number"][readonly],
-input[type="password"][readonly],
-input[type="search"][readonly],
-input[type="tel"][readonly],
-input[type="text"][readonly],
-input[type="url"][readonly],
-input[type="date"][readonly]:focus,
-input[type="email"][readonly]:focus,
-input[type="number"][readonly]:focus,
-input[type="password"][readonly]:focus,
-input[type="search"][readonly]:focus,
-input[type="tel"][readonly]:focus,
-input[type="text"][readonly]:focus,
-input[type="url"][readonly]:focus {
+input[type='date'][readonly],
+input[type='email'][readonly],
+input[type='number'][readonly],
+input[type='password'][readonly],
+input[type='search'][readonly],
+input[type='tel'][readonly],
+input[type='text'][readonly],
+input[type='url'][readonly],
+input[type='date'][readonly]:focus,
+input[type='email'][readonly]:focus,
+input[type='number'][readonly]:focus,
+input[type='password'][readonly]:focus,
+input[type='search'][readonly]:focus,
+input[type='tel'][readonly]:focus,
+input[type='text'][readonly]:focus,
+input[type='url'][readonly]:focus {
   /* Readonly state styles */
 }
 ```
@@ -99,7 +99,7 @@ By chaining up :not pseudo-classes to select input types we do not want to match
 input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="image"])
 ```
 
-Using a selector like this *may* seem like a good idea, **with this selector, we cut our output css selector count for these styles from 40 to 5**. Though, this introduces a side effect. When you chain the :not pseudo-classes, it increases specificity with each :not. While we cut the selector count down, we now have a selector with a **specificity score of 0.0.8.1**.
+Using a selector like this _may_ seem like a good idea, **with this selector, we cut our output css selector count for these styles from 40 to 5**. Though, this introduces a side effect. When you chain the :not pseudo-classes, it increases specificity with each :not. While we cut the selector count down, we now have a selector with a **specificity score of 0.0.8.1**.
 
 If you need to override styles applied by this selector, you'll need some way to trump their current styling specificity.
 

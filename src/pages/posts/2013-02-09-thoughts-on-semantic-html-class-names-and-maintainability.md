@@ -1,7 +1,7 @@
 ---
-title: "Thoughts on semantic HTML class names and maintainability"
-date: "2013-02-09"
-tags: ["CSS"]
+title: 'Thoughts on semantic HTML class names and maintainability'
+date: '2013-02-09'
+tags: ['CSS']
 permalink: /2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/
 ---
 
@@ -9,7 +9,7 @@ The discussion of semantic HTML class names is one that goes back quite a while.
 
 I want to reiterate this one point, HTML class names offer no semantic value to search engines or screen readers, aside from microformats. If you are concerned with semantic value, understanding HTML document outlines is very important. It's also important to understand that class names have no effect on the document outline. So the way we view semantic value of HTML class names must be different than the way we view semantic value of our HTML markup.
 
-Rather than concerning ourselves with creating semantic class names, I think we should be thinking about creating *sensible* class names. I believe sensible class names offer semantics, but they also offer flexibility and reusability. Sensible class names gives meaning to an element to make it easier to understand and maintain *for developers*. In my mind, there are two ways I see naming classes, based on their function(role) or based on their form(visual).
+Rather than concerning ourselves with creating semantic class names, I think we should be thinking about creating _sensible_ class names. I believe sensible class names offer semantics, but they also offer flexibility and reusability. Sensible class names gives meaning to an element to make it easier to understand and maintain _for developers_. In my mind, there are two ways I see naming classes, based on their function(role) or based on their form(visual).
 
 ## W3C recommendation of naming classes
 
@@ -41,7 +41,7 @@ I've put together a screenshot of sidebar to help go over some of these concepts
 
 <!-- ![Three review sections. One for movies, one for albums, and one for books](http://www.brettjankord.com/wp-content/uploads/2013/02/reviews.jpg) -->
 
-*EDIT: I should have changed the titles of the items in each review section in this graphic above, but they aren't really the focus of this post, so yeah&#8230;*
+_EDIT: I should have changed the titles of the items in each review section in this graphic above, but they aren't really the focus of this post, so yeah&#8230;_
 
 Upon getting this sidebar to code out, I would go about classing each review section as `.reviews` and not worry about getting too specific for now with the class names.
 
@@ -63,7 +63,9 @@ Upon getting this sidebar to code out, I would go about classing each review sec
 ```
 
 ```css
-.reviews {...}
+.reviews {
+  ...;
+}
 ```
 
 The `.reviews` class will act as our main module for all reviews we have here.
@@ -94,11 +96,19 @@ So now we have our updated HTML and CSS with our module class, and sub-module cl
 ```
 
 ```css
-.reviews {...}
+.reviews {
+  ...;
+}
 
-.reviews-movies {...}
-.reviews-albums {...}
-.reviews-books {...}
+.reviews-movies {
+  ...;
+}
+.reviews-albums {
+  ...;
+}
+.reviews-books {
+  ...;
+}
 ```
 
 ## DRYing up modules and sub-modules
@@ -114,11 +124,19 @@ For example:
 Instead of writing our CSS like below:
 
 ```css
-.reviews {/* Module Styles */}
+.reviews {
+  /* Module Styles */
+}
 
-.reviews-movies {/* Sub-Module Styles */}
-.reviews-albums {/* Sub-Module Styles */}
-.reviews-books {/* Sub-Module Styles */}
+.reviews-movies {
+  /* Sub-Module Styles */
+}
+.reviews-albums {
+  /* Sub-Module Styles */
+}
+.reviews-books {
+  /* Sub-Module Styles */
+}
 ```
 
 We can write it as:
@@ -127,11 +145,19 @@ We can write it as:
 .movie-reviews,
 .album-reviews,
 .book-reviews,
-.magazine-reviews {/* Module Styles */}
+.magazine-reviews {
+  /* Module Styles */
+}
 
-.reviews-movies {/* Sub-Module Styles */}
-.reviews-albums {/* Sub-Module Styles */}
-.reviews-books {/* Sub-Module Styles */}
+.reviews-movies {
+  /* Sub-Module Styles */
+}
+.reviews-albums {
+  /* Sub-Module Styles */
+}
+.reviews-books {
+  /* Sub-Module Styles */
+}
 ```
 
 This approach is similar in thinking to talks Jeremy Clarke has been giving on [DRY CSS][4].
@@ -183,11 +209,19 @@ Below is an example of the HTML we would write with this approach. You'll notice
 ```
 
 ```css
-[class*="reviews-"] {/* Module Styles */}
+[class*='reviews-'] {
+  /* Module Styles */
+}
 
-.reviews-movies {/* Sub-Module Styles */}
-.reviews-albums {/* Sub-Module Styles */}
-.reviews-books {/* Sub-Module Styles */}
+.reviews-movies {
+  /* Sub-Module Styles */
+}
+.reviews-albums {
+  /* Sub-Module Styles */
+}
+.reviews-books {
+  /* Sub-Module Styles */
+}
 ```
 
 With this technique it's important to be consistent with naming schemes so they match our class-attribute selector.
@@ -221,17 +255,15 @@ I've put together an example below to demonstrate the issue:
 </div>
 ```
 
-
 Gallagher has a valid point. In the example above, if we use the following CSS, our `.btn` module will be used on `.btn-group` as well.
 
 ```css
-[class*="btn-"] {
-  background: #CCC;
-  padding: .5em;
+[class*='btn-'] {
+  background: #ccc;
+  padding: 0.5em;
   text-decoration: none;
 }
 ```
-
 
 A few ways come to mind to avoid this concern.
 
@@ -247,13 +279,12 @@ With this approach the code looks like:
 ```
 
 ```css
-[class*="btn--"] {
-  background: #CCC;
-  padding: .5em;
+[class*='btn--'] {
+  background: #ccc;
+  padding: 0.5em;
   text-decoration: none;
 }
 ```
-
 
 I prefer this approach when using class-attribute selectors, I haven't run into naming conflicts with this approach yet, that's not to say there aren't any. It seems easier for me to glance at it and know immediately what its for. A minor detail, but just something I prefer.
 
@@ -267,9 +298,9 @@ Another solution would be to simply change the name of `.btn-group` so it doesn'
 ```
 
 ```css
-[class*="btn-"] {
-  background: #CCC;
-  padding: .5em;
+[class*='btn-'] {
+  background: #ccc;
+  padding: 0.5em;
   text-decoration: none;
 }
 ```
@@ -280,11 +311,11 @@ All in all, using class-attribute selectors does require an involved and thought
 
 I feel the discussion of how we name our classes and make sure our styles are flexible and resuable could go on and on. These are some techniques that I've found useful and am planning on sharing some more ideas on structuring and naming CSS and decoupling CSS from HTML. While I don't think there is **one true way** to craft CSS, I really wanted to document the techniques I use today to see if/how they change over time. So far these techniques have been very useful for me.
 
- [1]: http://www.w3.org/QA/Tips/goodclassnames
- [2]: http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/
- [3]: http://smacss.com/
- [4]: http://www.slideshare.net/jeremyclarke/dry-css-a-dontrepeatyourself-methodology-for-creating-efficient-unified-and-scalable-stylesheets
- [5]: http://nicolasgallagher.com/about-html-semantics-front-end-architecture/
- [6]: http://24ways.org/2012/a-harder-working-class/
- [7]: http://wellfireinteractive.com/
- [8]: http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
+[1]: http://www.w3.org/QA/Tips/goodclassnames
+[2]: http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/
+[3]: http://smacss.com/
+[4]: http://www.slideshare.net/jeremyclarke/dry-css-a-dontrepeatyourself-methodology-for-creating-efficient-unified-and-scalable-stylesheets
+[5]: http://nicolasgallagher.com/about-html-semantics-front-end-architecture/
+[6]: http://24ways.org/2012/a-harder-working-class/
+[7]: http://wellfireinteractive.com/
+[8]: http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
