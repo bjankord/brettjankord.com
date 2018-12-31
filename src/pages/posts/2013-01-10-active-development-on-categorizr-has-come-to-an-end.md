@@ -1,7 +1,7 @@
 ---
-title: "Active development on Categorizr has come to an end"
-date: "2013-01-10"
-tags: ["Categorizr"]
+title: 'Active development on Categorizr has come to an end'
+date: '2013-01-10'
+tags: ['Categorizr']
 permalink: /2013/01/10/active-development-on-categorizr-has-come-to-an-end/
 ---
 
@@ -87,20 +87,20 @@ And so, its sad, for me, to see the project go, but I'm also glad to move on fro
 
 In my next post I plan to talk more about this consensual hallucination and my new workflow.
 
- [1]: http://www.netmagazine.com/features/50-fantastic-tools-responsive-web-design
- [2]: http://www.netmagazine.com/interviews/ethan-marcotte-answers-your-responsive-web-design-questions
- [3]: https://twitter.com/zeldman/status/166660028055556096
- [4]: http://adactio.com/journal/5194/
- [5]: https://twitter.com/brad_frost/status/192289889939767296
- [6]: https://github.com/bjankord/Categorizr
- [7]: https://twitter.com/jaeisma
- [8]: http://social.msdn.microsoft.com/Forums/en-US/6be392da-4d2f-41b4-8354-8dcee20c85cd/internet-explorer-10-user-agent-strings-on-windows-8-64bit?forum=windowsdeveloperpreviewgeneral
- [9]: http://www.windowsfordevices.com/c/a/News/Reports-Windows-Phone-8-will-switch-to-desktop-kernel/
- [10]: http://arstechnica.com/information-technology/2012/02/leaked-windows-phone-8-vid-windows-8-kernel-and-integration-multiple-cores/
- [11]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms700675%28v=vs.85%29.aspx
- [12]: http://www.brettjankord.com/2012/02/22/thoughts-on-windows-8-device-detection/
- [13]: http://googlewebmastercentral.blogspot.com/2012/11/giving-tablet-users-full-sized-web.html
- [14]: http://static.lukew.com/unified_device_design.png
- [15]: http://www.lukew.com/ff/entry.asp?1392
- [16]: https://github.com/bjankord/isMobile
- [17]: http://futurefriend.ly/
+[1]: http://www.netmagazine.com/features/50-fantastic-tools-responsive-web-design
+[2]: http://www.netmagazine.com/interviews/ethan-marcotte-answers-your-responsive-web-design-questions
+[3]: https://twitter.com/zeldman/status/166660028055556096
+[4]: http://adactio.com/journal/5194/
+[5]: https://twitter.com/brad_frost/status/192289889939767296
+[6]: https://github.com/bjankord/Categorizr
+[7]: https://twitter.com/jaeisma
+[8]: http://social.msdn.microsoft.com/Forums/en-US/6be392da-4d2f-41b4-8354-8dcee20c85cd/internet-explorer-10-user-agent-strings-on-windows-8-64bit?forum=windowsdeveloperpreviewgeneral
+[9]: http://www.windowsfordevices.com/c/a/News/Reports-Windows-Phone-8-will-switch-to-desktop-kernel/
+[10]: http://arstechnica.com/information-technology/2012/02/leaked-windows-phone-8-vid-windows-8-kernel-and-integration-multiple-cores/
+[11]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms700675%28v=vs.85%29.aspx
+[12]: http://www.brettjankord.com/2012/02/22/thoughts-on-windows-8-device-detection/
+[13]: http://googlewebmastercentral.blogspot.com/2012/11/giving-tablet-users-full-sized-web.html
+[14]: http://static.lukew.com/unified_device_design.png
+[15]: http://www.lukew.com/ff/entry.asp?1392
+[16]: https://github.com/bjankord/isMobile
+[17]: http://futurefriend.ly/

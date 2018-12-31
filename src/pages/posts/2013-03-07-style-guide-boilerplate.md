@@ -1,7 +1,7 @@
 ---
-title: "Style Guide Boilerplate"
-date: "2013-03-07"
-tags: ["Style Guide Boilerplate"]
+title: 'Style Guide Boilerplate'
+date: '2013-03-07'
+tags: ['Style Guide Boilerplate']
 permalink: /2013/03/07/style-guide-boilerplate/
 ---
 
@@ -33,10 +33,10 @@ As mentioned earlier, I think there are a lot of benefits to having your own sty
 
 **Style guides:**
 
-*   Promote consistency
-*   Promote modular thinking
-*   Add a greater clarity to the parts and pieces that make up your website
-*   Increase efficiency when editing a website.
+- Promote consistency
+- Promote modular thinking
+- Add a greater clarity to the parts and pieces that make up your website
+- Increase efficiency when editing a website.
 
 I hope people find this boilerplate useful and add it to their own projects.
 
@@ -44,13 +44,13 @@ I'd love to be able to go to www.anysite.com/styleguide/ and view that site's st
 
 ## Download/Demo
 
-* [Download/Fork][6] the Style Guide Boilerplate from GitHub.
-* [View the demo][7] for Style Guide Boilerplate.
+- [Download/Fork][6] the Style Guide Boilerplate from GitHub.
+- [View the demo][7] for Style Guide Boilerplate.
 
- [1]: http://www.99lime.com/elements/
- [2]: https://twitter.com/htmlkickstart
- [3]: https://github.com/filamentgroup/X-rayHTML
- [4]: http://view.jquerymobile.com/master/demos/
- [5]: https://github.com/adactio/Pattern-Primer
- [6]: https://github.com/bjankord/Style-Guide-Boilerplate
- [7]: http://bjankord.github.io/Style-Guide-Boilerplate/demo.html
+[1]: http://www.99lime.com/elements/
+[2]: https://twitter.com/htmlkickstart
+[3]: https://github.com/filamentgroup/X-rayHTML
+[4]: http://view.jquerymobile.com/master/demos/
+[5]: https://github.com/adactio/Pattern-Primer
+[6]: https://github.com/bjankord/Style-Guide-Boilerplate
+[7]: http://bjankord.github.io/Style-Guide-Boilerplate/demo.html

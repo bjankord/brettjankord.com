@@ -1,7 +1,7 @@
 ---
-title: "You keep using that word, I do not think it means what you think it means"
-date: "2013-01-30"
-tags: ["Web Development"]
+title: 'You keep using that word, I do not think it means what you think it means'
+date: '2013-01-30'
+tags: ['Web Development']
 permalink: /2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/
 ---
 
@@ -23,12 +23,12 @@ Progressive enhancement was coined by [Steven Champeon][7] back in 2003. It allo
 
 **Additional Resources:**
 
-* [Progressive Enhancement and the Future of Web Design][7]
-* [Inclusive Web Design Future][8]
-* [Progressive Enhancement][6]
-* [Test-Driven Progressive Enhancement][9]
-* [Understanding Progressive Enhancement][10]
-* [Behavioral Separation][11]
+- [Progressive Enhancement and the Future of Web Design][7]
+- [Inclusive Web Design Future][8]
+- [Progressive Enhancement][6]
+- [Test-Driven Progressive Enhancement][9]
+- [Understanding Progressive Enhancement][10]
+- [Behavioral Separation][11]
 
 ## Graceful Degradation
 
@@ -38,11 +38,10 @@ Graceful degradation comes from the concept in software development of [fault to
 
 **Additional Resources:**
 
-* [Progressive Enhancement and Graceful Degradation: an Overview][14]
-* [Graceful Degredation versus Progressive Enhancement][15]
+- [Progressive Enhancement and Graceful Degradation: an Overview][14]
+- [Graceful Degredation versus Progressive Enhancement][15]
 
 <!-- ![Chart of responsive web design, progressive enhancement, and graceful degradation]({{ site.url }}/wp-content/uploads/2013/01/technique-chare.jpg) -->
-
 
 ## Responsive Web Design
 
@@ -66,10 +65,10 @@ Marcotte published a book entitled [Responsive Web Design][25]. Responsive Web D
 
 **Additional Resources:**
 
-* [Responsive Web Design][16]
-* [Responsive Web Design Book][25]
-* [Mediaqueri.es][27]
-* [What the heck is Responsive Web Design?][28]
+- [Responsive Web Design][16]
+- [Responsive Web Design Book][25]
+- [Mediaqueri.es][27]
+- [What the heck is Responsive Web Design?][28]
 
 ## Mobile-First
 
@@ -81,9 +80,9 @@ Coined by [Luke Wroblewski][29] back in November 2009, is a mindset that allows 
 
 **Additional Resources:**
 
-* [Mobile First Book][30]
-* [Mobile First: What Does It Mean?][31]
-* [Rethinking Your Mobile First Strategy][32]
+- [Mobile First Book][30]
+- [Mobile First: What Does It Mean?][31]
+- [Rethinking Your Mobile First Strategy][32]
 
 <!-- ![Mobile first]({{ site.url }}/wp-content/uploads/2013/01/mobile-first.jpg) -->
 
@@ -91,18 +90,18 @@ Coined by [Luke Wroblewski][29] back in November 2009, is a mindset that allows 
 
 This term combines the mobile-first mindset from Wroblewski with Marcotte’s Responsive Web Design technique. It involves starting with a baseline experience and using min-width media queries along with other elements of responsive web design to enhance the experience as the layout becomes wider. This approach falls in line with principles of progressive enhancement. While the technique of responsive web design can be implemented with a desktop-first or mobile-first approach, the mobile first is considered best practice amongst developers as it allows for more optimization for performance. Other terms you’ll often see when reading about mobile first responsive web design:
 
-*   Responsible Responsive Web Design
-*   Responsive Enhancement
-*   Feature Detection
-*   Conditional Loading
+- Responsible Responsive Web Design
+- Responsive Enhancement
+- Feature Detection
+- Conditional Loading
 
 **Additional Resources:**
 
-* [Mobile First Responsive Web Design][33]
-* [Creating A Mobile-First Responsive Web Design][34]
-* [FITC Mobile First Responsive Design][35]
-* [Jason Grigsby – Mobile-First Responsive Design][36]
-* [Mobile-First, Responsive Design Websites: Does This Really Matter?][37]
+- [Mobile First Responsive Web Design][33]
+- [Creating A Mobile-First Responsive Web Design][34]
+- [FITC Mobile First Responsive Design][35]
+- [Jason Grigsby – Mobile-First Responsive Design][36]
+- [Mobile-First, Responsive Design Websites: Does This Really Matter?][37]
 
 <!-- ![Dekstop first]({{ site.url }}/wp-content/uploads/2013/01/desktop-first.jpg) -->
 
@@ -114,12 +113,11 @@ Desktop-First Responsive Web Design This approach to responsive web design lines
 
 **Additional Resources:**
 
-* [Retrofitting sites with responsive design with Ben Callahan][39]
-* [Give the Web a Responsive-Design Facelift With ‘Responsive Retrofitting’][40]
-* [Responsive Retrofitting from CSS Dev Conf 2012 in Honolulu, HI][41]
+- [Retrofitting sites with responsive design with Ben Callahan][39]
+- [Give the Web a Responsive-Design Facelift With ‘Responsive Retrofitting’][40]
+- [Responsive Retrofitting from CSS Dev Conf 2012 in Honolulu, HI][41]
 
 <!-- ![Adaptive]({{ site.url }}/wp-content/uploads/2013/01/adaptive.jpg) -->
-
 
 ## Adaptive Web Design
 
@@ -132,9 +130,9 @@ From this, I get the idea that adaptive web design and progressive enhancement a
 
 **Additional Resources**
 
-* [On Adaptive vs. Responsive Web Design][44]
-* [What is Responsive and Adaptive Web Design?][45]
-* [Adaptive vs. Responsive, What’s the Difference?][46]
+- [On Adaptive vs. Responsive Web Design][44]
+- [What is Responsive and Adaptive Web Design?][45]
+- [Adaptive vs. Responsive, What’s the Difference?][46]
 
 ## Adaptive Layouts
 
@@ -142,19 +140,19 @@ The concept of [adaptive layouts][47] is often confused with term adaptive web d
 
 **Examples of Adaptive Layouts**
 
-* [Sony.com][48]
-* [FoodSense.is][49]
-* [LondonandPartners.com][50]
-* [SasquatchFestival.com][51]
-* [InformationArchitects.net][52]
+- [Sony.com][48]
+- [FoodSense.is][49]
+- [LondonandPartners.com][50]
+- [SasquatchFestival.com][51]
+- [InformationArchitects.net][52]
 
 **Examples of Responsive Web Design**
 
-* [BostonGlobe.com][53]
-* [Microsoft.com][54]
-* [TheGreatDiscontent.com][55]
-* [StephenCaver.com][56]
-* [Starbucks.com][57]
+- [BostonGlobe.com][53]
+- [Microsoft.com][54]
+- [TheGreatDiscontent.com][55]
+- [StephenCaver.com][56]
+- [Starbucks.com][57]
 
 ## RESS
 
@@ -168,65 +166,65 @@ For some time, the server side component in RESS was assumed to be a device dete
 
 Hopefully this can serve as a reference for those who want to catch up on these new terms. It’s always good when you’re planning out your next website project to make sure all of those involved are on the same page. By defining these terms for those who may not be familiar with them helps ensure better understanding for everyone throughout the project.
 
- [1]: http://www.businessinsider.com/survey-mobile-first-bad-strategy-2012-12
- [2]: http://uxmag.com/articles/combining-responsive-and-adaptive-strategies-to-solve-mobile-design-challenges
- [3]: http://bradfrostweb.com/blog/mobile/the-many-faces-of-mobile-first/
- [4]: http://en.wikipedia.org/wiki/Web_design
- [5]: http://en.wikipedia.org/wiki/Semantic_HTML
- [6]: http://en.wikipedia.org/wiki/Progressive_enhancement
- [7]: http://www.hesketh.com/thought-leadership/our-publications/progressive-enhancement-and-future-web-design
- [8]: http://hesketh.com/thought-leadership/our-publications/inclusive-web-design-future
- [9]: http://alistapart.com/article/testdriven
- [10]: http://alistapart.com/article/understandingprogressiveenhancement
- [11]: http://alistapart.com/article/behavioralseparation
- [12]: http://en.wikipedia.org/wiki/Graceful_degradation
- [13]: http://andreasviklund.com/learn/graceful-degradation-vs-progressive-enhancement-part-1/
- [14]: http://www.sitepoint.com/progressive-enhancement-graceful-degradation-basics/
- [15]: http://www.w3.org/wiki/Graceful_degredation_versus_progressive_enhancement
- [16]: http://alistapart.com/article/responsive-web-design
- [17]: http://en.wikipedia.org/wiki/Media_queries
- [18]: http://en.wikipedia.org/wiki/Web_browser
- [19]: http://en.wikipedia.org/wiki/Grid_%28page_layout%29#Grid_use_in_web_design
- [20]: http://en.wikipedia.org/wiki/Em_%28typography%29
- [21]: http://en.wikipedia.org/wiki/Pixel
- [22]: http://en.wikipedia.org/wiki/Point_%28typography%29
- [23]: http://en.wikipedia.org/wiki/HTML_element
- [24]: http://en.wikipedia.org/wiki/Responsive_web_design
- [25]: http://www.abookapart.com/products/responsive-web-design
- [26]: http://www.google.com/trends/explore#q=responsive%20design,%20responsive%20web%20design&cmpt=q
- [27]: http://mediaqueri.es/
- [28]: http://johnpolacek.github.com/scrolldeck.js/decks/responsive/
- [29]: http://www.lukew.com/ff/entry.asp?933
- [30]: http://www.abookapart.com/products/mobile-first
- [31]: http://www.uxmatters.com/mt/archives/2012/03/mobile-first-what-does-it-mean.php
- [32]: http://vincentjordan.com/2012/02/rethinking-your-mobile-first-strategy/
- [33]: http://bradfrostweb.com/blog/web/mobile-first-responsive-web-design/
- [34]: http://www.html5rocks.com/en/mobile/responsivedesign/
- [35]: http://www.slideshare.net/grigs/fitc-mobile-first-responsive-design
- [36]: http://www.uie.com/brainsparks/2012/10/12/jason-grigsby-mobile-first-responsive-design/
- [37]: http://435digital.com/blog/2012/10/16/mobile-first-responsive-design-websites/
- [38]: https://github.com/sparkbox/Responsive-Retrofitting
- [39]: http://responsivedesignweekly.com/rwd-summit/retrofitting-sites-with-responsive-design-with-ben-callahan/
- [40]: http://www.webmonkey.com/2012/09/give-the-web-a-responsive-design-facelift-with-responsive-retrofitting/
- [41]: https://speakerdeck.com/bencallahan/responsive-retrofitting-from-css-dev-conf-2012-in-honolulu-hi
- [42]: http://easy-readers.net/books/adaptive-web-design/
- [43]: https://bdconf.com/podcasts/adaptive-web-design-with-aaron-gustafson/
- [44]: http://blog.easy-designs.net/archives/2011/11/16/on-adaptive-vs-responsive-web-design/
- [45]: http://www.ampagency.com/what-is-responsive-and-adaptive-web-design/
- [46]: http://viljamis.com/blog/2012/adaptive-vs-responsive-whats-the-difference.php
- [47]: https://twitter.com/stephanierieger/status/237936382595723264
- [48]: http://www.sony.com/index.php
- [49]: http://foodsense.is/
- [50]: http://www.londonandpartners.com/
- [51]: http://sasquatchfestival.com/
- [52]: http://informationarchitects.net/
- [53]: http://bostonglobe.com/
- [54]: http://www.microsoft.com/en-us/default.aspx
- [55]: http://thegreatdiscontent.com/
- [56]: http://stephencaver.com/
- [57]: http://www.starbucks.com/
- [58]: http://www.lukew.com/ff/entry.asp?1392
- [59]: http://aneventapart.com/
- [60]: http://aneventapart.com/news/post/aea-2012-relaunch
- [61]: https://twitter.com/bjankord/status/275672328153755649
- [62]: https://twitter.com/lukew/status/275678033661272064
+[1]: http://www.businessinsider.com/survey-mobile-first-bad-strategy-2012-12
+[2]: http://uxmag.com/articles/combining-responsive-and-adaptive-strategies-to-solve-mobile-design-challenges
+[3]: http://bradfrostweb.com/blog/mobile/the-many-faces-of-mobile-first/
+[4]: http://en.wikipedia.org/wiki/Web_design
+[5]: http://en.wikipedia.org/wiki/Semantic_HTML
+[6]: http://en.wikipedia.org/wiki/Progressive_enhancement
+[7]: http://www.hesketh.com/thought-leadership/our-publications/progressive-enhancement-and-future-web-design
+[8]: http://hesketh.com/thought-leadership/our-publications/inclusive-web-design-future
+[9]: http://alistapart.com/article/testdriven
+[10]: http://alistapart.com/article/understandingprogressiveenhancement
+[11]: http://alistapart.com/article/behavioralseparation
+[12]: http://en.wikipedia.org/wiki/Graceful_degradation
+[13]: http://andreasviklund.com/learn/graceful-degradation-vs-progressive-enhancement-part-1/
+[14]: http://www.sitepoint.com/progressive-enhancement-graceful-degradation-basics/
+[15]: http://www.w3.org/wiki/Graceful_degredation_versus_progressive_enhancement
+[16]: http://alistapart.com/article/responsive-web-design
+[17]: http://en.wikipedia.org/wiki/Media_queries
+[18]: http://en.wikipedia.org/wiki/Web_browser
+[19]: http://en.wikipedia.org/wiki/Grid_%28page_layout%29#Grid_use_in_web_design
+[20]: http://en.wikipedia.org/wiki/Em_%28typography%29
+[21]: http://en.wikipedia.org/wiki/Pixel
+[22]: http://en.wikipedia.org/wiki/Point_%28typography%29
+[23]: http://en.wikipedia.org/wiki/HTML_element
+[24]: http://en.wikipedia.org/wiki/Responsive_web_design
+[25]: http://www.abookapart.com/products/responsive-web-design
+[26]: http://www.google.com/trends/explore#q=responsive%20design,%20responsive%20web%20design&cmpt=q
+[27]: http://mediaqueri.es/
+[28]: http://johnpolacek.github.com/scrolldeck.js/decks/responsive/
+[29]: http://www.lukew.com/ff/entry.asp?933
+[30]: http://www.abookapart.com/products/mobile-first
+[31]: http://www.uxmatters.com/mt/archives/2012/03/mobile-first-what-does-it-mean.php
+[32]: http://vincentjordan.com/2012/02/rethinking-your-mobile-first-strategy/
+[33]: http://bradfrostweb.com/blog/web/mobile-first-responsive-web-design/
+[34]: http://www.html5rocks.com/en/mobile/responsivedesign/
+[35]: http://www.slideshare.net/grigs/fitc-mobile-first-responsive-design
+[36]: http://www.uie.com/brainsparks/2012/10/12/jason-grigsby-mobile-first-responsive-design/
+[37]: http://435digital.com/blog/2012/10/16/mobile-first-responsive-design-websites/
+[38]: https://github.com/sparkbox/Responsive-Retrofitting
+[39]: http://responsivedesignweekly.com/rwd-summit/retrofitting-sites-with-responsive-design-with-ben-callahan/
+[40]: http://www.webmonkey.com/2012/09/give-the-web-a-responsive-design-facelift-with-responsive-retrofitting/
+[41]: https://speakerdeck.com/bencallahan/responsive-retrofitting-from-css-dev-conf-2012-in-honolulu-hi
+[42]: http://easy-readers.net/books/adaptive-web-design/
+[43]: https://bdconf.com/podcasts/adaptive-web-design-with-aaron-gustafson/
+[44]: http://blog.easy-designs.net/archives/2011/11/16/on-adaptive-vs-responsive-web-design/
+[45]: http://www.ampagency.com/what-is-responsive-and-adaptive-web-design/
+[46]: http://viljamis.com/blog/2012/adaptive-vs-responsive-whats-the-difference.php
+[47]: https://twitter.com/stephanierieger/status/237936382595723264
+[48]: http://www.sony.com/index.php
+[49]: http://foodsense.is/
+[50]: http://www.londonandpartners.com/
+[51]: http://sasquatchfestival.com/
+[52]: http://informationarchitects.net/
+[53]: http://bostonglobe.com/
+[54]: http://www.microsoft.com/en-us/default.aspx
+[55]: http://thegreatdiscontent.com/
+[56]: http://stephencaver.com/
+[57]: http://www.starbucks.com/
+[58]: http://www.lukew.com/ff/entry.asp?1392
+[59]: http://aneventapart.com/
+[60]: http://aneventapart.com/news/post/aea-2012-relaunch
+[61]: https://twitter.com/bjankord/status/275672328153755649
+[62]: https://twitter.com/lukew/status/275678033661272064

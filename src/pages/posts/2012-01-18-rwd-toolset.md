@@ -1,7 +1,7 @@
 ---
-date: "2011-01-18"
-title: "RWD toolset"
-tags: ["rwd"]
+date: '2011-01-18'
+title: 'RWD toolset'
+tags: ['rwd']
 permalink: /2012/01/18/rwd-toolset/
 ---
 
@@ -18,6 +18,7 @@ Using this method when developing a responsive design, it frees the design from 
 I've combined these two scripts together into what I'm calling the **RWD Toolset**. Since I've just thrown these two script together for development purposes, I'm sure there are ways to improve the code, though it accomplishes what I need it to do. If you have improvements, feel free to let me know in the comments below.
 
 ## How to use RWD Toolset:
+
 Download the JavaScript file and the CSS file and add them to your site.
 **RWD Toolset** requires jQuery so make sure you have that included on your site too.
 
@@ -29,7 +30,7 @@ Download the JavaScript file and the CSS file and add them to your site.
 
 Once the files are in place you, should now have the **RWD Toolset** toolbar on the bottom of you page.
 
- My idea in building **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive websites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive websites.
+My idea in building **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive websites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive websites.
 
 <!--
 * [View RWD Toolset Demo](http://brettjankord.com/projects/rwd-toolset/)

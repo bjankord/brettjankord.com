@@ -1,7 +1,7 @@
 ---
-title: "Cross browser retina/high resolution media queries"
-date: "2012-11-28"
-tags: ["Media Queries"]
+title: 'Cross browser retina/high resolution media queries'
+date: '2012-11-28'
+tags: ['Media Queries']
 permalink: /2012/11/28/cross-browser-retinahigh-resolution-media-queries/
 ---
 
@@ -12,27 +12,25 @@ Most developers are currently writing retina/high resolution media queries simil
 This media query example is from [37signals article on retina images and scss][4]. It is based on the one in Thomas Fuchs’ Retinafy book but, it has been modified to define the Google Nexus 7 with it’s 1.3 pixel ratio as a retina-capable device.
 
 ```css
-@media
-(-webkit-min-device-pixel-ratio: 1.3),
-(min--moz-device-pixel-ratio: 1.3),
-(-o-min-device-pixel-ratio: 2.6/2),
-(min-device-pixel-ratio: 1.3),
-(min-resolution: 1.3dppx) {
-   /* Retina-specific stuff here */
+@media (-webkit-min-device-pixel-ratio: 1.3),
+  (min--moz-device-pixel-ratio: 1.3),
+  (-o-min-device-pixel-ratio: 2.6/2),
+  (min-device-pixel-ratio: 1.3),
+  (min-resolution: 1.3dppx) {
+  /* Retina-specific stuff here */
 }
 ```
 
 Chris Coyier has a [retina display media query example][5] that looks like this:
 
 ```css
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and ( min--moz-device-pixel-ratio: 2),
-only screen and ( -o-min-device-pixel-ratio: 2/1),
-only screen and ( min-device-pixel-ratio: 2),
-only screen and ( min-resolution: 192dpi),
-only screen and ( min-resolution: 2dppx) {
-    /* Retina-specific stuff here */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  /* Retina-specific stuff here */
 }
 ```
 
@@ -67,11 +65,10 @@ This means you can replace, the `min-moz-device-pixel-ratio`, the `-o-min-device
 This cleans up Coyier's retina/high resolution media query.
 
 ```css
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and ( min-resolution: 192dpi),
-only screen and ( min-resolution: 2dppx) {
-    /* Retina-specific stuff here */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  /* Retina-specific stuff here */
 }
 ```
 
@@ -84,9 +81,7 @@ IE does not currently support dppx units.
 If you want to support retina/high resolution devices that are running IE, you need to use the resolution media query and use dpi units. If you're going to use the dpi unit, I don't see much need to include the dppx unit as well. Everywhere the dppx unit is supported, the dpi unit is also supported. Using both units would be like writing a media query that uses pixels and ems for the same size.
 
 ```css
-@media
-only screen and ( min-width: 320px),
-only screen and ( min-width: 20em) {
+@media only screen and (min-width: 320px), only screen and (min-width: 20em) {
   /* Two units that equal the same value don't make sense in this media query*/
   /* Why use two units which equal the same value with resolution media queries? */
 }
@@ -97,13 +92,11 @@ only screen and ( min-width: 20em) {
 This works in all the browsers that Coyier's original example does and is just a future friendly.
 
 ```css
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi) {
-    /* Retina-specific stuff here */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
 }
 ```
-
 
 Like I said, others have written about this before, though I still see a lot of people using verbose retina/high resolution media queries. As more Windows 8 devices come out, I can see a need for retina/high resolution media queries that work in IE.
 
@@ -113,39 +106,31 @@ I've done some testing across different desktop browsers and this looks to work 
 /* Clean version examples */
 
 /* 1.25 dpr */
-@media
-(-webkit-min-device-pixel-ratio: 1.25),
-(min-resolution: 120dpi){
-    /* Retina-specific stuff here */
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  /* Retina-specific stuff here */
 }
 
 /* 1.3 dpr */
-@media
-(-webkit-min-device-pixel-ratio: 1.3),
-(min-resolution: 124.8dpi){
-    /* Retina-specific stuff here */
+@media (-webkit-min-device-pixel-ratio: 1.3), (min-resolution: 124.8dpi) {
+  /* Retina-specific stuff here */
 }
 
 /* 1.5 dpr */
-@media
-(-webkit-min-device-pixel-ratio: 1.5),
-(min-resolution: 144dpi){
-    /* Retina-specific stuff here */
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  /* Retina-specific stuff here */
 }
 
 /*2.0 dpr */
-@media
-(-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi){
-    /* Retina-specific stuff here */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
 }
 ```
 
- [1]: http://www.w3.org/blog/CSS/2012/06/14/unprefix-webkit-device-pixel-ratio/
- [2]: http://benfrain.com/a-full-vendor-stack-for-targeting-high-resolution-retina-devices/
- [3]: http://www.broken-links.com/2012/07/13/using-media-queries-to-test-device-resolution/
- [4]: http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss
- [5]: http://css-tricks.com/snippets/css/retina-display-media-query/
- [6]: http://www.jordanm.co.uk/palmreader/
- [7]: http://brettjankord.com/projects/palmreader/
- [8]: https://developer.mozilla.org/en-US/docs/CSS/resolution
+[1]: http://www.w3.org/blog/CSS/2012/06/14/unprefix-webkit-device-pixel-ratio/
+[2]: http://benfrain.com/a-full-vendor-stack-for-targeting-high-resolution-retina-devices/
+[3]: http://www.broken-links.com/2012/07/13/using-media-queries-to-test-device-resolution/
+[4]: http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss
+[5]: http://css-tricks.com/snippets/css/retina-display-media-query/
+[6]: http://www.jordanm.co.uk/palmreader/
+[7]: http://brettjankord.com/projects/palmreader/
+[8]: https://developer.mozilla.org/en-US/docs/CSS/resolution
