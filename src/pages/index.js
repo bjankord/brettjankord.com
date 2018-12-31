@@ -32,6 +32,8 @@ class BlogIndex extends React.Component {
                 <Link to={node.frontmatter.permalink}>{title}</Link>
               </h2>
               <time dateTime={convertedPostDate}>{node.frontmatter.date}</time>
+              <span className="post-time-divider">-</span>
+              <span className="post-readtime">{node.fields.readingTime.text}</span>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
           );
@@ -57,6 +59,9 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
+            readingTime {
+              text
+            }
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
