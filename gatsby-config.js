@@ -8,26 +8,26 @@ module.exports = {
   pathPrefix: '/gatsby-starter-blog',
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/pages/posts`,
         name: 'blog',
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 590,
             },
           },
           {
-            resolve: `gatsby-remark-responsive-iframe`,
+            resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
+              wrapperStyle: 'margin-bottom: 1.0725rem',
             },
           },
           'gatsby-remark-prismjs',
@@ -36,8 +36,8 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {
@@ -45,7 +45,7 @@ module.exports = {
     //   },
     // },
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: 'gatsby-plugin-feed',
       options: {
         query: `
         {
@@ -61,17 +61,13 @@ module.exports = {
       `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.frontmatter.permalink, // Use permalink url to maintain prior URL structure
-                  guid: site.siteMetadata.siteUrl + edge.node.frontmatter.permalink, // Use permalink url to maintain prior URL structure
-                  custom_elements: [{ "content:encoded": edge.node.html }],
-                })
-              })
-            },
+            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map(edge => Object.assign({}, edge.node.frontmatter, {
+              description: edge.node.excerpt,
+              date: edge.node.frontmatter.date,
+              url: site.siteMetadata.siteUrl + edge.node.frontmatter.permalink, // Use permalink url to maintain prior URL structure
+              guid: site.siteMetadata.siteUrl + edge.node.frontmatter.permalink, // Use permalink url to maintain prior URL structure
+              custom_elements: [{ 'content:encoded': edge.node.html }],
+            })),
             query: `
             {
               allMarkdownRemark(
@@ -93,25 +89,25 @@ module.exports = {
               }
             }
           `,
-            output: "/rss.xml",
+            output: '/rss.xml',
             title: "Brett Jankord's Blog RSS Feed",
           },
         ],
       },
     },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `Brett Jankord's Blog`,
-        short_name: `Brett Jankord`,
-        start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/assets/blog-icon.png`,
+        name: 'Brett Jankord\'s Blog',
+        short_name: 'Brett Jankord',
+        start_url: '/',
+        background_color: '#ffffff',
+        theme_color: '#663399',
+        display: 'minimal-ui',
+        icon: 'src/assets/blog-icon.png',
       },
     },
-    //`gatsby-plugin-offline`,
-    `gatsby-plugin-react-helmet`,
+    // `gatsby-plugin-offline`,
+    'gatsby-plugin-react-helmet',
   ],
-}
+};

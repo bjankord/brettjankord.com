@@ -1,7 +1,7 @@
 ---
-date: "2012-11-15"
-title: "Syncing JavaScript with your active media query"
-tags: ["js", "css"]
+date: '2012-11-15'
+title: 'Syncing JavaScript with your active media query'
+tags: ['js', 'css']
 permalink: /2012/11/15/syncing-javascript-with-your-active-media-query/
 ---
 
@@ -26,7 +26,7 @@ With my interest peaked about this issue, I got a hold of a Blackberry Curve run
 I decided to switch storing the breakpoint value inside of a font-family property. This fixed the bug in Android 2.X and on the Blackberry running OS6, though it introduced another issue.
 
 As [Jeremy noted](http://adactio.com/journal/5429/),
- 
+
 > It works! …except in Opera. Where every other browser returns whatever string has been provided in the font-family declaration, Opera returns the font that ends up actually getting used (Times New Roman by default).
 
 I was able to get around this by using pseudo elements for Opera, and font-family for all other modern browsers.

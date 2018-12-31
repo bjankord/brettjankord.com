@@ -1,7 +1,7 @@
 ---
-title: "Modular CSS: Thoughts on SMACSS modules"
-date: "2013-03-09"
-tags: ["CSS"]
+title: 'Modular CSS: Thoughts on SMACSS modules'
+date: '2013-03-09'
+tags: ['CSS']
 permalink: /2013/03/09/modular-css-thoughts-on-smacss-modules/
 ---
 
@@ -30,7 +30,7 @@ From Nicole Sullivan's OOCSS Wiki:
 
 **Separate structure and skin**
 
-*This means to define repeating visual features (like background and border styles) as separate “skins” that you can mix-and-match with your various objects to achieve a large amount of visual variety without much code*
+_This means to define repeating visual features (like background and border styles) as separate “skins” that you can mix-and-match with your various objects to achieve a large amount of visual variety without much code_
 
 We can apply this concept of separate styles for structure and skin to modules.
 
@@ -38,24 +38,27 @@ Harry Roberts explains way better than I could about how you can combine the con
 
 The following is from Harry's [CSS Guidelines:][2]
 
-* * *
+---
 
 As an analogy (note, not example) take the following:
 
 ```css
-.room{}
+.room {
+}
 
-.room--kitchen{}
-.room--bedroom{}
-.room--bathroom{}
+.room--kitchen {
+}
+.room--bedroom {
+}
+.room--bathroom {
+}
 ```
-
 
 We have several types of room in a house, but they all share similar traits; they all have floors, ceilings, walls and doors. We can share this information in an abstracted .room{} class. However we have specific types of room that are different from the others; a kitchen might have a tiled floor and a bedroom might have carpets, a bathroom might not have a window but a bedroom most likely will, each room likely has different coloured walls. OOCSS teaches us to abstract the shared styles out into a base object and then extend this information with more specific classes to add the unique treatment(s).
 
 So, instead of building dozens of unique components, try and spot repeated design patterns across them all and abstract them out into reusable classes; build these skeletons as base ‘objects’ and then peg classes onto these to extend their styling for more unique circumstances.
 
-* * *
+---
 
 In the example above, the `.room` class Harry talks about would be a module in regards to SMACSS. It contains all of the common styles for all instances of the `.room` module. We extend the use of the `.room` module by adding a modifier to it, .room&#8211;kitchen, .room&#8211;bedroom, .room&#8211;bathroom.
 
@@ -87,9 +90,15 @@ For example, with the above comp, we could create a reviews module that had all 
 ```
 
 ```css
-.reviews {/* Module styles, plus specific styles for .reviews--movie */}
-.reviews--albums {/* Overrides for the albums block */}
-.reviews--books {/* Overrides for the albums block */}
+.reviews {
+  /* Module styles, plus specific styles for .reviews--movie */
+}
+.reviews--albums {
+  /* Overrides for the albums block */
+}
+.reviews--books {
+  /* Overrides for the albums block */
+}
 ```
 
 Another option is to create a module just for reviews which contains all the shared styles and no specific styles, then create a modifier for movies, albums, and books.
@@ -112,10 +121,18 @@ Another option is to create a module just for reviews which contains all the sha
 ```
 
 ```css
-.reviews {/* Common module styles */}
-.reviews--movies {/* Specific styles for movie reviews block */}
-.reviews--albums {/* Specific styles for album reviews block */}
-.reviews--books {/* Specific styles for books reviews block */}
+.reviews {
+  /* Common module styles */
+}
+.reviews--movies {
+  /* Specific styles for movie reviews block */
+}
+.reviews--albums {
+  /* Specific styles for album reviews block */
+}
+.reviews--books {
+  /* Specific styles for books reviews block */
+}
 ```
 
 I'm not particularly sure which method I prefer the most. With the first method, I see having to always overwrite the unique styles in each instance from the core module.
@@ -144,10 +161,19 @@ In both examples, `.reviews` is our module. In a previous post I talked about ho
 ```
 
 ```css
-.reviews, [class*='reviews--'] {/* Common module styles */}
-.reviews--movies {/* Specific styles for movie reviews block */}
-.reviews--albums {/* Specific styles for album reviews block */}
-.reviews--books {/* Specific styles for books reviews block */}
+.reviews,
+[class*='reviews--'] {
+  /* Common module styles */
+}
+.reviews--movies {
+  /* Specific styles for movie reviews block */
+}
+.reviews--albums {
+  /* Specific styles for album reviews block */
+}
+.reviews--books {
+  /* Specific styles for books reviews block */
+}
 ```
 
 I like to keep the `.reviews` in my styles if, for whatever reason, I decide to use it in my HTML. Whether you use multiple classes or class attribute selectors, the choice is up to you. What is important is understanding the concept of a module and a modifier.
@@ -184,12 +210,12 @@ In another post I'll come back to looking at modules within modules vs. subcompo
 
 This is really just a brain dump on my understanding of modular CSS. I find, writing this all done helps me better understand the concepts. As always, I'd love to hear your thoughts and ideas on this topic.
 
- [1]: http://en.wikipedia.org/wiki/File:Lego_Color_Bricks.jpg
- [2]: https://github.com/csswizardry/CSS-Guidelines#oocss
- [3]: http://24ways.org/2012/a-harder-working-class/
- [4]: http://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/
- [5]: http://us2.campaign-archive1.com/?u=2de298319eb1c284bd66e8b42&id=966ba5b4d3
- [6]: http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/
- [7]: http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/
- [8]: http://semantic.gs/
- [9]: http://carrotblog.com/css-patterns-evolved/
+[1]: http://en.wikipedia.org/wiki/File:Lego_Color_Bricks.jpg
+[2]: https://github.com/csswizardry/CSS-Guidelines#oocss
+[3]: http://24ways.org/2012/a-harder-working-class/
+[4]: http://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/
+[5]: http://us2.campaign-archive1.com/?u=2de298319eb1c284bd66e8b42&id=966ba5b4d3
+[6]: http://www.brettjankord.com/2013/03/06/more-thoughts-on-html-class-naming-conventions/
+[7]: http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/
+[8]: http://semantic.gs/
+[9]: http://carrotblog.com/css-patterns-evolved/
