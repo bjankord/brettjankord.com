@@ -26,6 +26,8 @@ class BlogPostTemplate extends React.Component {
         <article className="fade-in-down">
           <h1 className="post-title">{post.frontmatter.title}</h1>
           <time dateTime={convertedPostDate}>{post.frontmatter.date}</time>
+          <span className="post-time-divider">-</span>
+          <span className="post-readtime">{post.fields.readingTime.text}</span>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </article>
         <hr style={{ margin: '6rem 0 3rem' }} />
@@ -67,6 +69,12 @@ export const pageQuery = graphql`
       id
       excerpt
       html
+      fields {
+        slug
+        readingTime {
+          text
+        }
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

@@ -343,6 +343,19 @@ hr {
   line-height: 4.5rem;
 }
 
+.post-time-divider {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.post-readtime {
+  color: var(--gray);
+  display: inline-block;
+  font-style: italic;
+  vertical-align: bottom;
+}
+
 /* Bio
 ---------------------------------------- */
 .bio {
