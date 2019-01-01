@@ -55,8 +55,10 @@ class Layout extends React.Component {
         {header}
         <div className="site-container">{children}</div>
         <footer style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          Brett Jankord Copyright © 2011 - Present.{' '}
-          <a href="https://www.brettjankord.com/rss.xml">RSS Feed</a>
+          <div className="site-container">
+            Brett Jankord Copyright © 2011 - Present.{' '}
+            <a href="https://www.brettjankord.com/rss.xml">RSS Feed</a>
+          </div>
         </footer>
       </React.Fragment>
     );

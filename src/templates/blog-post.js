@@ -16,6 +16,8 @@ class BlogPostTemplate extends React.Component {
     const convertedPostDate = `${postDate.getFullYear()}-${postDate.getMonth() +
       1}-${postDate.getDate()}`;
 
+    const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://brettjankord.com${post.frontmatter.permalink}`)}`;
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
@@ -30,6 +32,9 @@ class BlogPostTemplate extends React.Component {
           <span className="post-readtime">{post.fields.readingTime.text}</span>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </article>
+        <a href={discussUrl} target="_blank" rel="noopener noreferrer">
+          Discuss on Twitter
+        </a>
         <hr style={{ margin: '6rem 0 3rem' }} />
         <Bio />
         <ul className="pagination">
