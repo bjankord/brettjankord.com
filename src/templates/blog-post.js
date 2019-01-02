@@ -1,10 +1,10 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
+import SEO from '../components/Seo';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -16,15 +16,13 @@ class BlogPostTemplate extends React.Component {
     const convertedPostDate = `${postDate.getFullYear()}-${postDate.getMonth() +
       1}-${postDate.getDate()}`;
 
-    const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://brettjankord.com${post.frontmatter.permalink}`)}`;
+    const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
+      `https://brettjankord.com${post.frontmatter.permalink}`
+    )}`;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={`${post.frontmatter.title} | ${siteTitle}`}
-        />
+        <SEO title={`${post.frontmatter.title} | ${siteTitle}`} description={post.excerpt} />
         <article className="fade-in-down">
           <h1 className="post-title">{post.frontmatter.title}</h1>
           <time dateTime={convertedPostDate}>{post.frontmatter.date}</time>
@@ -72,7 +70,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      excerpt
+      excerpt(pruneLength: 160)
       html
       fields {
         slug

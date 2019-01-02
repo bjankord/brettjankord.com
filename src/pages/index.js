@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
-import Helmet from 'react-helmet';
+import SEO from '../components/Seo';
 
 import Layout from '../components/Layout';
 
@@ -16,11 +16,7 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={siteTitle}
-        />
+        <SEO title="All posts" keywords={['blog', 'brett jankord', 'jankord', 'javascript', 'design systems', 'accessibility', 'responsive web design', 'CSS', 'ReactJS', 'open source software']} />
         {posts.map(({ node }) => {
           const title = get(node, 'frontmatter.title') || node.fields.slug;
           const postDate = new Date(node.frontmatter.date);
@@ -33,7 +29,9 @@ class BlogIndex extends React.Component {
               </h2>
               <time dateTime={convertedPostDate}>{node.frontmatter.date}</time>
               <span className="post-time-divider">-</span>
-              <span className="post-readtime">{node.fields.readingTime.text}</span>
+              <span className="post-readtime">
+                {node.fields.readingTime.text}
+              </span>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
           );
