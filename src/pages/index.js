@@ -16,7 +16,7 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" keywords={['blog', 'brett jankord', 'jankord', 'javascript', 'design systems', 'accessibility', 'responsive web design', 'CSS', 'ReactJS', 'open source software']} />
+        <SEO title="Front-End Developer" keywords={['blog', 'brett jankord', 'jankord', 'javascript', 'design systems', 'accessibility', 'responsive web design', 'CSS', 'ReactJS', 'open source software']} />
         {posts.map(({ node }) => {
           const title = get(node, 'frontmatter.title') || node.fields.slug;
           const postDate = new Date(node.frontmatter.date);
