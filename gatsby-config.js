@@ -4,14 +4,24 @@ module.exports = {
     author: 'Brett Jankord',
     description: 'Brett Jankord - Front-End Developer',
     siteUrl: 'https://brettjankord.com',
+    social: {
+      twitter: 'bjankord',
+      github: 'bjankord'
+    }
   },
-  pathPrefix: '/gatsby-starter-blog',
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages/posts`,
+        path: `${__dirname}/content/blog`,
         name: 'blog',
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/assets`,
+        name: 'assets',
       },
     },
     {
@@ -105,7 +115,7 @@ module.exports = {
         background_color: '#ffffff',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/assets/blog-icon.png',
+        icon: 'content/assets/blog-icon.png',
       },
     },
     // `gatsby-plugin-offline`,

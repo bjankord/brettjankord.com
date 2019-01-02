@@ -1,3 +1,3 @@
 // gatsby-browser.js
-require('./src/assets/styles.css');
-require('./src/assets/syntax-highlighter-theme.css');
+require('./content/assets/styles.css');
+require('./content/assets/syntax-highlighter-theme.css');
