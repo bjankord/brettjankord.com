@@ -183,15 +183,12 @@ hr {
 }
 
 .site-hero-bg {
-  background-size: cover;
-  background-position: center;
-  background-image: url(hero.jpg);
   filter: blur(3px) brightness(30%);
   top: -2rem;
   bottom: -2rem;
   left: -2rem;
   right: -2rem;
-  position: absolute;
+  position: absolute !important;
 }
 
 .site-hero-bg-overlay {
