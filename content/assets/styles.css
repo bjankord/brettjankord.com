@@ -9,7 +9,7 @@
 
   /* Typography */
   --font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --base-spacing-unit: 24px;
+  --base-spacing-unit: 2.4rem;
   --h1-size: 4rem;
   --h2-size: 3rem;
   --h3-size: 2.4rem;
@@ -378,8 +378,18 @@ hr {
   display: inline-block;
 }
 
+.bio-social-link svg {
+  display: inline-block;
+  vertical-align: -0.15em;
+  height: 0.9em;
+  width: 0.9em;
+  margin-right: 0.5rem;
+  fill: currentColor;
+}
+
 .bio-social-link-twitter {
-  margin-right: 5px;
+  margin-left: .5rem;
+  margin-right: 1.6rem;
 }
 
 
