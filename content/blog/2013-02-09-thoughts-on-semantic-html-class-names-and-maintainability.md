@@ -39,7 +39,7 @@ I prefer role based classes names but I think it is very important to keep them 
 
 I've put together a screenshot of sidebar to help go over some of these concepts.
 
-<!-- ![Three review sections. One for movies, one for albums, and one for books](http://www.brettjankord.com/wp-content/uploads/2013/02/reviews.jpg) -->
+![Three review sections. One for movies, one for albums, and one for books](../assets/wp-content/uploads/2013/02/reviews.jpg)
 
 _EDIT: I should have changed the titles of the items in each review section in this graphic above, but they aren't really the focus of this post, so yeah&#8230;_
 

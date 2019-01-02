@@ -7,10 +7,6 @@ permalink: /2013/01/22/beyond-device-detection/
 
 The landscape of web enabled devices is drastically changing at a [rapid pace][1]. Device detection is no longer a reliable solution to adapt with the changes we are seeing in the technological world. The amount of new web enabled devices being released is just too high.
 
-<!--
-![The amount of new web enabled devices is too damn high](http://www.brettjankord.com/wp-content/uploads/2013/01/toohigh.jpg)
--->
-
 ## A question of reliability
 
 Device detection _cannot_ reliably report the features of every device people are using to access the web. The main reason is for this is that reliable feature detection can only be done client-side via JavaScript. There are [ideas to offer feature detection on the server][2], yet these options are not available today.
@@ -21,8 +17,8 @@ The difficulty of keeping up with every new web enabled device and testing it an
 
 For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.
 
-<!-- ![Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all](http://www.brettjankord.com/wp-content/uploads/2013/01/test-all-the-devices.jpg)
-(Credit: [Jeremy Keith][5]) -->
+![Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all](../assets/wp-content/uploads/2013/01/test-all-the-devices.jpg)
+(Credit: [Jeremy Keith][5])
 
 A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.
 

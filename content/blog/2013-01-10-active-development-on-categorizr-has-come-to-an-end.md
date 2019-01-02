@@ -67,9 +67,7 @@ What I mean by this is that I longer see using user agent sniffing to group devi
 
 Sure, I can pick up a phone and tell the difference from a tablet. Likewise, I know the difference between my desktop computer at work and a tablet, though those lines we use to differentiate device groups are quickly fading away. Luke Wroblewski has an excellent graphic that shows how capabilities we saw associate with certain sets of devices is crossing over into all devices.
 
-<!--
-![Unified device design][14]
--->
+![Unified device design](../assets/unified_device_design.png)
 
 Thinking back to what originally motivated me to develop Categorizr, I wanted a [RESS solution][15] to help conditionally load resources/assets/content. A nice side effect of Categorizr was that it also worked great as redirect solution.
 
@@ -100,7 +98,6 @@ In my next post I plan to talk more about this consensual hallucination and my n
 [11]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms700675%28v=vs.85%29.aspx
 [12]: http://www.brettjankord.com/2012/02/22/thoughts-on-windows-8-device-detection/
 [13]: http://googlewebmastercentral.blogspot.com/2012/11/giving-tablet-users-full-sized-web.html
-[14]: http://static.lukew.com/unified_device_design.png
 [15]: http://www.lukew.com/ff/entry.asp?1392
 [16]: https://github.com/bjankord/isMobile
 [17]: http://futurefriend.ly/
