@@ -5,9 +5,9 @@ tags: ['Style Guide Boilerplate']
 permalink: /2013/03/07/style-guide-boilerplate/
 ---
 
-Recently, I've had a renewed interest in web style guides. As I've been building responsive websites, I've found style guides to be a crucial part of the build process. Style guides help promote consistency and modular thinking when building websites and also help add a greater clarity to the parts and pieces that make up your website.
+Recently, I've had a renewed interest in web style guides. As I've been building responsive websites, I've found style guides to be a crucial part of the build process. Style guides help promote consistency and modular thinking when building sites and also help add a greater clarity to the parts and pieces that make up your site.
 
-I've always been interested in standardizing the front-end code that I work on. Having a set reference any developer can look to adds efficiency to your team when editing a site.
+I've always been interested in standardizing the frontend code that I work on. Having a set reference any developer can look to adds efficiency to your team when editing a site.
 
 I decided I would standardize the style guide I had been using into a boilerplate of sorts for me and others to use. I started looking around to see what other developers were including in there style guides. One that really stood out to me was [HTML KickStart][1]. It probably falls more in line with a pattern library. I really liked how [Joshua Gatcke][2] had markup examples in tabs right next to the live code.
 
@@ -15,7 +15,7 @@ I started working on a style guide that used tabs that had markup next to the li
 
 This is similar to what Mat Marquis does with [X-RayHTML][3] and how code examples work on the [jQuery mobile docs site][4] currently. One thing I didn't like about this was how I had to format the live markup to get it look formatted correctly in the example code. Any code I wanted to populate in a code example, I had to remove all of the spaces to the left of the open and closing tags of my code sample. Looking at the markup it looked odd. It wasn't a big issue, though I could see people not wanting to format their markup so particularly to get the sample code to look right in `pre`.
 
-I kept looking around and came to Jeremy Keith's [Pattern Primer][5]. I liked how code snippets were all html pages that were pulled in with PHP. It meant I didn't have to worry about odd formatting to get my live code formatting to look correct in the code examples.
+I kept looking around and came to Jeremy Keith's [Pattern Primer][5]. I liked how code snippets were all HTML pages that were pulled in with PHP. It meant I didn't have to worry about odd formatting to get my live code formatting to look correct in the code examples.
 
 I spoke with Jeremy to see if I could use Pattern Primer for the core of my style guide boilerplate and build on top of it and he gave me the green light.
 
@@ -29,14 +29,14 @@ I wanted to combine the two into one document and so this was a driving factor b
 
 ## Goals for Style Guide Boilerplate
 
-As mentioned earlier, I think there are a lot of benefits to having your own style guide for your websites.
+As mentioned earlier, I think there are a lot of benefits to having your own style guide for your sites.
 
 **Style guides:**
 
 - Promote consistency
 - Promote modular thinking
-- Add a greater clarity to the parts and pieces that make up your website
-- Increase efficiency when editing a website.
+- Add a greater clarity to the parts and pieces that make up your site
+- Increase efficiency when editing a site.
 
 I hope people find this boilerplate useful and add it to their own projects.
 

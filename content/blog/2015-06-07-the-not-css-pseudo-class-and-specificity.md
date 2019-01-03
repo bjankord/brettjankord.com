@@ -99,7 +99,7 @@ By chaining up :not pseudo-classes to select input types we do not want to match
 input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="image"])
 ```
 
-Using a selector like this _may_ seem like a good idea, **with this selector, we cut our output css selector count for these styles from 40 to 5**. Though, this introduces a side effect. When you chain the :not pseudo-classes, it increases specificity with each :not. While we cut the selector count down, we now have a selector with a **specificity score of 0.0.8.1**.
+Using a selector like this _may_ seem like a good idea, **with this selector, we cut our output CSS selector count for these styles from 40 to 5**. Though, this introduces a side effect. When you chain the :not pseudo-classes, it increases specificity with each :not. While we cut the selector count down, we now have a selector with a **specificity score of 0.0.8.1**.
 
 If you need to override styles applied by this selector, you'll need some way to trump their current styling specificity.
 
