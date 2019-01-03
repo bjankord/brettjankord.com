@@ -34,7 +34,7 @@ One common pattern I saw with device detection when I was working on [Categorizr
 
 ## Feature Detection != Device Detection
 
-I will admit, it’s difficult to move beyond device detection. We want our websites to be suitable for and to work on as many devices as possible. Yet relying on user agents to determine features is not reliable, though we continue with this same set logic. We just reverse it. I’m sure you've all seen [a list][10] of media queries designed [specifically for the iPhone or the iPad][11]. Or maybe the misconception I brought up previously, that we can rely on detecting touch support to determine what type of device a user is on. These are not only silly, but have become tiring to see [over][12] and [over][13].
+I will admit, it’s difficult to move beyond device detection. We want our sites to be suitable for and to work on as many devices as possible. Yet relying on user agents to determine features is not reliable, though we continue with this same set logic. We just reverse it. I’m sure you've all seen [a list][10] of media queries designed [specifically for the iPhone or the iPad][11]. Or maybe the misconception I brought up previously, that we can rely on detecting touch support to determine what type of device a user is on. These are not only silly, but have become tiring to see [over][12] and [over][13].
 
 **If you believe device detection != feature detection, you must accept that, feature detection != device detection.**
 

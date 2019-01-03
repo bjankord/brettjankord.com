@@ -5,9 +5,9 @@ tags: ['rwd']
 permalink: /2012/01/18/rwd-toolset/
 ---
 
-**RWD Toolset** is a small JavaScript file paired with a stylesheet I threw together to help when developing responsive websites. It adds a form to the bottom of your site to calculate relative dimensions, either in percentanges or EMs. It also displays the current window width to help in figuring out where your layout breaks so you know where you need to add your media queries.
+**RWD Toolset** is a small JavaScript file paired with a style sheet I threw together to help when developing responsive sites. It adds a form to the bottom of your site to calculate relative dimensions, either in percentages or EMs. It also displays the current window width to help in figuring out where your layout breaks so you know where you need to add your media queries.
 
-While it's easy enough to open up your calculator app and do the math there, **RWD Toolset** adds a form to the page that you're developing, where you can enter the target size and context size and then get the results based either in percentages or EMs. The form uses Ethan Marcotte's [formula](http://www.alistapart.com/articles/fluidgrids/) for calculating relative based widths: **Target Size / Context Size = Result.**  I found that being able to do this math right on the page, in addition to being able to see what my current window size is, helps decrease the time needed when developing a responsive site.
+While it's easy enough to open up your calculator app and do the math there, **RWD Toolset** adds a form to the page that you're developing, where you can enter the target size and context size and then get the results based either in percentages or EMs. The form uses Ethan Marcotte's [formula](https://alistapart.com/article/fluidgrids) for calculating relative based widths: **Target Size / Context Size = Result.**  I found that being able to do this math right on the page, in addition to being able to see what my current window size is, helps decrease the time needed when developing a responsive site.
 
 Another task I find myself often doing when building responsive sites is checking where my layout breaks, to determine where I need to add my media query for my breakpoints. [Brent Simmons](http://inessential.com/2012/01/13/things_i_learned_doing_responsive_web_de) explains this concept nicely.
 
@@ -30,7 +30,7 @@ Download the JavaScript file and the CSS file and add them to your site.
 
 Once the files are in place you, should now have the **RWD Toolset** toolbar on the bottom of you page.
 
-My idea in building **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive websites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive websites.
+My idea in building **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive sites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive sites.
 
 <!--
 * [View RWD Toolset Demo](http://brettjankord.com/projects/rwd-toolset/)
