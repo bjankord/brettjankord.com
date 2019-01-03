@@ -40,7 +40,7 @@ Nothing really, though they could be a lot cleaner. A friend asked me about reti
 
 It got me thinking about the standard retina/high resolution media query I typically use. Usually I just copy and paste from other sites and had never put much thought into it.
 
-When I tested the query I usually use on his phone, I learned that IE does not have a device-pixel-ratio media query. There is no -ms-device-pixel-ratio. You can't detect the device-pixel-ration with Javascript using window.devicePixelRatio in IE either. Also of note, window.devicePixelRatio does not currently work in Firefox, though it does work in Opera and Chrome.
+When I tested the query I usually use on his phone, I learned that IE does not have a device-pixel-ratio media query. There is no -ms-device-pixel-ratio. You can't detect the device-pixel-ration with JavaScript using window.devicePixelRatio in IE either. Also of note, window.devicePixelRatio does not currently work in Firefox, though it does work in Opera and Chrome.
 
 ## IE is using standards, this is new
 

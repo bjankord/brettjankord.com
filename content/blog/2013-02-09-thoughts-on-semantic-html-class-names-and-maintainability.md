@@ -5,7 +5,7 @@ tags: ['CSS']
 permalink: /2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/
 ---
 
-The discussion of semantic HTML class names is one that goes back quite a while. While many great front-end developers have discussed back and forth on the topic, I wanted to document my own thoughts on the topic. To me, semantic HTML class names is somewhat of a misnomer. Aside from microformats, HTML classes add no semantic meaning to machines such as search engines or assistive technology like screen readers. Yet semantic class names is one of the main tenants of CSS best practices. I believe choosing class names is one of the most difficult part of CSS, largely do to our understanding of semantics. I've recently read and re-read a lot of articles/books on semantic HTML, specifically concerning document outlines, as well as techniques for writing maintainable and scalable CSS.
+The discussion of semantic HTML class names is one that goes back quite a while. While many great frontend developers have discussed back and forth on the topic, I wanted to document my own thoughts on the topic. To me, semantic HTML class names is somewhat of a misnomer. Aside from microformats, HTML classes add no semantic meaning to machines such as search engines or assistive technology like screen readers. Yet semantic class names is one of the main tenants of CSS best practices. I believe choosing class names is one of the most difficult part of CSS, largely do to our understanding of semantics. I've recently read and re-read a lot of articles/books on semantic HTML, specifically concerning document outlines, as well as techniques for writing maintainable and scalable CSS.
 
 I want to reiterate this one point, HTML class names offer no semantic value to search engines or screen readers, aside from microformats. If you are concerned with semantic value, understanding HTML document outlines is very important. It's also important to understand that class names have no effect on the document outline. So the way we view semantic value of HTML class names must be different than the way we view semantic value of our HTML markup.
 
@@ -19,7 +19,7 @@ From [W3C's Tips for Webmasters][1]
 
 The reasoning behind W3C's recommendation is clear, using a class like bluetext is not future friendly. If down the road, you change that color, `.bluetext` has lost its meaning.
 
-On the flip side, frameworks like Twitter Bootstrap which use visual(presentational) class names are widely popular. Back-end developers that I've talked to that have used Twitter Bootstrap seem to really like it. They love the plugin-in-play ability with adding visual class names to elements. They don't have to get in and mess around with the CSS, they can just add and remove classes as needed.
+On the flip side, frameworks like Twitter Bootstrap which use visual(presentational) class names are widely popular. backend developers that I've talked to that have used Twitter Bootstrap seem to really like it. They love the plugin-in-play ability with adding visual class names to elements. They don't have to get in and mess around with the CSS, they can just add and remove classes as needed.
 
 With individual role based classes, this flexibility is tricky. If we class the sections of the page individually, based on their role, with little thought to reusability, the CSS and the corresponding HTML classes offer little ease of maintenance and extensibility. If new sections are added, we need to add new role based classes along with additional CSS that corresponds to these new classes.
 
@@ -70,9 +70,9 @@ Upon getting this sidebar to code out, I would go about classing each review sec
 
 The `.reviews` class will act as our main module for all reviews we have here.
 
-## Sub-Classing
+## Subclassing
 
-Snook talks a lot about sub-classing in SMACSS and it's key to making our modules flexible. Sub-classing is the process of creating sub-modules based off of our main module.
+Snook talks a lot about subclassing in SMACSS and it's key to making our modules flexible. subclassing is the process of creating sub-modules based off of our main module.
 
 For instance, a sub-class, or sub-module of `.reviews` would be `.reviews-movies`. There are a few tricks to naming sub-modules which I'll touch on later, but the main thing I want to share is that by keeping our class names simple at first and creating basic modules, it makes them more reusable and allows use to use sub-modules to create flexibility.
 
@@ -181,7 +181,7 @@ One of the benefits of this approach is that we can remove the `.reviews` class 
 </div>
 ```
 
-The main drawback I see with this approach though is that if we decide to add a new review section, we have to update our styles. This is a small issue admittedly, though I think we can alleviate it with intelligently thinking about how we go about naming our classes and writing our CSS. Nicolas Gallagher touches on some of the other issues associated with a single class approach in the component modifiers section of his post, [About HTML semantics and front-end architecture][5].
+The main drawback I see with this approach though is that if we decide to add a new review section, we have to update our styles. This is a small issue admittedly, though I think we can alleviate it with intelligently thinking about how we go about naming our classes and writing our CSS. Nicolas Gallagher touches on some of the other issues associated with a single class approach in the component modifiers section of his post, [About HTML semantics and frontend architecture][5].
 
 ### Class-Attribute Selectors
 
@@ -240,7 +240,7 @@ The class-attribute selector offers a lot of power to how we can write our CSS a
 
 This is the reasoning behind why I used `[class*="reviews-"]` in the example above instead of just `[class*="reviews"]`. There may not be any conflicts with using `[class*="reviews"]` but adding the extra dash helps, usually.
 
-In the comments section of Nicolas Gallagher's About HTML semantics and front-end architecture post, Gallagher talks about a concern he has with the &#8220;moduleName-&#8221; pattern.
+In the comments section of Nicolas Gallagher's About HTML semantics and frontend architecture post, Gallagher talks about a concern he has with the &#8220;moduleName-&#8221; pattern.
 
 Below are Gallagher's concerns on using `[class*="btn-"]`
 

@@ -9,7 +9,7 @@ It's time to officially bring active development of Categorizr to a close. It's 
 
 It was fun to see the project take off, I remember getting a tweet from Paul Irish asking me to add a link to Categorizr in the Modernizr Wiki. It was fun to see Categorizr make it in to a list of 50 fantastic responsive web design tools on [.net Magazine][1], and see [Ethan Marcotte][2] mention my project as well other people I look up to like [Jeffery Zeldman][3], [Jeremy Keith][4], and [Brad Frost][5]. Jason Grigsby introduced me to Crystal Beasley and Lawrence Mandel to offer my thoughts on the user agent for Firefox's new OS to make sure it would be easily detectable. It was a great experience.
 
-I learned a lot while working on the project. To name just a few of the things, I learned a better understanding of PHP, a better understanding of how CDNs work, how to license code and what licensing options there are. Nearly a year ago, I took the plunge and learned how to use github and set up a project specifically so I could put [Categorizr][6] on it.
+I learned a lot while working on the project. To name just a few of the things, I learned a better understanding of PHP, a better understanding of how CDNs work, how to license code and what licensing options there are. Nearly a year ago, I took the plunge and learned how to use GitHub and set up a project specifically so I could put [Categorizr][6] on it.
 
 I worked with a great developer and friend on this project, [Josh Eisma][7]. He helped a lot with code review and we had even built out an API to launch a month after Categorizr was released on github, though there was something that held me back from ever pushing that update live. My view of the web.
 
@@ -23,41 +23,45 @@ Before Windows 8, you could [determine the difference][11] between a Windows PC 
 
 Though when I looked at they user agents Paulo Morgado collected from IE10, running on Windows 8 on his dev device, I noticed their was no **reliable** way to differentiate the user agent between Metro and Classic Desktop mode.
 
-User agent from Internet Explorer 10, running in the Metro UI:
+<!-- textlint-disable -->
+User agent from internet Explorer 10, running in the Metro UI:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)`
 ```
 
-User agent from Internet Explorer 10, running in the Classic Desktop UI:
+User agent from internet Explorer 10, running in the Classic Desktop UI:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)`
 ```
+<!-- textlint-enable -->
 
-This was the first instance I started to see the lines between tablet and desktop blur, then I started seeing screen shots of the tablet paired with a keyboard and it really opened my eyes. I [blogged][12] about it back in February last year.
+This was the first instance I started to see the lines between tablet and desktop blur, then I started seeing screenshots of the tablet paired with a keyboard and it really opened my eyes. I [blogged][12] about it back in February last year.
 
 So I decided to hold off on promoting Categorizr any more as I wanted to see if Microsoft would change the UAs, possibly adding Tablet PC to their Windows 8 tablets when they actually released their device.
 
 Here are the user agents from the new Microsoft Surface.
 
-User agent from Internet Explorer 10, running in the Metro UI on Microsoft Surface:
+<!-- textlint-disable -->
+User agent from internet Explorer 10, running in the Metro UI on Microsoft Surface:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
 ```
 
-User agent from Internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:
+User agent from internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
 ```
+<!-- textlint-enable -->
 
 Microsoft actually uses the same user agent when for the Surface when it is in Metro UI mode as when it is in Desktop UI mode.
 
 **They want the device to be recognized as a &#8220;desktop&#8221;**
 
-I don't think this is necessarily bad either. This matches up with [Google's tips for optimizing websites for tablets][13]
+I don't think this is necessarily bad either. This matches up with [Google's tips for optimizing sites for tablets][13]
 
 ## Other concerns
 
@@ -77,7 +81,7 @@ I would much rather rely on client-side feature detection. I feel it is more acc
 
 ## Moving on
 
-While I see little reason to use device detection in my workflow, I know there are intances where a separate mobile site is preferred. I've decided to take the knowledge I've learned from working on Categorizr and create a simpler, smaller device detection script called [isMobile][16].
+While I see little reason to use device detection in my workflow, I know there are instances where a separate mobile site is preferred. I've decided to take the knowledge I've learned from working on Categorizr and create a simpler, smaller device detection script called [isMobile][16].
 
 It will come in two flavors: a mobile first detection of mobile devices, and a desktop first detection of mobile devices.
 

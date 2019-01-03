@@ -184,13 +184,13 @@ Nathan Ford also has some insightful comments on selector performance of class a
 
 ## Naming Conventions of Modifiers
 
-What I call module modifiers, Johnathan refers to as submodles. I use the term modifier based on my understanding of the BEM methodology. I think as long as you understand the concept of modules(blocks), submodules(modifiers), and subcomponents(elements), what your call them is up to you. Find a naming convention you and your team agree on and stick to it. As long as it is easy for you to understand when you come back to your code or for other developers to understand if they work on it, that is what is important. In the [recent SMACSS newsletter][5], Johnathan listed some other naming conventions people are using.
+What I call module modifiers, Johnathan refers to as submodles. I use the term modifier based on my understanding of the BEM methodology. I think as long as you understand the concept of modules(blocks), submodules(modifiers), and sub-components(elements), what your call them is up to you. Find a naming convention you and your team agree on and stick to it. As long as it is easy for you to understand when you come back to your code or for other developers to understand if they work on it, that is what is important. In the [recent SMACSS newsletter][5], Johnathan listed some other naming conventions people are using.
 
 ## Modules and Presentational Class Names
 
 Another concept in OOCSS is the use of visual class names, or presentational class names. Ask anyone about semantic class names and they will tell you presentational class names are a bad practice, and I agree, to an extent. While I think presentational classes should be avoided in the HTML markup, I think they play a big role in aiding in developer understanding of the styles. They add meaning (semantics) for developers on how certain elements will look. People generally don't like presentational classes because they can muddy up our HTML. If we ever decide to change the look of something, we need to modify the HTML and this isn't always possible/ideal. So where do presentational classes fit in?
 
-**%placehoders**
+**%placeholders**
 
 With the rise of CSS preprocessors, specifically Sass, the ability to craft intelligent CSS has grown immensely. I especially like the %placeholder feature of Sass. Using placeholders, we can keep our presentational class names, though extend them inside our &#8220;semantic&#8221; role based class names.
 
@@ -200,13 +200,13 @@ I know [Semantic.gs][8] uses the same approach of loading presentational classes
 
 It is definitely something I'd like to explore some more.
 
-## Modules within Modules vs. Subcomponents
+## Modules within Modules vs. Sub-components
 
-Another important markup feature Snook talks about are subcomponents. These are the inside parts of the modules, the pieces that make up the module. Also of note is that modules can be used inside of other modules as well. I need some more experience using modules and subcompents to form my thoughts on best practices for when to use subcomponents and when to use a module inside a module.
+Another important markup feature Snook talks about are sub-components. These are the inside parts of the modules, the pieces that make up the module. Also of note is that modules can be used inside of other modules as well. I need some more experience using modules and sub-components to form my thoughts on best practices for when to use sub-components and when to use a module inside a module.
 
-Going back to the reviews example, each review is a module and in each of the .review modules there is a button. Depending on how you look at it, the button could be its own module used within the .review module, or it could be a subcomponent of the .review module.
+Going back to the reviews example, each review is a module and in each of the .review modules there is a button. Depending on how you look at it, the button could be its own module used within the .review module, or it could be a sub-component of the .review module.
 
-In another post I'll come back to looking at modules within modules vs. subcomponents.
+In another post I'll come back to looking at modules within modules vs. sub-components.
 
 This is really just a brain dump on my understanding of modular CSS. I find, writing this all done helps me better understand the concepts. As always, I'd love to hear your thoughts and ideas on this topic.
 

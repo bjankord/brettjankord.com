@@ -31,7 +31,14 @@
   },
   "devDependencies": {
     "eslint": "^5.11.1",
-    "prettier": "^1.14.2"
+    "license-checker": "^24.1.0",
+    "prettier": "^1.14.2",
+    "textlint": "^11.2.1",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-rule-no-dead-link": "^4.4.1",
+    "textlint-rule-no-start-duplicated-conjunction": "^2.0.2",
+    "textlint-rule-spellchecker": "^2.2.1",
+    "textlint-rule-terminology": "^1.1.30"
   },
   "homepage": "https://brettjankord.com",
   "main": "n/a",
@@ -39,9 +46,11 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
+    "lint:md": "textlint 'content/blog/**'",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.js' 'src/**/*.md'",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
+    "license-check": "license-checker --exclude 'MIT, MIT OR X11, ISC, Apache-2.0, BSD, WTFPL'"
   }
 }

@@ -15,7 +15,7 @@ By no means I am all knowing of this terminology either, though I thought I coul
 
 ## Progressive Enhancement
 
-Progressive enhancement is a strategy for [web design][4] that emphasizes accessibility, [semantic HTML markup][5], and external stylesheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or Internet connection, while also providing an enhanced version of the page to those with more advanced browser software or greater bandwidth.
+Progressive enhancement is a strategy for [web design][4] that emphasizes accessibility, [semantic HTML markup][5], and external style sheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or internet connection, while also providing an enhanced version of the page to those with more advanced browser software or greater bandwidth.
 
 (Source: [Wikipedia][6])
 
@@ -103,13 +103,13 @@ This term combines the mobile-first mindset from Wroblewski with Marcotte’s Re
 - [Jason Grigsby – Mobile-First Responsive Design][36]
 - [Mobile-First, Responsive Design Websites: Does This Really Matter?][37]
 
-![Dekstop first](../assets/wp-content/uploads/2013/01/desktop-first.jpg)
+![Desktop first](../assets/wp-content/uploads/2013/01/desktop-first.jpg)
 
 ## Desktop-First
 
 Desktop-first is the flip side to mobile-first. It has been the mindset of web designers and developers for the last 15+ years.
 
-Desktop-First Responsive Web Design This approach to responsive web design lines up with principles of graceful degradation. You start with your desktop website and add max-width media queries along with other elements of responsive web design to your website. Another term I've seen associated with this approach is [Responsive Retrofitting][38]
+Desktop-First Responsive Web Design This approach to responsive web design lines up with principles of graceful degradation. You start with your desktop site and add max-width media queries along with other elements of responsive web design to your site. Another term I've seen associated with this approach is [Responsive Retrofitting][38]
 
 **Additional Resources:**
 
@@ -156,15 +156,15 @@ The concept of [adaptive layouts][47] is often confused with term adaptive web d
 
 ## RESS
 
-RESS is another term I often see confused with adaptive web design. Original coined by [Luke Wroblewski][58] in September 2011, it stands for Responsive Design + Server Side Components. “In a nutshell, RESS combines adaptive layouts with server side component (not full page) optimization. So a single set of page templates define an entire Web site for all devices but key components within that site have device-class specific implementations that are rendered server side.”
+RESS is another term I often see confused with adaptive web design. Original coined by [Luke Wroblewski][58] in September 2011, it stands for Responsive Design + server-side Components. “In a nutshell, RESS combines adaptive layouts with server-side component (not full page) optimization. So a single set of page templates define an entire site for all devices but key components within that site have device-class specific implementations that are rendered server side.”
 
 (Source: [Luke Wroblewski][58])
 
-For some time, the server side component in RESS was assumed to be a device detection solution like WURFL, Categorizr, Device Atlas. Recently though, I had an insightful conversation with Tim Murtaugh. Tim helped develop the redesign for [An Event Apart][59]. In an [article about the redesign][60], it was mentioned that RESS was used in the redesign. I was curious about which server side component they were using as part of their RESS implementation, however when talking to Tim, he mentioned they were conditionally loading resources based on feature detection. Which is perfectly reasonable and the approach I prefer when I’m build responsive websites. Though the use of the term RESS did not seem to line up with my understanding of it. An [interesting discussion][61] ensued on Twitter between, Tim Murtaugh, Luke Wroblewski, Ethan Marcotte, Scott Jehl and myself about what RESS actually is. After the discussion I don’t think I understand what RESS full encapsulates. Depending on [who you ask][62], conditionally loading resources/markup via AJAX based on feature detection could be defined as RESS, where the server side component is the part the returns the data for the AJAX call, though I believe most people still associate RESS with responsive design + a server side device detection component. I think this is a perfect example of where terms we use everyday have a way of evolving as we adapt with change over time.
+For some time, the server-side component in RESS was assumed to be a device detection solution like WURFL, Categorizr, Device Atlas. Recently though, I had an insightful conversation with Tim Murtaugh. Tim helped develop the redesign for [An Event Apart][59]. In an [article about the redesign][60], it was mentioned that RESS was used in the redesign. I was curious about which server-side component they were using as part of their RESS implementation, however when talking to Tim, he mentioned they were conditionally loading resources based on feature detection. Which is perfectly reasonable and the approach I prefer when I’m build responsive sites. Though the use of the term RESS did not seem to line up with my understanding of it. An [interesting discussion][61] ensued on Twitter between, Tim Murtaugh, Luke Wroblewski, Ethan Marcotte, Scott Jehl and myself about what RESS actually is. After the discussion I don’t think I understand what RESS full encapsulates. Depending on [who you ask][62], conditionally loading resources/markup via Ajax based on feature detection could be defined as RESS, where the server-side component is the part the returns the data for the Ajax call, though I believe most people still associate RESS with responsive design + a server-side device detection component. I think this is a perfect example of where terms we use everyday have a way of evolving as we adapt with change over time.
 
 ## In Conclusion
 
-Hopefully this can serve as a reference for those who want to catch up on these new terms. It’s always good when you’re planning out your next website project to make sure all of those involved are on the same page. By defining these terms for those who may not be familiar with them helps ensure better understanding for everyone throughout the project.
+Hopefully this can serve as a reference for those who want to catch up on these new terms. It’s always good when you’re planning out your next site project to make sure all of those involved are on the same page. By defining these terms for those who may not be familiar with them helps ensure better understanding for everyone throughout the project.
 
 [1]: http://www.businessinsider.com/survey-mobile-first-bad-strategy-2012-12
 [2]: http://uxmag.com/articles/combining-responsive-and-adaptive-strategies-to-solve-mobile-design-challenges
