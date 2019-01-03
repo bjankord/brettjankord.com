@@ -31,7 +31,9 @@
   },
   "devDependencies": {
     "eslint": "^5.11.1",
-    "prettier": "^1.14.2"
+    "hygen": "^2.0.4",
+    "prettier": "^1.14.2",
+    "slugify": "^1.3.4"
   },
   "homepage": "https://brettjankord.com",
   "main": "n/a",
@@ -39,6 +41,7 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
+    "blog": "hygen blog new",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.js' 'src/**/*.md'",
