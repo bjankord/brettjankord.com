@@ -1,8 +1,8 @@
 ---
 title: 'Modular CSS: Thoughts on SMACSS modules'
 date: '2013-03-09'
-tags: ['CSS']
 permalink: /2013/03/09/modular-css-thoughts-on-smacss-modules/
+tags: ['CSS']
 ---
 
 My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I've learned about modules.

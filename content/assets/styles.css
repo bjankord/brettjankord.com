@@ -265,11 +265,10 @@ hr {
 ---------------------------------------- */
 .site-header {
   margin-bottom: 2rem;
-  max-width: 70rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: var(--base-spacing-unit);
-  padding-bottom: var(--base-spacing-unit);
+  max-width: 76rem;
+  padding: 2.4rem 3rem 2.3rem;
   border-bottom: 1px solid var(--gray-light);
   display: table;
   text-align: center;
@@ -352,6 +351,21 @@ hr {
   font-style: italic;
   vertical-align: bottom;
 }
+
+.post-featured-image {
+  display: block;
+  margin: 4rem 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* .post-featured-image .gatsby-image-wrapper {
+  top: 50%;
+  left: 50%;
+  margin-left: -50%;
+  margin-top: -50%;
+} */
 
 /* Bio
 ---------------------------------------- */

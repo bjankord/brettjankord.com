@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Img from "gatsby-image";
 
 import Hero from "./Hero";
 
@@ -19,7 +18,7 @@ class Layout extends React.Component {
         <header className="site-header fade-in-down">
           <h1 className="site-name">
             <Link to={'/'}>
-              {title}
+              Brett Jankord
               <small className="site-description">Front-End Developer</small>
             </Link>
           </h1>
@@ -29,7 +28,7 @@ class Layout extends React.Component {
     return (
       <React.Fragment>
         {header}
-        <div className="site-container">{children}</div>
+        {children}
         <footer style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="site-container">
             Brett Jankord Copyright © 2011 - Present.{' '}
