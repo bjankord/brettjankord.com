@@ -24,13 +24,13 @@ Before Windows 8, you could [determine the difference][11] between a Windows PC 
 Though when I looked at they user agents Paulo Morgado collected from IE10, running on Windows 8 on his dev device, I noticed their was no **reliable** way to differentiate the user agent between Metro and Classic Desktop mode.
 
 <!-- textlint-disable -->
-User agent from internet Explorer 10, running in the Metro UI:
+User agent from Internet Explorer 10, running in the Metro UI:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)`
 ```
 
-User agent from internet Explorer 10, running in the Classic Desktop UI:
+User agent from Internet Explorer 10, running in the Classic Desktop UI:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)`
@@ -44,13 +44,13 @@ So I decided to hold off on promoting Categorizr any more as I wanted to see if 
 Here are the user agents from the new Microsoft Surface.
 
 <!-- textlint-disable -->
-User agent from internet Explorer 10, running in the Metro UI on Microsoft Surface:
+User agent from Internet Explorer 10, running in the Metro UI on Microsoft Surface:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
 ```
 
-User agent from internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:
+User agent from Internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:
 
 ```sh
 `Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
