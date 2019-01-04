@@ -1,8 +1,8 @@
 ---
 title: 'Beyond device detection'
 date: '2013-01-22'
-tags: ['Device Detection']
 permalink: /2013/01/22/beyond-device-detection/
+tags: ['Device Detection']
 ---
 
 The landscape of web enabled devices is drastically changing at a [rapid pace][1]. Device detection is no longer a reliable solution to adapt with the changes we are seeing in the technological world. The amount of new web enabled devices being released is just too high.

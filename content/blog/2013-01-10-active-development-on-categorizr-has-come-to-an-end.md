@@ -1,8 +1,8 @@
 ---
 title: 'Active development on Categorizr has come to an end'
 date: '2013-01-10'
-tags: ['Categorizr']
 permalink: /2013/01/10/active-development-on-categorizr-has-come-to-an-end/
+tags: ['Categorizr']
 ---
 
 It's time to officially bring active development of Categorizr to a close. It's always difficult to bring a personal project to a close. This was my first big personal project, so it is bittersweet to see this go.

@@ -16,6 +16,7 @@
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "license-check": "license-checker --exclude 'MIT, MIT OR X11, ISC, Apache-2.0, BSD, WTFPL'",
     "lint:md": "textlint 'content/blog/**'",
+    "lint-fix:md": "textlint --fix 'content/blog/**'",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "serve": "gatsby serve",
     "start": "gatsby develop",

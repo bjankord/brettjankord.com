@@ -1,8 +1,8 @@
 ---
 date: '2011-01-18'
 title: 'RWD toolset'
-tags: ['rwd']
 permalink: /2012/01/18/rwd-toolset/
+tags: ['rwd']
 ---
 
 **RWD Toolset** is a small JavaScript file paired with a style sheet I threw together to help when developing responsive sites. It adds a form to the bottom of your site to calculate relative dimensions, either in percentages or EMs. It also displays the current window width to help in figuring out where your layout breaks so you know where you need to add your media queries.
