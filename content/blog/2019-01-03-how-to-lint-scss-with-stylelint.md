@@ -6,7 +6,7 @@ featuredImage: '../assets/how-to-lint-scss-with-stylelint.png'
 tags: ['css', 'stylelint']
 ---
 
-[Stylelint](https://github.com/stylelint/stylelint) is a mighty, modern CSS linter that helps you enforce consistent conventions and avoid errors in your stylesheets. If you are reading this, I’m guessing you are already familiar with stylelint. If not, I’d highly recommend reading Aleks Hudochenkov’s Smashing Magazine post, [Stylelint: The Style Sheet Linter We’ve Always Wanted](https://www.smashingmagazine.com/2016/05/stylelint-the-style-sheet-linter-weve-always-wanted/)
+[Stylelint](https://github.com/stylelint/stylelint) is a mighty, modern CSS linter that helps you enforce consistent conventions and avoid errors in your style sheets. If you are reading this, I’m guessing you are already familiar with stylelint. If not, I’d highly recommend reading Aleks Hudochenkov’s Smashing Magazine post, [Stylelint: The Style Sheet Linter We’ve Always Wanted](https://www.smashingmagazine.com/2016/05/stylelint-the-style-sheet-linter-weve-always-wanted/)
 
 ## Installing stylelint
 First, you’ll want to ensure you have stylelint installed. Stylelint is an npm package which can be installed by running the following command:
@@ -15,7 +15,7 @@ First, you’ll want to ensure you have stylelint installed. Stylelint is an npm
 npm install -g stylelint
 ```
 
-Be sure to check out the [CLI documentation](http://stylelint.io/user-guide/cli/) for more info about the CLI options.
+Be sure to check out the [CLI documentation](https://stylelint.io/user-guide/cli/) for more info about the CLI options.
 
 ## Usage
 After you have stylelint installed, you’ll want to create a `.stylelintrc.json` file. This is where you will configure all the lint rules you want stylelint to check for. Take a look at the [rules documentation page](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md) for a detailed overview of all the available rules.
@@ -70,7 +70,7 @@ Now when you run npm run stylelint, the npm ERR! messages will not display.
 
 You’ll want to leave off the `exit 0` though if your are running this script as part of a build process or continuous integration process where you want the process to fail if there is any lint.
 
-Another option is to set the [default severity](http://stylelint.io/user-guide/configuration/#defaultseverity) level in your stylelint config to warning.
+Another option is to set the [default severity](https://stylelint.io/user-guide/configuration/#defaultseverity) level in your stylelint config to warning.
 
 ```json
 {
@@ -92,7 +92,7 @@ Now you should be set up with how to lint `.scss` files with stylelint, though t
 
 I’ve found that the core stylelint rules cover a lot of the conventions and patterns I want to lint for in my .scss files, and stylelint-scss covers a nice set of additional patterns and syntax specific to SCSS.
 
-For example, I use stylelint’s [at-rule-blacklist](http://stylelint.io/user-guide/rules/at-rule-blacklist/) rule to ensure I don’t leave any debug commands in my .scss.
+For example, I use stylelint’s [at-rule-blacklist](https://stylelint.io/user-guide/rules/at-rule-blacklist/) rule to ensure I don’t leave any debug commands in my .scss.
 
 ```json
 "rules": {
@@ -122,7 +122,7 @@ The stylelint team maintains a standard stylelint config called [stylelint-confi
 
 ![stylelint-config-sass-guidelines](../assets/how-to-lint-scss-with-stylelint-4.png)
 
-I’m a big fan of [Hugo Giraudel’s](http://hugogiraudel.com/) [Sass Guidelines](https://sass-guidelin.es/). In my opinion, it is one of the best resources for writing sane, maintainable and scalable Sass/SCSS. In Sass Guidelines, there is a section for [tools](https://sass-guidelin.es/#tools), which provides a [scss-lint config](https://sass-guidelin.es/#scss-lint) based on the recommendations in Sass Guidelines.
+I’m a big fan of [Hugo Giraudel’s](https://hugogiraudel.com/) [Sass Guidelines](https://sass-guidelin.es/). In my opinion, it is one of the best resources for writing sane, maintainable and scalable Sass/SCSS. In Sass Guidelines, there is a section for [tools](https://sass-guidelin.es/#tools), which provides a [scss-lint config](https://sass-guidelin.es/#scss-lint) based on the recommendations in Sass Guidelines.
 
 I set out to put together [stylelint-config-sass-guidelines](https://github.com/bjankord/stylelint-config-sass-guidelines), a config based on the [scss-lint rules Sass Guidelines recommends](https://sass-guidelin.es/#scss-lint).
 
@@ -136,7 +136,7 @@ I’ve been surprised with how well stylelint does with linting SCSS. If you are
 }
 ```
 
-Hopefully, this post has shed some light on how easy it is to use stylelint for linting SCSS. With companies like [Facebook](https://code.facebook.com/posts/879890885467584), [GitHub](https://github.com/primer/primer/tree/master/tools/stylelint-config-primer), and [18F](https://github.com/18F/stylelint-rules) using stylelint, the project looks to have a bright future.
+Hopefully, this post has shed some light on how easy it is to use stylelint for linting SCSS. With companies like [Facebook](https://code.fb.com/open-source/improving-css-quality-at-facebook-and-beyond/), [GitHub](https://github.com/primer/primer/tree/master/tools/stylelint-config-primer), and [18F](https://github.com/18F/stylelint-rules) using stylelint, the project looks to have a bright future.
 
 __Originally posted on:__
 <br />
