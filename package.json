@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "author": "Brett Jankord",
   "homepage": "https://brettjankord.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjankord/brettjankord.com.git"
+  },
   "main": "n/a",
   "scripts": {
     "blog": "hygen blog new",
@@ -31,7 +35,6 @@
     "gatsby-remark-copy-linked-files": "^2.0.5",
     "gatsby-remark-images": "^3.0.1",
     "gatsby-remark-prismjs": "^3.0.0",
-    "gatsby-remark-reading-time": "^1.0.1",
     "gatsby-remark-responsive-iframe": "^2.0.5",
     "gatsby-remark-smartypants": "^2.0.5",
     "gatsby-source-filesystem": "^2.0.12",
@@ -41,7 +44,8 @@
     "prismjs": "^1.15.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "reading-time": "^1.1.3"
   },
   "devDependencies": {
     "eslint": "^5.11.1",
@@ -49,11 +53,10 @@
     "license-checker": "^24.1.0",
     "prettier": "^1.14.2",
     "slugify": "^1.3.4",
+    "textlint": "^11.2.1",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-no-dead-link": "^4.4.1",
     "textlint-rule-no-start-duplicated-conjunction": "^2.0.2",
-    "textlint-rule-spellchecker": "^2.2.1",
-    "textlint-rule-terminology": "^1.1.30",
-    "textlint": "^11.2.1"
+    "textlint-rule-terminology": "^1.1.30"
   }
 }
