@@ -21,8 +21,6 @@ class BlogPostTemplate extends React.Component {
       `https://brettjankord.com${post.frontmatter.permalink}`
     )}`;
 
-    const fullWidthOffSet = 'calc(-100vw / 2 + 79rem / 2)';
-
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={`${post.frontmatter.title} | ${siteTitle}`} description={post.excerpt} />
