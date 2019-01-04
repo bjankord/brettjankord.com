@@ -8,18 +8,5 @@
       "baseURI":"https://brettjankord.com"
     },
     "terminology":true,
-    "spellchecker": {
-      skipWords: [
-        "fantasai",
-        "polyfill",
-        "Jehl's",
-        "unprefixed",
-        "Zeldman",
-        "Grigsby",
-        "Morgado",
-        "Gatcke",
-        "li:not",
-      ],
-    }
   }
 }

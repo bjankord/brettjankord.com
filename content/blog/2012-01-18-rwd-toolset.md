@@ -15,7 +15,7 @@ Another task I find myself often doing when building responsive sites is checkin
 
 Using this method when developing a responsive design, it frees the design from being bound to certain devices. To figure out the exact width a layout breaks, I threw together a few more lines of JavaScript to output the current window width. Now I can see exactly at what width my layout breaks and use that to create my media queries.
 
-I've combined these two scripts together into what I'm calling the **RWD Toolset**. Since I've just thrown these two script together for development purposes, I'm sure there are ways to improve the code, though it accomplishes what I need it to do. If you have improvements, feel free to let me know in the comments below.
+I've combined these two scripts together into what I'm calling the **RWD Toolset**. Since I've just thrown these two scripts together for development purposes, I'm sure there are ways to improve the code, though it accomplishes what I need it to do. If you have improvements, feel free to let me know in the comments below.
 
 ## How to use RWD Toolset:
 
@@ -28,9 +28,9 @@ Download the JavaScript file and the CSS file and add them to your site.
 <script type="text/javascript" src="js/rwd-toolset.js"></script>
 ```
 
-Once the files are in place you, should now have the **RWD Toolset** toolbar on the bottom of you page.
+Once the files are in place you, should now have the **RWD Toolset** toolbar on the bottom of your page.
 
-My idea in building **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive sites. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive sites.
+My idea in building the **RWD Toolset** was to use it as a tool to help me in the development stage when working a responsive site. **RWD Toolset** has been tested in Chrome, Firefox, and IE9. Hopefully this will help speed up your development time when working on your own responsive sites.
 
 <!--
 * [View RWD Toolset Demo](http://brettjankord.com/projects/rwd-toolset/)

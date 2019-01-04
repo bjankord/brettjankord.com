@@ -3,6 +3,7 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
+const readingTime = require("reading-time");
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -64,6 +65,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === 'MarkdownRemark') {
     const value = createFilePath({ node, getNode });
+    createNodeField({
+      node,
+      name: `readingTime`,
+      value: readingTime(node.rawMarkdownBody),
+    });
+
     createNodeField({
       name: 'slug',
       node,
