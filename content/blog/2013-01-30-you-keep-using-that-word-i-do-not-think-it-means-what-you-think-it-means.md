@@ -2,7 +2,12 @@
 title: 'You keep using that word, I do not think it means what you think it means'
 date: '2013-01-30'
 permalink: /2013/01/30/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means/
-tags: ['Web Development']
+tags:
+ - Progressive Enhancement
+ - Graceful Degradation
+ - Responsive Web Design
+ - Mobile-First
+ - RESS
 ---
 
 I like to stay on top of cutting edge web design and development practices. I have a few keyword searches on Twitter I like to check daily for new articles on this and that, though one trend that really has caught my attention recently is seeing more and more authors writing about techniques like mobile first, adaptive web design, and RESS and many others terms with what seems to be a misconception of these terms. From [articles talking about mobile first][1] with no mention of Luke Wroblewski to [articles explaining adaptive web design as RESS][2].

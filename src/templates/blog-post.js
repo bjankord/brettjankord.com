@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
 import Img from 'gatsby-image';
+import kebabCase from "lodash/kebabCase";
 
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
@@ -23,7 +24,7 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title={`${post.frontmatter.title} | ${siteTitle}`} description={post.excerpt} />
+        <SEO title={`${post.frontmatter.title} | ${siteTitle}`} description={siteDescription} />
         <article className="fade-in-down">
           <div className="site-container">
             <h1 className="post-title">{post.frontmatter.title}</h1>
@@ -42,6 +43,13 @@ class BlogPostTemplate extends React.Component {
           <a href={discussUrl} target="_blank" rel="noopener noreferrer">
             Discuss on Twitter
           </a>
+          <p>Tags:{' '}
+            {post.frontmatter.tags.map((tag, i) =>
+              <span className="post-tags" key={i}>
+                <a href={`/tags/${kebabCase(tag)}`}>{tag}</a>
+              </span>
+            )}
+          </p>
           <hr style={{ margin: '6rem 0 3rem' }} />
           <Bio />
           <ul className="pagination">
@@ -92,6 +100,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         permalink
+        tags
         featuredImage {
           childImageSharp{
             fluid(maxWidth: 2000) {
