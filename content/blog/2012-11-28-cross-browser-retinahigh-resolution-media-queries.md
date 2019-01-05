@@ -1,8 +1,10 @@
 ---
 title: 'Cross browser retina/high resolution media queries'
 date: '2012-11-28'
-permalink: /2012/11/28/cross-browser-retinahigh-resolution-media-queries/
-tags: ['Media Queries']
+permalink: /2012/11/28/cross-browser-retina-high-resolution-media-queries/
+tags:
+ - CSS
+ - Media Queries
 ---
 
 [fantasai][1], [Ben Frain][2], and [Peter Gasston][3] have all written about this topic before, though I still see a lot developers using verbose media queries for retina/high resolution displays so I figured I would write up my own post.

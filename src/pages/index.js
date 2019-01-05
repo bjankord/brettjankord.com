@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import get from 'lodash/get';
-import SEO from '../components/Seo';
+import kebabCase from "lodash/kebabCase";
 
 import Layout from '../components/Layout';
+import SEO from '../components/Seo';
 
 class BlogIndex extends React.Component {
   render() {
@@ -34,6 +35,13 @@ class BlogIndex extends React.Component {
                   {node.fields.readingTime.text}
                 </span>
                 <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                <p className="post-listing-tags-container">
+                  {node.frontmatter.tags.map((tag, i) =>
+                    <span className="post-tags" key={i}>
+                      <a href={`/tags/${kebabCase(tag)}`}>{tag}</a>
+                    </span>
+                  )}
+                </p>
               </div>
             );
           })}
@@ -67,6 +75,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             permalink
+            tags
           }
         }
       }

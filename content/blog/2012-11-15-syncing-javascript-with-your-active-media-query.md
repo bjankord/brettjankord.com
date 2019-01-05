@@ -2,7 +2,10 @@
 date: '2012-11-15'
 title: 'Syncing JavaScript with your active media query'
 permalink: /2012/11/15/syncing-javascript-with-your-active-media-query/
-tags: ['js', 'css']
+tags:
+ - Responsive Web Design
+ - CSS
+ - JS
 ---
 
 Just read [Jeremy Keith's conditional loading for responsive designs concept](https://24ways.org/2011/conditional-loading-for-responsive-designs). Not only can it be used to load in additional content, but it's a great way to sync JavaScript functions with your CSS media queries. As I've worked on responsive websites, I noticed a need to be able to sync my JavaScript functionality with my CSS media queries and at times, have only certain JavaScript functionality work within a certain range of breakpoints.

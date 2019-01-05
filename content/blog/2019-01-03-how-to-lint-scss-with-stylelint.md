@@ -3,7 +3,11 @@ title: 'How to lint SCSS with stylelint'
 date: '2019-01-03'
 permalink: /2019/01/03/how-to-lint-scss-with-stylelint/
 featuredImage: '../assets/how-to-lint-scss-with-stylelint.png'
-tags: ['css', 'stylelint']
+tags:
+ - CSS
+ - Sass
+ - SCSS
+ - stylelint
 ---
 
 [Stylelint](https://github.com/stylelint/stylelint) is a mighty, modern CSS linter that helps you enforce consistent conventions and avoid errors in your style sheets. If you are reading this, I’m guessing you are already familiar with stylelint. If not, I’d highly recommend reading Aleks Hudochenkov’s Smashing Magazine post, [Stylelint: The Style Sheet Linter We’ve Always Wanted](https://www.smashingmagazine.com/2016/05/stylelint-the-style-sheet-linter-weve-always-wanted/)

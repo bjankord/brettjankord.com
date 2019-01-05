@@ -2,7 +2,8 @@
 title: 'Style Guide Boilerplate'
 date: '2013-03-07'
 permalink: /2013/03/07/style-guide-boilerplate/
-tags: ['Style Guide Boilerplate']
+tags:
+ - Style Guide Boilerplate
 ---
 
 Recently, I've had a renewed interest in web style guides. As I've been building responsive websites, I've found style guides to be a crucial part of the build process. Style guides help promote consistency and modular thinking when building sites and also help add a greater clarity to the parts and pieces that make up your site.

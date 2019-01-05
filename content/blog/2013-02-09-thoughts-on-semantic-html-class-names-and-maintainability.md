@@ -2,7 +2,8 @@
 title: 'Thoughts on semantic HTML class names and maintainability'
 date: '2013-02-09'
 permalink: /2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/
-tags: ['CSS']
+tags:
+ - CSS
 ---
 
 The discussion of semantic HTML class names is one that goes back quite a while. While many great frontend developers have discussed back and forth on the topic, I wanted to document my own thoughts on the topic. To me, semantic HTML class names is somewhat of a misnomer. Aside from microformats, HTML classes add no semantic meaning to machines such as search engines or assistive technology like screen readers. Yet semantic class names is one of the main tenants of CSS best practices. I believe choosing class names is one of the most difficult part of CSS, largely do to our understanding of semantics. I've recently read and re-read a lot of articles/books on semantic HTML, specifically concerning document outlines, as well as techniques for writing maintainable and scalable CSS.
