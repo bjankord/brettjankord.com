@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import Hero from "./Hero";
+import ThemeMode from "./ThemeMode";
 
 class Layout extends React.Component {
   render() {
@@ -33,6 +34,7 @@ class Layout extends React.Component {
           <div className="site-container">
             Brett Jankord Copyright © 2011 - Present.{' '}
             <a href="https://www.brettjankord.com/rss.xml">RSS Feed</a>
+            <ThemeMode />
           </div>
         </footer>
       </React.Fragment>

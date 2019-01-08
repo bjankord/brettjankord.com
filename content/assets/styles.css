@@ -1,11 +1,27 @@
 :root {
   /* Colors */
-  --bg: #fff;
-  --fg: #333;
-  --slate: #3B4247;
-  --link-color: #3c7ab7;
+  --white: #fff;
   --gray: #737373;
   --gray-light: #eee;
+  --gray-dark: #3B4247;
+  --gray-darker: #333;
+  --blue: #3c7ab7;
+
+  --bg: var(--white);
+  --fg: var(--gray-darker);
+  --link-color: var(--blue);
+  --site-description-color: var(--gray);
+  --time-color: var(--gray);
+  --post-readtime-color:var(--gray);
+  --heading-color: var(--gray-dark);
+  --selection-color: var(--gray-dark);
+  --site-name-color: var(--gray-dark);
+  --hr-color: var(--gray-light);
+  --selection-background-color: var(--gray-light);
+  --site-header-border-bottom-color: var(--gray-light);
+  --code-background-color: rgb(40, 44, 52);
+  --post-tags-background-color: #d5d5d5;
+
 
   /* Typography */
   --font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -17,6 +33,62 @@
   --h5-size: 1.8rem;
   --h6-size: 1.6rem;
 }
+
+.dark-mode {
+    --bg: var(--gray-darker);
+    --fg: var(--white);
+    --link-color: #55cdff;
+    --site-description-color: #c5c5c5;
+    --time-color: var(--gray-light);
+    --post-readtime-color:var(--gray-light);
+    --heading-color: var(--white);
+    --selection-color: var(--white);
+    --site-name-color: var(--white);
+    --hr-color: #73797d;
+    --selection-background-color: #777;
+    --site-header-border-bottom-color: #73797d;
+    --code-background-color: rgb(39, 39, 39);
+    --post-tags-background-color: #6f6f6f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--gray-darker);
+    --fg: var(--white);
+    --link-color: #55cdff;
+    --site-description-color: #c5c5c5;
+    --time-color: var(--gray-light);
+    --post-readtime-color:var(--gray-light);
+    --heading-color: var(--white);
+    --selection-color: var(--white);
+    --site-name-color: var(--white);
+    --hr-color: #73797d;
+    --selection-background-color: #777;
+    --site-header-border-bottom-color: #73797d;
+    --code-background-color: rgb(39, 39, 39);
+    --post-tags-background-color: #6f6f6f;
+  }
+
+  /* Allows ability to switch to light mode even when OS is set to prefers-color-scheme: dark */
+  .light-mode {
+    --bg: var(--white);
+    --fg: var(--gray-darker);
+    --link-color: var(--blue);
+    --site-description-color: var(--gray);
+    --time-color: var(--gray);
+    --post-readtime-color:var(--gray);
+    --heading-color: var(--gray-dark);
+    --selection-color: var(--gray-dark);
+    --site-name-color: var(--gray-dark);
+    --hr-color: var(--gray-light);
+    --selection-background-color: var(--gray-light);
+    --site-header-border-bottom-color: var(--gray-light);
+    --code-background-color: rgb(40, 44, 52);
+    --post-tags-background-color: #d5d5d5;
+  }
+}
+
+
 
 /* Base
 ---------------------------------------- */
@@ -77,7 +149,7 @@ svg:not(:root) {
 /* Headings
 ---------------------------------------- */
  h1, h2, h3, h4, h5, h6 {
-  color: var(--slate);
+  color: var(--heading-color);
   font-family: var(--base-heading-font-family, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif);
 }
 
@@ -102,7 +174,7 @@ q:before, q:after {
 }
 
 time {
-  color: var(--gray);
+  color: var(--time-color);
   display: inline-block;
   font-style: italic;
   vertical-align: bottom;
@@ -111,20 +183,21 @@ time {
 hr {
   margin-top: var(--base-spacing-unit -1);
   margin-bottom: var(--base-spacing-unit);
-  border-top: 1px solid var(--gray-light);
+  border: none;
+  border-top: 1px solid var(--hr-color);
   box-sizing: content-box;
   height: 0;
 }
 
 /* Specify the color of the selection */
 ::-moz-selection {
-  background: var(--gray-light);
-  color: var(--slate);
+  background: var(--selection-background-color);
+  color: var(--selection-color);
 }
 
 ::selection {
-  background: var(--gray-light);
-  color: var(--slate);
+  background: var(--selection-background-color);
+  color: var(--selection-color);
 }
 
 /* Animations
@@ -156,13 +229,11 @@ hr {
 
 .fade-in-down-slow {
   animation-duration: .9s;
-  animation-fill-mode: both;
   animation-name: fadeInDown;
 }
 
 .fade-in-down {
   animation-duration: .6s;
-  animation-fill-mode: both;
   animation-name: fadeInDown;
 }
 
@@ -269,7 +340,7 @@ hr {
   margin-right: auto;
   max-width: 76rem;
   padding: 2.4rem 3rem 2.3rem;
-  border-bottom: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--site-header-border-bottom-color);
   display: table;
   text-align: center;
   width: 100%;
@@ -287,7 +358,7 @@ hr {
 .site-name {
   font-size: 2.4rem;
   font-weight: 500;
-  color: var(--slate);
+  color: var(--site-name-color);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing: 1px;
   line-height: 1;
@@ -314,7 +385,7 @@ hr {
 ---------------------------------------- */
 .site-description {
   font-size: 1.5rem;
-  color: var(--gray);
+  color: var(--site-description-color);
 }
 
 /* Post Listing
@@ -350,7 +421,7 @@ hr {
 }
 
 .post-readtime {
-  color: var(--gray);
+  color: var(--post-readtime-color);
   display: inline-block;
   font-style: italic;
   vertical-align: bottom;
@@ -369,13 +440,18 @@ hr {
   margin-right: 1rem;
   margin-bottom: 1rem;
   padding: 0 .7rem;
-  background-color: #d5d5d5;
+  background-color: var(--post-tags-background-color);
   border-radius: .3rem;
   line-height: 1.5;
 }
 
 .post-tags a {
   color: var(--fg);
+}
+
+.site-container pre[class*="language-"],
+.site-container :not(pre) > code[class*="language-"] {
+  background-color: var(--code-background-color);
 }
 
 /* Bio
@@ -446,4 +522,20 @@ hr {
 
 .pagination-next {
   margin-left: 2rem;
+}
+
+/* Theme Switcher
+---------------------------------------- */
+.theme-switcher {
+  font-size: .8em;
+}
+
+.theme-switcher-btn {
+  background: rgba(0,0,0,0);
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
 }
