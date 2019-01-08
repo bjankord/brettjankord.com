@@ -34,6 +34,23 @@
   --h6-size: 1.6rem;
 }
 
+.dark-mode {
+    --bg: var(--gray-darker);
+    --fg: var(--white);
+    --link-color: #55cdff;
+    --site-description-color: #c5c5c5;
+    --time-color: var(--gray-light);
+    --post-readtime-color:var(--gray-light);
+    --heading-color: var(--white);
+    --selection-color: var(--white);
+    --site-name-color: var(--white);
+    --hr-color: #73797d;
+    --selection-background-color: #777;
+    --site-header-border-bottom-color: #73797d;
+    --code-background-color: rgb(39, 39, 39);
+    --post-tags-background-color: #6f6f6f;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: var(--gray-darker);
@@ -51,7 +68,27 @@
     --code-background-color: rgb(39, 39, 39);
     --post-tags-background-color: #6f6f6f;
   }
+
+  /* Allows ability to switch to light mode even when OS is set to prefers-color-scheme: dark */
+  .light-mode {
+    --bg: var(--white);
+    --fg: var(--gray-darker);
+    --link-color: var(--blue);
+    --site-description-color: var(--gray);
+    --time-color: var(--gray);
+    --post-readtime-color:var(--gray);
+    --heading-color: var(--gray-dark);
+    --selection-color: var(--gray-dark);
+    --site-name-color: var(--gray-dark);
+    --hr-color: var(--gray-light);
+    --selection-background-color: var(--gray-light);
+    --site-header-border-bottom-color: var(--gray-light);
+    --code-background-color: rgb(40, 44, 52);
+    --post-tags-background-color: #d5d5d5;
+  }
 }
+
+
 
 /* Base
 ---------------------------------------- */
