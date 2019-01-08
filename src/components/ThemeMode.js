@@ -25,14 +25,13 @@ class ThemeMode extends React.Component {
         window.localStorage.setItem('BJTheme', this.state.theme);
       }
 
-      // Need mojave to test this logic
       // If the user prefers dark color scheme
-      // if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      //   // Save this preference to local storage
-      //   window.localStorage.setItem('BrettJankordTheme', 'Dark Mode')
-      //   // Save this preference to local state as well
-      //   this.setState({ theme: 'Dark Mode' });
-      // }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Save this preference to local storage
+        window.localStorage.setItem('BrettJankordTheme', 'Dark Mode')
+        // Save this preference to local state as well
+        this.setState({ theme: 'Dark Mode' });
+      }
     }
   }
 
@@ -61,7 +60,9 @@ class ThemeMode extends React.Component {
     let inverseTheme = this.state.theme === 'Light Mode' ? 'Dark Mode' : 'Light Mode';
 
     return (
-      <span className="theme-switcher">Set site theme to: <button className="theme-switcher-btn" type="button" onClick={this.handleOnClick}>{inverseTheme}</button></span>
+      <div className="theme-switcher">
+        Change site theme to: <button className="theme-switcher-btn" type="button" onClick={this.handleOnClick}>{inverseTheme}</button>
+      </div>
     );
   }
 }

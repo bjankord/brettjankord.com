@@ -229,13 +229,11 @@ hr {
 
 .fade-in-down-slow {
   animation-duration: .9s;
-  animation-fill-mode: both;
   animation-name: fadeInDown;
 }
 
 .fade-in-down {
   animation-duration: .6s;
-  animation-fill-mode: both;
   animation-name: fadeInDown;
 }
 
@@ -524,4 +522,20 @@ hr {
 
 .pagination-next {
   margin-left: 2rem;
+}
+
+/* Theme Switcher
+---------------------------------------- */
+.theme-switcher {
+  font-size: .8em;
+}
+
+.theme-switcher-btn {
+  background: rgba(0,0,0,0);
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
 }
