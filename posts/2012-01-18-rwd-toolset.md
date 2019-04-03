@@ -6,6 +6,7 @@ summary: RWD Toolset is a small JavaScript file paired with a style sheet I thre
 tags:
  - Responsive Web Design
 layout: layouts/post.njk
+type: article
 ---
 
 **RWD Toolset** is a small JavaScript file paired with a style sheet I threw together to help when developing responsive sites. It adds a form to the bottom of your site to calculate relative dimensions, either in percentages or EMs. It also displays the current window width to help in figuring out where your layout breaks so you know where you need to add your media queries.

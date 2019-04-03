@@ -6,6 +6,7 @@ summary: Recently, I’ve had a renewed interest in web style guides. As I’ve 
 tags:
  - Style Guide Boilerplate
 layout: layouts/post.njk
+type: article
 ---
 
 Recently, I've had a renewed interest in web style guides. As I've been building responsive websites, I've found style guides to be a crucial part of the build process. Style guides help promote consistency and modular thinking when building sites and also help add a greater clarity to the parts and pieces that make up your site.

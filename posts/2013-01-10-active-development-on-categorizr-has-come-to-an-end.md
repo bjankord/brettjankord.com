@@ -7,6 +7,7 @@ tags:
 - Categorizr
 - Device Detection
 layout: layouts/post.njk
+type: article
 ---
 
 It's time to officially bring active development of Categorizr to a close. It's always difficult to bring a personal project to a close. This was my first big personal project, so it is bittersweet to see this go.

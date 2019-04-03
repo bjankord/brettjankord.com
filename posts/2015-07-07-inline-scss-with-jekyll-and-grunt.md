@@ -6,6 +6,7 @@ summary: Inlining critical CSS as great way to improve the performance of your s
 tags:
  - CSS
 layout: layouts/post.njk
+type: article
 ---
 
 Inlining critical CSS as great way to improve the performance of your site, it reduces blocking CSS requests needed for the initial render. I recently added this functionality to my site and with the help of grunt, inlining CSS in Jekyll is fairly straight forward.

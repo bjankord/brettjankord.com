@@ -6,6 +6,7 @@ summary: My understanding of CSS modules continues to grow from day to day. To m
 tags:
  - CSS
 layout: layouts/post.njk
+type: article
 ---
 
 My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I've learned about modules.
