@@ -1,0 +1,688 @@
+:root {
+  /* Colors */
+  --white: #fff;
+  --gray: #737373;
+  --gray-light: #eee;
+  --gray-dark: #3B4247;
+  --gray-darker: #333;
+  --blue: #3c7ab7;
+
+  --bg: var(--white);
+  --fg: var(--gray-darker);
+  --link-color: var(--blue);
+  --site-description-color: var(--gray);
+  --time-color: var(--gray);
+  --post-readtime-color:var(--gray);
+  --heading-color: var(--gray-dark);
+  --selection-color: var(--gray-dark);
+  --site-name-color: var(--gray-dark);
+  --hr-color: var(--gray-light);
+  --selection-background-color: var(--gray-light);
+  --site-header-border-bottom-color: var(--gray-light);
+  --code-background-color: rgb(40, 44, 52);
+  --post-tags-background-color: #d5d5d5;
+
+
+  /* Typography */
+  --font-stack-3: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --base-spacing-unit: 2.4rem;
+  --h1-size: 4rem;
+  --h2-size: 3rem;
+  --h3-size: 2.4rem;
+  --h4-size: 2rem;
+  --h5-size: 1.8rem;
+  --h6-size: 1.6rem;
+}
+
+.dark-mode {
+    --bg: var(--gray-darker);
+    --fg: var(--white);
+    --link-color: #55cdff;
+    --site-description-color: #c5c5c5;
+    --time-color: var(--gray-light);
+    --post-readtime-color:var(--gray-light);
+    --heading-color: var(--white);
+    --selection-color: var(--white);
+    --site-name-color: var(--white);
+    --hr-color: #73797d;
+    --selection-background-color: #777;
+    --site-header-border-bottom-color: #73797d;
+    --code-background-color: rgb(39, 39, 39);
+    --post-tags-background-color: #6f6f6f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--gray-darker);
+    --fg: var(--white);
+    --link-color: #55cdff;
+    --site-description-color: #c5c5c5;
+    --time-color: var(--gray-light);
+    --post-readtime-color:var(--gray-light);
+    --heading-color: var(--white);
+    --selection-color: var(--white);
+    --site-name-color: var(--white);
+    --hr-color: #73797d;
+    --selection-background-color: #777;
+    --site-header-border-bottom-color: #73797d;
+    --code-background-color: rgb(39, 39, 39);
+    --post-tags-background-color: #6f6f6f;
+  }
+
+  /* Allows ability to switch to light mode even when OS is set to prefers-color-scheme: dark */
+  .light-mode {
+    --bg: var(--white);
+    --fg: var(--gray-darker);
+    --link-color: var(--blue);
+    --site-description-color: var(--gray);
+    --time-color: var(--gray);
+    --post-readtime-color:var(--gray);
+    --heading-color: var(--gray-dark);
+    --selection-color: var(--gray-dark);
+    --site-name-color: var(--gray-dark);
+    --hr-color: var(--gray-light);
+    --selection-background-color: var(--gray-light);
+    --site-header-border-bottom-color: var(--gray-light);
+    --code-background-color: rgb(40, 44, 52);
+    --post-tags-background-color: #d5d5d5;
+  }
+}
+
+/* Base
+---------------------------------------- */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%; /* Assumes default font-size is unchanged, making 1rem = 10px. */
+  min-height: 100%;
+  overflow-y: scroll;
+}
+
+/* Allows easy override of default box-sizing: border-box */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--base-font-family, Georgia, Cambria, "Times New Roman", Times,serif);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.003em;
+  line-height: 1.75;
+  padding: 0;
+  margin: 0;
+}
+
+/* Links
+---------------------------------------- */
+a {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:active,
+a:hover {
+  color: var(--link-color);
+  outline: 0;
+  text-decoration: underline;
+}
+
+/* Images
+---------------------------------------- */
+/* Vertical align set to remove extra whitespace below image */
+img {
+	max-width: 100%;
+	vertical-align: center;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Headings
+---------------------------------------- */
+ h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--base-heading-font-family, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif);
+}
+
+/* Text Elements
+-------------------------------------------------- */
+blockquote {
+  border-left: 3px solid;
+  font-style: italic;
+  margin-left: -1.2em;
+  margin-right: -1.2em;
+  padding: 0 0.6em;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+time {
+  color: var(--time-color);
+  display: inline-block;
+  font-style: italic;
+  vertical-align: bottom;
+}
+
+hr {
+  margin-top: var(--base-spacing-unit -1);
+  margin-bottom: var(--base-spacing-unit);
+  border: none;
+  border-top: 1px solid var(--hr-color);
+  box-sizing: content-box;
+  height: 0;
+}
+
+.divider {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Specify the color of the selection */
+::-moz-selection {
+  background: var(--selection-background-color);
+  color: var(--selection-color);
+}
+
+::selection {
+  background: var(--selection-background-color);
+  color: var(--selection-color);
+}
+
+pre,
+code {
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  line-height: 1.5;
+}
+pre {
+  font-size: 14px;
+  line-height: 1.375;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  padding: 1em;
+  margin: .5em 0;
+  background-color: #f6f6f6;
+}
+.highlight-line {
+  display: block;
+  padding: 0.125em 1em;
+  text-decoration: none; /* override del, ins, mark defaults */
+  color: inherit; /* override del, ins, mark defaults */
+}
+
+/* allow highlighting empty lines */
+.highlight-line:empty:before {
+  content: " ";
+}
+/* avoid double line breaks when using display: block; */
+.highlight-line + br {
+  display: none;
+}
+
+.highlight-line-isdir {
+  color: #b0b0b0;
+  background-color: #222;
+}
+.highlight-line-active {
+  background-color: #444;
+  background-color: hsla(0, 0%, 27%, .8);
+}
+.highlight-line-add {
+  background-color: #45844b;
+}
+.highlight-line-remove {
+  background-color: #902f2f;
+}
+
+
+/* Animations
+---------------------------------------- */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes wave {
+  0% {transform:rotate(3deg);}
+  96.6% {transform:rotate(3deg);}
+  96.9% {transform:rotate(0deg);}
+  97.3% {transform:rotate(-3deg);}
+  97.6% {transform:rotate(0deg);}
+  97.9% {transform:rotate(3deg);}
+  98.3% {transform:rotate(0deg);}
+  98.6% {transform:rotate(-3deg);}
+  98.9% {transform:rotate(0deg);}
+  99.3% {transform:rotate(3deg);}
+}
+
+.fade-in-down-slow {
+  animation-duration: .9s;
+  animation-name: fadeInDown;
+}
+
+.fade-in-down {
+  animation-duration: .6s;
+  animation-name: fadeInDown;
+}
+
+/* Site Container
+---------------------------------------- */
+.site-container {
+  max-width: 76rem;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+/* Site Hero
+---------------------------------------- */
+.site-hero {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5rem;
+}
+
+.site-hero-bg {
+  background-image: url(/img/hero-dark.jpg);
+  background-size: cover;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.site-hero-bg:after {
+  content: '';
+  display: block;
+  background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), linear-gradient(270deg, #38b0e8, #964f93);
+  background-size: 100% 600%;
+  height: 100%;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+}
+
+.site-hero-content {
+  animation-duration: .9s;
+  animation-fill-mode: both;
+  animation-name: fadeInDown;
+
+  position: relative;
+  align-items: center;
+  display: flex;
+  padding: 7rem 0 10rem 0;
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.site-hero-heading {
+  color: #fff;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif;
+  position: relative; /* Needed for emoji wave */
+}
+
+.site-hero-wave {
+  position: absolute;
+  top: 0;
+  left: 3em;
+  animation: wave 10s alternate infinite;
+  transform-origin: 50% 60%;
+  transform: rotate(3deg);
+  animation-timing-function: ease;
+}
+
+.site-hero-intro {
+  display: block;
+  font-family: Georgia, sans-serif;
+  font-size: 3rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.site-hero-intro a {
+  color: #fff;
+}
+
+.site-hero-intro a:hover {
+  color: #ffd21f;
+}
+
+.site-hero-social {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-hero-social a {
+  display: inline-block;
+  color: #ffd21f;
+}
+
+.site-hero-social a:first-child {
+  margin-right: 1.5rem;
+}
+
+/* Site Header
+---------------------------------------- */
+.site-header {
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 76rem;
+  padding: 2.4rem 3rem 2.3rem;
+  border-bottom: 1px solid var(--site-header-border-bottom-color);
+  display: table;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 740px) {
+  .site-header {
+    text-align: left;
+    padding-bottom:  calc(var(--base-spacing-unit) - 1px);
+  }
+}
+
+/* Site Name
+---------------------------------------- */
+.site-name {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: var(--site-name-color);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 0;
+}
+
+.site-name a {
+  color: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 740px) {
+  .site-name {
+    display: table-cell;
+    text-align: left;
+    vertical-align: bottom;
+    width: 50%;
+  }
+}
+
+/* Site Description
+---------------------------------------- */
+.site-description {
+  font-size: 1.5rem;
+  color: var(--site-description-color);
+}
+
+/* Site Nav
+---------------------------------------- */
+.site-nav {
+  padding: 1em 0 0;
+  text-align: center;
+}
+
+.site-nav-item {
+  display: inline-block
+}
+
+.site-nav-item + .site-nav-item {
+  padding-left: 2em;
+}
+
+@media screen and (min-width: 740px) {
+  .site-nav {
+    text-align: right;
+  }
+}
+
+/* Post Listing
+---------------------------------------- */
+.postlist {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 6rem;
+}
+
+.postlist-item {
+  margin-bottom: 1rem;
+}
+
+.postlist-title {
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.postlist-link {
+  color: inherit;
+}
+
+.tmpl-home .postlist-link {
+  font-size: 1.1875em; /* 19px /16 */
+  font-weight: 700;
+}
+
+.postlist-tags-container {
+  font-size: 0.8em;
+}
+
+/* Article Post
+---------------------------------------- */
+.post-title {
+  margin-bottom: 0;
+  line-height: 4.5rem;
+}
+
+.post-time {
+  color: var(--post-readtime-color);
+  font-style: italic;
+}
+
+.post-time-divider {
+  display: inline-block;
+  color: var(--post-readtime-color);
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.post-readtime {
+  color: var(--post-readtime-color);
+  display: inline-block;
+  font-style: italic;
+  vertical-align: bottom;
+}
+
+
+/* Post Tags
+---------------------------------------- */
+.post-tags a {
+  color: var(--fg);
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 0 .7rem;
+  background-color: var(--post-tags-background-color);
+  border-radius: .3rem;
+  line-height: 1.5;
+}
+
+/* Tag colors */
+[data-tag="Responsive Web Design"] a {
+  background-color: rgb(17, 65, 104);
+  color: #fff;
+}
+
+[data-tag="CSS"] a {
+  background-color: rgb(170, 218, 19);
+}
+
+[data-tag="JS"] a {
+  background-color: rgb(242, 188, 65);
+}
+
+[data-tag="Media Queries"] a {
+  background-color: rgb(190, 150, 226);
+}
+
+[data-tag="Device Detection"] a {
+  background-color: rgb(117, 187, 172);
+}
+
+[data-tag="Progressive Enhancement"] a {
+  background-color: rgb(100, 54, 151);
+  color: #fff;
+}
+
+[data-tag="Graceful Degradation"] a {
+  background-color: rgb(150, 43, 84);
+  color: #fff;
+}
+
+[data-tag="Mobile-First"] a {
+  background-color: rgb(16, 126, 109);
+  color: #fff;
+}
+
+[data-tag="RESS"] a {
+  background-color: rgb(255, 148, 17);
+}
+
+[data-tag="Style Guide Boilerplate"] a {
+  background-color: rgb(7, 99, 157);
+  color: #fff;
+}
+
+[data-tag="Sass"] a {
+  background-color: rgb(176, 64, 120);
+  color: #fff;
+}
+
+[data-tag="SCSS"] a {
+  background-color: rgb(176, 64, 120);
+  color: #fff;
+}
+
+[data-tag="stylelint"] a {
+  background-color: rgb(20, 20, 20);
+  color: #fff;
+}
+
+/* Site Footer
+---------------------------------------- */
+.site-footer {
+  text-align: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 6rem;
+}
+
+.site-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer-nav li {
+  display: inline-block;
+  margin-left: 2em;
+}
+
+.site-footer-nav li:fist-child {
+  margin-left: 0;
+}
+
+/* Bio
+---------------------------------------- */
+.bio {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.bio-img {
+  border-radius: 100%;
+  margin-right: 0.875rem;
+  margin-bottom: 0;
+  width: 5.5rem;
+  height: 5.5rem;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.bio-content {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.bio-social-link {
+  display: inline-block;
+}
+
+.bio-social-link svg {
+  display: inline-block;
+  vertical-align: -0.15em;
+  height: 0.9em;
+  width: 0.9em;
+  margin-right: 0.5rem;
+  fill: currentColor;
+}
+
+.bio-social-link-twitter {
+  margin-left: .5rem;
+  margin-right: 1.6rem;
+}
+
+
+/* Direct Links / Markdown Headers */
+.direct-link {
+  font-family: sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  margin-left: .1em;
+}
+a[href].direct-link,
+a[href].direct-link:visited {
+  color: transparent;
+}
+a[href].direct-link:focus,
+a[href].direct-link:focus:visited,
+:hover > a[href].direct-link,
+:hover > a[href].direct-link:visited {
+  color: #aaa;
+}
