@@ -19,7 +19,6 @@
     "license-check": "license-checker --exclude 'MIT, MIT OR X11, ISC, Apache-2.0, BSD, WTFPL'",
     "lint:md": "textlint 'content/blog/**'",
     "lint-fix:md": "textlint --fix 'content/blog/**'",
-    "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -32,7 +31,6 @@
     "markdown-it-anchor": "^5.0.2"
   },
   "devDependencies": {
-    "eslint": "^5.11.1",
     "hygen": "^3.0.0",
     "license-checker": "^25.0.0",
     "prettier": "^1.14.2",
