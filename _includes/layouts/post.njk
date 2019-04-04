@@ -17,8 +17,6 @@ templateClass: tmpl-post
     <div class="site-container">
       <h1 class="post-title">{{ title }}</h1>
       <span class="post-time">{{ date | postDate }}</span>
-      <span class="post-time-divider">-</span>
-      <span class="post-readtime">{{ content | readingTime }} read</span>
     </div>
     {% if featuredImage %}
     <figure class="post-featured-image">

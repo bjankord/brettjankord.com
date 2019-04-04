@@ -2,12 +2,10 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const readingTime = require("eleventy-plugin-reading-time");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
-  eleventyConfig.addPlugin(readingTime);
   eleventyConfig.setDataDeepMerge(true);
 
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
@@ -39,10 +37,6 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
-
-  // eleventyConfig.addPairedNunjucksShortcode("discussURL", function (permalink) {
-  //   return `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://brettjankord.com${permalink}`)}`;
-  //  });
 
   eleventyConfig.addFilter("discussURL", function (value) {
     return `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://brettjankord.com${value}`)}`;

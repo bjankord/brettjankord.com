@@ -5,8 +5,6 @@
       <a href="{{ post.url | url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
     </h2>
     <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    <span class="post-time-divider">-</span>
-    <span class="post-readtime">{{ post | readingTime }} read</span>
     {% if post.data.summary %}
       <p>
         {{ post.data.summary }}
