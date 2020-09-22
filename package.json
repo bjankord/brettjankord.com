@@ -19,9 +19,7 @@
     "license-check": "license-checker --exclude 'MIT, MIT OR X11, ISC, Apache-2.0, BSD, WTFPL'",
     "lint:md": "textlint 'content/blog/**'",
     "lint-fix:md": "textlint --fix 'content/blog/**'",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.10.0",
