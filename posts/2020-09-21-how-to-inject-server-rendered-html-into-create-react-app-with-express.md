@@ -233,3 +233,8 @@ If we make changes to files within `./src`, `./public`, or `./server`, the app w
 ## Running in production
 
 Once you are ready to run the app in production mode, remember to run `yarn build` to build the assets for production and then you can run `yarn server` to start up the app.
+
+## GitHub Repo
+You can find a sample app with the code from this post here:
+
+https://github.com/bjankord/express-create-react-app-custom-template
