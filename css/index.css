@@ -1,5 +1,5 @@
 :root {
-  --bg: #142129;
+  --bg: #111723;
   --fg: #f6f8ff;
   --link-color: #82cefb;
   --site-name-color: #f6f8ff;
@@ -143,12 +143,12 @@ hr {
 
 pre,
 code {
-  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
-  line-height: 1.5;
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  line-height: 2;
 }
 pre {
-  font-size: 14px;
-  line-height: 1.375;
+  font-size: 0.77em;
+  line-height: 2;
   direction: ltr;
   text-align: left;
   white-space: pre-wrap;
@@ -163,9 +163,9 @@ pre {
   hyphens: none;
   padding: 1em;
   margin: .5em 0;
-  background-color: #172229;
+  background-color:#252c3a;
   border-radius: 7px;
-  border: 2px solid #4a6ea9;
+  border: 2px solid #4e5c77;
 }
 .highlight-line {
   display: block;
