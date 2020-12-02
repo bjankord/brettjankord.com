@@ -31,6 +31,7 @@
     "sharp": "^0.26.3"
   },
   "devDependencies": {
+    "clean-css": "^4.2.3",
     "license-checker": "^25.0.0",
     "prettier": "^1.14.2",
     "textlint": "^11.2.1",

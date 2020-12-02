@@ -3,6 +3,7 @@ const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const Image = require("@11ty/eleventy-img");
+const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
   // Image Shortcode
@@ -43,6 +44,10 @@ module.exports = function(eleventyConfig) {
       height="${lowestSrc.height}">`;
 
     return `<div class="image-wrapper"><picture> ${source} ${img} </picture></div>`;
+  });
+
+  eleventyConfig.addFilter("cssmin", function (code) {
+    return new CleanCSS({}).minify(code).styles;
   });
 
   eleventyConfig.addPlugin(pluginRss);
