@@ -226,16 +226,6 @@ pre {
   99.3% {transform:rotate(3deg);}
 }
 
-.fade-in-down-slow {
-  animation-duration: .9s;
-  animation-name: fadeInDown;
-}
-
-.fade-in-down {
-  animation-duration: .6s;
-  animation-name: fadeInDown;
-}
-
 /* Site Container
 ---------------------------------------- */
 .site-container {
