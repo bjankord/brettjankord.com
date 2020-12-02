@@ -1,5 +1,5 @@
 :root {
-  --bg: #111723;
+  --bg: #222d3f;
   --fg: #f6f8ff;
   --link-color: #82cefb;
   --site-name-color: #f6f8ff;
@@ -265,7 +265,7 @@ pre {
 .site-hero-bg:after {
   content: '';
   display: block;
-  background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), linear-gradient(270deg, #38b0e8, #964f93);
+  background-color: #3c4c6b;
   background-size: 100% 600%;
   height: 100%;
   opacity: 0.4;
@@ -464,6 +464,15 @@ pre {
   display: inline-block;
   font-style: italic;
   vertical-align: bottom;
+}
+
+/* Post Images
+---------------------------------------- */
+.image-wrapper img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 

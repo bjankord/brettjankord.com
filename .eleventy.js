@@ -2,11 +2,53 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const Image = require("@11ty/eleventy-img");
 
 module.exports = function(eleventyConfig) {
+  // Image Shortcode
+  eleventyConfig.addNunjucksAsyncShortcode("Image", async (src, alt) => {
+    if (!alt) {
+      throw new Error(`Missing \`alt\` on Image from: ${src}`);
+    }
+
+    let stats = await Image(src, {
+      widths: [250, 320, 640, 960, 1200, 1800, 2400],
+      formats: ["jpeg", "webp"],
+      urlPath: "/img/",
+      outputDir: "./img/",
+    });
+
+    let lowestSrc = stats["jpeg"][0];
+
+    const srcset = Object.keys(stats).reduce(
+      (acc, format) => ({
+        ...acc,
+        [format]: stats[format].reduce(
+          (_acc, curr) => `${_acc} ${curr.srcset} ,`,
+          ""
+        ),
+      }),
+      {}
+    );
+
+    const source = `<source type="image/webp" srcset="${srcset["webp"]}" >`;
+
+    const img = `<img
+      loading="lazy"
+      alt="${alt}"
+      src="${lowestSrc.url}"
+      sizes='(min-width: 1024px) 1024px, 100vw'
+      srcset="${srcset["jpeg"]}"
+      width="${lowestSrc.width}"
+      height="${lowestSrc.height}">`;
+
+    return `<div class="image-wrapper"><picture> ${source} ${img} </picture></div>`;
+  });
+
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.setDataDeepMerge(true);
+
 
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
@@ -88,7 +130,7 @@ module.exports = function(eleventyConfig) {
     // This is only used for URLs (it does not affect your file structure)
     pathPrefix: "/",
 
-    markdownTemplateEngine: "liquid",
+    markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
     passthroughFileCopy: true,

@@ -76,7 +76,7 @@ What I mean by this is that I longer see using user agent sniffing to group devi
 
 Sure, I can pick up a phone and tell the difference from a tablet. Likewise, I know the difference between my desktop computer at work and a tablet, though those lines we use to differentiate device groups are quickly fading away. Luke Wroblewski has an excellent graphic that shows how capabilities we saw associate with certain sets of devices is crossing over into all devices.
 
-![Unified device design](../../../../img/unified_device_design.png)
+{% Image "img/unified_device_design.png", "Unified device design" %}
 
 Thinking back to what originally motivated me to develop Categorizr, I wanted a [RESS solution][15] to help conditionally load resources/assets/content. A nice side effect of Categorizr was that it also worked great as redirect solution.
 

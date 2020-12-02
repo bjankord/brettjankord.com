@@ -20,7 +20,7 @@ templateClass: tmpl-post
     </div>
     {% if featuredImage %}
     <figure class="post-featured-image">
-      <img src="../../../../{{ featuredImage }}" alt="{{ title }}" />
+      {% Image featuredImage, title %}
     </figure>
     {% endif %}
     <div class="site-container">
@@ -33,7 +33,7 @@ templateClass: tmpl-post
     <div class="bio">
       <div class="bio-img">
         <a href="https://twitter.com/bjankord">
-          <img src="{{ metadata.url }}/img/profile-pic.jpg" alt="Brett Jankord"/>
+          <img loading="lazy" src="{{ metadata.url }}/img/profile-pic.jpg" alt="Brett Jankord"/>
         </a>
       </div>
       <p class="bio-content">

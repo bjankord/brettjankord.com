@@ -61,7 +61,7 @@ Then, in your `package.json` file you can add this command:
 
 Then you can run `npm run stylelint` to lint your SCSS files. When you run this command, if there are any lint errors, you’ll see all these npm ERR! messages after the lint errors.
 
-![Stylelint errors](../../../../img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-1.png)
+{% Image "img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-1.png", "Stylelint errors" %}
 
 This is expected. You can update your stylelint script to always exit with a zero and it won’t output all the npm ERR! messages.
 
@@ -73,7 +73,7 @@ This is expected. You can update your stylelint script to always exit with a zer
 
 Now when you run npm run stylelint, the npm ERR! messages will not display.
 
-![Stylelint errors with exit 0](../../../../img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-2.png)
+{% Image "img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-2.png", "Stylelint errors with exit 0" %}
 
 You’ll want to leave off the `exit 0` though if your are running this script as part of a build process or continuous integration process where you want the process to fail if there is any lint.
 
@@ -90,7 +90,7 @@ Another option is to set the [default severity](https://stylelint.io/user-guide/
 
 When you run `npm run stylelint`, it will treat lint issues as warnings and exit with a zero.
 
-![Stylelint warnings](../../../../img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-3.png)
+{% Image "img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-3.png", "Stylelint warnings" %}
 
 Now you should be set up with how to lint `.scss` files with stylelint, though there are additional stylelint plugins which have been developed specifically for SCSS which are helpful when linting SCSS.
 
@@ -127,7 +127,7 @@ The stylelint team maintains a standard stylelint config called [stylelint-confi
 
 ## stylelint-config-sass-guidelines
 
-![stylelint-config-sass-guidelines](../../../../img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-4.png)
+{% Image "img/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-4.png", "stylelint-config-sass-guidelines" %}
 
 I’m a big fan of [Hugo Giraudel’s](https://hugogiraudel.com/) [Sass Guidelines](https://sass-guidelin.es/). In my opinion, it is one of the best resources for writing sane, maintainable and scalable Sass/SCSS. In Sass Guidelines, there is a section for [tools](https://sass-guidelin.es/#tools), which provides a [scss-lint config](https://sass-guidelin.es/#scss-lint) based on the recommendations in Sass Guidelines.
 

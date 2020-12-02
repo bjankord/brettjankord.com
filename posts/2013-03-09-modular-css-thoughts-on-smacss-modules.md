@@ -11,8 +11,8 @@ type: article
 
 My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I've learned about modules.
 
+{% Image "img/wp-content/uploads/2013/03/Lego_Color_Bricks.jpg", "Lego Bricks" %}
 
-![Lego Bricks](../../../../img/wp-content/uploads/2013/03/Lego_Color_Bricks.jpg)
 Source: [Wikipedia][1]
 
 
@@ -72,7 +72,7 @@ Module modifiers contain the specific styles for each instance of the `.room` mo
 
 As I talked about earlier, module modifiers extend the use of modules. There are a few ways that come to mind on how one could use module modifiers.
 
-![Sample component design](../../../../img/wp-content/uploads/2013/02/reviews.jpg "reviews")
+{% Image "img/wp-content/uploads/2013/02/reviews.jpg", "Sample component design" %}
 
 For example, with the above comp, we could create a reviews module that had all the styles for the movie review block in it, and create module modifiers for albums and books.
 

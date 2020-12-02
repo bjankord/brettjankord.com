@@ -15,11 +15,11 @@ type: article
 
 I like to stay on top of cutting edge web design and development practices. I have a few keyword searches on Twitter I like to check daily for new articles on this and that, though one trend that really has caught my attention recently is seeing more and more authors writing about techniques like mobile first, adaptive web design, and RESS and many others terms with what seems to be a misconception of these terms. From [articles talking about mobile first][1] with no mention of Luke Wroblewski to [articles explaining adaptive web design as RESS][2].
 
-![Scene from The Princess Bride](../../../../img/wp-content/uploads/2013/01/youkeepusingthatword.jpg)
+{% Image "img/wp-content/uploads/2013/01/youkeepusingthatword.jpg", "Scene from The Princess Bride" %}
 
 By no means I am all knowing of this terminology either, though I thought I could help clear some confusion by sharing insight to the origins of where some of these new terms came from. My hope in this, is that it will result in more accurate articles which, would ideally, result in a better understanding of these techniques for a wider range of readers. With this, maybe we can reduce discussions where we are talking past each other instead of with each other because of a simple misunderstanding of terminology. The words we use to describe what we do have a way of evolving and gaining additional meaning over time, so I don’t mean to cement these definitions. This is happening with responsive web design and is happening with [mobile-first][3] as Brad Frost documented. As I talk about these terms, these are the meanings I've come to know and wanted to share in hopes of clearing up some confusion.
 
-![Escalators](../../../../img/wp-content/uploads/2013/01/progressive-enhancement.jpg)
+{% Image "img/wp-content/uploads/2013/01/progressive-enhancement.jpg", "Escalators" %}
 
 ## Progressive Enhancement
 
@@ -49,7 +49,7 @@ Graceful degradation comes from the concept in software development of [fault to
 - [Progressive Enhancement and Graceful Degradation: an Overview][14]
 - [Graceful Degredation versus Progressive Enhancement][15]
 
-![Chart of responsive web design, progressive enhancement, and graceful degradation](../../../../img/wp-content/uploads/2013/01/technique-chare.jpg)
+{% Image "img/wp-content/uploads/2013/01/technique-chare.jpg", "Chart of responsive web design, progressive enhancement, and graceful degradation" %}
 
 ## Responsive Web Design
 
@@ -92,7 +92,7 @@ Coined by [Luke Wroblewski][29] back in November 2009, is a mindset that allows 
 - [Mobile First: What Does It Mean?][31]
 - [Rethinking Your Mobile First Strategy][32]
 
-![Mobile first](../../../../img/wp-content/uploads/2013/01/mobile-first.jpg)
+{% Image "img/wp-content/uploads/2013/01/mobile-first.jpg", "Mobile first" %}
 
 ## Mobile-First Responsive Web Design
 
@@ -111,7 +111,7 @@ This term combines the mobile-first mindset from Wroblewski with Marcotte’s Re
 - [Jason Grigsby – Mobile-First Responsive Design][36]
 - [Mobile-First, Responsive Design Websites: Does This Really Matter?][37]
 
-![Desktop first](../../../../img/wp-content/uploads/2013/01/desktop-first.jpg)
+{% Image "img/wp-content/uploads/2013/01/desktop-first.jpg", "Desktop first" %}
 
 ## Desktop-First
 
@@ -125,7 +125,7 @@ Desktop-First Responsive Web Design This approach to responsive web design lines
 - [Give the Web a Responsive-Design Facelift With ‘Responsive Retrofitting’][40]
 - [Responsive Retrofitting from CSS Dev Conf 2012 in Honolulu, HI][41]
 
-![Adaptive](../../../../img/wp-content/uploads/2013/01/adaptive.jpg)
+{% Image "img/wp-content/uploads/2013/01/adaptive.jpg", "Adaptive" %}
 
 ## Adaptive Web Design
 

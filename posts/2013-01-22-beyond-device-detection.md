@@ -22,18 +22,13 @@ The difficulty of keeping up with every new web enabled device and testing it an
 
 For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.
 
-![Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all](../../../../img/wp-content/uploads/2013/01/test-all-the-devices.jpg)
-(Credit: [Jeremy Keith][5])
+{% Image "img/wp-content/uploads/2013/01/test-all-the-devices.jpg", "Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all" %}
 
 A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.
 
 ## Device Detection != Feature Detection
 
 One common pattern I saw with device detection when I was working on [Categorizr][6] and looking at other projects, new and old, was too assume features based on the type of device. For instance, it was, and unfortunately [still is][7], [common][8] for people to [talk about][9] how mobiles and tablets support touch and desktops do not. This is simply not true anymore.
-
-<!--
-[![](http://www.brettjankord.com/wp-content/uploads/2013/01/touch-desktop.jpg "touch-desktop")](http://windows.microsoft.com/en-US/windows-8/meet)
--->
 
 (Credit: CNET)
 
