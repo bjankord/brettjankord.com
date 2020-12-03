@@ -491,14 +491,17 @@ pre {
 
 [data-tag="JS"] a {
   background-color: rgb(242, 188, 65);
+  color: #000;
 }
 
 [data-tag="Media Queries"] a {
   background-color: rgb(190, 150, 226);
+  color: #000;
 }
 
 [data-tag="Device Detection"] a {
   background-color: rgb(117, 187, 172);
+  color: #000;
 }
 
 [data-tag="Progressive Enhancement"] a {
@@ -518,6 +521,7 @@ pre {
 
 [data-tag="RESS"] a {
   background-color: rgb(255, 148, 17);
+  color: #000;
 }
 
 [data-tag="Style Guide Boilerplate"] a {
