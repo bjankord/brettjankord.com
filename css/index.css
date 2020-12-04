@@ -237,30 +237,10 @@ pre {
 /* Site Hero
 ---------------------------------------- */
 .site-hero {
+  background-color: #181F2B;
   position: relative;
   overflow: hidden;
   margin-bottom: 5rem;
-}
-
-.site-hero-bg {
-  background-color: #181F2B;
-  background-size: cover;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
-}
-
-.site-hero-bg:after {
-  content: '';
-  display: block;
-  background-color: #3c4c6b;
-  background-size: 100% 600%;
-  height: 100%;
-  opacity: 0.4;
-  position: absolute;
-  width: 100%;
 }
 
 .site-hero-content {
