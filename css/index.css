@@ -244,9 +244,9 @@ pre {
 }
 
 .site-hero-content {
-  animation-duration: .9s;
+  /* animation-duration: .9s;
   animation-fill-mode: both;
-  animation-name: fadeInDown;
+  animation-name: fadeInDown; */
 
   position: relative;
   align-items: center;
@@ -266,10 +266,10 @@ pre {
   position: absolute;
   top: 0;
   left: 3em;
-  animation: wave 10s alternate infinite;
+  /* animation: wave 10s alternate infinite; */
   transform-origin: 50% 60%;
   transform: rotate(3deg);
-  animation-timing-function: ease;
+  /* animation-timing-function: ease; */
 }
 
 .site-hero-intro {
