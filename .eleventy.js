@@ -4,6 +4,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const Image = require("@11ty/eleventy-img");
 const CleanCSS = require("clean-css");
+const htmlmin = require("html-minifier");
 
 module.exports = function(eleventyConfig) {
   // Image Shortcode
@@ -48,6 +49,20 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("cssmin", function (code) {
     return new CleanCSS({}).minify(code).styles;
+  });
+
+  eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
+    // Eleventy 1.0+: use this.inputPath and this.outputPath instead
+    if (outputPath.endsWith(".html")) {
+      let minified = htmlmin.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true
+      });
+      return minified;
+    }
+
+    return content;
   });
 
   eleventyConfig.addPlugin(pluginRss);
