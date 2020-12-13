@@ -20,6 +20,7 @@ node_modules/
 
 # 11ty files
 _site/
+functions/template.html
 
 # Mac files
 .DS_Store

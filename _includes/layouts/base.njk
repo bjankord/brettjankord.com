@@ -28,6 +28,10 @@
     <link rel="apple-touch-icon" sizes="384x384" href="{{metadata.url}}/img/favicon/icon-384x384.png?v=2">
     <link rel="apple-touch-icon" sizes="512x512" href="{{metadata.url}}/img/favicon/icon-512x512.png?v=2">
 
+    {%- set pageSocialImg %}{{ metadata.url }}/previews/{{ title | slug }}.png{% endset-%}
+    <meta property="og:image" content="{{pageSocialImg}}" />
+    <meta name="twitter:image" content="{{pageSocialImg}}" />
+
     <meta property="og:type" content="{{type or 'website'}}">
     <meta property="og:url"  content="{{metadata.url}}{{permalink}}" />
     <meta name="twitter:card" content="summary">
@@ -42,7 +46,7 @@
     {% if featuredImage %}
       <meta property="og:image" content="{{metadata.url}}/{{ featuredImage }}" />
     {% endif %}
- </head>
+  </head>
   <body>
     {{ content | safe }}
     <footer class="site-footer">

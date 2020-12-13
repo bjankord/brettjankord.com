@@ -5,8 +5,21 @@ const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const Image = require("@11ty/eleventy-img");
 const CleanCSS = require("clean-css");
 const htmlmin = require("html-minifier");
+const socialImages = require("@11tyrocks/eleventy-plugin-social-images");
+
 
 module.exports = function(eleventyConfig) {
+  // Add social images
+  eleventyConfig.addPlugin(socialImages);
+  eleventyConfig.addFilter("cleanImgName", (str) => {
+    if (!str) {
+      return;
+    }
+    let imgName = str.replace(':', '');
+    imgName = imgName.replace('(', '');
+    imgName = imgName.replace(')', '');
+    return imgName;
+  });
   // Image Shortcode
   eleventyConfig.addNunjucksAsyncShortcode("Image", async (src, alt) => {
     if (!alt) {
