@@ -28,21 +28,32 @@
     <link rel="apple-touch-icon" sizes="384x384" href="{{metadata.url}}/img/favicon/icon-384x384.png?v=2">
     <link rel="apple-touch-icon" sizes="512x512" href="{{metadata.url}}/img/favicon/icon-512x512.png?v=2">
 
-    <meta property="og:type" content="{{type or 'website'}}">
-    <meta property="og:url"  content="{{metadata.url}}{{permalink}}" />
+    <!-- Twitter Card Data -->
+    {% if type == "article" %}
+    <meta name="twitter:card" content="summary_large_image">
+    {% else %}
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:creator" content="{{ metadata.author.twitterHandle}}">
-
-    <meta property="og:title"   content="{{ renderData.title or title }} | {{ metadata.author.name }}">
-    <meta name="twitter:title"  content="{{ renderData.title or title }} | {{ metadata.author.name }}">
-
-    <meta name="description" content="{{ summary or renderData.description or description or metadata.description }}">
-    <meta property="og:description" content="{{ summary or renderData.description or description or metadata.description }}">
-    <meta name="twitter:description" content="{{ summary or renderData.description or description or metadata.description }}">
-    {% if featuredImage %}
-      <meta property="og:image" content="{{metadata.url}}/{{ featuredImage }}" />
     {% endif %}
- </head>
+    <meta name="twitter:creator" content="{{ metadata.author.twitterHandle}}">
+    <meta name="twitter:title"  content="{{ renderData.title or title }} | {{ metadata.author.name }}">
+    <meta name="twitter:description" content="{{ summary or renderData.description or description or metadata.description }}">
+    {% if type == "article" %}
+      {% if featuredImage %}
+        <meta property="og:image" content="{{metadata.url}}/{{ featuredImage }}">
+        <meta name="twitter:image" content="{{metadata.url}}/{{ featuredImage }}">
+      {% else %}
+        <meta property="og:image" content="{{metadata.url}}/previews/{{ title | cleanImgName | slug }}.png">
+        <meta name="twitter:image" content="{{metadata.url}}/previews/{{ title | cleanImgName | slug }}.png">
+      {% endif %}
+    {% endif %}
+
+    <!-- Open Graph Data -->
+    <meta property="og:type" content="{{type or 'website'}}">
+    <meta property="og:url"  content="{{metadata.url}}{{permalink}}">
+    <meta property="og:title"  content="{{ renderData.title or title }} | {{ metadata.author.name }}">
+    <meta property="og:description" content="{{ summary or renderData.description or description or metadata.description }}">
+    <meta name="description" content="{{ summary or renderData.description or description or metadata.description }}">
+  </head>
   <body>
     {{ content | safe }}
     <footer class="site-footer">

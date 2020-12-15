@@ -10,7 +10,8 @@
   },
   "main": "n/a",
   "scripts": {
-    "build": "npx eleventy",
+    "social-images": "eleventy-social-images --siteName 'BrettJankord.com' --stylesPath css/social-images.css",
+    "build": "npx eleventy ; npm run social-images",
     "serve": "npx eleventy --serve",
     "watch": "npx eleventy --watch",
     "debug": "DEBUG=* npx eleventy",
@@ -25,6 +26,7 @@
     "@11ty/eleventy-img": "^0.3.0",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "@11tyrocks/eleventy-plugin-social-images": "^0.1.2",
     "luxon": "^1.24.0",
     "markdown-it": "^12.0.0",
     "markdown-it-anchor": "^6.0.0",
