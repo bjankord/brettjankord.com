@@ -30,7 +30,7 @@
     "luxon": "^1.24.0",
     "markdown-it": "^12.0.0",
     "markdown-it-anchor": "^6.0.0",
-    "sharp": "^0.26.3"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "clean-css": "^4.2.3",
