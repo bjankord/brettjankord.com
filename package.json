@@ -10,27 +10,21 @@
   },
   "main": "n/a",
   "scripts": {
-    "social-images": "eleventy-social-images --siteName 'BrettJankord.com' --stylesPath css/social-images.css",
-    "build": "npx eleventy ; npm run social-images",
-    "serve": "npx eleventy --serve",
-    "watch": "npx eleventy --watch",
-    "debug": "DEBUG=* npx eleventy",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'posts/**/*.md'",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "license-check": "license-checker --exclude 'MIT, MIT OR X11, ISC, Apache-2.0, BSD, WTFPL'",
     "lint:md": "textlint 'content/blog/**'",
     "lint-fix:md": "textlint --fix 'content/blog/**'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-img": "^0.3.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.7",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "@11tyrocks/eleventy-plugin-social-images": "^0.1.2",
-    "luxon": "^1.24.0",
-    "markdown-it": "^12.0.0",
-    "markdown-it-anchor": "^6.0.0",
-    "sharp": "^0.26.3"
+    "@astrojs/mdx": "^0.9.0",
+    "@astrojs/rss": "^1.0.0",
+    "@astrojs/sitemap": "^1.0.0",
+    "astro": "^1.0.5"
   },
   "devDependencies": {
     "clean-css": "^4.2.3",
