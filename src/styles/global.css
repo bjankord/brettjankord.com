@@ -4,8 +4,9 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 body {
-	font-family: Verdana, sans-serif;
-	margin: auto;
+	font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+	font-size: 1.2em;
+  margin: auto;
 	max-width: 44rem;
 	padding: 3rem;
 	text-align: left;
@@ -69,4 +70,8 @@ blockquote {
 	padding: 2px 0px 2px 20px;
 	margin: 0px;
 	font-style: italic;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
 }
