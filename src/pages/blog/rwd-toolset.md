@@ -1,9 +1,8 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'RWD toolset'
-permalink: /2011/01/18/rwd-toolset/
 description: "RWD Toolset is a small JavaScript file paired with a style sheet I threw together to help when developing responsive sites. It adds a form…"
-date: '2011-01-18'
+pubDate: '2011-01-18'
 tags:
  - Responsive Web Design
 ---

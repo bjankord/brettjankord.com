@@ -1,14 +1,13 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'The :not() css-pseudo-class and specificity'
-date: '2015-06-07'
-permalink: /2015/06/07/the-not-css-pseudo-class-and-specificity/
 description: "The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument…"
+pubDate: '2015-06-07'
 tags:
  - CSS
 ---
 
-The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument passed to it. For example, `li:not(.different)` would match all list items that don’t have the HTML class: `.different`. There are [cases](https://twitter.com/wesbos/status/606144483562913792) where using the :not pseudo-class makes a lot of sense. There are also cases where the specificity :not() applies can work against you.
+The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument passed to it. For example, `li:not(.different)` would match all list items that don't have the HTML class: `.different`. There are [cases](https://twitter.com/wesbos/status/606144483562913792) where using the :not pseudo-class makes a lot of sense. There are also cases where the specificity :not() applies can work against you.
 
 Recently I was working on a project where various form text inputs were styled with the following code.
 

@@ -1,9 +1,8 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Cross browser retina/high resolution media queries'
-date: '2012-11-28'
-permalink: /2012/11/28/cross-browser-retina-high-resolution-media-queries/
 description: "fantasai, Ben Frain, and Peter Gasston have all written about this topic before, though I still see a lot developers using verbose…"
+pubDate: '2012-11-28'
 tags:
  - CSS
  - Media Queries
@@ -13,7 +12,7 @@ tags:
 
 Most developers are currently writing retina/high resolution media queries similar to the examples below:
 
-This media query example is from [37signals article on retina images and scss][4]. It is based on the one in Thomas Fuchs’ Retinafy book but, it has been modified to define the Google Nexus 7 with it’s 1.3 pixel ratio as a retina-capable device.
+This media query example is from [37signals article on retina images and scss][4]. It is based on the one in Thomas Fuchs' Retinafy book but, it has been modified to define the Google Nexus 7 with it's 1.3 pixel ratio as a retina-capable device.
 
 ```css
 @media (-webkit-min-device-pixel-ratio: 1.3),

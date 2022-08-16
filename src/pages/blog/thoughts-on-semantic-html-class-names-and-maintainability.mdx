@@ -1,12 +1,12 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Thoughts on semantic HTML class names and maintainability'
-date: '2013-02-09'
-permalink: /2013/02/09/thoughts-on-semantic-html-class-names-and-maintainability/
 description: "The discussion of semantic HTML class names is one that goes back quite a while. While many great frontend developers have discussed back…"
+pubDate: '2013-02-09'
 tags:
  - CSS
 ---
+import {Image} from '@astrojs/image/components';
 
 The discussion of semantic HTML class names is one that goes back quite a while. While many great frontend developers have discussed back and forth on the topic, I wanted to document my own thoughts on the topic. To me, semantic HTML class names is somewhat of a misnomer. Aside from microformats, HTML classes add no semantic meaning to machines such as search engines or assistive technology like screen readers. Yet semantic class names is one of the main tenants of CSS best practices. I believe choosing class names is one of the most difficult part of CSS, largely do to our understanding of semantics. I've recently read and re-read a lot of articles/books on semantic HTML, specifically concerning document outlines, as well as techniques for writing maintainable and scalable CSS.
 
@@ -42,7 +42,12 @@ I prefer role based classes names but I think it is very important to keep them 
 
 I've put together a screenshot of sidebar to help go over some of these concepts.
 
-{% Image "img/wp-content/uploads/2013/02/reviews.jpg", "Three review sections. One for movies, one for albums, and one for books" %}
+<Image
+  src="src/assets/modular-css-thoughts-on-smacss-modules/reviews.jpg"
+  alt="Three review sections. One for movies, one for albums, and one for books"
+  width={282}
+	height={846}
+/>
 
 _EDIT: I should have changed the titles of the items in each review section in this graphic above, but they aren't really the focus of this post, so yeah&#8230;_
 

@@ -1,16 +1,21 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Modular CSS: Thoughts on SMACSS modules'
-date: '2013-03-09'
-permalink: /2013/03/09/modular-css-thoughts-on-smacss-modules/
 description: "My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable…"
+pubDate: '2013-03-09'
 tags:
  - CSS
 ---
+import {Image} from '@astrojs/image/components';
 
 My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I've learned about modules.
 
-{% Image "img/wp-content/uploads/2013/03/Lego_Color_Bricks.jpg", "Lego Bricks" %}
+<Image
+  src="src/assets/modular-css-thoughts-on-smacss-modules/lego-color-bricks.jpg"
+  alt="Lego Bricks"
+  width={700}
+	height={468}
+/>
 
 Source: [Wikipedia][1]
 
@@ -58,7 +63,7 @@ As an analogy (note, not example) take the following:
 
 We have several types of room in a house, but they all share similar traits; they all have floors, ceilings, walls and doors. We can share this information in an abstracted .room{} class. However we have specific types of room that are different from the others; a kitchen might have a tiled floor and a bedroom might have carpets, a bathroom might not have a window but a bedroom most likely will, each room likely has different coloured walls. OOCSS teaches us to abstract the shared styles out into a base object and then extend this information with more specific classes to add the unique treatment(s).
 
-So, instead of building dozens of unique components, try and spot repeated design patterns across them all and abstract them out into reusable classes; build these skeletons as base ‘objects’ and then peg classes onto these to extend their styling for more unique circumstances.
+So, instead of building dozens of unique components, try and spot repeated design patterns across them all and abstract them out into reusable classes; build these skeletons as base 'objects' and then peg classes onto these to extend their styling for more unique circumstances.
 ---
 
 In the example above, the `.room` class Harry talks about would be a module in regards to SMACSS. It contains all of the common styles for all instances of the `.room` module. We extend the use of the `.room` module by adding a modifier to it, .room&#8211;kitchen, .room&#8211;bedroom, .room&#8211;bathroom.
@@ -69,7 +74,12 @@ Module modifiers contain the specific styles for each instance of the `.room` mo
 
 As I talked about earlier, module modifiers extend the use of modules. There are a few ways that come to mind on how one could use module modifiers.
 
-{% Image "img/wp-content/uploads/2013/02/reviews.jpg", "Sample component design" %}
+<Image
+  src="src/assets/modular-css-thoughts-on-smacss-modules/reviews.jpg"
+  alt="Sample reviews component design"
+  width={282}
+	height={846}
+/>
 
 For example, with the above comp, we could create a reviews module that had all the styles for the movie review block in it, and create module modifiers for albums and books.
 

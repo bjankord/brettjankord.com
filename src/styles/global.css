@@ -6,8 +6,8 @@
 body {
 	font-family: Verdana, sans-serif;
 	margin: auto;
-	padding: 20px;
-	max-width: 65ch;
+	max-width: 44rem;
+	padding: 3rem;
 	text-align: left;
 	background-color: #fff;
 	word-wrap: break-word;
@@ -46,6 +46,8 @@ table {
 }
 img {
 	max-width: 100%;
+	/* https: //github.com/withastro/astro/pull/4327/files#r945765187 */
+	height: auto;
 }
 code {
 	padding: 2px 5px;
@@ -54,8 +56,12 @@ code {
 pre {
 	padding: 1rem;
 }
-pre > code {
+pre code {
 	all: unset;
+	background-color: inherit;
+}
+.language-id {
+	display: none;
 }
 blockquote {
 	border: 1px solid #999;

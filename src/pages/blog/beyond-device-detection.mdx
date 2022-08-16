@@ -1,13 +1,13 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Beyond device detection'
-date: '2013-01-22'
-permalink: /2013/01/22/beyond-device-detection/
 description: "The landscape of web enabled devices is drastically changing at a rapid pace . Device detection is no longer a reliable solution to adapt…"
+pubDate: '2013-01-22'
 tags:
  - JS
  - Device Detection
 ---
+import {Image} from '@astrojs/image/components';
 
 The landscape of web enabled devices is drastically changing at a [rapid pace][1]. Device detection is no longer a reliable solution to adapt with the changes we are seeing in the technological world. The amount of new web enabled devices being released is just too high.
 
@@ -17,11 +17,16 @@ Device detection _cannot_ reliably report the features of every device people ar
 
 There are [serives][3] which aim to provide a list of known features on a device based on it's user agent, however, they are not without drawbacks.
 
-The difficulty of keeping up with every new web enabled device and testing it and making sure it’s features are added to a database is no small task. It’s a maintenance nightmare as well as a costly endeavor. If one major company decides to break away from standards you rely on for device detection and feature pairing based on the user agent, the whole technique becomes less reliable.
+The difficulty of keeping up with every new web enabled device and testing it and making sure it's features are added to a database is no small task. It's a maintenance nightmare as well as a costly endeavor. If one major company decides to break away from standards you rely on for device detection and feature pairing based on the user agent, the whole technique becomes less reliable.
 
 For device detection to be accurate, it must be reliable. For device detection to be reliable, it must be tested on all of the new devices and maintained to make sure does not produce major false positives. This task is becoming more and more challenging.
 
-{% Image "img/wp-content/uploads/2013/01/test-all-the-devices.jpg", "Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all" %}
+<Image
+  src="src/assets/beyond-device-detection/test-all-the-devices.jpg"
+  alt="Pile of web enabled devices with text overlaid on top that reads, Gotta catch 'em all"
+  width={700}
+	height={525}
+/>
 
 A more future-friendly solution for adapting to this change is to move beyond device detection and to rely on feature detection alone.
 
@@ -33,7 +38,7 @@ One common pattern I saw with device detection when I was working on [Categorizr
 
 ## Feature Detection != Device Detection
 
-I will admit, it’s difficult to move beyond device detection. We want our sites to be suitable for and to work on as many devices as possible. Yet relying on user agents to determine features is not reliable, though we continue with this same set logic. We just reverse it. I’m sure you've all seen [a list][10] of media queries designed [specifically for the iPhone or the iPad][11]. Or maybe the misconception I brought up previously, that we can rely on detecting touch support to determine what type of device a user is on. These are not only silly, but have become tiring to see [over][12] and [over][13].
+I will admit, it's difficult to move beyond device detection. We want our sites to be suitable for and to work on as many devices as possible. Yet relying on user agents to determine features is not reliable, though we continue with this same set logic. We just reverse it. I'm sure you've all seen [a list][10] of media queries designed [specifically for the iPhone or the iPad][11]. Or maybe the misconception I brought up previously, that we can rely on detecting touch support to determine what type of device a user is on. These are not only silly, but have become tiring to see [over][12] and [over][13].
 
 **If you believe device detection != feature detection, you must accept that, feature detection != device detection.**
 

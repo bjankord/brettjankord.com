@@ -1,13 +1,13 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Active development on Categorizr has come to an end'
-date: '2013-01-10'
-permalink: /2013/01/10/active-development-on-categorizr-has-come-to-an-end/
-description: "It’s time to officially bring active development of Categorizr to a close. It’s always difficult to bring a personal project to a close…"
+description: "It's time to officially bring active development of Categorizr to a close. It's always difficult to bring a personal project to a close…"
+pubDate: '2013-01-10'
 tags:
 - Categorizr
 - Device Detection
 ---
+import {Image} from '@astrojs/image/components';
 
 It's time to officially bring active development of Categorizr to a close. It's always difficult to bring a personal project to a close. This was my first big personal project, so it is bittersweet to see this go.
 
@@ -27,19 +27,17 @@ Before Windows 8, you could [determine the difference][11] between a Windows PC 
 
 Though when I looked at they user agents Paulo Morgado collected from IE10, running on Windows 8 on his dev device, I noticed their was no **reliable** way to differentiate the user agent between Metro and Classic Desktop mode.
 
-<!-- textlint-disable -->
 User agent from Internet Explorer 10, running in the Metro UI:
 
 ```
-`Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)`
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)
 ```
 
 User agent from Internet Explorer 10, running in the Classic Desktop UI:
 
 ```
-`Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)`
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)
 ```
-<!-- textlint-enable -->
 
 This was the first instance I started to see the lines between tablet and desktop blur, then I started seeing screenshots of the tablet paired with a keyboard and it really opened my eyes. I [blogged][12] about it back in February last year.
 
@@ -47,19 +45,17 @@ So I decided to hold off on promoting Categorizr any more as I wanted to see if 
 
 Here are the user agents from the new Microsoft Surface.
 
-<!-- textlint-disable -->
 User agent from Internet Explorer 10, running in the Metro UI on Microsoft Surface:
 
 ```
-`Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)
 ```
 
 User agent from Internet Explorer 10, running in the Classic Desktop UI on Microsoft Surface:
 
 ```
-`Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)`
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)
 ```
-<!-- textlint-enable -->
 
 Microsoft actually uses the same user agent when for the Surface when it is in Metro UI mode as when it is in Desktop UI mode.
 
@@ -75,7 +71,12 @@ What I mean by this is that I longer see using user agent sniffing to group devi
 
 Sure, I can pick up a phone and tell the difference from a tablet. Likewise, I know the difference between my desktop computer at work and a tablet, though those lines we use to differentiate device groups are quickly fading away. Luke Wroblewski has an excellent graphic that shows how capabilities we saw associate with certain sets of devices is crossing over into all devices.
 
-{% Image "img/unified_device_design.png", "Unified device design" %}
+<Image
+  src="src/assets/active-development-on-categorizr-has-come-to-an-end/unified-device-design.png"
+  alt="Unified device design"
+  width={700}
+	height={523}
+/>
 
 Thinking back to what originally motivated me to develop Categorizr, I wanted a [RESS solution][15] to help conditionally load resources/assets/content. A nice side effect of Categorizr was that it also worked great as redirect solution.
 

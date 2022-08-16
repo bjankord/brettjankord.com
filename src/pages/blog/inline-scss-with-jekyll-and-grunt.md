@@ -1,9 +1,8 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'Inline SCSS with Jekyll and Grunt'
-date: '2015-07-07'
-permalink: /2015/07/07/inline-scss-with-jekyll-and-grunt/
 description: "Inlining critical CSS as great way to improve the performance of your site, it reduces blocking CSS requests needed for the initial render…"
+pubDate: '2015-07-07'
 tags:
  - CSS
 ---

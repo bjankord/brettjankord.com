@@ -1,9 +1,8 @@
 ---
 layout: "../../layouts/BlogPost.astro"
 title: 'How to inject server rendered HTML into create-react-app with Express'
-date: '2020-09-21'
-permalink: /2020/09/21/how-to-inject-server-rendered-html-into-create-react-app-with-express/
 description: "I recently ran into a limitation of using Express and Create React App, I needed the ability to inject server rendered HTML into..."
+pubDate: '2020-09-21'
 tags:
  - react
  - express
