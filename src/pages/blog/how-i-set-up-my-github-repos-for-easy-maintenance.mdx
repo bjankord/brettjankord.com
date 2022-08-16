@@ -8,6 +8,8 @@ tags:
  - open-source
 ---
 import {Image} from '@astrojs/image/components';
+import githubBranchChecksImg from '../../assets/how-i-set-up-my-github-repos-for-easy-maintenance/github-branch-checks.png';
+import autoDeleteBranchImg from '../../assets/how-i-set-up-my-github-repos-for-easy-maintenance/auto-delete-branch.png';
 
 I wanted to share some of the configuration I set up to make maintaining my open source projects a bit easier. As you work on a project, big or small, you will realize keeping a project up to date is an ongoing task.
 
@@ -61,7 +63,7 @@ Once I have this GitHub action set up, I can add a branch check to ensure it pas
 GitHub branch checks are a great way to ensure certain criteria are met on pull requests before they can be merged down. For my personal repos, I usually just set up checks to ensure the branch is up to date with master before it can be merged and similarly, ensure the branch passes the automated tests that are set up for the repo.
 
 <Image
-  src="src/assets/how-i-set-up-my-github-repos-for-easy-maintenance/github-branch-checks.png"
+  src={githubBranchChecksImg}
   alt="GitHub branch checks"
   width={700}
 	height={491}
@@ -98,7 +100,7 @@ With this in place, your project can easily be kept up to date automatically wit
 GitHub has a feature for deleting branches that have been merged into your main branch. Once you turn this on it becomes a lot easier to clean up the branches from various pull requests.
 
 <Image
-  src="src/assets/how-i-set-up-my-github-repos-for-easy-maintenance/auto-delete-branch.png"
+  src={autoDeleteBranchImg}
   alt="Auto-delete branch"
   width={700}
 	height={91}

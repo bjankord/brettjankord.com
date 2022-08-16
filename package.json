@@ -28,10 +28,7 @@
     "astro": "^1.0.5"
   },
   "devDependencies": {
-    "clean-css": "^4.2.3",
-    "html-minifier": "^4.0.0",
     "license-checker": "^25.0.0",
-    "prettier": "^1.14.2",
     "textlint": "^11.2.1",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-no-dead-link": "^4.4.1",

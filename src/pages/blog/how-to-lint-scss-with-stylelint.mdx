@@ -11,6 +11,10 @@ tags:
  - stylelint
 ---
 import {Image} from '@astrojs/image/components';
+import stylelint1Img from '../../assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-1.png';
+import stylelint2Img from '../../assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-2.png';
+import stylelint3Img from '../../assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-3.png';
+import stylelint4Img from '../../assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-4.png';
 
 [Stylelint](https://github.com/stylelint/stylelint) is a mighty, modern CSS linter that helps you enforce consistent conventions and avoid errors in your style sheets. If you are reading this, I'm guessing you are already familiar with stylelint. If not, I'd highly recommend reading Aleks Hudochenkov's Smashing Magazine post, [Stylelint: The Style Sheet Linter We've Always Wanted](https://www.smashingmagazine.com/2016/05/stylelint-the-style-sheet-linter-weve-always-wanted/)
 
@@ -61,7 +65,7 @@ Then, in your `package.json` file you can add this command:
 Then you can run `npm run stylelint` to lint your SCSS files. When you run this command, if there are any lint errors, you'll see all these npm ERR! messages after the lint errors.
 
 <Image
-  src="src/assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-1.png"
+  src={stylelint1Img}
   alt="Stylelint errors"
   width={700}
 	height={421}
@@ -78,7 +82,7 @@ This is expected. You can update your stylelint script to always exit with a zer
 Now when you run npm run stylelint, the npm ERR! messages will not display.
 
 <Image
-  src="src/assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-2.png"
+  src={stylelint2Img}
   alt="Stylelint errors with exit 0"
   width={700}
 	height={290}
@@ -100,7 +104,7 @@ Another option is to set the [default severity](https://stylelint.io/user-guide/
 When you run `npm run stylelint`, it will treat lint issues as warnings and exit with a zero.
 
 <Image
-  src="src/assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-3.png"
+  src={stylelint3Img}
   alt="Stylelint warnings"
   width={700}
 	height={295}
@@ -142,7 +146,7 @@ The stylelint team maintains a standard stylelint config called [stylelint-confi
 ## stylelint-config-sass-guidelines
 
 <Image
-  src="src/assets/how-to-lint-scss-with-stylelint/how-to-lint-scss-with-stylelint-4.png"
+  src={stylelint4Img}
   alt="stylelint-config-sass-guidelines"
   width={700}
 	height={297}

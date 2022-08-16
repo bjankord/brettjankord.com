@@ -7,11 +7,13 @@ tags:
  - CSS
 ---
 import {Image} from '@astrojs/image/components';
+import legoImg from '../../assets/modular-css-thoughts-on-smacss-modules/lego-color-bricks.jpg';
+import reviewsImg from '../../assets/modular-css-thoughts-on-smacss-modules/reviews.jpg';
 
 My understanding of CSS modules continues to grow from day to day. To me, modules are one of the best ways to create scalable and reusable styles. The offer us a way to add order to our styling. I wanted to jot down a few things I've learned about modules.
 
 <Image
-  src="src/assets/modular-css-thoughts-on-smacss-modules/lego-color-bricks.jpg"
+  src={legoImg}
   alt="Lego Bricks"
   width={700}
 	height={468}
@@ -75,7 +77,7 @@ Module modifiers contain the specific styles for each instance of the `.room` mo
 As I talked about earlier, module modifiers extend the use of modules. There are a few ways that come to mind on how one could use module modifiers.
 
 <Image
-  src="src/assets/modular-css-thoughts-on-smacss-modules/reviews.jpg"
+  src={reviewsImg}
   alt="Sample reviews component design"
   width={282}
 	height={846}
