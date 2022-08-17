@@ -1,23 +1,11 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { SITE } from '$/config';
+import DefaultLayout from '$/layouts/Default.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en-us">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>Hello 👋</h1>
-			<p>
-				I'm Brett Jankord, a Software Engineer living in the midwest who enjoys working on front-end development, design systems, accessibility, responsive web design, CSS, ReactJS / Vue.js, and open source software.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+  <h1>Hello 👋</h1>
+  <p>
+    I'm Brett Jankord, a Software Engineer living in the midwest who enjoys working on front-end development, design systems, accessibility, responsive web design, CSS, ReactJS / Vue.js, and open source software.
+  </p>
+</DefaultLayout>

@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'Syncing JavaScript with your active media query'
 description: "Just read Jeremy Keith's conditional loading for responsive designs concept . Not only can it be used to load in additional content, but it…"
 pubDate: '2012-11-15'

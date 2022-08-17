@@ -1,12 +1,12 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../config';
+import { SITE } from '$/config';
 ---
 
 <header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
+	<span class="logo">
+		{SITE.title}
+  </span>
 	<nav>
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="/blog">Blog</HeaderLink>
@@ -19,7 +19,10 @@ import { SITE_TITLE } from '../config';
 	header {
 		margin: 0em 0 2em;
 	}
-	h2 {
+	.logo {
 		margin: 0.5em 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    font-size: 2rem;
 	}
 </style>

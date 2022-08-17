@@ -10,11 +10,13 @@ const __dirname = dirname(__filename)
 
 // https://astro.build/config
 export default defineConfig({
-  resolve: {
-      alias: {
-        '$': path.resolve(__dirname, './src'),
-      },
-  },
 	site: 'https://www.brettjankord.com',
 	integrations: [image(), mdx(), sitemap()],
+  vite: {
+    resolve: {
+        alias: {
+          '$': path.resolve(__dirname, './src'),
+        },
+    },
+  }
 });

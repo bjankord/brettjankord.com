@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'How to inject server rendered HTML into create-react-app with Express'
 description: "I recently ran into a limitation of using Express and Create React App, I needed the ability to inject server rendered HTML into..."
 pubDate: '2020-09-21'

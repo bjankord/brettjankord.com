@@ -1,8 +1,7 @@
 ---
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../../config';
+import { SITE } from '$/config';
+import DefaultLayout from '$/layouts/Default.astro';
+import PostListing from '$/components/PostListing.astro';
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = (await Astro.glob('../../{blog,notes}/*.{md,mdx}'))
@@ -24,27 +23,10 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 const { tag } = Astro.params;
-
-console.log(page.data[0].frontmatter.title);
 ---
 
-<!DOCTYPE html>
-<html lang="en-us">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-      <hl>{tag}</hl>
-			<ul>
-        {page.data.map((p) => (
-          <li>
-            {p.frontmatter.title}
-          </li>
-        ))}
-      </ul>
-		</main>
-		<Footer />
-	</body>
-</html>
+<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+  <h1>Posts tagged: {tag}</h1>
+  <PostListing posts={page.data} />
+  <p>Back to <a href="/tags">all tags</a></p>
+</DefaultLayout>

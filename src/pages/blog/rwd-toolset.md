@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'RWD toolset'
 description: "RWD Toolset is a small JavaScript file paired with a style sheet I threw together to help when developing responsive sites. It adds a form…"
 pubDate: '2011-01-18'

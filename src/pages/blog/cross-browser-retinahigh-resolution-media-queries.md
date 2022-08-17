@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'Cross browser retina/high resolution media queries'
 description: "fantasai, Ben Frain, and Peter Gasston have all written about this topic before, though I still see a lot developers using verbose…"
 pubDate: '2012-11-28'

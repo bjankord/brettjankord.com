@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'Inline SCSS with Jekyll and Grunt'
 description: "Inlining critical CSS as great way to improve the performance of your site, it reduces blocking CSS requests needed for the initial render…"
 pubDate: '2015-07-07'

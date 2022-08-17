@@ -1,8 +1,6 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
+import { SITE } from '$/config';
+import DefaultLayout from '$/layouts/Default.astro';
 
 // fetch all the posts/notes and get their tags
 const allTags =  (await Astro.glob('../{blog,notes}/*.{md,mdx}'))
@@ -12,27 +10,17 @@ const allTags =  (await Astro.glob('../{blog,notes}/*.{md,mdx}'))
 
 const uniqueTags = [...new Set(allTags)];
 ---
-<!-- TODO - Build a layout component that has a slot and accepts props for head/meta -->
-<!DOCTYPE html>
-<html lang="en-us">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<ul class="tag-list">
-      {uniqueTags.map((tag) => (
-          <li>
-            <a
-              class="tag"
-              href={`/tags/${tag}`}
-              title={`View posts tagged: ${tag}`}
-            >{tag}</a>
-          </li>
-      ))}
-      </ul>
-		</main>
-		<Footer />
-	</body>
-</html>
+<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+  <h1>Tags</h1>
+  <ul class="tag-list">
+  {uniqueTags.map((tag) => (
+    <li>
+      <a
+        class="tag"
+        href={`/tags/${tag}`}
+        title={`View posts tagged: ${tag}`}
+      >{tag}</a>
+    </li>
+  ))}
+  </ul>
+</DefaultLayout>

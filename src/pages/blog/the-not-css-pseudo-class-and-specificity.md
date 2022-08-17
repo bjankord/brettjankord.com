@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'The :not() css-pseudo-class and specificity'
 description: "The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument…"
 pubDate: '2015-06-07'

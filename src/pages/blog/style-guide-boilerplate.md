@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: '$/layouts/BlogPost.astro'
 title: 'Style Guide Boilerplate'
 description: "Recently, I've had a renewed interest in web style guides. As I've been building responsive websites, I've found style guides to be a…"
 pubDate: '2013-03-07'
