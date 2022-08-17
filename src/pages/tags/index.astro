@@ -1,0 +1,26 @@
+---
+import { SITE } from '$/config';
+import DefaultLayout from '$/layouts/Default.astro';
+
+// fetch all the posts/notes and get their tags
+const allTags =  (await Astro.glob('../{blog,notes}/*.{md,mdx}'))
+  .flatMap(entry => entry.frontmatter.tags)
+  .filter(tag => tag !== undefined)
+  .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+const uniqueTags = [...new Set(allTags)];
+---
+<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+  <h1>Tags</h1>
+  <ul class="tag-list">
+  {uniqueTags.map((tag) => (
+    <li>
+      <a
+        class="tag"
+        href={`/tags/${tag}`}
+        title={`View posts tagged: ${tag}`}
+      >{tag}</a>
+    </li>
+  ))}
+  </ul>
+</DefaultLayout>

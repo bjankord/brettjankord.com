@@ -1,0 +1,16 @@
+---
+import { SITE } from '$/config';
+import DefaultLayout from '$/layouts/Default.astro';
+import PostListing from '$/components/PostListing.astro';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('./notes/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+  <content>
+    <p>Here you'll find my short notes about various coding/technical ideas.</p>
+    <PostListing posts={posts} />
+  </content>
+</DefaultLayout>

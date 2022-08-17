@@ -1,0 +1,27 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE } from '$/config';
+---
+
+<header>
+	<span class="logo">
+		{SITE.title}
+  </span>
+	<nav>
+		<HeaderLink href="/">Home</HeaderLink>
+		<HeaderLink href="/notes">Notes</HeaderLink>
+		<HeaderLink href="https://twitter.com/bjankord" target="_blank">Twitter</HeaderLink>
+		<HeaderLink href="https://github.com/bjankord" target="_blank">GitHub</HeaderLink>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0em 0 2em;
+	}
+	.logo {
+		margin: 0.5em 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    font-size: 2rem;
+	}
+</style>
