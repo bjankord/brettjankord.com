@@ -1,6 +1,12 @@
 ---
 import { SITE } from '$/config';
 import DefaultLayout from '$/layouts/Default.astro';
+import PostListing from '$/components/PostListing.astro';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
 ---
 
 <DefaultLayout content={{title: SITE.title, description: SITE.description}}>
@@ -8,4 +14,8 @@ import DefaultLayout from '$/layouts/Default.astro';
   <p>
     I'm Brett Jankord, a Software Engineer living in the midwest who enjoys working on front-end development, design systems, accessibility, responsive web design, CSS, ReactJS / Vue.js, and open source software.
   </p>
+  <div>
+    <h2>Posts</h2>
+    <PostListing posts={posts} />
+  </div>
 </DefaultLayout>

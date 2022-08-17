@@ -1,5 +1,5 @@
 [build]
-  publish = "_site"
+  publish = "dist"
   command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer npm run build"
 [build.environment]
   NODE_VERSION = "lts/*"
