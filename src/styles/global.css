@@ -11,7 +11,7 @@ body {
 	font-size: 1.2em;
   margin: auto;
 	max-width: 44rem;
-	padding: 3rem;
+	padding: 3rem 2rem;
 	text-align: left;
 	background-color: #fff;
 	word-wrap: break-word;
@@ -32,9 +32,6 @@ b {
 a {
 	color: #3273dc;
 }
-nav a {
-	margin-right: 10px;
-}
 textarea {
 	width: 100%;
 	font-size: 16px;
@@ -48,17 +45,15 @@ content {
 table {
 	width: 100%;
 }
-img {
-	max-width: 100%;
-	/* https: //github.com/withastro/astro/pull/4327/files#r945765187 */
-	height: auto;
-}
 code {
 	padding: 2px 5px;
 	background-color: #f2f2f2;
 }
 pre {
 	padding: 1rem;
+}
+pre.shiki {
+  overflow: scroll;
 }
 pre code {
 	all: unset;
@@ -75,6 +70,15 @@ blockquote {
 	font-style: italic;
 }
 h1,h2,h3,h4,h5,h6 {
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 600;
+  font-family: 'Fjalla One', sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.content {
+  font-weight: 300;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
 }
