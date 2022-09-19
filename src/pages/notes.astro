@@ -9,8 +9,8 @@ const posts = (await Astro.glob('./notes/*.{md,mdx}')).sort(
 );
 ---
 <DefaultLayout content={{title: SITE.title, description: SITE.description}}>
-  <content>
+  <section>
     <p>Here you'll find my short notes about various coding/technical ideas.</p>
     <PostListing posts={posts} />
-  </content>
+  </section>
 </DefaultLayout>

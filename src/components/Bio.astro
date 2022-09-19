@@ -23,18 +23,23 @@ import profilePic from '$/assets/profile-pic.jpg';
 .bio {
     align-items: center;
     display: flex;
-    margin-bottom: 5rem
+    margin-bottom: 2rem
 }
 
 .bio-img {
-    border-radius: 100%;
     margin-right: .875rem;
     margin-bottom: 0;
-    width: 3.45rem;
-    height: 3.45rem;
+    min-width: 55px;
+    min-height: 55px;
     position: relative;
     overflow: hidden;
     display: inline-block
+}
+
+.bio-img img {
+  border-radius: 100%;
+  width: 55px;
+  height: 55px;
 }
 
 .bio-content {

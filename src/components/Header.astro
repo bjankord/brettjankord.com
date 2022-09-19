@@ -7,7 +7,7 @@ import { SITE } from '$/config';
 	<span class="logo">
 		{SITE.title}
   </span>
-	<nav>
+	<nav class="nav">
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="/notes">Notes</HeaderLink>
 		<HeaderLink href="https://twitter.com/bjankord" target="_blank">Twitter</HeaderLink>
@@ -18,10 +18,22 @@ import { SITE } from '$/config';
 	header {
 		margin: 0em 0 2em;
 	}
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    margin-right: 1rem;
+  }
+
 	.logo {
+    color: #222;
 		margin: 0.5em 0;
-    font-family: "Playfair Display", Georgia, serif;
-    font-weight: 600;
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: 400;
     font-size: 2rem;
+    text-transform: uppercase;
 	}
 </style>

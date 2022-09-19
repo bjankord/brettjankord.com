@@ -9,7 +9,7 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 );
 ---
 <DefaultLayout content={{title: SITE.title, description: SITE.description}}>
-  <content>
+  <section>
     <PostListing posts={posts} />
-  </content>
+  </section>
 </DefaultLayout>

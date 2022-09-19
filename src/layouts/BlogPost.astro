@@ -43,22 +43,29 @@ const discussionUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
       description={ description }
     />
     <style>
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-  		  border-top: 1px solid #DDD;
-				margin: 1rem 0;
-			}
+      .title {
+        font-size: 1.5em;
+        margin: 0.25em 0 0;
+      }
+
+      @media screen and (min-width:770px) {
+        .title {
+          font-size: 2em;
+        }
+      }
+
+      hr {
+        border-top: 1px solid #DDD;
+        margin: 1rem 0;
+      }
 
       .tags a {
         margin-right: 0.5rem;
       }
-		</style>
+    </style>
   </head>
   <MainLayout>
-    <article>
+    <article class="blog-post">
       {heroImageAsset && (
         <Image
           width={720}
