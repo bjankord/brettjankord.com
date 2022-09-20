@@ -1,26 +1,61 @@
 ---
-import Header from '$/components/Header.astro';
-import Footer from '$/components/Footer.astro';
-const { title } = Astro.props
+import Header from "$/components/Header.astro";
+import Footer from "$/components/Footer.astro";
+const { title } = Astro.props;
 ---
+<style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+</style>
 <body>
+  <a class="sr-only sr-only-focusable" href="#main">Skip to main content</a>
   <Header title={title} />
-  <main class="content">
+  <main id="main" class="content">
     <slot />
   </main>
   <Footer />
   <script>
     partytown = {
-      resolveUrl: function(url) {
-          if (url.hostname === 'www.google-analytics.com') {
-            var proxyUrl = new URL('https://www.brettjankord.com/analytics/');
-            proxyUrl.searchParams.append('url', url);
-            return proxyUrl;
-          }
-          return url;
+      resolveUrl: function (url) {
+        if (url.hostname === "www.google-analytics.com") {
+          var proxyUrl = new URL("https://www.brettjankord.com/analytics/");
+          proxyUrl.searchParams.append("url", url);
+          return proxyUrl;
         }
-    }
+        return url;
+      },
+    };
   </script>
-  <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=UA-3084536-1"></script>
-  <script type="text/partytown">window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-3084536-1');</script>
+  <script
+    type="text/partytown"
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-3084536-1"
+  ></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "UA-3084536-1");
+  </script>
 </body>
