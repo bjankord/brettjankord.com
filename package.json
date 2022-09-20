@@ -27,6 +27,7 @@
     "astro": "^1.0.5"
   },
   "devDependencies": {
+    "@astrojs/partytown": "^1.0.0",
     "license-checker": "^25.0.0",
     "textlint": "^11.2.1",
     "textlint-filter-rule-comments": "^1.2.2",
