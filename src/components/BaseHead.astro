@@ -48,5 +48,13 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap">
+
+<!-- Async CSS -->
+<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap">
+
+<!-- no-JS fallback -->
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap">
+</noscript>
