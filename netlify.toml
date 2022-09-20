@@ -3,3 +3,8 @@
   command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer npm run build"
 [build.environment]
   NODE_VERSION = "lts/*"
+[[redirects]]
+  from = "/analytics/"
+  to = "https://www.google-analytics.com/analytics.js"
+  status = 200
+  force = true

@@ -9,6 +9,18 @@ const { title } = Astro.props
     <slot />
   </main>
   <Footer />
+  <script>
+    partytown = {
+      resolveUrl: function(url) {
+          if (url.hostname === 'www.google-analytics.com') {
+            var proxyUrl = new URL('https://www.brettjankord.com/analytics/');
+            proxyUrl.searchParams.append('url', url);
+            return proxyUrl;
+          }
+          return url;
+        }
+    }
+  </script>
   <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=UA-3084536-1"></script>
   <script type="text/partytown">window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-3084536-1');</script>
 </body>
