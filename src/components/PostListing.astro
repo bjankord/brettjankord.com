@@ -29,7 +29,7 @@ const { posts } = Astro.props;
   ul li time {
     font-style: italic;
     font-weight: 300;
-    color: #757575
+    color: var(--post-listing-time-color);
   }
 
   @media screen and (min-width:770px) {
@@ -40,8 +40,5 @@ const { posts } = Astro.props;
     ul li time {
       flex: 0 0 130px;
     }
-  }
-  ul li a:visited {
-    color: #8e32dc;
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import { SITE } from '$/config';
 import BaseHead from '$/components/BaseHead.astro';
+import Divider from '$/components/Divider.astro';
 import MainLayout from '$/components/MainLayout.astro';
 
 const {
@@ -25,10 +26,6 @@ const {
 				font-size: 2em;
 				margin: 0.25em 0 0;
 			}
-			hr {
-  		  border-top: 1px solid #DDD;
-				margin: 1rem 0;
-			}
 
       .tags a {
         margin-right: 0.5rem;
@@ -40,7 +37,7 @@ const {
       <h1 class="title">{title}</h1>
       {pubDate && <time>{pubDate}</time>}
       {updatedDate && <div>Last updated on <time>{updatedDate}</time></div>}
-      <hr/>
+      <Divider />
       <slot />
       {tags.length && (<p class="tags">Tags: {tags.map(tag =>(<a href={`/tags/${tag}`}>{tag}</a>) )}</p>)}
     </article>

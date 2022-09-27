@@ -3,6 +3,55 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+:root {
+  --black: #000;
+  --gray-10: #222;
+  --gray-20: #444;
+  --gray-30: #666;
+  --gray-40: #757575;
+  --gray-50: #888;
+  --gray-60: #999;
+  --gray-70: #BBB;
+  --gray-80: #DDD;
+  --gray-90: #f2f2f2;
+  --white: #fff;
+  --blue: #3273dc;
+  --light-blue: #7ebef4;
+  --purple: #8e32dc;
+  --light-purple: #b588da;
+  --slate: #282C34;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --body-bg-color: var(--white);
+    --body-color: var(--gray-20);
+    --heading-color: var(--gray-10);
+    --logo-color: var(--gray-10);
+    --post-listing-time-color: var(--gray-40);
+    --blockquote-color: var(--gray-10);
+    --blockquote-border-color: var(--gray-60);
+    --code-bg-color: var(--gray-90);
+    --link-color: var(--blue);
+    --link-visited-color: var(--purple);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color: var(--slate);
+    --body-color: var(--gray-90);
+    --heading-color: var(--white);
+    --logo-color: var(--white);
+    --post-listing-time-color: var(--gray-70);
+    --blockquote-color: var(--white);
+    --blockquote-border-color: var(--gray-60);
+    --code-bg-color: var(--gray-20);
+    --link-color: var(--light-blue);
+    --link-visited-color: var(--light-purple);
+  }
+}
+
 html {
   -webkit-font-smoothing: subpixel-antialiased;
 }
@@ -13,11 +62,11 @@ body {
 	max-width: 44rem;
 	padding: 3rem 2rem;
 	text-align: left;
-	background-color: #fff;
+	background-color: var(--body-bg-color);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
-	color: #444;
+	color: var(--body-color);
 }
 h1,
 h2,
@@ -27,10 +76,13 @@ h5,
 h6,
 strong,
 b {
-	color: #222;
+	color: var(--heading-color);
 }
 a {
-	color: #3273dc;
+	color: var(--link-color);
+}
+a:visited {
+  color: var(--link-visited-color);
 }
 textarea {
 	width: 100%;
@@ -47,7 +99,7 @@ table {
 }
 code {
 	padding: 2px 5px;
-	background-color: #f2f2f2;
+	background-color: var(--code-bg-color);
 }
 pre {
 	padding: 1rem;
@@ -63,10 +115,10 @@ pre code {
 	display: none;
 }
 blockquote {
-	border: 1px solid #999;
-	color: #222;
-	padding: 2px 0px 2px 20px;
-	margin: 0px;
+	border-left: 2px solid var(--blockquote-border-color);
+	color: var(--blockquote-color);
+	padding: 2px 0 2px 2rem;
+	margin: 0;
 	font-style: italic;
 }
 h1,h2,h3,h4,h5,h6 {
