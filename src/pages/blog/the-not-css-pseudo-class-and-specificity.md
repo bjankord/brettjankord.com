@@ -3,6 +3,7 @@ layout: '$/layouts/BlogPost.astro'
 title: 'The :not() css-pseudo-class and specificity'
 description: "The :not() pseudo-class is a powerful CSS negation matcher added in CSS3. It matches elements that are not represented by the argument…"
 pubDate: '2015-06-07'
+updatedDate: '2022-10-07'
 tags:
  - CSS
 ---
@@ -105,6 +106,8 @@ Using a selector like this _may_ seem like a good idea, **with this selector, we
 
 If you need to override styles applied by this selector, you'll need some way to trump their current styling specificity.
 
+A demo of this issue can be viewed here on codepen: <a href="https://codepen.io/bjankord/pen/wvjYvza" target="_blank">Codepen.io :not specificity demo</a>
+
 ## An alternate approach
 
 If you have control over the markup, you can apply the styles with a single class. This solves the problem of keeping selector count low while also keeping specificity low.
@@ -131,3 +134,14 @@ If you have control over the markup, you can apply the styles with a single clas
 With this `.text-input` class, we can apply form field styles only to the specific inputs we want. It also keeps things simple. The **specificity score of this `.text-input` selector is 0.0.1.0**, which is easy to override if the need arises. The total selector count for applying these styles with a class is 5, the same as the chained :not selector.
 
 When using the :not pseudo-class, be careful of chaining them together. You may end up creating a specificity side effect that will cause issues down the road.
+
+## Edit 10-07-22
+
+Now with the new `:where` selector, we can use the chained `:not` selectors without dealing with the increased specificity that comes with that approach. The key about the `:where()` selector is that it always has 0 specificity. So we can get rid of our problem very easily like this:
+
+```css
+:where(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="image"]))
+```
+With wrapping the chained `:not` selector in a `:where` pseudo-class, we can now override the inputs matched by this selector with a single class that comes later in the stylesheet cascade.
+
+A demo of this issue can be viewed here on codepen: <a href="https://codepen.io/bjankord/pen/eYrPOrz" target="_blank">Codepen.io :where :not specificity demo</a>
