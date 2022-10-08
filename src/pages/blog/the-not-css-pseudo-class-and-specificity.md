@@ -142,6 +142,6 @@ Now with the new `:where` selector, we can use the chained `:not` selectors with
 ```css
 :where(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="image"]))
 ```
-With wrapping the chained `:not` selector in a `:where` pseudo-class, we can now override the inputs matched by this selector with a single class that comes later in the stylesheet cascade.
+With wrapping the chained `:not` selector in a `:where` pseudo-class, we can now override the inputs matched by this selector with a single class that comes later in the stylesheet based on the cascade's sorting order of appearance logic.
 
 A demo of this issue can be viewed here on codepen: <a href="https://codepen.io/bjankord/pen/eYrPOrz" target="_blank">Codepen.io :where :not specificity demo</a>
