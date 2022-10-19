@@ -1,31 +1,32 @@
 ---
-import { SITE } from '$/config';
-import DefaultLayout from '$/layouts/Default.astro';
-import PostListing from '$/components/PostListing.astro';
+import { SITE } from "$/config";
+import DefaultLayout from "$/layouts/Default.astro";
+import PostListing from "$/components/PostListing.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = (await Astro.glob('../../{blog,notes}/*.{md,mdx}'))
-  const allTags = allPosts.flatMap(entry => entry.frontmatter.tags)
-  .filter(tag => tag !== undefined)
-  .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+  const allPosts = await Astro.glob("../../{blog,notes}/*.{md,mdx}");
+  const allTags = allPosts
+    .flatMap((entry) => entry.frontmatter.tags)
+    .filter((tag) => tag !== undefined)
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   const uniqueTags = [...new Set(allTags)];
 
-	return uniqueTags.map((tag) => {
-		const filterPosts = allPosts.filter((post) =>
-			post.frontmatter.tags?.includes(tag)
-		);
-		return paginate(filterPosts, {
-			params: { tag },
-			pageSize: 10,
-		});
-	});
+  return uniqueTags.map((tag) => {
+    const filterPosts = allPosts.filter((post) =>
+      post.frontmatter.tags?.includes(tag)
+    );
+    return paginate(filterPosts, {
+      params: { tag },
+      pageSize: 10,
+    });
+  });
 }
 
 const { page } = Astro.props;
 const { tag } = Astro.params;
 ---
 
-<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+<DefaultLayout content={{ title: tag, description: SITE.description }}>
   <h1>Posts tagged: {tag}</h1>
   <PostListing posts={page.data} />
   <p>Back to <a href="/tags">all tags</a></p>

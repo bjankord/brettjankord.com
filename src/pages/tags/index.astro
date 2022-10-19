@@ -10,7 +10,7 @@ const allTags =  (await Astro.glob('../{blog,notes}/*.{md,mdx}'))
 
 const uniqueTags = [...new Set(allTags)];
 ---
-<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+<DefaultLayout content={{title: 'Tags', description: SITE.description}}>
   <h1>Tags</h1>
   <ul class="tag-list">
   {uniqueTags.map((tag) => (

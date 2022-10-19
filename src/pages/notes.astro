@@ -8,7 +8,7 @@ const posts = (await Astro.glob('./notes/*.{md,mdx}')).sort(
 	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
 );
 ---
-<DefaultLayout content={{title: SITE.title, description: SITE.description}}>
+<DefaultLayout content={{title: 'Notes', description: 'Notes from Brett Jankord'}}>
   <section>
     <p>Here you'll find my short notes about various coding/technical ideas.</p>
     <PostListing posts={posts} />
