@@ -45,17 +45,16 @@ const { title } = Astro.props;
       },
     };
   </script>
-  <script
+  <!-- GA4 Scripts -->
+  <script  
     type="text/partytown"
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-3084536-1"
+    async 
+    src="https://www.googletagmanager.com/gtag/js?id=G-RFT9V1G58K"
   ></script>
   <script type="text/partytown">
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-    gtag("config", "UA-3084536-1");
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RFT9V1G58K');
   </script>
 </body>
