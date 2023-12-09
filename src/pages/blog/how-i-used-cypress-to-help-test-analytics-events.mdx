@@ -1,0 +1,120 @@
+---
+layout: '$/layouts/BlogPost.astro'
+title: 'Using cypress to validate analytic events'
+description: "With Google Analytics 3 being sunset this last year, my squad had been tasked with applying changes and updates to various analytics..."
+pubDate: '2023-12-09'
+tags:
+ - cypress
+ - integration-testing
+ - analytics
+---
+With Google Analytics 3 being sunset this last year, my squad had been tasked with applying changes and updates to various analytics events across our web applications at Garmin. As users navigate through our purchasing funnel, there are key events like viewing a product, selecting a product, and purchasing a product we want to track via analytics. The analytics data required for those related events is sourced from multiple APIS (product data, pricing data, etc).
+
+Based on this, I felt like cypress would be a great solution to validate that we are sending the expected analytics data as users navigate our pages and ensure we are not over firing or duplicating events.
+
+Gleb Bahmutov has a great article on using cypress to test Google Analytics: https://glebbahmutov.com/blog/spy-on-complex-method-call/
+This article helped point me in the right direction to get started. While we are using Google Analytics 4 at Garmin, we are also using Tealium to send our events which can then be mapped to GA4 or other analytics tools.
+
+Tealium offers 2 methods for sending event data:
+* `window.utag.view`
+* `window.utag.link`
+
+To start, I decided I wanted to stub out those methods in cypress so we could then assert on the arguments passed to them whenever they are called by our application code.
+
+To set up the stubs, I added the following to our `cypress/support/commands.js` file:
+
+```js
+Cypress.on('window:before:load', (win) => {
+  // Stub window.utag.link and window.utag.view
+  win.utag = {};
+  win.utag.view = cy.stub().as('utagView');
+  win.utag.link = cy.stub().as('utagLink');
+});
+```
+
+With these stubs in place, I could now use the aliases for the stubs to start testing.
+I set up a test for our initial page view event with the following:
+
+```js
+it('Sends the expected analytics data on page load', () => {
+  cy.visit('https://www.garmin.com/en-US/p/735611/');
+
+  const expectedPageViewAnalyticsData = {
+    // this object contains all our analytics data for page views
+    productBrand: 'Garmin',
+    productName: 'Fenix 7 - Standard Edition',
+    tealium_event: 'page_view',
+    // etc...
+   };
+
+  cy.get('@utagView')
+    .should('be.calledWith', Cypress.sinon.match({ tealium_event: 'page_view' }))
+    .then((stub) => {
+      const calls = stub.getCalls();
+
+      // Ensure there is only 1 page_view event fired on page load
+      expect(calls.length).to.equal(1);
+
+      const selectedCall = calls.find((call) => call?.args?.[0]?.tealium_event === 'page_view');
+      const actualAnalyticsData = selectedCall?.args?.[0];
+
+      // Ensure the objects contain the same keys
+      compareObjectKeyNames(expectedPageViewAnalyticsData, actualAnalyticsData);
+      // Ensure the objects values match the expected values
+      deepCompareObject(expectedPageViewAnalyticsData, actualAnalyticsData);
+    });
+});
+```
+
+I want break down what each part is doing in this test. First, we have a `cy.get('@utagView')`. This will run when our stub for `window.utag.view` is called. I chained that with `.should('be.calledWith', Cypress.sinon.match({ tealium_event: 'page_view' }))`
+
+When I first started work on adding the tests, we had multiple `window.utag.view` calls firing, so by using the should be called with, I could then use the `Cypress.sinon.match` to match an object that contained a key/value pair I was expecting, in this case `{ tealium_event: 'page_view' }`.
+
+Next, I can start making assertions on the stub call that we matched with in the should statement. `const calls = stub.getCalls();` will get all the calls that match from our should statement. I wanted to ensure that we were onlying firing 1 `tealium_event: 'page_view'` event and so I added the expect statement to check the calls length.
+
+```js
+// Ensure there is only 1 page_view event fired on page load
+expect(calls.length).to.equal(1);
+```
+
+Next, I wanted to make assertions on the data that we actually pass to `window.utag.view`. The following lines let us access the arguments that were passed to our stub.
+
+```js
+const selectedCall = calls.find((call) => call?.args?.[0]?.tealium_event === 'page_view');
+const actualAnalyticsData = selectedCall?.args?.[0];
+```
+
+Now that we have access to the actual analytics data passed to `window.utag.view` from our application code, I can compare it to what we expect it to be. I found that if I did a deep equal on the actual object vs the expected object, if there was a mis-match (a key missing, or a value that doesnt match) cypess didn't do a great job logging that exact diff. I wanted it to be able to immediately see if a test failed, what piece of data caused it.
+
+So for that use case, I created 2 helper functions to compare the object keys and then compare the values individually.
+
+```js
+// Ensure the objects contain the same keys
+compareObjectKeyNames(expectedPageViewAnalyticsData, actualAnalyticsData);
+
+// Ensure the objects values match the expected values
+deepCompareObject(expectedPageViewAnalyticsData, actualAnalyticsData);
+```
+
+The `compareObjectKeyNames` helper takes an expected object and an actual object and sorts the object keys on each. Then it does a deep equal compare of those arrays. I noticed when I was first setting up some of the expect statements that if our actual object only contained a subset of the keys in the expected object, it was still matching and passing the expect tests. So I wanted to correct that and ensure if our actual analytics data was only sending a subset of what we expected, it would fail in the test case.
+```
+const compareObjectKeyNames = (expectedObject, actualObject) => {
+  const sortedActualObjectKeys = Object.keys(actualObject).sort();
+  const sortedExpectedObjectKeys = Object.keys(expectedObject).sort();
+  expect(sortedActualObjectKeys).to.deep.equal(sortedExpectedObjectKeys);
+};
+```
+
+The `deepCompareObject` helper takes an expected object and an actual object and applies `Object.keys` to the expected object and then uses `forEach` to loop over every entry doing a deep compare of the actual object key value against the expected object key value. With this, if there is a mismatch in one of the keys, the test will fail and we can see which exact key/value failed.
+
+```js
+const deepCompareObject = (expectedObject, actualObject) => {
+  Object.keys(expectedObject).forEach((key) => {
+    expect(actualObject[key]).to.deep.equal(expectedObject[key]);
+  });
+};
+```
+
+This testing setup proved to be helpful as we were testing our product names sent through analytics across various locales. We wanted to use the en-US version of the product name for every locale to make reporting easier. What we found in testing was that for some non en-US locales, they were sending an en-US version of the product name and others were sending a localized version of the product name. So we worked on correcting that so we could have consistent data under 1 standardized product name in our analytics reporting. 
+
+I then wrote similar tests for our analytics events that use `window.utag.link`. The logic in those tests was nearly indentical to the `window.utag.view` tests, checking that event was fired 1 time after a user interacts with some element, expecting the event data passed to `window.utag.link` matches what we expect it to be. With these tests in place, it helped our squad feel confident that we were sending all of the analytics data as we'd expect to be set.
