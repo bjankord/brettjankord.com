@@ -1,0 +1,56 @@
+---
+layout: '$/layouts/BlogPost.astro'
+title: 'Things I have learned building a full-stack app with Cloudflare Pages'
+description: "Recently, I wanted to explore building a full-stack app with Cloudflare Pages..."
+pubDate: '2024-07-19'
+tags:
+ - cloudflare
+ - cloudflare-pages
+---
+Recently, I wanted to explore building a full-stack app with [Cloudflare Pages](https://developers.cloudflare.com/pages/). From Cloudflare's website, "Cloudflare Pages is a JAMstack platform for frontend developers to collaborate and deploy websites." It offers a solution for automatic deployments via Git integration, unmatched performance on Cloudflare’s edge network, and the ability to add dynamic
+functionality through integration with Cloudflare Workers (via Cloudflare Pages Functions).
+
+I've found Cloudflare Pages to be a great tool for building Single Page Apps (SPAs) where I also want to add dynamic functionality that would normally require a backend server. If you are familiar with how GitHub Pages, Cloudflare Pages is very similar, with the addition of an edge network hosting solution along with dynamic functionality via Cloudflare Pages Functions. 
+
+## Things that were great using Cloudflare Pages
+
+### Easy Setup
+Getting started with Cloudflare Pages was easy. I ran `npm create cloudflare` on my machine, answered some questions about the type of app I was creating, and had a working boilerplate relatively fast. From there, I initialized the output code into a new GitHub repo and then configured the integration for Cloudflare to do automatic deployments of my Cloudflare Pages app every time I pushed a commit to my repo.
+
+You can read me about how to get started with Cloudflare Pages here: https://developers.cloudflare.com/pages/get-started/
+
+### Protecting my app
+For the app I was building, I wanted a place to log my daily work. I knew I wanted to store these activities in a KV store, but I also wanted to make sure that only I would have access to read from/write to my KV store. So I started looking into what auth options were available for Cloudflare Pages. I spent some time looking into Auth0 but had some issues trying to integrate it into Cloudflare's workerd runtime so I ended up switching over to use [Cloudflare's Access product](https://www.cloudflare.com/zero-trust/products/access/). You can read through [the following docs](https://developers.cloudflare.com/pages/platform/known-issues/#enable-access-on-your-pagesdev-domain) to set up Cloudflare Access on your on Cloudflare Pages app.
+
+In a few simple clicks, I had configured Cloudflare Access for my CF Pages app, which meant that both my static files and the API endpoints I planned to create to interface with the KV Store were now auth protected.
+
+### Viewing logs
+During development as I was creating some CF Page Functions to get and put data into my KV store, there were times I wanted to log out various data from the function as I was testing it. With CF Pages, once you app is deployed, you can navigate to the deployment, click on the functions tab, and then scroll down to a section to turn on real time logs. 
+
+With this, I could hit my endpoints and and console.log or errors that were thrown would be output in the real-time log section. This was really great to be able to easily view those logs. One area I'd love to see Cloudflare improve on with logging for CF Pages is having the ability to continuously output logs so I could view logs from previous traffic instead of needing to turn on the real-time log capturing whenever I wanted logs. 
+
+There is a Cloudflare Pages + Sentry integration that could be used to capture and collect error logs while app is running and honestly, that would probably be enough my logging needs.
+
+It seems Cloudflare has a [Logs Explorer product in beta](https://developers.cloudflare.com/logs/log-explorer/), but I havent looked into it to see if it integrates with CF Pages Functions.
+
+### KV Store
+Creating and interfacing with the KV store was really easy for the most part. I could inspect the data within by logging into Cloudflare and viewing the KV Store. I run into an issue where I noticed that running the CF Pages app locally, I wasnt able to access my remote KV Store. I know with Cloudflare Workers I can pass in the `--remote` flag, but it doesnt seem CF Pages have that functionality. There is [an open feature request for adding the `--remote` flag here](https://github.com/cloudflare/workers-sdk/issues/3505).
+
+I ended up creating a CF Pages function that I could make a GET request to and it would seed a local KV Store while I was running the app locally. I found this to work nicely for what I needed.
+
+## Things that need some polish when working with Cloudflare Pages
+I think adding support for the [`--remote` flag](https://github.com/cloudflare/workers-sdk/issues/3505) to `wrangler pages dev` would make local development easier and polish up the developer experience while working with Cloudflare Pages.
+
+Another item I think needs some improvement is around hot-module-replacement (HMR) while running `wrangler pages dev`. The way that command works is you pass it a directory of built static assets, and wranlger serves those. The problem I ran into is with this approach it requires you to build your static files and then run your pages app instead of being able to run both seemlessly. To alleviate this, there was a `--proxy` flag that Cloudflare had documented that would allow you to proxy output from 1 build tool, like Vite, into you wrangler pages. What this allowed was you could edit your SPA files or your CF Pages functions and both would live reload in the browser while working on your app. The developer experience on this was GREAT!
+
+Unfortunately, Cloudflare decided to deprecate the `--proxy` flag for use with `wrangler pages dev`. This means that if you want some essence of live reload, you need to run 2 commands. In one terminal, run `vite build --watch` to generate the directory of static assets for `wrangler pages dev` to server. Then in another terminal, run `wrangler pages dev <your-built-directory>`.
+
+This works, but its not the same as having HRM for the SPA when using the `--proxy` flag. With using `vite build --watch`, the code in the browser is all compiled for production and split into chunks, making it harder to debug.
+
+Tools like React Dev Tools/Vue Dev Tools, work best when your code is not minified for production, so doing this approach meant I wasnt able to use my preferred developer tooling. 
+
+At the moment, the `--proxy` flag is deprecated but still works in wrangler v3, so I ended up continuing to use it as I preferred the DX it provided. I've left a [comment with my thoughts on the open issue around removing the `--proxy` flag here](https://github.com/cloudflare/workers-sdk/issues/5315#issuecomment-2231687775). 
+
+## Closing Thoughts
+
+Overall, I was very pleased working with Cloudflare Pages. I was able to easily set up an activity tracker app, set up auth to protect access to it, and integrate with GitHub for automated deployments. If you are interested in getting started with a simple solution for hosting your single page apps, I'd certainly give Cloudflare Pages a look.
